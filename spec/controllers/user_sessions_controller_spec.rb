@@ -11,7 +11,7 @@ describe Spree::UserSessionsController do
       let(:order) { mock_model Spree::Order }
 
       before do
-        controller.stub :current_user => user
+        controller.stub :current_spree_user => user
         controller.stub :current_order => order
       end
 

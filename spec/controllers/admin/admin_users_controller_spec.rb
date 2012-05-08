@@ -8,7 +8,7 @@ describe Spree::Admin::UsersController do
     let(:mock_user) { mock_model Spree::User }
 
     before do
-      controller.stub :current_user => user
+      controller.stub :current_spree_user => user
       Spree::User.stub(:find).with('9').and_return(mock_user)
       Spree::User.stub(:new).and_return(mock_user)
     end

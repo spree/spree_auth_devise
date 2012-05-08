@@ -11,7 +11,7 @@ describe Spree::CheckoutController do
     # TODO: Really, this shouldn't be in effect here.
     # We should only be testing for auth's decorations
     controller.stub :apply_pending_promotions
-    controller.stub :current_user => nil
+    controller.stub :current_spree_user => nil
   end
 
   context '#edit' do
@@ -22,7 +22,7 @@ describe Spree::CheckoutController do
       end
 
       context 'when authenticated as registered user' do
-        before { controller.stub :current_user => user }
+        before { controller.stub :current_spree_user => user }
 
         it 'should proceed to the first checkout step' do
           spree_get :edit, { :state => 'confirm' }
@@ -47,7 +47,7 @@ describe Spree::CheckoutController do
       end
 
       context 'when authenticated as registered' do
-        before { controller.stub :current_user => user }
+        before { controller.stub :current_spree_user => user }
 
         it 'should proceed to the first checkout step' do
           spree_get :edit, { :state => 'confirm' }
@@ -96,7 +96,7 @@ describe Spree::CheckoutController do
           before do
             order.stub :token => 'ABC'
             user.stub :has_role? => true
-            controller.stub :current_user => nil
+            controller.stub :current_spree_user => nil
           end
 
           it 'should redirect to the tokenized order view' do
@@ -113,7 +113,7 @@ describe Spree::CheckoutController do
         context 'with a registered user' do
           before do
             user.stub :has_role? => true
-            controller.stub :current_user => mock_model(Spree::User, :has_role? => true)
+            controller.stub :current_spree_user => mock_model(Spree::User, :has_role? => true)
           end
 
           it 'should redirect to the standard order view' do

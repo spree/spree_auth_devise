@@ -9,7 +9,7 @@ Spree::Admin::UsersController.class_eval do
   private
 
     def sign_in_if_change_own_password
-      if current_user == @user && @user.password.present?
+      if current_spree_user == @user && @user.password.present?
         sign_in(@user, :event => :authentication, :bypass => true)
       end
     end

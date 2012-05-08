@@ -10,7 +10,7 @@ describe Spree::Admin::ShipmentsController do
     let(:order) { mock_model(Spree::Order, :number => 'R123', :reload => nil, :save! => true) }
 
     before do
-      controller.stub :current_user => user
+      controller.stub :current_spree_user => user
       Spree::Shipment.stub(:find).with(9).and_return(shipment)
       Spree::Shipment.stub :find_by_number => shipment
       Spree::Order.stub :find_by_number => order

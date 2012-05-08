@@ -17,7 +17,7 @@ describe Spree::Admin::OrdersController do
     let(:user) { Spree::User.new }
 
     before do
-      controller.stub :current_user => user
+      controller.stub :current_spree_user => user
       Spree::Order.stub(:new).and_return(order)
     end
 
