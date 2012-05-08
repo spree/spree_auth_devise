@@ -16,12 +16,6 @@ Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
 end
 
-desc 'Release to gemcutter'
-task :release do
-  version = File.read(File.expand_path('../../SPREE_VERSION', __FILE__)).strip
-  cmd = "cd pkg && gem push spree_auth-#{version}.gem"; puts cmd; system cmd
-end
-
 desc 'Generates a dummy app for testing'
 task :test_app do
   ENV['LIB_NAME'] = 'spree/auth'
