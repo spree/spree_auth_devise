@@ -10,7 +10,7 @@ RSpec::Core::RakeTask.new
 
 task :default => :spec
 
-spec = eval(File.read('spree_auth.gemspec'))
+spec = eval(File.read('spree_auth_devise.gemspec'))
 
 Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
