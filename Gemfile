@@ -25,6 +25,8 @@ group :test do
   gem 'launchy'
 end
 
+gem 'spree', :git => "git://github.com/spree/spree", :branch => "auth-take-two"
+
 # platform :ruby_18 do
 #   gem "ruby-debug"
 # end
