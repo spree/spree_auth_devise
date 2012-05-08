@@ -25,8 +25,8 @@ module Spree
 
     class DestroyWithOrdersError < StandardError; end
 
-    # has_role? simply needs to return true or false whether a user has a role or not.
-    def has_role?(role_in_question)
+    # has_spree_role? simply needs to return true or false whether a user has a role or not.
+    def has_spree_role?(role_in_question)
       roles.any? { |role| role.name == role_in_question.to_s }
     end
 
