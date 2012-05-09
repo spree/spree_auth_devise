@@ -45,7 +45,6 @@ describe "Checkout", :js => true do
     user = create(:user, :email => "email@person.com", :password => "password", :password_confirmation => "password")
     click_link "RoR Mug"
     click_button "Add To Cart"
-    Spree::User.count.should == 2
 
     visit spree.login_path
     fill_in "user_email", :with => user.email
