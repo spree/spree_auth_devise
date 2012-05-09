@@ -33,12 +33,5 @@ describe Spree::UsersController do
         response.should redirect_to(spree.account_url(:only_path => true))
       end
     end
-
-    context 'when attempting to update other account' do
-      it 'should not allow update' do
-        put :update, { :user => create(:user) }, { :user => { :email => 'mynew@email-address.com' } }
-        response.should redirect_to(spree.login_url(:only_path => true))
-      end
-    end
   end
 end
