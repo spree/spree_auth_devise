@@ -2,8 +2,6 @@ require 'spree_core'
 require 'devise'
 require 'cancan'
 
-require 'spree/token_resource'
-
 module Spree
   module Auth
     def self.config(&block)
