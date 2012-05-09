@@ -5,7 +5,7 @@ describe Spree::UsersController do
   let(:user) { create(:user) }
 
   before do
-    controller.stub(:current_spree_user => user)
+    controller.stub(:spree_current_user => user)
   end
 
   context '#create' do

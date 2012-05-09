@@ -10,5 +10,9 @@ Spree::BaseController.class_eval do
   def spree_logout_path
     spree.destroy_user_session_path
   end
+
+  def spree_current_user
+    current_user
+  end
 end
 

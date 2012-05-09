@@ -1,4 +1,4 @@
-<% if current_spree_user %>
+<% if spree_current_user %>
   <li><%= link_to t(:my_account), spree.account_path %></li>
   <li><%= link_to t(:logout), spree.destroy_user_session_path %></li>
 <% else %>

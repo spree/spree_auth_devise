@@ -27,7 +27,7 @@ describe Spree::OrdersController do
       end
 
       context 'when authenticated as a registered user' do
-        before { controller.stub :current_spree_user => user }
+        before { controller.stub :spree_current_user => user }
 
         it 'should not create an anonymous user' do
           Spree::User.should_not_receive :anonymous!
@@ -76,7 +76,7 @@ describe Spree::OrdersController do
 
     before do
       controller.stub :current_order => order
-      controller.stub :current_spree_user => user
+      controller.stub :spree_current_user => user
     end
 
     context '#populate' do

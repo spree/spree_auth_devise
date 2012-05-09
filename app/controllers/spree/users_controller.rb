@@ -37,7 +37,7 @@ class Spree::UsersController < Spree::BaseController
 
   private
     def load_object
-      @user ||= current_spree_user
+      @user ||= spree_current_user
       authorize! params[:action].to_sym, @user
     end
 
