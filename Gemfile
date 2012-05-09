@@ -25,7 +25,11 @@ group :test do
   gem 'launchy'
 end
 
-gem 'spree', :git => "git://github.com/spree/spree", :branch => "auth-take-two"
+if ENV['USE_LOCAL_SPREE']
+  gem 'spree', :path => "~/Sites/gems/spree"
+else
+  gem 'spree', :git => "git://github.com/spree/spree", :branch => "auth-take-two"
+end
 
 # platform :ruby_18 do
 #   gem "ruby-debug"
