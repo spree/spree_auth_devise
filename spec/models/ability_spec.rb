@@ -123,7 +123,7 @@ describe Spree::Ability do
     let(:resource) { Object.new }
 
     context 'with admin user' do
-      before(:each) { user.stub(:has_role?).and_return(true) }
+      before(:each) { user.stub(:has_spree_role?).and_return(true) }
       it_should_behave_like 'access granted'
       it_should_behave_like 'index allowed'
     end
