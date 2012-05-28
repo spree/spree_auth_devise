@@ -3,7 +3,7 @@ PATH
   specs:
     spree_auth_devise (1.0.0)
       cancan (= 1.6.7)
-      devise (~> 2.0)
+      devise (~> 2.0.4)
       spree_core
 
 PATH
