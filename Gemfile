@@ -16,6 +16,7 @@ group :test do
   gem 'rspec-rails', '~> 2.9.0'
   gem 'factory_girl_rails', '~> 1.7.0'
   gem 'email_spec', '~> 1.2.1'
+  gem 'debugger'
 
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.0.0'

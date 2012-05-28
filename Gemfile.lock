@@ -115,7 +115,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    columnize (0.3.6)
     database_cleaner (0.7.1)
+    debugger (1.1.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1)
+      debugger-ruby_core_source (~> 1.1)
+    debugger-linecache (1.1.1)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.1)
     deface (0.8.0)
       nokogiri (~> 1.5.0)
       rails (>= 3.0.9)
@@ -262,6 +270,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 3.2)
   database_cleaner (= 0.7.1)
+  debugger
   email_spec (~> 1.2.1)
   factory_girl_rails (~> 1.7.0)
   ffaker
