@@ -15,15 +15,6 @@ describe Spree::OrdersController do
     before { Spree::Order.stub :new => order }
 
     context '#populate' do
-      context 'when authenticated as a registered user' do
-        before { controller.stub :spree_current_user => user }
-
-        it 'should associate the new order with the registered user' do
-          post :populate
-          order.user.should == user
-        end
-      end
-
       context 'when not authenticated' do
         context 'when there is an order token' do
           before { order.stub :token => ORDER_TOKEN }
