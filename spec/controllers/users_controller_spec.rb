@@ -13,16 +13,6 @@ describe Spree::UsersController do
       post :create, { :user => { :email => 'foobar@example.com', :password => 'foobar123', :password_confirmation => 'foobar123' } }
       assigns[:user].new_record?.should be_false
     end
-
-    context 'when an order exists in the session' do
-      let(:order) { mock_model Spree::Order }
-      before { controller.stub :current_order => order }
-
-      it 'should assign the user to the order' do
-        order.should_receive(:associate_user!)
-        post :create, { :user => { :email => 'foobar@spreecommerce.com', :password => 'foobar123', :password_confirmation => 'foobar123' } }
-      end
-    end
   end
 
   context '#update' do
