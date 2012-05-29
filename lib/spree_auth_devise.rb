@@ -1,2 +1,2 @@
 require 'spree/auth/devise'
-require 'spree/core/controller_helpers_ext'
+require 'spree/authentication_helpers'
