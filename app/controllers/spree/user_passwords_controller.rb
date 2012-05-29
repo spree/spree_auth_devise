@@ -4,12 +4,6 @@ class Spree::UserPasswordsController < Devise::PasswordsController
 
   ssl_required
 
-  after_filter :associate_user
-
-  def new
-    super
-  end
-
   # Temporary Override until next Devise release (i.e after v1.3.4)
   # line:
   #   respond_with resource, :location => new_session_path(resource_name)
@@ -27,14 +21,6 @@ class Spree::UserPasswordsController < Devise::PasswordsController
     else
       respond_with_navigational(resource) { render :new }
     end
-  end
-
-  def edit
-    super
-  end
-
-  def update
-    super
   end
 
 end
