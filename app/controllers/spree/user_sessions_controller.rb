@@ -4,8 +4,6 @@ class Spree::UserSessionsController < Devise::SessionsController
 
   include Spree::Core::CurrentOrder
 
-  after_filter :associate_user, :only => :create
-
   ssl_required :new, :create, :destroy, :update
   ssl_allowed :login_bar
 

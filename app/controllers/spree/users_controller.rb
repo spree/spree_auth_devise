@@ -12,7 +12,6 @@ class Spree::UsersController < Spree::BaseController
     if @user.save
 
       if current_order
-        current_order.associate_user!(@user)
         session[:guest_token] = nil
       end
 
