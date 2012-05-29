@@ -11,29 +11,12 @@ describe Spree::OrdersController do
     spree.token_order_path('R123456', 'ABCDEF').should == '/orders/R123456/token/ABCDEF'
   end
 
-  before do
-    Spree::User.stub :anonymous! => guest_user
-  end
-
   context 'when no order exists in the session' do
     before { Spree::Order.stub :new => order }
 
     context '#populate' do
-      context 'when not logged in' do
-        it 'should create an anonymous user' do
-          Spree::User.should_receive :anonymous!
-          post :populate
-        end
-      end
-
       context 'when authenticated as a registered user' do
         before { controller.stub :spree_current_user => user }
-
-        it 'should not create an anonymous user' do
-          Spree::User.should_not_receive :anonymous!
-          post :populate
-          session[:access_token].should be_nil
-        end
 
         it 'should associate the new order with the registered user' do
           post :populate
@@ -42,16 +25,6 @@ describe Spree::OrdersController do
       end
 
       context 'when not authenticated' do
-        it 'should create an anonymous user' do
-          Spree::User.should_receive(:anonymous!).and_return guest_user
-          post :populate
-        end
-
-        it 'should associate the new order with the anonymous user' do
-          post :populate
-          order.user.should == guest_user
-        end
-
         context 'when there is an order token' do
           before { order.stub :token => ORDER_TOKEN }
 
