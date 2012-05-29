@@ -26,10 +26,4 @@ describe "Users" do
     within('table#listing_users') { click_link "Edit" }
     find_field('user_role_user')['checked'].should be_true
   end
-
-  it "listing users when anonymous users are present" do
-    Spree::User.anonymous!
-    click_link "Users"
-    page.should_not have_content("@example.net")
-  end
 end
