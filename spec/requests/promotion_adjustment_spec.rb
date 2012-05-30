@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'promotion adjustments', :js => true do
-  stub_authorization!
 
   before(:each) do
     PAYMENT_STATES = Spree::Payment.state_machine.states.keys unless defined? PAYMENT_STATES
