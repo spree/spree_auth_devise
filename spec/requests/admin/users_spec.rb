@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe "Users" do
-  stub_authorization!
 
   before(:each) do
     create(:user, :email => "a@example.com")
     create(:user, :email => "b@example.com")
+    sign_in_as!(create(:admin_user))
     visit spree.admin_path
     click_link "Users"
   end
