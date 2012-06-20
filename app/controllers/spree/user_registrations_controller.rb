@@ -1,5 +1,5 @@
 class Spree::UserRegistrationsController < Devise::RegistrationsController
-  include Spree::Core::ControllerHelpers
+  include SslRequirement
   helper 'spree/users', 'spree/base'
 
   ssl_required
