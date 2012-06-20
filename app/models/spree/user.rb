@@ -25,11 +25,6 @@ module Spree
 
     class DestroyWithOrdersError < StandardError; end
 
-    # has_spree_role? simply needs to return true or false whether a user has a role or not.
-    def has_spree_role?(role_in_question)
-      roles.any? { |role| role.name == role_in_question.to_s }
-    end
-
     # Creates an anonymous user.  An anonymous user is basically an auto-generated +User+ account that is created for the customer
     # behind the scenes and its completely transparently to the customer.  All +Orders+ must have a +User+ so this is necessary
     # when adding to the "cart" (which is really an order) and before the customer has a chance to provide an email or to register.
