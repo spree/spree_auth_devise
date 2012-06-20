@@ -5,7 +5,7 @@
 <%= form_for @user, :url => spree.user_path(@user), :method => :put do |f| %>
   <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
   <p>
-    <%= f.submit t(:update) %>
+    <%= f.submit t(:update), :class => 'button primary' %>
   </p>
 <% end %>
 
