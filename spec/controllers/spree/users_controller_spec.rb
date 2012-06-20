@@ -10,7 +10,7 @@ describe Spree::UsersController do
 
   context '#create' do
     it 'should create a new user' do
-      post :create, { :user => { :email => 'foobar@example.com', :password => 'foobar123', :password_confirmation => 'foobar123' } }
+      spree_post :create, { :user => { :email => 'foobar@example.com', :password => 'foobar123', :password_confirmation => 'foobar123' } }
       assigns[:user].new_record?.should be_false
     end
   end
@@ -18,7 +18,7 @@ describe Spree::UsersController do
   context '#update' do
     context 'when updating own account' do
       it 'should perform update' do
-        put :update, { :user => { :email => 'mynew@email-address.com' } }
+        spree_put :update, { :user => { :email => 'mynew@email-address.com' } }
         assigns[:user].email.should == 'mynew@email-address.com'
         response.should redirect_to(spree.account_url(:only_path => true))
       end

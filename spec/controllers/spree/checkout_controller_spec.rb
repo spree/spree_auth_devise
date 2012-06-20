@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::CheckoutController do
   let(:order) { Spree::Order.new }
-  let(:user) { mock_model Spree::User }
+  let(:user) { mock_model Spree::User, :last_incomplete_spree_order => nil }
   let(:token) { 'some_token' }
 
   before do
@@ -113,7 +113,7 @@ describe Spree::CheckoutController do
         context 'with a registered user' do
           before do
             user.stub :has_role? => true
-            controller.stub :spree_current_user => mock_model(Spree::User, :has_role? => true)
+            controller.stub :spree_current_user => mock_model(Spree::User, :has_role? => true, :last_incomplete_spree_order => nil)
           end
 
           it 'should redirect to the standard order view' do

@@ -20,13 +20,13 @@ describe Spree::OrdersController do
           before { order.stub :token => ORDER_TOKEN }
 
           it 'should store the token in the session' do
-            post :populate
+            spree_post :populate
             session[:access_token].should == ORDER_TOKEN
           end
 
           it 'should repalce any previous access tokens' do
             session[:access_token] = 'OLD_TOKEN'
-            post :populate
+            spree_post :populate
             session[:access_token].should == ORDER_TOKEN
           end
         end
@@ -46,22 +46,22 @@ describe Spree::OrdersController do
     context '#populate' do
       it 'should check if user is authorized for :edit' do
         controller.should_receive(:authorize!).with(:edit, order, token)
-        post :populate, :token => token
+        spree_post :populate, :token => token
       end
       it "should check against the specified order" do
         controller.should_receive(:authorize!).with(:edit, specified_order, token)
-        post :populate, :id => specified_order.number, :token => token
+        spree_post :populate, :id => specified_order.number, :token => token
       end
     end
 
     context '#edit' do
       it 'should check if user is authorized for :edit' do
         controller.should_receive(:authorize!).with(:edit, order, token)
-        get :edit, :token => token
+        spree_get :edit, :token => token
       end
       it "should check against the specified order" do
         controller.should_receive(:authorize!).with(:edit, specified_order, token)
-        get :edit, :id => specified_order.number, :token => token
+        spree_get :edit, :id => specified_order.number, :token => token
       end
     end
 
@@ -69,30 +69,30 @@ describe Spree::OrdersController do
       it 'should check if user is authorized for :edit' do
         order.stub :update_attributes
         controller.should_receive(:authorize!).with(:edit, order, token)
-        post :update, :token => token
+        spree_post :update, :token => token
       end
       it "should check against the specified order" do
         order.stub :update_attributes
         controller.should_receive(:authorize!).with(:edit, specified_order, token)
-        post :update, :id => specified_order.number, :token => token
+        spree_post :update, :id => specified_order.number, :token => token
       end
     end
 
     context '#empty' do
       it 'should check if user is authorized for :edit' do
         controller.should_receive(:authorize!).with(:edit, order, token)
-        post :empty, :token => token
+        spree_post :empty, :token => token
       end
       it "should check against the specified order" do
         controller.should_receive(:authorize!).with(:edit, specified_order, token)
-        post :empty, :id => specified_order.number, :token => token
+        spree_post :empty, :id => specified_order.number, :token => token
       end
     end
 
     context "#show" do
       it "should check against the specified order" do
         controller.should_receive(:authorize!).with(:edit, specified_order, token)
-        get :show, :id => specified_order.number, :token => token
+        spree_get :show, :id => specified_order.number, :token => token
       end
     end
   end
@@ -103,19 +103,19 @@ describe Spree::OrdersController do
     context '#show' do
       context 'when token parameter present' do
         it 'should store as guest_token in session' do
-          get :show, {:id => 'R123', :token => order.token }
+          spree_get :show, {:id => 'R123', :token => order.token }
           session[:access_token].should == order.token
         end
       end
 
       context 'when no token present' do
         it 'should not store a guest_token in the session' do
-          get :show, {:id => 'R123'}
+          spree_get :show, {:id => 'R123'}
           session[:access_token].should be_nil
         end
 
         it 'should respond with 404' do
-          get :show, {:id => 'R123'}
+          spree_get :show, {:id => 'R123'}
           response.code.should == '404'
         end
       end
