@@ -59,7 +59,7 @@ module Spree
       def check_admin
         return if self.class.admin_created?
         admin_role = Role.find_or_create_by_name 'admin'
-        self.roles << admin_role
+        self.spree_roles << admin_role
       end
 
       def set_login

@@ -25,7 +25,7 @@ describe Spree::Ability do
 
   after(:each) {
     Spree::Ability.abilities = Set.new
-    user.roles = []
+    user.spree_roles = []
   }
 
   context 'register_ability' do
@@ -146,7 +146,7 @@ describe Spree::Ability do
     context 'with admin user' do
       #before(:each) { user.stub(:has_role?).and_return(true) }
       it 'should be able to admin' do
-        user.roles = [Spree::Role.find_or_create_by_name('admin')]
+        user.spree_roles = [Spree::Role.find_or_create_by_name('admin')]
         ability.should be_able_to :admin, resource
         ability.should be_able_to :index, resource_order
         ability.should be_able_to :show, resource_product
@@ -156,7 +156,7 @@ describe Spree::Ability do
 
     context 'with fakedispatch user' do
       it 'should be able to admin on the order and shipment pages' do
-        user.roles = [Spree::Role.find_or_create_by_name('bar')]
+        user.spree_roles = [Spree::Role.find_or_create_by_name('bar')]
 
         Spree::Ability.register_ability(BarAbility)
 
