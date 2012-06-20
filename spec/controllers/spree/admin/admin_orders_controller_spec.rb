@@ -39,7 +39,7 @@ describe Spree::Admin::OrdersController do
       order.stub(:update_attributes).and_return true
       order.stub(:user).and_return Spree::User.new
       order.stub(:token).and_return nil
-      user.roles = [Spree::Role.find_or_create_by_name('bar')]
+      user.spree_roles = [Spree::Role.find_or_create_by_name('bar')]
       Spree::Ability.register_ability(BarAbility)
       spree_post :update, { :id => 'R123' }
       response.should render_template 'spree/shared/unauthorized'
