@@ -31,8 +31,6 @@ describe Spree::Admin::ShipmentsController do
       end
     end
 
-    after(:each) { user.roles = [] }
-
     it 'should grant access to users with an admin role' do
       #user.stub :has_role? => true
       user.spree_roles = [Spree::Role.find_or_create_by_name('admin')]
