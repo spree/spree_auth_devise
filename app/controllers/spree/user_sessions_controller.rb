@@ -46,4 +46,9 @@ class Spree::UserSessionsController < Devise::SessionsController
     def accurate_title
       t(:login)
     end
+
+    def redirect_back_or_default(default)
+      redirect_to(session["user_return_to"] || default)
+      session["user_return_to"] = nil
+    end
 end
