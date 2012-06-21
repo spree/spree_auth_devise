@@ -1,7 +1,9 @@
+<% @body_id = 'edit-password' %>
+
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+
 <div id="edit-password">
   <h1><%= t(:change_my_password) %></h1>
-
   <%= form_for @user, :url => spree.user_password_path, :method => :put do |f| %>
     <p>
       <%= f.label :password, t(:password) %><br />

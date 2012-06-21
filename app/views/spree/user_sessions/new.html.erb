@@ -8,7 +8,10 @@
   <h1><%= t(:login_as_existing) %></h1>
   <div data-hook="login">
     <%= render :partial => 'spree/shared/login' %>
-    <p><%= t(:or) %> <%= link_to t(:create_a_new_account), spree.signup_path %> | <%= link_to t(:forgot_password), spree.new_user_password_path %></p>
+    <p>
+      <%= t(:or) %> <%= link_to t(:create_a_new_account), spree.signup_path %> | <%= link_to t(:forgot_password), spree.new_user_password_path %>
+    </p>
   </div>
 </div>
+
 <div data-hook="login_extras"></div>

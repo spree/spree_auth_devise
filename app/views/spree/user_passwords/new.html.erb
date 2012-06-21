@@ -1,9 +1,12 @@
+<% @body_id = 'reset-password' %>
+
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+
 <div id="forgot-password">
   <h1><%= t(:forgot_password) %></h1>
-
-  <p><%= t(:instructions_to_reset_password) %></p>
-
+  <p>
+    <%= t(:instructions_to_reset_password) %>
+  </p>
   <%= form_for Spree::User.new, :as => :user, :url => spree.user_password_path do |f| %>
     <p>
       <%= f.label :email, t(:email) %><br />
