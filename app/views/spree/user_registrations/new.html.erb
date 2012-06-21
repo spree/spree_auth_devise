@@ -3,7 +3,7 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
 
 <div id="new-customer">
-  <h6><%= t(:new_customer) %></h6>
+  <h1><%= t(:new_customer) %></h1>
 
   <div data-hook="signup">
 
@@ -13,7 +13,7 @@
         <p><%= f.submit t(:create), :class => 'button primary' %></p>
       </div>
     <% end %>
-    <%= t(:or) %> <%= link_to t(:login_as_existing), spree.login_path %>
+    <p><%= t(:or) %> <%= link_to t(:login_as_existing), spree.login_path %></p>
 
   </div>
 
