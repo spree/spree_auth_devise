@@ -2,6 +2,8 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   include SslRequirement
   helper 'spree/users', 'spree/base'
 
+  include Spree::Core::ControllerHelpers
+
   ssl_required
 
   # Temporary Override until next Devise release (i.e after v1.3.4)
