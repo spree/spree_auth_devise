@@ -51,7 +51,7 @@ module Spree
 
       private
 
-        # handling raise from Admin::ResourceController#destroy
+        # handling raise from Spree::Admin::ResourceController#destroy
         def user_destroy_with_orders_error
           invoke_callbacks(:destroy, :fails)
           render :status => :forbidden, :text => t(:error_user_destroy_with_orders)
