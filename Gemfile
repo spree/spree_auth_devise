@@ -23,6 +23,7 @@ group :test do
   gem 'selenium-webdriver', '2.20.0'
   gem 'database_cleaner', '0.7.1'
   gem 'launchy'
+  gem 'debugger'
 end
 
 if ENV['USE_LOCAL_SPREE']
@@ -30,14 +31,6 @@ if ENV['USE_LOCAL_SPREE']
 else
   gem 'spree', :git => "git://github.com/spree/spree", :branch => "1-2-stable"
 end
-
-# platform :ruby_18 do
-#   gem "ruby-debug"
-# end
-
-# platform :ruby_19 do
-#   gem "ruby-debug19"
-# end
 
 gemspec
 
