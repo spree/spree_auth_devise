@@ -14,7 +14,7 @@ describe Spree::Admin::OrdersController do
   end
 
   context '#authorize_admin' do
-    let(:user) { Spree::User.new }
+    let(:user) { create(:user) }
 
     before do
       controller.stub :spree_current_user => user
@@ -23,13 +23,13 @@ describe Spree::Admin::OrdersController do
 
     it 'should grant access to users with an admin role' do
       #user.stub :has_role? => true
-      user.spree_roles = [Spree::Role.find_or_create_by_name('admin')]
+      user.spree_roles << Spree::Role.find_or_create_by_name('admin')
       spree_post :index
       response.should render_template :index
     end
 
     it 'should grant access to users with an bar role' do
-      user.spree_roles = [Spree::Role.find_or_create_by_name('bar')]
+      user.spree_roles << Spree::Role.find_or_create_by_name('bar')
       Spree::Ability.register_ability(BarAbility)
       spree_post :index
       response.should render_template :index
@@ -39,14 +39,15 @@ describe Spree::Admin::OrdersController do
       order.stub(:update_attributes).and_return true
       order.stub(:user).and_return Spree::User.new
       order.stub(:token).and_return nil
-      user.spree_roles = [Spree::Role.find_or_create_by_name('bar')]
+      user.spree_roles.clear
+      user.spree_roles << Spree::Role.find_or_create_by_name('bar')
       Spree::Ability.register_ability(BarAbility)
-      spree_post :update, { :id => 'R123' }
+      spree_put :update, { :id => 'R123' }
       response.should render_template 'spree/shared/unauthorized'
     end
 
     it 'should deny access to users without an admin role' do
-      user.stub :has_role? => false
+      user.stub :has_spree_role? => false
       spree_post :index
       response.should render_template 'spree/shared/unauthorized'
     end
