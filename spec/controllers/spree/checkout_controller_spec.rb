@@ -25,7 +25,7 @@ describe Spree::CheckoutController do
         before { controller.stub :spree_current_user => user }
 
         it 'should proceed to the first checkout step' do
-          spree_get :edit, { :state => 'confirm' }
+          spree_get :edit, { :state => 'address' } 
           response.should render_template :edit
         end
       end
@@ -34,7 +34,7 @@ describe Spree::CheckoutController do
         before { controller.stub :auth_user => user }
 
         it 'should redirect to registration step' do
-          spree_get :edit, { :state => 'confirm' }
+          spree_get :edit, { :state => 'address' }
           response.should redirect_to spree.checkout_registration_path
         end
       end
@@ -50,7 +50,7 @@ describe Spree::CheckoutController do
         before { controller.stub :spree_current_user => user }
 
         it 'should proceed to the first checkout step' do
-          spree_get :edit, { :state => 'confirm' }
+          spree_get :edit, { :state => 'address' }
           response.should render_template :edit
         end
       end
@@ -59,7 +59,7 @@ describe Spree::CheckoutController do
         before { controller.stub :auth_user => user }
 
         it 'should proceed to the first checkout step' do
-          spree_get :edit, { :state => 'confirm' }
+          spree_get :edit, { :state => 'address' }
           response.should render_template :edit
         end
       end
@@ -68,14 +68,14 @@ describe Spree::CheckoutController do
 
     it 'should check if the user is authorized for :edit' do
       controller.should_receive(:authorize!).with(:edit, order, token)
-      spree_get :edit, { :state => 'confirm' }, { :access_token => token }
+      spree_get :edit, { :state => 'address' }, { :access_token => token }
     end
   end
 
   context '#update' do
     it 'should check if the user is authorized for :edit' do
       controller.should_receive(:authorize!).with(:edit, order, token)
-      spree_post :update, { :state => 'confirm' }, { :access_token => token }
+      spree_post :update, { :state => 'address' }, { :access_token => token }
     end
 
     context 'when save successful' do
@@ -95,29 +95,29 @@ describe Spree::CheckoutController do
         context 'with a guest user' do
           before do
             order.stub :token => 'ABC'
-            user.stub :has_role? => true
+            user.stub :has_spree_role? => true
             controller.stub :spree_current_user => nil
           end
 
           it 'should redirect to the tokenized order view' do
-            spree_post :update, { :state => 'confirm' }
+            spree_post :update, { :state => 'delivery' }
             response.should redirect_to spree.token_order_path('R123', 'ABC')
           end
 
           it 'should populate the flash message' do
-            spree_post :update, { :state => 'confirm' }
+            spree_post :update, { :state => 'delivery' }
             flash.notice.should == I18n.t(:order_processed_successfully)
           end
         end
 
         context 'with a registered user' do
           before do
-            user.stub :has_role? => true
-            controller.stub :spree_current_user => mock_model(Spree::User, :has_role? => true, :last_incomplete_spree_order => nil)
+            user.stub :has_spree_role? => true
+            controller.stub :spree_current_user => mock_model(Spree::User, :has_spree_role? => true, :last_incomplete_spree_order => nil)
           end
 
           it 'should redirect to the standard order view' do
-            spree_post :update, { :state => 'confirm' }
+            spree_post :update, { :state => 'address' }
             response.should redirect_to spree.order_path('R123')
           end
         end
