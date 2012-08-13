@@ -17,9 +17,13 @@ class FooAbility
 end
 
 describe Spree::Ability do
-  let(:user) { Spree::User.new }
+  let(:user) { create(:user) }
   let(:ability) { Spree::Ability.new(user) }
   let(:token) { nil }
+
+  before do
+    user.spree_roles.clear
+  end
 
   TOKEN = 'token123'
 
@@ -144,9 +148,8 @@ describe Spree::Ability do
     let(:fakedispatch_ability) { Spree::Ability.new(fakedispatch_user) }
 
     context 'with admin user' do
-      #before(:each) { user.stub(:has_role?).and_return(true) }
       it 'should be able to admin' do
-        user.spree_roles = [Spree::Role.find_or_create_by_name('admin')]
+        user.spree_roles << Spree::Role.find_or_create_by_name('admin')
         ability.should be_able_to :admin, resource
         ability.should be_able_to :index, resource_order
         ability.should be_able_to :show, resource_product
@@ -156,7 +159,7 @@ describe Spree::Ability do
 
     context 'with fakedispatch user' do
       it 'should be able to admin on the order and shipment pages' do
-        user.spree_roles = [Spree::Role.find_or_create_by_name('bar')]
+        user.spree_roles << Spree::Role.find_or_create_by_name('bar')
 
         Spree::Ability.register_ability(BarAbility)
 
