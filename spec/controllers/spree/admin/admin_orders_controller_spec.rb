@@ -22,7 +22,6 @@ describe Spree::Admin::OrdersController do
     end
 
     it 'should grant access to users with an admin role' do
-      #user.stub :has_role? => true
       user.spree_roles << Spree::Role.find_or_create_by_name('admin')
       spree_post :index
       response.should render_template :index
