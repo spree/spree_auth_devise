@@ -14,7 +14,6 @@ describe "Payment methods" do
     Spree::PaymentMethod.stub(:production).and_return(payment_methods = [stub])
     payment_methods.stub(:where).and_return([])
     click_link "Payment Methods"
-    save_and_open_page
   end
 
 
