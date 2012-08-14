@@ -20,10 +20,10 @@ describe "Users" do
   end
 
   it "admin editing roles" do
-    check "user_role_user"
+    check "user_spree_role_user"
     click_button "Update"
     page.should have_content("User has been successfully updated!")
     within('table#listing_users') { click_link "Edit" }
-    find_field('user_role_user')['checked'].should be_true
+    find_field('user_spree_role_user')['checked'].should be_true
   end
 end
