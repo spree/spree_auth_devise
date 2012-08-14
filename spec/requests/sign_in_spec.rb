@@ -18,7 +18,7 @@ describe "Sign In" do
     page.should have_content("Logged in successfully")
     page.should_not have_content("Login")
     page.should have_content("Logout")
-    current_path.should == "/products"
+    current_path.should == "/"
   end
 
   it "should show validation erros" do
