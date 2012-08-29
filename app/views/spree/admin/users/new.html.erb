@@ -1,6 +1,15 @@
+<% content_for :page_title do %>
+  <%= t(:new_user) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to t(:back_to_users_list), spree.admin_users_path, :icon => 'icon-arrow-left' %>
+  </li>
+<% end %>
+
 <div data-hook="admin_user_new_form_header">
   <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
-  <h1><%= t(:new_user) %></h1>
 </div>
 
 <div data-hook="admin_user_new_form">
