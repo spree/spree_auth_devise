@@ -21,6 +21,11 @@ Spree::CheckoutController.class_eval do
   end
 
   private
+
+    def skip_state_validation?
+      %w(registration update_registration).include?(params[:action])
+    end
+
     def check_authorization
       authorize!(:edit, current_order, session[:access_token])
     end
