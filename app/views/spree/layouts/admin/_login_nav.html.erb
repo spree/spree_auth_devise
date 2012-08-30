@@ -1,5 +1,5 @@
 <% if spree_current_user %>
-  <ul id="login-nav">
+  <ul id="login-nav" class="inline-menu">
     <li><%= t(:logged_in_as) %>: <%= spree_current_user.email %></li>
     <li><%= link_to t(:account), spree.edit_user_path(spree_current_user) %></li>
     <li><%= link_to t(:logout), spree.destroy_user_session_path %></li>
