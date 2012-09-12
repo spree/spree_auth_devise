@@ -30,7 +30,7 @@
           <td class="order-status"><%= t(order.state).titleize %></td>
           <td class="order-payment-state"><%= t("payment_states.#{order.payment_state}") if order.payment_state %></td>
           <td class="order-shipment-state"><%= t("shipment_states.#{order.shipment_state}") if order.shipment_state %></td>
-          <td class="order-total"><%= number_to_currency order.total %></td>
+          <td class="order-total"><%= money order.total %></td>
         </tr>
       <% end %>
       </tbody>
