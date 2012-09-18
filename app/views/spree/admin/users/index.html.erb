@@ -2,30 +2,28 @@
   <%= t(:listing_users) %>
 <% end %>
 
-<% content_for :page_actions do %>
-  <div class="toolbar" data-hook="toolbar">
-    <ul class="actions header-action-links inline-menu">
-      <li>
-        <p><%= button_link_to t(:new_user), new_object_url, :icon => 'add', :id => 'admin_new_user_link' %></p>
-      </li>
-    </ul>    
-  </div>
+<% content_for :page_actions do %>  
+  <ul class="actions header-action-links inline-menu">
+    <li>
+      <%= button_link_to t(:new_user), new_object_url, :icon => 'icon-plus', :id => 'admin_new_user_link' %>
+    </li>
+  </ul>  
 <% end %>
 
 <table class="index" id="listing_users" data-hook>
   <thead>
     <tr data-hook="admin_users_index_headers">
       <th><%= sort_link @search,:email, t(:user), {}, {:title => 'users_email_title'} %></th>
-      <th data-hook="admin_users_index_header_actions"></th>
+      <th data-hook="admin_users_index_header_actions" class="actions"></th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user|%>
-      <tr id="<%= spree_dom_id user %>" data-hook="admin_users_index_rows">
-        <td width="350px" class='user_email'><%=link_to user.email, object_url(user) %></td>
-        <td data-hook="admin_users_index_row_actions">
-          <%= link_to_edit user, :class => 'edit' %> &nbsp;
-          <%= link_to_delete user %>
+      <tr id="<%= spree_dom_id user %>" data-hook="admin_users_index_rows" class="<%= cycle('odd', 'even')%>">
+        <td class='user_email'><%=link_to user.email, object_url(user) %></td>
+        <td data-hook="admin_users_index_row_actions" class="actions">
+          <%= link_to_edit user, :no_text => true %>
+          <%= link_to_delete user, :no_text => true %>
         </td>
       </tr>
     <% end %>
