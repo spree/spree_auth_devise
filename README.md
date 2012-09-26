@@ -19,6 +19,11 @@ If you're installing this in a new Spree 1.2+ application, you'll need to instal
 
 and then, run `bundle exec rake spree_auth:admin:create` in order to set up the admin user for the application.
 
+If you're updating a Spree 1.1 application, run these to migrate the database:
+
+    rake railties:install:migrations
+    rake db:migrate
+
 
 ## Testing
 
