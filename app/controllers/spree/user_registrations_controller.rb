@@ -2,6 +2,10 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   include SslRequirement
   helper 'spree/users', 'spree/base'
 
+  if defined?(Spree::Dash)
+    helper 'spree/analytics'
+  end
+
   include Spree::Core::ControllerHelpers
   ssl_required
   before_filter :check_permissions, :only => [:edit, :update]

@@ -2,6 +2,10 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   include SslRequirement
   helper 'spree/users', 'spree/base'
 
+  if defined?(Spree::Dash)
+    helper 'spree/analytics'
+  end
+
   include Spree::Core::ControllerHelpers
 
   ssl_required

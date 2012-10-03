@@ -1,6 +1,9 @@
 class Spree::UserSessionsController < Devise::SessionsController
   include SslRequirement
   helper 'spree/users', 'spree/base'
+  if defined?(Spree::Dash)
+    helper 'spree/analytics'
+  end
 
   include Spree::Core::CurrentOrder
   include Spree::Core::ControllerHelpers
