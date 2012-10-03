@@ -10,7 +10,7 @@
   <tr data-hook="roles">
     <th><%= t(:roles) %></th>
     <td>
-      <%= list_roles(@user) %>
+      <%= @user.spree_roles.pluck(:name).join(', ') %>
     </td>
   </tr>
 </table>
