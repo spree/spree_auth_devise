@@ -23,6 +23,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
       set_flash_message(:notice, :signed_up)
       sign_in(:user, @user)
       session[:spree_user_signup] = true
+      associate_user
       sign_in_and_redirect(:user, @user)
     else
       clean_up_passwords(resource)
