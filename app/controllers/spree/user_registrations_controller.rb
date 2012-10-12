@@ -22,6 +22,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     if resource.save
       set_flash_message(:notice, :signed_up)
       sign_in(:user, @user)
+      fire_event('spree.user.signup', :user => @user, :order => current_order(true))
       session[:spree_user_signup] = true
       sign_in_and_redirect(:user, @user)
     else
