@@ -7,7 +7,7 @@ class Spree::UserSessionsController < Devise::SessionsController
 
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
-  include Spree::Core::ControllerHelpers::CurrentOrder
+  include Spree::Core::ControllerHelpers::Order
 
   ssl_required :new, :create, :destroy, :update
   ssl_allowed :login_bar

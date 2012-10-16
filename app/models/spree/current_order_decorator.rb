@@ -1,4 +1,4 @@
-Spree::Core::ControllerHelpers::CurrentOrder.module_eval do
+Spree::Core::ControllerHelpers::Order.module_eval do
   # Associate the new order with the currently authenticated user before saving
   def before_save_new_order
     @current_order.user ||= try_spree_current_user
