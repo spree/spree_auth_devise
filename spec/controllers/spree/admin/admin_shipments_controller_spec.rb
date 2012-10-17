@@ -38,20 +38,22 @@ describe Spree::Admin::ShipmentsController do
       user.spree_roles << Spree::Role.find_or_create_by_name('bar')
       Spree::Ability.register_ability(BarAbility)
       spree_get :edit, { :order_id => 'R123', :id => 9 }
-      response.should_not render_template 'shared/unauthorized'
+      response.should_not redirect_to('/unauthorized')
+      response.status.should_not == 302
     end
 
     it 'should grant access to users with an bar role' do
       user.spree_roles << Spree::Role.find_or_create_by_name('bar')
       Spree::Ability.register_ability(BarAbility)
       spree_put :update, { :order_id => 'R123', :id => 9 }
-      response.should_not render_template 'shared/unauthorized'
+      response.should_not redirect_to('/unauthorized')
+      response.status.should_not == 302
     end
 
     it 'should deny access to users without an admin role' do
       user.stub :has_spree_role? => false
       spree_get :index
-      response.should render_template 'shared/unauthorized'
+      response.should redirect_to('/unauthorized')
     end
   end
 end
