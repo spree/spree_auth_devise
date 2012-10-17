@@ -10,11 +10,6 @@ class Spree::UserSessionsController < Devise::SessionsController
   ssl_required :new, :create, :destroy, :update
   ssl_allowed :login_bar
 
-  # GET /resource/sign_in
-  def new
-    super
-  end
-
   def create
     authenticate_user!
 
