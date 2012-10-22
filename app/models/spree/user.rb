@@ -37,7 +37,7 @@ module Spree
     end
 
     def anonymous?
-      email =~ /@example.net$/
+      email =~ /@example.net$/ ? true : false
     end
 
     def send_reset_password_instructions
