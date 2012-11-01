@@ -6,7 +6,9 @@ class Spree::UserPasswordsController < Devise::PasswordsController
     helper 'spree/analytics'
   end
 
-  include Spree::Core::ControllerHelpers
+  include Spree::Core::ControllerHelpers::Auth
+  include Spree::Core::ControllerHelpers::Common
+  include Spree::Core::ControllerHelpers::Order
 
   ssl_required
 
