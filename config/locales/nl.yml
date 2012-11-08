@@ -1,0 +1,47 @@
+nl:
+  errors:
+    messages:
+      not_found: 'niet gevonden'
+      already_confirmed: 'is al bevestigd'
+      not_locked: 'is niet vergrendeld'
+      not_saved:
+        one: '1 fout tijdens het opslaan van %{resource}'
+        other: '%{count} fouten tijdens het opslaan van %{resource}'
+  devise:
+    failure:
+      unauthenticated: 'Je moet een account aanmaken voordat je kan verder gaan.'
+      unconfirmed: 'Je moet je account bevestigen voordat je kan verder gaan.'
+      locked: 'Je account is vergrendeld.'
+      invalid: 'E-mailadres of wachtwoord is onjuist.'
+      invalid_token: 'Verkeerde authenticatie token.'
+      timeout: 'Je sessie is verlopen, log opnieuw in om verder te gaan.'
+      inactive: 'Je account is nog niet geactiveerd.'
+      already_authenticated: 'Je bent al ingelogd.'
+    user_passwords:
+      user:
+        send_instructions: 'Binnen enkele minuten ontvang je een e-mail met instructies om je wachtwoord te resetten.'
+        updated: 'Je wachtwoord is succesvol gewijzigd. Je bent nu ingelogd.'
+    confirmations:
+      send_instructions: 'Binnen enkele minuten ontvang je een e-mail om je account te bevestigen.'
+      confirmed: 'Je account is succesvol bevestigd. Je bent nu ingelogd.'
+    user_registrations:
+      signed_up: 'Welkom! Je bent succesvol aangemeld.'
+      inactive_signed_up: 'Je bent succesvol aangemeld. Maar we kunnen je niet inloggen omdat je account is %{reason}.'
+      updated: 'Je account is succesvol aangepast.'
+      destroyed: 'Tot ziens! Je account is succesvol opgezegd. We hopen je snel terug te zien.'
+    user_sessions:
+      signed_in: 'Succesvol ingelogd.'
+      signed_out: 'Succesvol uitgelogd.'
+    unlocks:
+      send_instructions: 'Binnen enkele minuten ontvang je een e-mail om je account te ontgrendelen.'
+      unlocked: 'Je account is succesvol ontgrendeld. Je bent nu ingelogd.'
+    oauth_callbacks:
+      success: 'Succeslvol geautoriseerd van %{kind} account.'
+      failure: 'We konden je niet autoriseren van %{kind} omdat "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Bevestig je account'
+      reset_password_instructions:
+        subject: 'Wijzig je wachtwoord'
+      unlock_instructions:
+        subject: 'Ontgrendel je account'
