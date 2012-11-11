@@ -18,6 +18,7 @@ en:
       inactive: 'Your account was not activated yet.'
     user_passwords:
       user:
+        cannot_be_blank: 'Your password cannot be blank.'
         send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
         updated: 'Your password was changed successfully. You are now signed in.'
     confirmations:
