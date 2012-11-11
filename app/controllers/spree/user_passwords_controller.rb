@@ -28,4 +28,16 @@ class Spree::UserPasswordsController < Devise::PasswordsController
     end
   end
 
+  # Devise::PasswordsController allows for blank passwords.
+  # Silly Devise::PasswordsController!
+  # Fixes spree/spree#2190.
+  def update
+    if params[:user][:password].blank?
+      set_flash_message(:error, :cannot_be_blank)
+      render :edit
+    else
+      super
+    end
+  end
+
 end
