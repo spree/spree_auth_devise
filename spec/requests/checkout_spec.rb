@@ -20,7 +20,7 @@ describe "Checkout", :js => true do
     click_link "RoR Mug"
     click_button "Add To Cart"
     within('h1') { page.should have_content("Shopping Cart") }
-    click_link "Checkout"
+    click_button "Checkout"
     page.should have_content("Checkout as a Guest")
 
     within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
@@ -55,7 +55,7 @@ describe "Checkout", :js => true do
     page.should have_content("RoR Mug")
     within('h1') { page.should have_content("Shopping Cart") }
 
-    click_link "Checkout"
+    click_button "Checkout"
     str_addr = "bill_address"
     select "United States", :from => "order_#{str_addr}_attributes_country_id"
     ['firstname', 'lastname', 'address1', 'city', 'zipcode', 'phone'].each do |field|
@@ -89,7 +89,7 @@ describe "Checkout", :js => true do
     click_button "Update my password and log me in"
 
     click_link "Cart"
-    click_link "Checkout"
+    click_button "Checkout"
     str_addr = "bill_address"
     select "United States", :from => "order_#{str_addr}_attributes_country_id"
     ['firstname', 'lastname', 'address1', 'city', 'zipcode', 'phone'].each do |field|
@@ -104,7 +104,7 @@ describe "Checkout", :js => true do
   it "should allow a user to register during checkout" do
     click_link "RoR Mug"
     click_button "Add To Cart"
-    click_link "Checkout"
+    click_button "Checkout"
     page.should have_content("Registration")
     click_link "Create a new account"
 
@@ -132,7 +132,7 @@ describe "Checkout", :js => true do
     create(:authorize_net_payment_method, :environment => 'test')
     click_link "RoR Mug"
     click_button "Add To Cart"
-    click_link "Checkout"
+    click_button "Checkout"
 
     within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
     click_button "Continue"
@@ -157,7 +157,7 @@ describe "Checkout", :js => true do
 
     click_link "RoR Mug"
     click_button "Add To Cart"
-    click_link "Checkout"
+    click_button "Checkout"
 
     within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
     click_button "Continue"
@@ -177,7 +177,7 @@ describe "Checkout", :js => true do
 
     click_link "RoR Mug"
     click_button "Add To Cart"
-    click_link "Checkout"
+    click_button "Checkout"
 
     within("#guest_checkout") { fill_in "Email", :with => "spree@test.com" }
     click_button "Continue"
@@ -197,7 +197,7 @@ describe "Checkout", :js => true do
     create(:bogus_payment_method, :environment => 'test')
     click_link "RoR Mug"
     click_button "Add To Cart"
-    click_link "Checkout"
+    click_button "Checkout"
 
     within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
     click_button "Continue"
@@ -223,7 +223,7 @@ describe "Checkout", :js => true do
     create(:payment_method, :environment => 'test')
     click_link "RoR Mug"
     click_button "Add To Cart"
-    click_link "Checkout"
+    click_button "Checkout"
 
     within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
     click_button "Continue"
@@ -244,7 +244,7 @@ describe "Checkout", :js => true do
     create(:bogus_payment_method, :environment => 'test')
     click_link "RoR Mug"
     click_button "Add To Cart"
-    click_link "Checkout"
+    click_button "Checkout"
 
     within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
     click_button "Continue"
@@ -285,7 +285,7 @@ describe "Checkout", :js => true do
     page.should have_content("RoR Mug")
     within('h1') { page.should have_content("Shopping Cart") }
 
-    click_link "Checkout"
+    click_button "Checkout"
 
     str_addr = "bill_address"
     select "United States", :from => "order_#{str_addr}_attributes_country_id"
