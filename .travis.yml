@@ -14,9 +14,5 @@ script:
 notifications:
   email:
     - ryan@spreecommerce.com
-branches:
-  only:
-    - 1-2-stable
-    - master
 rvm:
   - 1.9.3
