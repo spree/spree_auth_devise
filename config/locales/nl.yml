@@ -7,6 +7,7 @@ nl:
       not_saved:
         one: '1 fout tijdens het opslaan van %{resource}'
         other: '%{count} fouten tijdens het opslaan van %{resource}'
+  complete: 'voltooid'
   devise:
     failure:
       unauthenticated: 'Je moet een account aanmaken voordat je kan verder gaan.'
@@ -36,7 +37,7 @@ nl:
       send_instructions: 'Binnen enkele minuten ontvang je een e-mail om je account te ontgrendelen.'
       unlocked: 'Je account is succesvol ontgrendeld. Je bent nu ingelogd.'
     oauth_callbacks:
-      success: 'Succeslvol geautoriseerd van %{kind} account.'
+      success: 'Succesvol geautoriseerd van %{kind} account.'
       failure: 'We konden je niet autoriseren van %{kind} omdat "%{reason}".'
     mailer:
       confirmation_instructions:
@@ -45,3 +46,9 @@ nl:
         subject: 'Wijzig je wachtwoord'
       unlock_instructions:
         subject: 'Ontgrendel je account'
+  shipment_states:
+    backorder: 'Backorder'
+    partial: 'Gedeeltelijk'
+    pending: 'In afwachting'
+    ready: 'Voltooid'
+    shipped: 'Verzonden'cd .
