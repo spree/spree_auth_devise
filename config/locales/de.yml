@@ -1,0 +1,46 @@
+en:
+  errors:
+    messages:
+      not_found: 'nicht gefunden'
+      already_confirmed: 'wurde berreits bestätigt'
+      not_locked: 'war nicht gesperrt'
+      not_saved:
+        one: '1 Fehler verhindert das Speichern von %{resource}:'
+        other: '%{count} Fehler verhindern das Speichern von %{resource}:'
+  devise:
+    failure:
+      unauthenticated: 'Sie müssen sich anmelden oder registrieren, bevor Sie fortfahren.'
+      unconfirmed: 'Sie müssen Ihre Registrierung bestätigen, bevor Sie fortfahren.'
+      locked: 'Ihr Konto ist gesperrt.'
+      invalid: 'Ungültige E-Mail-Adresse oder Passwort.'
+      invalid_token: 'Ungültiger Authentifizierungsschlüssel.'
+      timeout: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an, um fortzufahren.'
+      inactive: 'Ihr Konto wurde noch nicht aktiviert.'
+    user_passwords:
+      user:
+        send_instructions: 'In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Passwort zurücksetzen.'
+        updated: 'Ihr Passwort wurde erfolgreich geändert.'
+    confirmations:
+      send_instructions: 'In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen, um Ihr Konto zu aktivieren.'
+      confirmed: 'Ihr Konto wurde erfolgreich aktiviert.'
+    user_registrations:
+      signed_up: 'Herzlich Willkommen! Sie haben sich erfolgreich registriert.'
+      inactive_signed_up: 'Sie haben sich erfolgreich registriert. Wir konnten Sie jedoch nicht anmelden, da Ihr Konto %{reason} ist.'
+      updated: 'Sie haben Ihr Konto erfolgreich aktualisiert.'
+      destroyed: 'Ihr Konto wurde erfolgreich gelöscht. Auf Wiedersehen!'
+    user_sessions:
+      signed_in: 'Erfolgreich angemeldet.'
+      signed_out: 'Erfolgreich abgemeldet.'
+    unlocks:
+      send_instructions: 'In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Konto freizuschalten.'
+      unlocked: 'Ihr Konto wurde erfolgreich freigeschaltet.'
+    oauth_callbacks:
+      success: 'Erfolgreich autorisiert durch %{kind} Konto.'
+      failure: 'Autorisierung durch %{kind} fehlgeschlagen aufgrund von "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Bestätigen Sie Ihre Registrierung'
+      reset_password_instructions:
+        subject: 'Passwort zurücksetzen'
+      unlock_instructions:
+        subject: 'Konto freischalten'
