@@ -10,7 +10,9 @@ env:
 script:
   - "export DISPLAY=:99.0"
   - "bundle exec rspec spec"
-
+branches:
+  only:
+    - 1-2-stable
 notifications:
   email:
     - ryan@spreecommerce.com
