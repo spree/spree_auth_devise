@@ -10,7 +10,7 @@ At one stage in the past, this used to be the auth component for Spree. If that'
 
 Just add this line to your Gemfile:
 
-    gem "spree_auth_devise", :git => "git://github.com/spree/spree_auth_devise"
+    gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise', :branch => '1-2-stable'
 
 Then run `bundle install`. Authentication will then work exactly as it did in previous versions of Spree.
 
