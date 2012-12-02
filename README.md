@@ -1,5 +1,7 @@
 # Spree Auth (Devise)
 
+[![Build Status](https://secure.travis-ci.org/spree/spree_auth_devise.png?branch=1-2-stable)](https://travis-ci.org/spree/spree_auth_devise)
+
 Provides authentication services for Spree, using the Devise gem.
 
 ## Installation
