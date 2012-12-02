@@ -23,7 +23,7 @@ group :test do
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.0.0'
   gem 'capybara', '1.1.3'
-  gem 'database_cleaner', '0.7.1'
+  gem 'database_cleaner', '0.9.1'
   gem 'launchy'
  # gem 'debugger'
 end
