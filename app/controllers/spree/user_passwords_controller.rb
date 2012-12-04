@@ -10,13 +10,12 @@ class Spree::UserPasswordsController < Devise::PasswordsController
 
   ssl_required
 
-  # Temporary Override until next Devise release (i.e after v1.3.4)
-  # line:
+  # Overridden due to bug in Devise.
   #   respond_with resource, :location => new_session_path(resource_name)
   # is generating bad url /session/new.user
   #
   # overridden to:
-  #   respond_with resource, :location => login_path
+  #   respond_with resource, :location => spree.login_path
   #
   def create
     self.resource = resource_class.send_reset_password_instructions(params[resource_name])
@@ -26,6 +25,18 @@ class Spree::UserPasswordsController < Devise::PasswordsController
       respond_with resource, :location => spree.login_path
     else
       respond_with_navigational(resource) { render :new }
+    end
+  end
+
+  # Devise::PasswordsController allows for blank passwords.
+  # Silly Devise::PasswordsController!
+  # Fixes spree/spree#2190.
+  def update
+    if params[:user][:password].blank?
+      set_flash_message(:error, :cannot_be_blank)
+      render :edit
+    else
+      super
     end
   end
 

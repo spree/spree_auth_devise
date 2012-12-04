@@ -139,4 +139,6 @@ Devise.setup do |config|
   # change their passwords.
   config.reset_password_within = 6.hours
   config.sign_out_via = :get
+
+  config.case_insensitive_keys = [:email]
 end
