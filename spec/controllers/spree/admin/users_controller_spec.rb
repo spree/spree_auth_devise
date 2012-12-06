@@ -24,20 +24,20 @@ describe Spree::Admin::UsersController do
       user.spree_roles << Spree::Role.find_or_create_by_name('bar')
       Spree::Ability.register_ability(BarAbility)
       spree_post :index
-      response.should render_template 'spree/shared/unauthorized'
+      response.should redirect_to '/unauthorized'
     end
 
     it 'should deny access to users with an bar role' do
       user.spree_roles << Spree::Role.find_or_create_by_name('bar')
       Spree::Ability.register_ability(BarAbility)
       spree_post :update, { :id => '9' }
-      response.should render_template 'spree/shared/unauthorized'
+      response.should redirect_to '/unauthorized'
     end
 
     it 'should deny access to users without an admin role' do
       user.stub :has_spree_role? => false
       spree_post :index
-      response.should render_template 'spree/shared/unauthorized'
+      response.should redirect_to '/unauthorized'
     end
   end
 end

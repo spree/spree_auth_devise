@@ -1,4 +1,8 @@
 class Spree::UsersController < Spree::BaseController
+  include Spree::Core::ControllerHelpers::Auth
+  include Spree::Core::ControllerHelpers::Order
+  include Spree::Core::ControllerHelpers::Common
+
   ssl_required
   prepend_before_filter :load_object, :only => [:show, :edit, :update]
   prepend_before_filter :authorize_actions, :only => :new

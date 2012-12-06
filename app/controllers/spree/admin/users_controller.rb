@@ -2,6 +2,8 @@ module Spree
   module Admin
     class UsersController < ResourceController
 
+      include Spree::Core::ControllerHelpers::Auth
+
       # http://spreecommerce.com/blog/2010/11/02/json-hijacking-vulnerability/
       before_filter :check_json_authenticity, :only => :index
       before_filter :load_roles, :only => [:edit, :new, :update, :create, :generate_api_key, :clear_api_key]
