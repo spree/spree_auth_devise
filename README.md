@@ -1,6 +1,11 @@
 # Spree Auth (Devise)
 
+<<<<<<< HEAD
 [![Build Status](https://secure.travis-ci.org/spree/spree_auth_devise.png?branch=1-2-stable)](https://travis-ci.org/spree/spree_auth_devise)
+=======
+[![Build Status](https://secure.travis-ci.org/spree/spree_auth_devise.png?branch=master)](https://travis-ci.org/spree/spree_auth_devise)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/spree/spree_auth_devise)
+>>>>>>> f05a575d0f28924f1eb41dd2e43165eb34a30493
 
 Provides authentication services for Spree, using the Devise gem.
 
