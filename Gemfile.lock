@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/spree/spree
-  revision: 4fd0f0a7aafc87069f71ebb70708d77bc37f0ff5
+  revision: 7de52e9a54bfe6d6fe4f70a251639c63e0086201
   branch: 1-3-stable
   specs:
     spree (1.3.0.rc1)
@@ -47,7 +47,8 @@ PATH
   specs:
     spree_auth_devise (1.2.0)
       cancan (= 1.6.7)
-      devise (~> 2.0.4)
+      devise (~> 2.1.2)
+      devise-encryptable
       spree_core (= 1.3.0.rc1)
 
 GEM
@@ -102,6 +103,8 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
+    bourne (1.1.2)
+      mocha (= 0.10.5)
     builder (3.0.4)
     cancan (1.6.7)
     capybara (1.1.3)
@@ -122,7 +125,7 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     columnize (0.3.6)
-    database_cleaner (0.7.1)
+    database_cleaner (0.9.1)
     debugger (1.2.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
@@ -133,11 +136,13 @@ GEM
     deface (0.9.1)
       nokogiri (~> 1.5.0)
       rails (~> 3.1)
-    devise (2.0.4)
+    devise (2.1.2)
       bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.0.3)
+      orm_adapter (~> 0.1)
       railties (~> 3.1)
-      warden (~> 1.1.1)
+      warden (~> 1.2.1)
+    devise-encryptable (0.1.1)
+      devise (>= 2.1.0.rc)
     diff-lcs (1.1.3)
     email_spec (1.2.1)
       mail (~> 2.2)
@@ -176,7 +181,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.19)
+    mocha (0.10.5)
+      metaclass (~> 0.0.1)
     money (5.0.0)
       i18n (~> 0.4)
       json
@@ -184,7 +192,7 @@ GEM
     multi_xml (0.5.1)
     mysql2 (0.3.11)
     nokogiri (1.5.5)
-    orm_adapter (0.0.7)
+    orm_adapter (0.4.0)
     paperclip (2.8.0)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
@@ -226,19 +234,21 @@ GEM
       polyamorous (~> 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
-    rspec (2.9.0)
-      rspec-core (~> 2.9.0)
-      rspec-expectations (~> 2.9.0)
-      rspec-mocks (~> 2.9.0)
-    rspec-core (2.9.0)
-    rspec-expectations (2.9.1)
+    rspec (2.12.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
+    rspec-core (2.12.1)
+    rspec-expectations (2.12.0)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.9.0)
-    rspec-rails (2.9.0)
+    rspec-mocks (2.12.0)
+    rspec-rails (2.12.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec (~> 2.9.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
     rubyzip (0.9.9)
     sass (3.2.3)
     sass-rails (3.2.5)
@@ -247,12 +257,14 @@ GEM
       tilt (~> 1.3)
     select2-rails (3.2.1)
       thor (~> 0.14)
-    selenium-webdriver (2.26.0)
+    selenium-webdriver (2.27.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    shoulda-matchers (1.0.0)
+    shoulda-matchers (1.4.2)
+      activesupport (>= 3.0.0)
+      bourne (~> 1.1.2)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -272,7 +284,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-    warden (1.1.1)
+    warden (1.2.1)
       rack (>= 1.0)
     websocket (1.0.4)
     xpath (0.1.4)
@@ -284,8 +296,10 @@ PLATFORMS
 DEPENDENCIES
   capybara (= 1.1.3)
   coffee-rails (~> 3.2)
-  database_cleaner (= 0.7.1)
+  database_cleaner (= 0.9.1)
   debugger
+  devise (~> 2.1.2)
+  devise-encryptable
   email_spec (~> 1.2.1)
   factory_girl_rails (~> 1.7.0)
   ffaker
@@ -294,9 +308,9 @@ DEPENDENCIES
   multi_json (= 1.2.0)
   mysql2
   pg
-  rspec-rails (~> 2.9.0)
+  rspec-rails (~> 2.12.0)
   sass-rails (~> 3.2)
-  shoulda-matchers (~> 1.0.0)
+  shoulda-matchers (~> 1.4.2)
   spree!
   spree_auth_devise!
   sqlite3
