@@ -1,7 +1,11 @@
 # Spree Auth (Devise)
 
+<<<<<<< HEAD
+[![Build Status](https://secure.travis-ci.org/spree/spree_auth_devise.png?branch=1-2-stable)](https://travis-ci.org/spree/spree_auth_devise)
+=======
 [![Build Status](https://secure.travis-ci.org/spree/spree_auth_devise.png?branch=master)](https://travis-ci.org/spree/spree_auth_devise)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/spree/spree_auth_devise)
+>>>>>>> f05a575d0f28924f1eb41dd2e43165eb34a30493
 
 Provides authentication services for Spree, using the Devise gem.
 
@@ -11,7 +15,7 @@ At one stage in the past, this used to be the auth component for Spree. If that'
 
 Just add this line to your Gemfile:
 
-    gem "spree_auth_devise", :git => "git://github.com/spree/spree_auth_devise"
+    gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise', :branch => '1-2-stable'
 
 Then run `bundle install`. Authentication will then work exactly as it did in previous versions of Spree.
 

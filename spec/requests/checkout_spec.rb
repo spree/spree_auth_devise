@@ -2,9 +2,6 @@ require 'spec_helper'
 
 describe "Checkout", :js => true do
   before(:each) do
-    PAYMENT_STATES = Spree::Payment.state_machine.states.keys unless defined? PAYMENT_STATES
-    SHIPMENT_STATES = Spree::Shipment.state_machine.states.keys unless defined? SHIPMENT_STATES
-    ORDER_STATES = Spree::Order.state_machine.states.keys unless defined? ORDER_STATES
     sm = create(:shipping_method, :zone => Spree::Zone.find_by_name('North America'))
     sm.calculator.set_preference(:amount, 10)
 

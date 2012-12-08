@@ -25,13 +25,13 @@ group :test do
   gem 'capybara', '1.1.3'
   gem 'database_cleaner', '0.9.1'
   gem 'launchy'
- # gem 'debugger'
+  gem 'debugger'
 end
 
 if ENV['USE_LOCAL_SPREE']
-  gem 'spree', :path => '~/Sites/gems/spree'
+  gem 'spree', :path => '~/code/spree'
 else
-  gem 'spree', :git => 'git://github.com/spree/spree', :branch => '1-2-stable'
+  gem 'spree', :git => 'git://github.com/spree/spree', :branch => '1-3-stable'
 end
 
 gemspec

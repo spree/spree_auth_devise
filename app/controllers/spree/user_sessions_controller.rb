@@ -5,8 +5,10 @@ class Spree::UserSessionsController < Devise::SessionsController
     helper 'spree/analytics'
   end
 
-  include Spree::Core::CurrentOrder
-  include Spree::Core::ControllerHelpers
+  include Spree::Core::ControllerHelpers::Auth
+  include Spree::Core::ControllerHelpers::Common
+  include Spree::Core::ControllerHelpers::Order
+  include Spree::Core::ControllerHelpers::RespondWith
 
   ssl_required :new, :create, :destroy, :update
   ssl_allowed :login_bar
