@@ -28,12 +28,12 @@ describe 'promotion adjustments', :js => true do
   context "provides a promotion for the first order for a new user" do
     before do
       fill_in "Name", :with => "Sign up"
-      select "User signup", :from => "Event"
+      select2 "User signup", :from => "Event Name"
       click_button "Create"
       page.should have_content("Editing Promotion")
-      select "First order", :from => "Add rule of type"
+      select2 "First order", :from => "Add rule of type"
       within("#rule_fields") { click_button "Add" }
-      select "Create adjustment", :from => "Add action of type"
+      select2 "Create adjustment", :from => "Add action of type"
       within("#actions_container") { click_button "Add" }
       select "Flat Percent", :from => "Calculator"
       within(".calculator-fields") { fill_in "Flat Percent", :with => "10" }
