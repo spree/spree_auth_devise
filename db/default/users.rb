@@ -62,9 +62,9 @@ def create_admin_user
       admin.save
       say "Done!"
     else
-      say "There was some problems with persisting new admin user. Run with INSPECT_ERRORS=true for details"
-      if ENV['INSPECT_ERRORS']
-        say admin.errors.inspect
+      say "There was some problems with persisting new admin user:"
+      admin.errors.full_messages.each do |error|
+        say error
       end
     end
   end
@@ -80,4 +80,3 @@ else
     puts 'No admin user created.'
   end
 end
-
