@@ -55,11 +55,18 @@ def create_admin_user
   if Spree::User.find_by_email(email)
     say "\nWARNING: There is already a user with the email: #{email}, so no account changes were made.  If you wish to create an additional admin user, please run rake spree_auth:admin:create again with a different email.\n\n"
   else
-    admin = Spree::User.create(attributes)
-    # create an admin role and and assign the admin user to that role
-    role = Spree::Role.find_or_create_by_name 'admin'
-    admin.spree_roles << role
-    admin.save
+    admin = Spree::User.new(attributes)
+    if admin.save
+      role = Spree::Role.find_or_create_by_name 'admin'
+      admin.spree_roles << role
+      admin.save
+      say "Done!"
+    else
+      say "There was some problems with persisting new admin user:"
+      admin.errors.full_messages.each do |error|
+        say error
+      end
+    end
   end
 end
 
@@ -73,4 +80,3 @@ else
     puts 'No admin user created.'
   end
 end
-
