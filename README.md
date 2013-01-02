@@ -31,7 +31,7 @@ You need to do a quick one-time creation of a test application and then you can 
 
     bundle exec rake test_app
 
-Then run the rspec tests
+Then run the rspec tests.
 
     bundle exec rake spec
 
