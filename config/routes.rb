@@ -28,4 +28,8 @@ Spree::Core::Engine.routes.prepend do
   end
 
   resource :account, :controller => 'users'
+
+  namespace :admin do
+    resources :users
+  end
 end
