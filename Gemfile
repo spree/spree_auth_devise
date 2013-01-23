@@ -1,8 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'devise', '~> 2.1.2'
-gem 'devise-encryptable'
-
 gem 'json'
 gem 'sqlite3'
 gem 'mysql2'
