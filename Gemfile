@@ -29,7 +29,7 @@ end
 if ENV['USE_LOCAL_SPREE']
   gem 'spree', :path => "~/Sites/gems/spree"
 else
-  gem 'spree', :git => "git://github.com/spree/spree", :branch => "master"
+  gem 'spree', :git => "git://github.com/spree/spree", :branch => "1-3-stable"
 end
 
 gemspec
