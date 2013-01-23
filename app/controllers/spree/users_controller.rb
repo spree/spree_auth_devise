@@ -1,6 +1,4 @@
-class Spree::UsersController < Spree::BaseController
-  include Spree::Core::ControllerHelpers::Order
-
+class Spree::UsersController < Spree::StoreController
   ssl_required
   prepend_before_filter :load_object, :only => [:show, :edit, :update]
   prepend_before_filter :authorize_actions, :only => :new
