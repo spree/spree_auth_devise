@@ -1,6 +1,9 @@
 module Spree
   module Admin
     class UsersController < ResourceController
+      rescue_from Spree::User::DestroyWithOrdersError, :with => :user_destroy_with_orders_error
+
+      update.after :sign_in_if_change_own_password
 
       # http://spreecommerce.com/blog/2010/11/02/json-hijacking-vulnerability/
       before_filter :check_json_authenticity, :only => :index
@@ -72,6 +75,15 @@ module Spree
           end
         end
 
+        def sign_in_if_change_own_password
+          if spree_current_user == @user && @user.password.present?
+            sign_in(@user, :event => :authentication, :bypass => true)
+          end
+        end
+
+        def load_roles
+          @roles = Spree::Role.scoped
+        end
     end
   end
 end
