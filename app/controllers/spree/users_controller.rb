@@ -2,6 +2,7 @@ class Spree::UsersController < Spree::BaseController
   include Spree::Core::ControllerHelpers::Order
 
   ssl_required
+  skip_before_filter :set_current_order, :only => :show
   prepend_before_filter :load_object, :only => [:show, :edit, :update]
   prepend_before_filter :authorize_actions, :only => :new
 
