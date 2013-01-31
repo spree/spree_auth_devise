@@ -2,21 +2,26 @@ require 'spec_helper'
 
 describe 'promotion adjustments', :js => true do
 
-  before(:each) do
-    PAYMENT_STATES = Spree::Payment.state_machine.states.keys unless defined? PAYMENT_STATES
-    SHIPMENT_STATES = Spree::Shipment.state_machine.states.keys unless defined? SHIPMENT_STATES
-    ORDER_STATES = Spree::Order.state_machine.states.keys unless defined? ORDER_STATES
-    # creates a default shipping method which is required for checkout
-    create(:bogus_payment_method, :environment => 'test')
-    # creates a check payment method so we don't need to worry about cc details
-    create(:payment_method)
+  let!(:country) { create(:country, :name => "United States",:states_required => true) }
+  let!(:state) { create(:state, :name => "Maryland", :country => country) }
+  let!(:shipping_method) do
+    shipping_method = create(:shipping_method)
+    calculator = Spree::Calculator::PerItem.create!({:calculable => shipping_method, :preferred_amount => 10}, :without_protection => true)
+    shipping_method.calculator = calculator
+    shipping_method.save
 
-    sm = create(:shipping_method, :zone => Spree::Zone.find_by_name('North America'))
-    sm.calculator.set_preference(:amount, 10)
+    shipping_method
+  end
 
-    user = create(:admin_user)
-    create(:product, :name => "RoR Mug", :price => "40")
-    create(:product, :name => "RoR Bag", :price => "20")
+  let!(:payment_method) { create(:payment_method) }
+  let!(:zone) { create(:zone) }
+  let!(:address) { create(:address, :state => state, :country => country) }
+  let!(:user) { create(:user) }
+
+  before do
+    @product = create(:product, :name => "RoR Mug")
+    @product.on_hand = 1
+    @product.save
 
     sign_in_as!(user)
     visit spree.admin_path
@@ -28,14 +33,15 @@ describe 'promotion adjustments', :js => true do
   context "provides a promotion for the first order for a new user" do
     before do
       fill_in "Name", :with => "Sign up"
-      select "User signup", :from => "Event"
+      select2 "User signup", :from => "Event"
       click_button "Create"
       page.should have_content("Editing Promotion")
-      select "First order", :from => "Add rule of type"
+      select2 "First order", :from => "Add rule of type"
       within("#rule_fields") { click_button "Add" }
-      select "Create adjustment", :from => "Add action of type"
+      select2 "Create adjustment", :from => "Add action of type"
       within("#actions_container") { click_button "Add" }
-      select "Flat Percent", :from => "Calculator"
+      binding.pry
+      select2 "Flat Percent", :from => "Calculator"
       within(".calculator-fields") { fill_in "Flat Percent", :with => "10" }
       within("#actions_container") { click_button "Update" }
 
