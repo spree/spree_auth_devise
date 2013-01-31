@@ -1,19 +1,28 @@
 require 'spec_helper'
 
 describe "Checkout", :js => true do
-  before(:each) do
-    PAYMENT_STATES = Spree::Payment.state_machine.states.keys unless defined? PAYMENT_STATES
-    SHIPMENT_STATES = Spree::Shipment.state_machine.states.keys unless defined? SHIPMENT_STATES
-    ORDER_STATES = Spree::Order.state_machine.states.keys unless defined? ORDER_STATES
-    sm = create(:shipping_method, :zone => Spree::Zone.find_by_name('North America'))
-    sm.calculator.set_preference(:amount, 10)
+  let!(:country) { create(:country, :name => "United States",:states_required => true) }
+  let!(:state) { create(:state, :name => "Maryland", :country => country) }
+  let!(:shipping_method) do
+    shipping_method = create(:shipping_method)
+    calculator = Spree::Calculator::PerItem.create!({:calculable => shipping_method, :preferred_amount => 10}, :without_protection => true)
+    shipping_method.calculator = calculator
+    shipping_method.save
 
-    create(:payment_method, :environment => 'test')
-    create(:product, :name => "RoR Mug")
-    visit spree.root_path
+    shipping_method
   end
 
-  let!(:address) { create(:address, :state => Spree::State.first) }
+  let!(:payment_method) { create(:payment_method) }
+  let!(:zone) { create(:zone) }
+  let!(:address) { create(:address, :state => state, :country => country) }
+
+  before do
+    @product = create(:product, :name => "RoR Mug")
+    @product.on_hand = 1
+    @product.save
+
+    visit spree.root_path
+  end
 
   it "should allow a visitor to checkout as guest, without registration" do
     Spree::Auth::Config.set(:registration_step => true)
@@ -67,7 +76,8 @@ describe "Checkout", :js => true do
     click_button "Save and Continue"
     click_button "Save and Continue"
     page.should have_content("Your order has been processed successfully")
-    Spree::Order.count.should == 1
+
+    Spree::Order.first.user.should == user
   end
 
   # Regression test for #890
@@ -125,7 +135,8 @@ describe "Checkout", :js => true do
     click_button "Save and Continue"
     click_button "Save and Continue"
     page.should have_content("Your order has been processed successfully")
-    Spree::Order.count.should == 1
+
+    Spree::Order.first.user.should == Spree::User.find_by_email("email@person.com")
   end
 
   it "the current payment method does not support profiles" do
@@ -219,7 +230,7 @@ describe "Checkout", :js => true do
   end
 
   it "completing checkout for a free order, skipping payment step" do
-    create(:free_shipping_method, :zone => Spree::Zone.find_by_name('North America'))
+    create(:free_shipping_method, :zone => zone)
     create(:payment_method, :environment => 'test')
     click_link "RoR Mug"
     click_button "Add To Cart"
@@ -267,7 +278,7 @@ describe "Checkout", :js => true do
   end
 
   it "changing country to different zone during checkout should reset shipments" do
-    eu_vat_zone = Spree::Zone.find_by_name("EU_VAT")
+    eu_vat_zone = Spree::Zone.create!(:name => "EU_VAT")
     italy = create(:country, :iso_name => "ITALY", :iso => "IT", :iso3 => "ITA", :name => "Italy")
     eu_vat_zone.zone_members.create!(:zoneable => italy)
     ita_address = create(:address, :country => italy, :state_name => "Roma")
