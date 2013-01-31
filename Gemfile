@@ -20,17 +20,19 @@ group :test do
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.0.0'
   gem 'capybara', '1.1.3'
-  gem 'selenium-webdriver', '2.25.0'
+  gem 'selenium-webdriver', '2.27.1'
   gem 'database_cleaner', '0.7.1'
   gem 'launchy'
  # gem 'debugger'
 end
 
-if ENV['USE_LOCAL_SPREE']
-  gem 'spree', :path => "~/Sites/gems/spree"
-else
-  gem 'spree', :git => "git://github.com/spree/spree", :branch => "1-3-stable"
-end
+# if ENV['USE_LOCAL_SPREE']
+#   gem 'spree', :path => "~/Sites/gems/spree"
+# else
+#   gem 'spree', :git => "git://github.com/spree/spree", :branch => "1-3-stable"
+# end
+#
+gem 'spree', :path => '../spree'
 
 gemspec
 
