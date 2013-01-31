@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "Users" do
   before(:each) do
+    Spree::Role.create!(:name => "user")
     user = create(:admin_user, :email => "admin@person.com", :password => "password", :password_confirmation => "password")
     visit spree.admin_path
     fill_in "user_email", :with => user.email
