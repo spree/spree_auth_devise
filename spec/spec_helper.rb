@@ -10,7 +10,6 @@ require 'spree/core/url_helpers'
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-require 'spree/core/testing_support/fixtures'
 require 'spree/core/testing_support/factories'
 require 'spree/core/testing_support/controller_requests'
 
@@ -32,7 +31,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.before(:each) do
     if example.metadata[:js]
-      DatabaseCleaner.strategy = :truncation, { :except => ['spree_countries', 'spree_zones', 'spree_zone_members', 'spree_states', 'spree_roles'] }
+      DatabaseCleaner.strategy = :truncation
     else
       DatabaseCleaner.strategy = :transaction
     end
