@@ -66,17 +66,9 @@ describe Spree::CheckoutController do
 
     end
 
-    it 'should check if the user is authorized for :edit' do
-      controller.should_receive(:authorize!).with(:edit, order, token)
-      spree_get :edit, { :state => 'address' }, { :access_token => token }
-    end
   end
 
   context '#update' do
-    it 'should check if the user is authorized for :edit' do
-      controller.should_receive(:authorize!).with(:edit, order, token)
-      spree_post :update, { :state => 'address' }, { :access_token => token }
-    end
 
     context 'when save successful' do
       before do
