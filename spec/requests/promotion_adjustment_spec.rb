@@ -40,7 +40,6 @@ describe 'promotion adjustments', :js => true do
       within("#rule_fields") { click_button "Add" }
       select2 "Create adjustment", :from => "Add action of type"
       within("#actions_container") { click_button "Add" }
-      binding.pry
       select2 "Flat Percent", :from => "Calculator"
       within(".calculator-fields") { fill_in "Flat Percent", :with => "10" }
       within("#actions_container") { click_button "Update" }
