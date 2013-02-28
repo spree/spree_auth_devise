@@ -48,8 +48,8 @@ RSpec.configure do |config|
   end
 
   config.include FactoryGirl::Syntax::Methods
-  config.include Spree::Core::TestingSupport::UrlHelpers
-  config.include Spree::Core::TestingSupport::ControllerRequests, :type => :controller
+  config.include Spree::TestingSupport::UrlHelpers
+  config.include Spree::TestingSupport::ControllerRequests, :type => :controller
   config.include Devise::TestHelpers, :type => :controller
   config.include Rack::Test::Methods, :type => :requests
 end
