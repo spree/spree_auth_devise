@@ -3,9 +3,9 @@ if defined?(Spree::Admin::BaseController)
   Spree::Admin::BaseController.class_eval do
     protected
       def model_class
-        const_name = "Spree::#{controller_name.classify}"
-        if Object.const_defined?(const_name)
-          return const_name.constantize
+        const_name = controller_name.classify
+        if Spree.const_defined?(const_name)
+          return "Spree::#{const_name}".constantize
         end
         nil
       end
