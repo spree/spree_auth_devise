@@ -5,6 +5,7 @@ module Spree
       # http://spreecommerce.com/blog/2010/11/02/json-hijacking-vulnerability/
       before_filter :check_json_authenticity, :only => :index
       before_filter :load_roles, :only => [:edit, :new, :update, :create, :generate_api_key, :clear_api_key]
+      skip_before_filter :load_resource, :only => :create
 
       def index
         respond_with(@collection) do |format|
