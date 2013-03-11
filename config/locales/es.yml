@@ -21,7 +21,7 @@ es:
       unauthenticated: 'Necesita conectarse o registrarse para continuar.'
       unconfirmed: 'Necesita confirmar su cuenta para continuar.'
       locked: 'Su cuenta está bloqueada.'
-      invalid: 'Dirección de correo o contraseña inválido(s).'
+      invalid: 'Dirección de correo o contraseña no válidos.'
       invalid_token: 'Token de autenticación no válido.'
       timeout: 'Su sesión ha expirado, por favor conéctese de nuevo para continuar.'
       inactive: 'Su cuenta no ha sido activada aún.'
