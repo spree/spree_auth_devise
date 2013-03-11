@@ -1,0 +1,56 @@
+es:
+  logged_in_as: "Conectado como"
+  logged_in_succesfully: "Conectado correctamente"
+  logged_out: "Ha sido desconectado."
+  login: Login
+  login_as_existing: "Login como Cliente Registrado"
+  login_failed: "Falló de autenticación en el Login."
+  login_name: Login
+  logout: Desconectar
+
+  errors:
+    messages:
+      not_found: 'no encontrado'
+      already_confirmed: 'ya estaba confirmado'
+      not_locked: 'no estaba bloqueado'
+      not_saved:
+        one: '1 error impidió guardar este %{resource}:'
+        other: '%{count} errores impidieron guardar este %{resource}:'
+  devise:
+    failure:
+      unauthenticated: 'Necesita conectarse o registrarse para continuar.'
+      unconfirmed: 'Necesita confirmar su cuenta para continuar.'
+      locked: 'Su cuenta está bloqueada.'
+      invalid: 'Dirección de correo o contraseña no válidos.'
+      invalid_token: 'Token de autenticación no válido.'
+      timeout: 'Su sesión ha expirado, por favor conéctese de nuevo para continuar.'
+      inactive: 'Su cuenta no ha sido activada aún.'
+    user_passwords:
+      user:
+        cannot_be_blank: 'La contraseña no puede estar en blanco.'
+        send_instructions: 'Recibirá un email con instrucciones acerca de como restaurar su contraseña en pocos minutos.'
+        updated: 'Su contraseña ha sido cambiada correctamente. Ahora está conectado.'
+    confirmations:
+      send_instructions: 'Recibirá un email con instrucciones acerca de como confirmar su cuenta en pocos minutos.'
+      confirmed: 'Su cuenta ha sido confirmada. Ahora está conectado.'
+    user_registrations:
+      signed_up: 'Bienvenido! Ha sido registrado correctamente.'
+      inactive_signed_up: 'Ha sido registrado correctamente. Sin embargo, no se puede acceder porque su cuenta está %{reason}.'
+      updated: 'Su cuenta ha sido actualizada correctamente .'
+      destroyed: 'Hasta luego! Su cuenta ha sido cancelada correctamente. Esperamos volver a verle pronto.'
+    user_sessions:
+      signed_in: 'Conectado correctamente.'
+      signed_out: 'Desconectado correctamente.'
+    unlocks:
+      send_instructions: 'Recibirá un email con instrucciones acerca de cómo desbloquear su cuenta en pocos minutos.'
+      unlocked: 'Su cuenta ha sido desbloqueada correctamente. Ahora está conectado.'
+    oauth_callbacks:
+      success: 'Cuenta autorizada correctamente desde %{kind}.'
+      failure: 'No es posible autorizarle desde %{kind} porque "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Instrucciones de confirmación'
+      reset_password_instructions:
+        subject: 'Instrucciones para restablecer la contraseña'
+      unlock_instructions:
+        subject: 'Instrucciones de desbloqueo'
