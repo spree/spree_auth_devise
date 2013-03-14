@@ -12,7 +12,7 @@ if defined?(Spree::CheckoutController)
     def update_registration
       fire_event("spree.user.signup", :order => current_order)
       # hack - temporarily change the state to something other than cart so we can validate the order email address
-      current_order.state = 'address'
+      current_order.state = current_order.checkout_steps.first
       if current_order.update_attributes(params[:order])
         redirect_to checkout_path
       else
