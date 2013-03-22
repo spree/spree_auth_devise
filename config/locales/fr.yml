@@ -32,7 +32,7 @@ fr:
         updated: 'Votre mot de passe a été changé avec succès. Vous êtes maintenant connecté(e).'
     confirmations:
       send_instructions: 'Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de confirmer votre compte.'
-      confirmed: 'Votre compte a été confirmée. Vous êtes maintenant connecté(e).'
+      confirmed: 'Votre compte a été confirmé. Vous êtes maintenant connecté(e).'
     user_registrations:
       signed_up: 'Bienvenue! Vous vous êtes inscrit(e) avec succès.'
       inactive_signed_up: "Vous vous êtes inscrit(e) avec succès. Cependant, nous n'avons pu vous connecter car votre compte est %{reason}."
