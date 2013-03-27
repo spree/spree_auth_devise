@@ -1,3 +1,4 @@
+require_dependency 'spree/base_controller'
 Spree::BaseController.class_eval do
   def spree_login_path
     spree.login_path
