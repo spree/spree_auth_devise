@@ -1,17 +1,13 @@
 require 'spec_helper'
 
 describe Spree::CheckoutController do
-  let(:order) { Spree::Order.new }
+  let(:order) { FactoryGirl.create(:order_with_totals, :email => nil, :user => nil) }
   let(:user) { mock_model Spree::User, :last_incomplete_spree_order => nil }
   let(:token) { 'some_token' }
 
   before do
-    order.stub :checkout_allowed? => true, :user => user, :new_record? => false
     controller.stub :current_order => order
-    # TODO: Really, this shouldn't be in effect here.
-    # We should only be testing for auth's decorations
-    controller.stub :apply_pending_promotions
-    controller.stub :spree_current_user => nil
+    order.stub :confirmation_required? => true
   end
 
   context '#edit' do
@@ -31,8 +27,6 @@ describe Spree::CheckoutController do
       end
 
       context 'when authenticated as guest' do
-        before { controller.stub :auth_user => user }
-
         it 'should redirect to registration step' do
           spree_get :edit, { :state => 'address' }
           response.should redirect_to spree.checkout_registration_path
@@ -56,8 +50,6 @@ describe Spree::CheckoutController do
       end
 
       context 'when authenticated as guest' do
-        before { controller.stub :auth_user => user }
-
         it 'should proceed to the first checkout step' do
           spree_get :edit, { :state => 'address' }
           response.should render_template :edit
@@ -69,49 +61,37 @@ describe Spree::CheckoutController do
   end
 
   context '#update' do
-
-    context 'when save successful' do
+    context 'when in the confirm state' do
       before do
-        controller.stub :check_authorization
-        order.stub(:update_attribute).and_return true
-        order.should_receive(:update_attributes).and_return true
+        order.update_column(:email, 'spree@example.com')
+        order.update_column(:state, 'confirm')
+
+        # So that the order can transition to complete successfully
+        order.stub :payment_required? => false
       end
 
-      context 'when in the confirm state' do
+      context "with a token" do
         before do
-          order.stub :next => true
-          order.stub :state => 'complete'
-          order.stub :number => 'R123'
+          order.stub :token => 'ABC'
         end
 
-        context 'with a guest user' do
-          before do
-            order.stub :token => 'ABC'
-            user.stub :has_spree_role? => true
-            controller.stub :spree_current_user => nil
-          end
+        it 'should redirect to the tokenized order view' do
+          spree_post :update, { :state => 'confirm' }, { :access_token => "ABC" }
+          response.should redirect_to spree.token_order_path(order, 'ABC')
+          flash.notice.should == I18n.t(:order_processed_successfully)
+        end
+      end
 
-          it 'should redirect to the tokenized order view' do
-            spree_post :update, { :state => 'delivery' }
-            response.should redirect_to spree.token_order_path('R123', 'ABC')
-          end
-
-          it 'should populate the flash message' do
-            spree_post :update, { :state => 'delivery' }
-            flash.notice.should == I18n.t(:order_processed_successfully)
-          end
+      context 'with a registered user' do
+        before do
+          controller.stub :spree_current_user => user
+          order.stub :user => user
+          order.stub :token => nil
         end
 
-        context 'with a registered user' do
-          before do
-            user.stub :has_spree_role? => true
-            controller.stub :spree_current_user => mock_model(Spree::User, :has_spree_role? => true, :last_incomplete_spree_order => nil)
-          end
-
-          it 'should redirect to the standard order view' do
-            spree_post :update, { :state => 'address' }
-            response.should redirect_to spree.order_path('R123')
-          end
+        it 'should redirect to the standard order view' do
+          spree_post :update, { :state => 'confirm' }
+          response.should redirect_to spree.order_path(order)
         end
       end
     end
