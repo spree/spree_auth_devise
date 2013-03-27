@@ -28,6 +28,7 @@ describe "Checkout", :js => true do
   context "without payment being required" do
     before do
       # So that we don't have to setup payment methods just for the sake of it
+      Spree::Order.any_instance.stub :has_available_payment => true
       Spree::Order.any_instance.stub :payment_required? => false
     end
 
