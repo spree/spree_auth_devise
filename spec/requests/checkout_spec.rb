@@ -1,44 +1,60 @@
 require 'spec_helper'
 
 describe "Checkout", :js => true do
-  before(:each) do
-    PAYMENT_STATES = Spree::Payment.state_machine.states.keys unless defined? PAYMENT_STATES
-    SHIPMENT_STATES = Spree::Shipment.state_machine.states.keys unless defined? SHIPMENT_STATES
-    ORDER_STATES = Spree::Order.state_machine.states.keys unless defined? ORDER_STATES
-    sm = create(:shipping_method, :zone => Spree::Zone.find_by_name('North America'))
-    sm.calculator.set_preference(:amount, 10)
+  let!(:country) { create(:country, :name => "United States",:states_required => true) }
+  let!(:state) { create(:state, :name => "Maryland", :country => country) }
+  let!(:shipping_method) do
+    shipping_method = create(:shipping_method)
+    calculator = Spree::Calculator::PerItem.create!({:calculable => shipping_method, :preferred_amount => 10}, :without_protection => true)
+    shipping_method.calculator = calculator
+    shipping_method.save
+
+    shipping_method
+  end
+
+  let!(:zone) { create(:zone) }
+  let!(:address) { create(:address, :state => state, :country => country) }
+
+  before do
+    @product = create(:product, :name => "RoR Mug")
+    @product.on_hand = 1
+    @product.save
 
     create(:payment_method, :environment => 'test')
     create(:product, :name => "RoR Mug")
     visit spree.root_path
   end
 
-  let!(:address) { create(:address, :state => Spree::State.first) }
-
-  it "should allow a visitor to checkout as guest, without registration" do
-    Spree::Auth::Config.set(:registration_step => true)
-    click_link "RoR Mug"
-    click_button "Add To Cart"
-    within('h1') { page.should have_content("Shopping Cart") }
-    click_button "Checkout"
-    page.should have_content("Checkout as a Guest")
-
-    within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
-    click_button "Continue"
-    page.should have_content("Billing Address")
-    page.should have_content("Shipping Address")
-
-    str_addr = "bill_address"
-    select "United States", :from => "order_#{str_addr}_attributes_country_id"
-    ['firstname', 'lastname', 'address1', 'city', 'zipcode', 'phone'].each do |field|
-      fill_in "order_#{str_addr}_attributes_#{field}", :with => "#{address.send(field)}"
+  context "without payment being required" do
+    before do
+      # So that we don't have to setup payment methods just for the sake of it
+      Spree::Order.any_instance.stub :payment_required? => false
     end
-    select "#{address.state.name}", :from => "order_#{str_addr}_attributes_state_id"
-    check "order_use_billing"
-    click_button "Save and Continue"
-    click_button "Save and Continue"
-    click_button "Save and Continue"
-    page.should have_content("Your order has been processed successfully")
+
+    it "should allow a visitor to checkout as guest, without registration" do
+      Spree::Auth::Config.set(:registration_step => true)
+      click_link "RoR Mug"
+      click_button "Add To Cart"
+      within('h1') { page.should have_content("Shopping Cart") }
+      click_button "Checkout"
+      page.should have_content("Checkout as a Guest")
+
+      within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
+      click_button "Continue"
+      page.should have_content("Billing Address")
+      page.should have_content("Shipping Address")
+
+      str_addr = "bill_address"
+      select "United States", :from => "order_#{str_addr}_attributes_country_id"
+      ['firstname', 'lastname', 'address1', 'city', 'zipcode', 'phone'].each do |field|
+        fill_in "order_#{str_addr}_attributes_#{field}", :with => "#{address.send(field)}"
+      end
+
+      check "order_use_billing"
+      click_button "Save and Continue"
+      click_button "Save and Continue"
+      page.should have_content("Your order has been processed successfully")
+    end
   end
 
   it "should associate an uncompleted guest order with user after logging in" do
