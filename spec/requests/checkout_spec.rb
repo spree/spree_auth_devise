@@ -12,7 +12,6 @@ describe "Checkout", :js => true do
     shipping_method
   end
 
-  let!(:payment_method) { create(:payment_method) }
   let!(:zone) { create(:zone) }
   let!(:address) { create(:address, :state => state, :country => country) }
 
@@ -24,30 +23,36 @@ describe "Checkout", :js => true do
     visit spree.root_path
   end
 
-  it "should allow a visitor to checkout as guest, without registration" do
-    Spree::Auth::Config.set(:registration_step => true)
-    click_link "RoR Mug"
-    click_button "Add To Cart"
-    within('h1') { page.should have_content("Shopping Cart") }
-    click_button "Checkout"
-    page.should have_content("Checkout as a Guest")
-
-    within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
-    click_button "Continue"
-    page.should have_content("Billing Address")
-    page.should have_content("Shipping Address")
-
-    str_addr = "bill_address"
-    select "United States", :from => "order_#{str_addr}_attributes_country_id"
-    ['firstname', 'lastname', 'address1', 'city', 'zipcode', 'phone'].each do |field|
-      fill_in "order_#{str_addr}_attributes_#{field}", :with => "#{address.send(field)}"
+  context "without payment being required" do
+    before do
+      # So that we don't have to setup payment methods just for the sake of it
+      Spree::Order.any_instance.stub :payment_required? => false
     end
-    select "#{address.state.name}", :from => "order_#{str_addr}_attributes_state_id"
-    check "order_use_billing"
-    click_button "Save and Continue"
-    click_button "Save and Continue"
-    click_button "Save and Continue"
-    page.should have_content("Your order has been processed successfully")
+
+    it "should allow a visitor to checkout as guest, without registration" do
+      Spree::Auth::Config.set(:registration_step => true)
+      click_link "RoR Mug"
+      click_button "Add To Cart"
+      within('h1') { page.should have_content("Shopping Cart") }
+      click_button "Checkout"
+      page.should have_content("Checkout as a Guest")
+
+      within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
+      click_button "Continue"
+      page.should have_content("Billing Address")
+      page.should have_content("Shipping Address")
+
+      str_addr = "bill_address"
+      select "United States", :from => "order_#{str_addr}_attributes_country_id"
+      ['firstname', 'lastname', 'address1', 'city', 'zipcode', 'phone'].each do |field|
+        fill_in "order_#{str_addr}_attributes_#{field}", :with => "#{address.send(field)}"
+      end
+
+      check "order_use_billing"
+      click_button "Save and Continue"
+      click_button "Save and Continue"
+      page.should have_content("Your order has been processed successfully")
+    end
   end
 
   it "should associate an uncompleted guest order with user after logging in" do
