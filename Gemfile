@@ -27,6 +27,7 @@ group :test do
 end
 
 gem 'spree', :github => "spree/spree", :branch => "master"
+gem 'pry'
 
 gemspec
 
