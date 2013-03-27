@@ -35,7 +35,7 @@ describe "Sign In" do
     fill_in "user_email", :with => user.email
     fill_in "user_password", :with => user.password
     click_button "Login"
-    page.should have_content("Logged in successfully")
+    page.should have_content("Logged in as: admin@person.com")
     current_path.should == "/admin"
   end
 end
