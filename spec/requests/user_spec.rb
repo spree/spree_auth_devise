@@ -23,7 +23,6 @@ describe "Users" do
     check "user_spree_role_user"
     click_button "Update"
     page.should have_content("Account updated!")
-    within('table#listing_users') { click_link "Edit" }
     find_field('user_spree_role_user')['checked'].should be_true
   end
 end
