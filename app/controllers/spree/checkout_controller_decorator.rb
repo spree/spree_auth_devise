@@ -1,3 +1,5 @@
+require_dependency 'spree/checkout_controller'
+
 if defined?(Spree::CheckoutController)
   Spree::CheckoutController.class_eval do
     before_filter :check_authorization

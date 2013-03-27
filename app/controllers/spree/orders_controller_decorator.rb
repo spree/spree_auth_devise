@@ -1,3 +1,5 @@
+require_dependency 'spree/orders_controller'
+
 if defined?(Spree::OrdersController)
   Spree::OrdersController.class_eval do
     before_filter :check_authorization
