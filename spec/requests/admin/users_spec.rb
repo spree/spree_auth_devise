@@ -53,8 +53,8 @@ describe "Users" do
       fill_in "user_email", :with => "a@example.com99"
       click_button "Update"
 
-      page.should have_content("successfully updated!")
-      page.should have_content("a@example.com99")
+      page.should have_content("Account updated!")
+      find_field("user_email").value.should == "a@example.com99"
     end
 
     it "should let me edit the user password" do
@@ -62,7 +62,7 @@ describe "Users" do
       fill_in "user_password_confirmation", :with => "welcome"
       click_button "Update"
 
-      page.should have_content("successfully updated!")
+      page.should have_content("Account updated!")
     end
   end
 end
