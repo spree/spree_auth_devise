@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "Reset Password" do
+  before do
+    create(:mail_method)
+  end
+
   it "should allow the user to indicate they have forgotten their password" do
     visit spree.login_path
     click_link "Forgot Password?"
