@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::CheckoutController do
   let(:order) { FactoryGirl.create(:order_with_totals, :email => nil, :user => nil) }
-  let(:user) { mock_model Spree::User, :last_incomplete_spree_order => nil }
+  let(:user) { mock_model Spree::User, :last_incomplete_spree_order => nil, :has_spree_role? => true }
   let(:token) { 'some_token' }
 
   before do
