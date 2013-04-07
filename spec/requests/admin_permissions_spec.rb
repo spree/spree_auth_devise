@@ -23,8 +23,9 @@ describe "Admin Permissions" do
     end
 
     it "should not be able to view an order" do
-      create(:order, :number => "R123")
-      visit spree.admin_order_path("R123")
+      number = "R123"
+      create(:order, :number => number)
+      visit "admin/orders/#{number}/customer"
       page.should have_content("Authorization Failure")
     end
   end
