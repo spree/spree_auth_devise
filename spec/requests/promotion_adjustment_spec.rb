@@ -20,8 +20,8 @@ describe 'promotion adjustments', :js => true do
 
   before do
     @product = create(:product, :name => "RoR Mug")
-    @product.on_hand = 1
-    @product.save
+    v = @product.variants.create!(sku: 'ROR2')
+    v.stock_items.first.update_column(:count_on_hand, 1)
 
     sign_in_as!(user)
     visit spree.admin_path
