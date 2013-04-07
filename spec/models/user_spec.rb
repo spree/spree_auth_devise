@@ -44,23 +44,4 @@ describe Spree::User do
     end
   end
 
-  context '#save' do
-    let(:user) { build(:user) }
-
-    context 'when there are no admin users' do
-      it 'should assign the user an admin role' do
-        user.save
-        user.has_spree_role?('admin').should be_true
-      end
-    end
-
-    context 'when there are existing admin users' do
-      before { create(:admin_user) }
-
-      it 'should not assign the user an admin role' do
-        user.save
-        user.has_spree_role?('anonymous?').should be_false
-      end
-    end
-  end
 end

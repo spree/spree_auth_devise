@@ -9,7 +9,6 @@ module Spree
     belongs_to :ship_address, :foreign_key => 'ship_address_id', :class_name => 'Spree::Address'
     belongs_to :bill_address, :foreign_key => 'bill_address_id', :class_name => 'Spree::Address'
 
-    before_save :check_admin
     before_validation :set_login
     before_destroy :check_completed_orders
 
@@ -54,12 +53,6 @@ module Spree
 
       def check_completed_orders
         raise DestroyWithOrdersError if orders.complete.present?
-      end
-
-      def check_admin
-        return if self.class.admin_created?
-        admin_role = Role.find_or_create_by_name 'admin'
-        self.spree_roles << admin_role
       end
 
       def set_login
