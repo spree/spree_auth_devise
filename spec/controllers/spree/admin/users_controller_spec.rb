@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'spree/core/testing_support/bar_ability'
+require 'spree/testing_support/bar_ability'
 
 describe Spree::Admin::UsersController do
 
