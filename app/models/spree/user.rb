@@ -36,6 +36,10 @@ module Spree
       User.admin.count > 0
     end
 
+    def admin?
+      has_spree_role?('admin')
+    end
+
     def anonymous?
       email =~ /@example.net$/ ? true : false
     end
