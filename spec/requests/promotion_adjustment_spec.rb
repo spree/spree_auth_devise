@@ -16,7 +16,11 @@ describe 'promotion adjustments', :js => true do
   let!(:payment_method) { create(:payment_method) }
   let!(:zone) { create(:zone) }
   let!(:address) { create(:address, :state => state, :country => country) }
-  let!(:user) { create(:user) }
+  let!(:user) do
+    create(:user).tap do |u|
+      u.spree_roles << Spree::Role.where(:name => "admin").first_or_create
+    end
+  end
 
   before do
     @product = create(:product, :name => "RoR Mug")
