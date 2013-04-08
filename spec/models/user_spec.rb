@@ -3,6 +3,11 @@ require 'spec_helper'
 describe Spree::User do
   before(:all) { Spree::Role.create :name => 'admin' }
 
+  it '#admin?' do
+    create(:admin_user).admin?.should be_true
+    create(:user).admin?.should be_false
+  end
+
   it 'should generate the reset password token' do
     user = build(:user)
     Spree::UserMailer.should_receive(:reset_password_instructions).with(user).and_return(double(:deliver => true))
