@@ -19,4 +19,11 @@ describe "Reset Password" do
     click_button "Reset my password"
     page.should have_content("You will receive an email with instructions")
   end
+
+  it "shows errors if no email is supplied" do
+    visit spree.login_path
+    click_link "Forgot Password?"
+    click_button "Reset my password"
+    page.should have_content("Email can't be blank")
+  end
 end
