@@ -13,6 +13,7 @@ Spree::Core::Engine.routes.prepend do
 
   devise_scope :user do
     get '/login' => 'user_sessions#new', :as => :login
+    get '/logout' => 'user_sessions#new', :as => :logout
     get '/signup' => 'user_registrations#new', :as => :signup
   end
 
