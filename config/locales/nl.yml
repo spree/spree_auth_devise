@@ -19,7 +19,7 @@ nl:
       inactive: 'Je account is nog niet geactiveerd.'
       already_authenticated: 'Je bent al ingelogd.'
     user_passwords:
-      user:
+      spree_user:
         send_instructions: 'Binnen enkele minuten ontvang je een e-mail met instructies om je wachtwoord te resetten.'
         updated: 'Je wachtwoord is succesvol gewijzigd. Je bent nu ingelogd.'
     confirmations:

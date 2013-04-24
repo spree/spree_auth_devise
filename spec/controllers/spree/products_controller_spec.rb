@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::ProductsController do
   let!(:product) { create(:product, :available_on => 1.year.from_now) }
-  let!(:user) { Spree::User.create }
+  let!(:user) { mock_model(Spree::User, :spree_api_key => 'fake', :last_incomplete_spree_order => nil) }
 
   it "allows admins to view non-active products" do
     controller.stub :before_save_new_order

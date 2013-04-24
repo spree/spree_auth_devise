@@ -26,7 +26,7 @@ es:
       timeout: 'Su sesión ha expirado, por favor conéctese de nuevo para continuar.'
       inactive: 'Su cuenta no ha sido activada aún.'
     user_passwords:
-      user:
+      spree_user:
         cannot_be_blank: 'La contraseña no puede estar en blanco.'
         send_instructions: 'Recibirá un email con instrucciones acerca de como restaurar su contraseña en pocos minutos.'
         updated: 'Su contraseña ha sido cambiada correctamente. Ahora está conectado.'

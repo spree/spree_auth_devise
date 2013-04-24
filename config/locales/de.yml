@@ -17,7 +17,7 @@ de:
       timeout: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an, um fortzufahren.'
       inactive: 'Ihr Konto wurde noch nicht aktiviert.'
     user_passwords:
-      user:
+      spree_user:
         send_instructions: 'In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Passwort zurücksetzen.'
         updated: 'Ihr Passwort wurde erfolgreich geändert.'
     confirmations:

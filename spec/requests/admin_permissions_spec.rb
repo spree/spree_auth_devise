@@ -6,8 +6,8 @@ describe "Admin Permissions" do
       user = create(:admin_user, :email => "admin@person.com", :password => "password", :password_confirmation => "password")
       Spree::Ability.register_ability(AbilityDecorator)
       visit spree.login_path
-      fill_in "user_email", :with => user.email
-      fill_in "user_password", :with => user.password
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
       click_button "Login"
     end
 

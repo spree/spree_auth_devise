@@ -59,8 +59,8 @@ describe "Checkout", :js => true do
       click_button "Add To Cart"
 
       visit spree.login_path
-      fill_in "user_email", :with => user.email
-      fill_in "user_password", :with => user.password
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
       click_button "Login"
 
       click_link "Cart"
@@ -90,12 +90,12 @@ describe "Checkout", :js => true do
 
       visit spree.login_path
       click_link "Forgot Password?"
-      fill_in "Email", :with => "email@person.com"
+      fill_in "spree_user_email", :with => "email@person.com"
       click_button "Reset my password"
 
       user.reload
 
-      visit spree.edit_user_password_path(:reset_password_token => user.reset_password_token)
+      visit spree.edit_spree_user_password_path(:reset_password_token => user.reset_password_token)
       fill_in "Password", :with => "password"
       fill_in "Password Confirmation", :with => "password"
       click_button "Update my password and log me in"

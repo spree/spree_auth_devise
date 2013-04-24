@@ -10,8 +10,8 @@ describe "Sign Out" do
 
   before do
     visit spree.login_path
-    fill_in "user_email", :with => user.email
-    fill_in "user_password", :with => user.password
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with => user.password
     # Regression test for #1257
     check "Remember me"
     click_button "Login"

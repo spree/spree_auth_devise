@@ -15,7 +15,7 @@ describe "Reset Password" do
     user = create(:user, :email => "foobar@example.com", :password => "secret", :password_confirmation => "secret")
     visit spree.login_path
     click_link "Forgot Password?"
-    fill_in "user_email", :with => "foobar@example.com"
+    fill_in "Email", :with => "foobar@example.com"
     click_button "Reset my password"
     page.should have_content("You will receive an email with instructions")
   end
