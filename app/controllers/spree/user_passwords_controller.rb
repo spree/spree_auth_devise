@@ -34,7 +34,7 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   # Silly Devise::PasswordsController!
   # Fixes spree/spree#2190.
   def update
-    if params[:user][:password].blank?
+    if params[:spree_user][:password].blank?
       set_flash_message(:error, :cannot_be_blank)
       render :edit
     else

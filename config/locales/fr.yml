@@ -26,7 +26,7 @@ fr:
       timeout: "Votre session a expiré, merci de bien vouloir vous connecter à nouveau pour continuer."
       inactive: "Votre compte n'a pas encore été activé."
     user_passwords:
-      user:
+      spree_user:
         cannot_be_blank: 'Votre mot de passe ne peut pas être vide.'
         send_instructions: 'Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de réinitialiser votre mot de passe.'
         updated: 'Votre mot de passe a été changé avec succès. Vous êtes maintenant connecté(e).'

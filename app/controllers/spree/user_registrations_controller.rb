@@ -22,13 +22,13 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
 
   # POST /resource/sign_up
   def create
-    @user = build_resource(params[:user])
+    @user = build_resource(params[:spree_user])
     if resource.save
       set_flash_message(:notice, :signed_up)
-      sign_in(:user, @user)
+      sign_in(:spree_user, @user)
       session[:spree_user_signup] = true
       associate_user
-      sign_in_and_redirect(:user, @user)
+      sign_in_and_redirect(:spree_user, @user)
     else
       clean_up_passwords(resource)
       render :new

@@ -13,9 +13,9 @@ class Spree::UserSessionsController < Devise::SessionsController
   ssl_allowed :login_bar
 
   def create
-    authenticate_user!
+    authenticate_spree_user!
 
-    if user_signed_in?
+    if spree_user_signed_in?
       respond_to do |format|
         format.html {
           flash[:success] = t(:logged_in_succesfully)

@@ -5,8 +5,8 @@ describe "Accounts" do
     it "should be able to edit an admin user" do
       user = create(:admin_user, :email => "admin@person.com", :password => "password", :password_confirmation => "password")
       visit spree.login_path
-      fill_in "user_email", :with => user.email
-      fill_in "user_password", :with => user.password
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
       click_button "Login"
 
       click_link "My Account"
@@ -35,8 +35,8 @@ describe "Accounts" do
       Spree::Auth::Config.set(:signout_after_password_change => false)
       user = create(:user, :email => "email@person.com", :password => "secret", :password_confirmation => "secret")
       visit spree.login_path
-      fill_in "user_email", :with => user.email
-      fill_in "user_password", :with => user.password
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
       click_button "Login"
 
       click_link "My Account"

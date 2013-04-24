@@ -20,8 +20,8 @@ describe "Orders" do
       click_button "Add To Cart"
 
       visit spree.login_path
-      fill_in "user_email", :with => user.email
-      fill_in "user_password", :with => user.password
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
       click_button "Login"
 
       click_link "Cart"
@@ -35,8 +35,8 @@ describe "Orders" do
       click_button "Add To Cart"
 
       visit spree.login_path
-      fill_in "user_email", :with => user.email
-      fill_in "user_password", :with => user.password
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
       click_button "Login"
 
       # order should have been merged with first session
