@@ -5,7 +5,7 @@ class Spree::UsersController < Spree::BaseController
   prepend_before_filter :authorize_actions, :only => :new
 
   def show
-    @orders = @user.orders.complete
+    @orders = @user.orders.complete.order('completed_at desc')
   end
 
   def create
