@@ -7,7 +7,7 @@ class Spree::UsersController < Spree::StoreController
   include Spree::Core::ControllerHelpers
 
   def show
-    @orders = @user.orders.complete
+    @orders = @user.orders.complete.order('completed_at desc')
   end
 
   def create
