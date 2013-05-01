@@ -1,4 +1,8 @@
 en:
+  account_updated: "Account updated"
+  back_to_users_list: "Back To Users List"
+  editing_user: "Editing User"
+  listing_users: "Listing Users"
   logged_in_as: "Logged in as"
   logged_in_succesfully: "Logged in successfully"
   logged_out: "You have been logged out."
@@ -7,6 +11,7 @@ en:
   login_failed: "Login authentication failed."
   login_name: Login
   logout: Logout
+  new_user: "New User"
 
   errors:
     messages:
