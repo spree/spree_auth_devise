@@ -31,7 +31,7 @@ class Spree::UsersController < Spree::StoreController
         user = Spree::User.reset_password_by_token(params[:user])
         sign_in(@user, :event => :authentication, :bypass => !Spree::Auth::Config[:signout_after_password_change])
       end
-      redirect_to spree.account_url, :notice => t(:account_updated)
+      redirect_to spree.account_url, :notice => Spree.t(:account_updated)
     else
       render :edit
     end
@@ -48,6 +48,6 @@ class Spree::UsersController < Spree::StoreController
     end
 
     def accurate_title
-      t(:my_account)
+      Spree.t(:my_account)
     end
 end

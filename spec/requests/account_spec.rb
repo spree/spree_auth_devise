@@ -28,7 +28,7 @@ describe "Accounts" do
       fill_in "Password Confirmation", :with => "foobar"
       click_button "Update"
       page.should have_content("email@person.com")
-      page.should have_content("Account updated!")
+      page.should have_content("Account updated")
     end
 
     it "should be able to edit an existing user account" do
@@ -46,7 +46,7 @@ describe "Accounts" do
       fill_in "Password Confirmation", :with => "foobar"
       click_button "Update"
       page.should have_content("email@person.com")
-      page.should have_content("Account updated!")
+      page.should have_content("Account updated")
     end
   end
 end
