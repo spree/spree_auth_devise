@@ -18,7 +18,7 @@ class Spree::UserSessionsController < Devise::SessionsController
     if user_signed_in?
       respond_to do |format|
         format.html {
-          flash[:success] = t(:logged_in_succesfully)
+          flash[:success] = Spree.t(:logged_in_succesfully)
           redirect_back_or_default(after_sign_in_path_for(spree_current_user))
         }
         format.js {
@@ -27,7 +27,7 @@ class Spree::UserSessionsController < Devise::SessionsController
         }
       end
     else
-      flash.now[:error] = t('devise.failure.invalid')
+      flash.now[:error] = Spree.t('devise.failure.invalid')
       render :new
     end
   end
@@ -44,7 +44,7 @@ class Spree::UserSessionsController < Devise::SessionsController
 
   private
     def accurate_title
-      t(:login)
+      Spree.t(:login)
     end
 
     def redirect_back_or_default(default)
