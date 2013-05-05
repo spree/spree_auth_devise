@@ -1,16 +1,16 @@
 <% content_for :page_title do %>
-  <%= t(:user_account) %>
+  <%= Spree.t(:user_account) %>
 <% end %>
 
 <table>
   <tr data-hook="email">
-    <th><%= t(:email) %></th>
+    <th><%= Spree.t(:email) %></th>
     <td>
       <%= @user.email %>
     </td>
   </tr>
   <tr data-hook="roles">
-    <th><%= t(:roles) %></th>
+    <th><%= Spree.t(:roles) %></th>
     <td>
       <%= @user.spree_roles.pluck(:name).join(', ') %>
     </td>
@@ -18,6 +18,6 @@
 </table>
 
 <p>
-  <%= link_to_edit @user, :class => 'edit_user' %> <%= t(:or) %>
-  <%= link_to t(:back), collection_url %>
+  <%= link_to_edit @user, :class => 'edit_user' %> <%= Spree.t(:or) %>
+  <%= link_to Spree.t(:back), collection_url %>
 </p>
