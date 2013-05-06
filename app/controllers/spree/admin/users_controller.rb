@@ -28,7 +28,7 @@ module Spree
             @user.spree_roles = roles.reject(&:blank?).collect{|r| Spree::Role.find(r)}
           end
 
-          flash.now[:notice] = t(:created_successfully)
+          flash.now[:success] = t(:created_successfully)
           render :edit
         else
           render :new
@@ -50,7 +50,7 @@ module Spree
             user = Spree::User.reset_password_by_token(params[:user])
             sign_in(@user, :event => :authentication, :bypass => !Spree::Auth::Config[:signout_after_password_change])
           end
-          flash.now[:notice] = t(:account_updated)
+          flash.now[:success] = t(:account_updated)
           render :edit
         else
           render :edit
@@ -59,14 +59,14 @@ module Spree
 
       def generate_api_key
         if @user.generate_spree_api_key!
-          flash.notice = t('key_generated', :scope => 'spree.api')
+          flash[:success] = t('key_generated', :scope => 'spree.api')
         end
         redirect_to edit_admin_user_path(@user)
       end
 
       def clear_api_key
         if @user.clear_spree_api_key!
-          flash.notice = t('key_cleared', :scope => 'spree.api')
+          flash[:success] = t('key_cleared', :scope => 'spree.api')
         end
         redirect_to edit_admin_user_path(@user)
       end
