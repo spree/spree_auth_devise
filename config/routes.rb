@@ -14,6 +14,8 @@ Spree::Core::Engine.routes.prepend do
   devise_scope :spree_user do
     get '/login' => 'user_sessions#new', :as => :login
     get '/logout' => 'user_sessions#destroy', :as => :logout
+    # Necessary for #78
+    get '/logout' => 'user_sessions#destroy', :as => :destroy_user_session
     get '/signup' => 'user_registrations#new', :as => :signup
   end
 
