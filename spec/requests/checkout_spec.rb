@@ -17,6 +17,8 @@ describe "Checkout", :js => true do
     @product = create(:product, :name => "RoR Mug")
     @product.master.stock_items.first.update_column(:count_on_hand, 1)
 
+    ActionMailer::Base.default_url_options[:host] = "http://example.com"
+
     visit spree.root_path
   end
 
@@ -98,7 +100,7 @@ describe "Checkout", :js => true do
       visit spree.edit_spree_user_password_path(:reset_password_token => user.reset_password_token)
       fill_in "Password", :with => "password"
       fill_in "Password Confirmation", :with => "password"
-      click_button "Update my password and log me in"
+      click_button "Update"
 
       click_link "Cart"
       click_button "Checkout"
