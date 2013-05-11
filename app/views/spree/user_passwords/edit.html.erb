@@ -7,9 +7,9 @@
     <%= f.password_field :password %><br />
   </p>
   <p>
-    <%= f.label :password_confirmation, Spree.t(:password_confirmation) %><br />
+    <%= f.label :password_confirmation, Spree.t(:confirm_password) %><br />
     <%= f.password_field :password_confirmation %><br />
   </p>
   <%= f.hidden_field :reset_password_token %>
-  <%= f.submit Spree.t(:update_password), :class => 'button primary' %>
+  <%= f.submit Spree.t(:update), :class => 'button primary' %>
 <% end %>
