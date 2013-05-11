@@ -84,11 +84,11 @@ module Spree
                                      OR (spree_addresses.lastname  #{LIKE} :search AND spree_addresses.id = spree_users.ship_address_id)",
               { :search => "#{params[:q].strip}%" }).
                 limit(params[:limit] || 100)
-            end
           else
             @search = Spree::User.registered.ransack(params[:q])
             @collection = @search.result.page(params[:page]).per(Spree::Config[:admin_products_per_page])
           end
+        end
 
       private
 
