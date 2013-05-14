@@ -3,5 +3,7 @@
 
 # Examples
 #
+"2.1.x" => { :branch => "master" }
+"2.0.x" => { :branch => "2-0-stable" }
 "1.3.x" => { :branch => "1-3-stable" }
 "1.2.x" => { :branch => "1-2-stable" }
