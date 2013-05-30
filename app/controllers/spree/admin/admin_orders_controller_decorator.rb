@@ -3,12 +3,15 @@ Spree::Admin::OrdersController.class_eval do
 
   private
     def check_authorization
-      load_order
-      session[:access_token] ||= params[:token]
-
-      resource = @order || Spree::Order.new
       action = params[:action].to_sym
-
-      authorize! action, resource, session[:access_token]
+      if action == :index
+        authorize! :index, Spree::Order
+      else
+        load_order
+        session[:access_token] ||= params[:token]
+        resource = @order || Spree::Order.new
+        authorize! action, resource, session[:access_token]
+      end
     end
+  end
 end
