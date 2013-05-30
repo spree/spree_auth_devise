@@ -13,5 +13,5 @@ Spree::Admin::OrdersController.class_eval do
         authorize! action, resource, session[:access_token]
       end
     end
-  end
+
 end
