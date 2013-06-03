@@ -5,7 +5,8 @@ Spree::Core::Engine.routes.draw do
                                :registrations => 'spree/user_registrations',
                                :passwords => 'spree/user_passwords' },
              :skip => [:unlocks, :omniauth_callbacks],
-             :path_names => { :sign_out => 'logout' }
+             :path_names => { :sign_out => 'logout' },
+             :path_prefix => :user
 end
 
 Spree::Core::Engine.routes.prepend do
