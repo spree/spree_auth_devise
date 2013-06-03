@@ -1,3 +1,8 @@
+begin
+require_dependency 'spree/base_mailer'
+rescue LoadError
+end
+
 superclass = defined?(Spree::BaseMailer) ? Spree::BaseMailer : ActionMailer::Base
 class Spree::UserMailer < superclass
   def reset_password_instructions(user)
