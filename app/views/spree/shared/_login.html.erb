@@ -1,4 +1,4 @@
-<%= form_for :spree_user, :url => spree.spree_user_session_path do |f| %>
+<%= form_for Spree::User.new, :as => :spree_user, :url => spree.spree_user_session_path do |f| %>
   <div id="password-credentials">
     <p>
       <%= f.label :email, Spree.t(:email) %><br />
