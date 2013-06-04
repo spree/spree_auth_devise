@@ -7,9 +7,7 @@ Spree::Core::Engine.routes.draw do
              :skip => [:unlocks, :omniauth_callbacks],
              :path_names => { :sign_out => 'logout' },
              :path_prefix => :user
-end
 
-Spree::Core::Engine.routes.prepend do
   resources :users, :only => [:edit, :update]
 
   devise_scope :spree_user do
@@ -24,8 +22,8 @@ Spree::Core::Engine.routes.prepend do
     put '/password/change' => 'user_passwords#update', :as => :update_password
   end
 
-  match '/checkout/registration' => 'checkout#registration', :via => :get, :as => :checkout_registration
-  match '/checkout/registration' => 'checkout#update_registration', :via => :put, :as => :update_checkout_registration
+  get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration
+  put '/checkout/registration' => 'checkout#update_registration', :as => :update_checkout_registration
 
   resource :session do
     member do
