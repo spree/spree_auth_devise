@@ -6,8 +6,7 @@
   <h6><%= t(:new_customer) %></h6>
 
   <div data-hook="signup">
-
-    <%= form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user) do |f| %>
+    <%= form_for Spree::User.new, :as => :spree_user, :url => spree.spree_user_registration_path(@spree_user) do |f| %>
       <div data-hook="signup_inside_form">
         <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
         <p><%= f.submit t(:create), :class => 'button primary' %></p>
