@@ -30,7 +30,7 @@
           <td class="order-status"><%= Spree.t(order.state).titleize %></td>
           <td class="order-payment-state"><%= Spree.t("payment_states.#{order.payment_state}") if order.payment_state %></td>
           <td class="order-shipment-state"><%= Spree.t("shipment_states.#{order.shipment_state}") if order.shipment_state %></td>
-          <td class="order-total"><%= money order.total %></td>
+          <td class="order-total"><%= order.display_total %></td>
         </tr>
       <% end %>
       </tbody>
