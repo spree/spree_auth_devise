@@ -9,7 +9,7 @@ module Spree
     belongs_to :ship_address, :foreign_key => 'ship_address_id', :class_name => 'Spree::Address'
     belongs_to :bill_address, :foreign_key => 'bill_address_id', :class_name => 'Spree::Address'
 
-    before_save :check_admin
+    before_create :check_admin
     before_validation :set_login
     before_destroy :check_completed_orders
 
