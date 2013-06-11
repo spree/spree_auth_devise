@@ -9,7 +9,7 @@ describe Spree::Admin::UsersController do
 
     before do
       controller.stub :spree_current_user => user
-      Spree::User.stub(:find).with('9').and_return(mock_user)
+      Spree::User.stub(:find).with(mock_user.id.to_s).and_return(mock_user)
       Spree::User.stub(:new).and_return(mock_user)
       user.spree_roles.clear
     end
@@ -18,6 +18,20 @@ describe Spree::Admin::UsersController do
       user.spree_roles << Spree::Role.find_or_create_by_name('admin')
       spree_post :index
       response.should render_template :index
+    end
+
+    it "allows admins to update a user's API key" do
+      user.spree_roles << Spree::Role.find_or_create_by_name('admin')
+      mock_user.should_receive(:generate_spree_api_key!).and_return(true)
+      spree_put :generate_api_key, :id => mock_user.id
+      response.should redirect_to(spree.edit_admin_user_path(mock_user))
+    end
+
+    it "allows admins to clear a user's API key" do
+      user.spree_roles << Spree::Role.find_or_create_by_name('admin')
+      mock_user.should_receive(:clear_spree_api_key!).and_return(true)
+      spree_put :clear_api_key, :id => mock_user.id
+      response.should redirect_to(spree.edit_admin_user_path(mock_user))
     end
 
     it 'should deny access to users with an bar role' do
