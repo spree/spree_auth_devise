@@ -11,7 +11,7 @@ describe Spree::Admin::ShipmentsController do
 
     before do
       order.stub :shipments => [shipment]
-      controller.stub :current_user => user
+      controller.stub :spree_current_user => user
       controller.stub :order => order
       controller.stub :shipment => shipment
       controller.stub :load_shipping_methods # shut this up
