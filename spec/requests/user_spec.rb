@@ -9,7 +9,7 @@ describe "Users" do
     fill_in "Password", :with => user.password
     click_button "Login"
     click_link "Users"
-    within('table#listing_users td.Email') { click_link "admin@person.com" }
+    within('table#listing_users td.user_email') { click_link "admin@person.com" }
     click_link "Edit"
     page.should have_content("Editing User")
   end
