@@ -26,10 +26,10 @@ group :test do
  # gem 'debugger'
 end
 
-gem 'spree_core', :github => "spree/spree", :branch => "master"
-gem 'spree_frontend', :github => "spree/spree", :branch => "master"
-gem 'spree_backend', :github => "spree/spree", :branch => "master"
-gem 'spree_api', :github => "spree/spree", :branch => "master"
+gem 'spree_core', :github => "spree/spree", :branch => "2-0-stable"
+gem 'spree_frontend', :github => "spree/spree", :branch => "2-0-stable"
+gem 'spree_backend', :github => "spree/spree", :branch => "2-0-stable"
+gem 'spree_api', :github => "spree/spree", :branch => "2-0-stable"
 gem 'pry'
 
 gemspec
