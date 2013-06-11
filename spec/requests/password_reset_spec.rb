@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Reset Password" do
   before do
     create(:mail_method)
+    ActionMailer::Base.default_url_options[:host] = "http://example.com"
   end
 
   it "should allow the user to indicate they have forgotten their password" do
