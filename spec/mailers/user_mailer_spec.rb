@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::UserMailer do 
 
-  before do 
+  before do
     ActionMailer::Base.default_url_options[:host] = "http://example.com"
     user = create(:user)
     Spree::UserMailer.reset_password_instructions(user).deliver
