@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Spree::UserMailer do 
 
   before do 
+    ActionMailer::Base.default_url_options[:host] = "http://example.com"
     user = create(:user)
     Spree::UserMailer.reset_password_instructions(user).deliver
     @message = ActionMailer::Base.deliveries.last
@@ -23,7 +24,7 @@ describe Spree::UserMailer do
 
     context 'body includes' do
       it 'password reset url' do
-        @message.body.raw_source.should include('http://demo.spreecommerce.com/user/spree_user/password/edit')
+        @message.body.raw_source.should include('http://example.com/user/spree_user/password/edit')
       end
     end  
   end  
