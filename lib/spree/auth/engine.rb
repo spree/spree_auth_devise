@@ -18,6 +18,10 @@ module Spree
         ApplicationController.send :include, Spree::AuthenticationHelpers
       end
 
+      initializer "spree_auth_devise.set_user_class", :after => :load_config_initializers do
+        Spree.user_class = "Spree::User"
+      end
+
       config.to_prepare &method(:activate).to_proc
     end
   end
