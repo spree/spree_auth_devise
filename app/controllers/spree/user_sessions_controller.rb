@@ -33,8 +33,7 @@ class Spree::UserSessionsController < Devise::SessionsController
   end
 
   def destroy
-    cookies.clear
-    session.clear
+    env['warden'].logout(:spree_user)
     super
   end
 
