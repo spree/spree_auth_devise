@@ -26,7 +26,10 @@ describe Spree::UsersController do
     end
 
     it 'should not update roles' do
-      expect { spree_put :update, { :user => { :spree_role_ids => [role.id] } }}.to raise_exception(ActiveModel::MassAssignmentSecurity::Error)
+      spree_put :update, :user => { :spree_role_ids => [role.id] }
+      expect(assigns[:user].spree_roles).to_not include role
     end
+
+    pending "figure out why ActiveModel::ForbiddenAttributesError is not raised when passing spree_role_ids"
   end
 end

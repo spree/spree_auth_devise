@@ -15,7 +15,7 @@ describe Spree::Admin::UsersController do
     end
 
     it 'should grant access to users with an admin role' do
-      user.spree_roles << Spree::Role.find_or_create_by_name('admin')
+      user.spree_roles << Spree::Role.find_or_create_by(name: 'admin')
       spree_post :index
       response.should render_template :index
     end
@@ -35,14 +35,14 @@ describe Spree::Admin::UsersController do
     end
 
     it 'should deny access to users with an bar role' do
-      user.spree_roles << Spree::Role.find_or_create_by_name('bar')
+      user.spree_roles << Spree::Role.find_or_create_by(name: 'bar')
       Spree::Ability.register_ability(BarAbility)
       spree_post :index
       response.should redirect_to('/unauthorized')
     end
 
     it 'should deny access to users with an bar role' do
-      user.spree_roles << Spree::Role.find_or_create_by_name('bar')
+      user.spree_roles << Spree::Role.find_or_create_by(name: 'bar')
       Spree::Ability.register_ability(BarAbility)
       spree_post :update, { :id => '9' }
       response.should redirect_to('/unauthorized')

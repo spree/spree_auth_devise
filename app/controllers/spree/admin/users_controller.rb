@@ -21,7 +21,7 @@ module Spree
           roles = params[:user].delete("spree_role_ids")
         end
 
-        @user = Spree::User.new(params[:user])
+        @user = Spree::User.new(user_params)
         if @user.save
 
           if roles
@@ -40,7 +40,7 @@ module Spree
           roles = params[:user].delete("spree_role_ids")
         end
 
-        if @user.update_attributes(params[:user])
+        if @user.update_attributes(user_params)
           if roles
             @user.spree_roles = roles.reject(&:blank?).collect{|r| Spree::Role.find(r)}
           end
@@ -93,6 +93,9 @@ module Spree
         end
 
       private
+        def user_params
+          params.require(:user).permit(:email, :password, :password_confirmation, :spree_role_ids)
+        end
 
         # handling raise from Spree::Admin::ResourceController#destroy
         def user_destroy_with_orders_error
@@ -122,7 +125,7 @@ module Spree
         end
 
         def load_roles
-          @roles = Spree::Role.scoped
+          @roles = Spree::Role.all
         end
     end
   end
