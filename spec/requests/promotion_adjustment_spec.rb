@@ -6,7 +6,7 @@ describe 'promotion adjustments', :js => true do
   let!(:state) { create(:state, :name => "Maryland", :country => country) }
   let!(:shipping_method) do
     shipping_method = create(:shipping_method)
-    calculator = Spree::Calculator::Shipping::PerItem.create!({:calculable => shipping_method, :preferred_amount => 10}, :without_protection => true)
+    calculator = Spree::Calculator::Shipping::PerItem.create!(:calculable => shipping_method, :preferred_amount => 10)
     shipping_method.calculator = calculator
     shipping_method.save
 
