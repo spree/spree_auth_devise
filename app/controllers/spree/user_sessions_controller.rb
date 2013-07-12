@@ -32,11 +32,6 @@ class Spree::UserSessionsController < Devise::SessionsController
     end
   end
 
-  def destroy
-    env['warden'].logout(:spree_user)
-    super
-  end
-
   def nav_bar
     render :partial => 'spree/shared/nav_bar'
   end
