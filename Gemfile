@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'json'
 gem 'sqlite3'
@@ -19,20 +19,14 @@ group :test do
 
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.4.2'
-  gem 'capybara', '1.1.3'
+  gem 'capybara', '~> 2.1'
   gem 'database_cleaner', '0.9.1'
   gem 'selenium-webdriver', '2.32.0'
   gem 'launchy'
  # gem 'debugger'
 end
 
-gem 'spree_core', :github => "spree/spree", :branch => "2-0-stable"
-gem 'spree_frontend', :github => "spree/spree", :branch => "2-0-stable"
-gem 'spree_backend', :github => "spree/spree", :branch => "2-0-stable"
-gem 'spree_api', :github => "spree/spree", :branch => "2-0-stable"
+gem 'spree', github: 'spree/spree', branch: '2-0-stable'
 gem 'pry'
 
 gemspec
-
-
-

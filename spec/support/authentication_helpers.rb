@@ -5,9 +5,8 @@ module AuthenticationHelpers
     fill_in 'Password', :with => 'secret'
     click_button 'Login'
   end
-
 end
 
 RSpec.configure do |c|
-  c.include AuthenticationHelpers, :type => :request
+  c.include AuthenticationHelpers, :type => :feature
 end
