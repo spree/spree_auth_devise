@@ -19,20 +19,14 @@ group :test do
 
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 1.4.2'
-  gem 'capybara', '1.1.3'
+  gem 'capybara', '~> 2.1'
   gem 'database_cleaner', '0.9.1'
   gem 'selenium-webdriver', '2.32.0'
   gem 'launchy'
  # gem 'debugger'
 end
 
-gem 'spree_core', :github => "spree/spree", :branch => "master"
-gem 'spree_frontend', :github => "spree/spree", :branch => "master"
-gem 'spree_backend', :github => "spree/spree", :branch => "master"
-gem 'spree_api', :github => "spree/spree", :branch => "master"
+gem 'spree', :github => "spree/spree"
 gem 'pry'
 
 gemspec
-
-
-
