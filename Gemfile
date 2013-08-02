@@ -33,6 +33,6 @@ gem 'pry'
 
 # while we don't have rails 4 releases for these two
 gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
-gem 'awesome_nested_set', github: 'collectiveidea/awesome_nested_set', branch: 'rails4'
+gem 'awesome_nested_set', '~> 3.0.0.rc.1'
 
 gemspec
