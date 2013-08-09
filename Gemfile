@@ -28,4 +28,7 @@ end
 gem 'spree', :github => "spree/spree", :branch => "master"
 gem 'pry'
 
+# while we don't have rails 4 releases for these two
+gem 'ransack', github: 'ernie/ransack'
+
 gemspec
