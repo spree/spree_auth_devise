@@ -3,4 +3,5 @@ spec/dummy
 Gemfile.lock
 .sass-cache
 Gemfile.lock
+.sass-cache
 *.swp
