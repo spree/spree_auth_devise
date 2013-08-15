@@ -55,7 +55,7 @@ describe Spree::User do
     context 'when there are no admin users' do
       it 'should assign the user an admin role' do
         user.save
-        user.has_spree_role?('admin').should be_true
+        user.reload.has_spree_role?('admin').should be_true
       end
     end
 
@@ -64,7 +64,7 @@ describe Spree::User do
 
       it 'should not assign the user an admin role' do
         user.save
-        user.has_spree_role?('anonymous?').should be_false
+        user.reload.has_spree_role?('anonymous?').should be_false
       end
     end
   end
