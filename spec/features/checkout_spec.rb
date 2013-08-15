@@ -14,6 +14,7 @@ describe "Checkout", :js => true do
   let!(:address) { create(:address, :state => state, :country => country) }
 
   before do
+    ActionMailer::Base.default_url_options[:host] = "http://example.com"
     @product = create(:product, :name => "RoR Mug")
     @product.master.stock_items.first.update_column(:count_on_hand, 1)
 
@@ -36,8 +37,12 @@ describe "Checkout", :js => true do
       within('h1') { page.should have_content("Shopping Cart") }
       click_button "Checkout"
 
+      page.should have_content(/Checkout as a Guest/i)
+
       within('#guest_checkout') { fill_in "Email", :with => "spree@test.com" }
       click_button "Continue"
+      page.should have_content(/Billing Address/i)
+      page.should have_content(/Shipping Address/i)
 
       str_addr = "bill_address"
       select "United States", :from => "order_#{str_addr}_attributes_country_id"

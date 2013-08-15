@@ -13,6 +13,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 require 'spree/testing_support/factories'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/capybara_ext'
+require 'ffaker'
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -52,6 +53,7 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::ControllerRequests, :type => :controller
   config.include Devise::TestHelpers, :type => :controller
   config.include Rack::Test::Methods, :type => :feature
+  config.include Capybara::DSL
 end
 
 if defined? CanCan::Ability
