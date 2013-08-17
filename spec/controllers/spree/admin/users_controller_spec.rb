@@ -21,14 +21,14 @@ describe Spree::Admin::UsersController do
     end
 
     it "allows admins to update a user's API key" do
-      user.spree_roles << Spree::Role.find_or_create_by_name('admin')
+      user.spree_roles << Spree::Role.find_or_create_by(name: 'admin')
       mock_user.should_receive(:generate_spree_api_key!).and_return(true)
       spree_put :generate_api_key, :id => mock_user.id
       response.should redirect_to(spree.edit_admin_user_path(mock_user))
     end
 
     it "allows admins to clear a user's API key" do
-      user.spree_roles << Spree::Role.find_or_create_by_name('admin')
+      user.spree_roles << Spree::Role.find_or_create_by(name: 'admin')
       mock_user.should_receive(:clear_spree_api_key!).and_return(true)
       spree_put :clear_api_key, :id => mock_user.id
       response.should redirect_to(spree.edit_admin_user_path(mock_user))
