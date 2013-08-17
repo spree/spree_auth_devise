@@ -57,7 +57,7 @@ def create_admin_user
   else
     admin = Spree::User.new(attributes)
     if admin.save
-      role = Spree::Role.find_or_create_by_name 'admin'
+      role = Spree::Role.find_or_create_by(name: 'admin')
       admin.spree_roles << role
       admin.save
       say "Done!"
