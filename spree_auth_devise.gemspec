@@ -22,12 +22,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'devise', '~> 3.0.1'
   s.add_dependency 'devise-encryptable', '0.1.2'
-  s.add_dependency 'cancan', '~> 1.6.7'
   s.add_development_dependency 'rspec-rails', '~> 2.12.2'
   s.add_development_dependency 'factory_girl_rails', '~> 4.2.0'
   s.add_development_dependency 'email_spec', '~> 1.2.1'
   s.add_development_dependency 'capybara', '~> 2.1.0'
-  s.add_development_dependency 'database_cleaner', '0.9.1'
+  s.add_development_dependency 'database_cleaner', '~> 1.0.1'
   s.add_development_dependency 'selenium-webdriver', '2.34.0'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'pry'
