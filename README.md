@@ -49,5 +49,5 @@ Then run the rspec tests.
 
     bundle exec rake spec
 
-If everything doesn't pass on your machine (using Ruby (1.8.7 or 1.9.3) and (MySQL or PostgreSQL or SQLite3)) then we would consider that a bug. Please file a bug report on the issues page for this project with your test output
+If everything doesn't pass on your machine (using Ruby (1.9.3 or 2.0.0) and (MySQL or PostgreSQL or SQLite3)) then we would consider that a bug. Please file a bug report on the issues page for this project with your test output
 and we will investigate it.
