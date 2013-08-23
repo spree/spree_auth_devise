@@ -11,7 +11,7 @@ describe "Payment methods" do
   # Regression test for #5
   it "can dismiss the banner" do
     Spree::User.any_instance.stub(:dismissed_banner? => false)
-    Spree::PaymentMethod.stub(:production).and_return(payment_methods = [stub])
+    Spree::PaymentMethod.stub(:production).and_return(payment_methods = [double])
     payment_methods.stub(:where).and_return([])
     click_link "Payment Methods"
   end
