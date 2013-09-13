@@ -1,0 +1,51 @@
+tr:
+  spree:
+    admin:
+      tab:
+        users: "Kullanıcılar"
+  devise:
+    confirmations:
+      confirmed: Hesabınız başarıyla doğrulandı. Oturumunuz açıldı.
+      send_instructions: Birkaç dakika içinde hesabınızı nasıl doğrulayacağınızı anlatan bir e-posta alacaksınız.
+    failure:
+      inactive: Hesabınız henüz faal değil.
+      invalid: Geçersiz e-posta ya da şifre.
+      invalid_token: Geçersiz anahtar.
+      locked: Hesabınız kilitlendi.
+      timeout: Oturumunuzun süresi doldu, devam etmek için lütfen giriş yapın.
+      unauthenticated: Devam etmek için üye olmalı ya da giriş yapmalısınız.
+      unconfirmed: Devam etmek için hesabınızı doğrulamalısınız.
+    mailer:
+      confirmation_instructions:
+        subject: Doğrulama Talimatları
+      reset_password_instructions:
+        subject: Şifre Sıfırlama Talimatları
+      unlock_instructions:
+        subject: Kilit Açma Talimatları
+    oauth_callbacks:
+      failure: Sizi %{kind} üzerinden "%{reason}" sebebiyle yetkilendiremedik.
+      success: '%{kind} hesabından başarıyla yetkilendirildiniz.'
+    unlocks:
+      send_instructions: Birkaç dakika içinde hesabınızın kilidini nasıl açacağınızı anlatan bir e-posta alacaksınız.
+      unlocked: Hesabınızın kilidi başarıyla açıldı. Oturumunuz açıldı.
+    user_passwords:
+      spree_user:
+        cannot_be_blank: Boş parola giremezsiniz.
+        send_instructions: Birkaç dakika içinde şifrenizi nasıl yeniden ayarlayacağınızı anlatan bir e-posta alacaksınız.
+        updated: Şifreniz başarıyla değiştirildi. Oturumunuz açıldı.
+    user_registrations:
+      destroyed: Güle Güle! Hesabınız başarıyla iptal edildi. Sizi tekrar aramızda görmeyi umuyoruz.
+      inactive_signed_up: Başarıyla kayıt oldunuz. Ancak oturumunuzu "%{reason}" sebebiyle açamadık.
+      signed_up: Hoşgeldiniz! Başarıyla kayıt oldunuz.
+      updated: Hesabınız başarıyla güncellendi.
+    user_sessions:
+      signed_in: Giriş başarılı oldu.
+      signed_out: Çıkış başarılı oldu.
+  errors:
+    messages:
+      already_confirmed: zaten doğrulanmış
+      not_found: kayıt yok
+      not_locked: kilitli değil
+      not_saved:
+        one: ! '1 hata yüzünden %{resource} kaynağı kaydedilemedi:'
+        other: ! '%{count} sayıda hata yüzünden %{resource} kaynağı kaydedilemedi:'
