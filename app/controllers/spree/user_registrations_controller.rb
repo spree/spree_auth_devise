@@ -17,6 +17,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     super
+    @user = resource
   end
 
   # POST /resource/sign_up
