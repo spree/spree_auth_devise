@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'email_spec', '~> 1.4.0'
   s.add_development_dependency 'capybara', '~> 2.1.0'
   s.add_development_dependency 'database_cleaner', '~> 1.0.1'
-  s.add_development_dependency 'selenium-webdriver', '~> 2.35.0'
+  s.add_development_dependency 'selenium-webdriver', '~> 2.35.1'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'pry'
