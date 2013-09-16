@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_auth_devise'
-  s.version     = '2.1.0'
+  s.version     = '2.2.0'
   s.summary     = 'Provides authentication and authorization services for use with Spree by using Devise and CanCan.'
   s.description = 'Required dependency for Spree'
 
@@ -22,20 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'devise', '~> 3.0.1'
   s.add_dependency 'devise-encryptable', '0.1.2'
-  s.add_development_dependency 'rspec-rails', '~> 2.13'
-  s.add_development_dependency 'factory_girl_rails', '~> 4.2.1'
-  s.add_development_dependency 'email_spec', '~> 1.4.0'
-  s.add_development_dependency 'capybara', '~> 2.1.0'
-  s.add_development_dependency 'database_cleaner', '~> 1.0.1'
-  s.add_development_dependency 'selenium-webdriver', '~> 2.35.1'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'launchy'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'debugger'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'pg'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'mysql2'
-  s.add_development_dependency 'simplecov'
+  s.add_dependency 'cancan', '~> 1.6.7'
 end
