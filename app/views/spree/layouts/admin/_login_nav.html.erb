@@ -3,6 +3,6 @@
     <li data-hook="user-logged-in-as"><%= Spree.t(:logged_in_as) %>: <%= spree_current_user.email %></li>
     <li data-hook="user-account-link"><i class="icon-user"></i><%= link_to Spree.t(:account), spree.edit_user_path(spree_current_user) %></li>
     <li data-hook="user-logout-link"><i class="icon-signout"></i><%= link_to Spree.t(:logout), spree.destroy_spree_user_session_path %></li>
-    <li data-hook="store-frontend-link"><i class="icon-external-link"></i><%= link_to Spree.t(:store), spree.root_path, :target => '_blank' %></li>
+    <li data-hook="store-frontend-link"><i class="icon-external-link"></i><%= link_to Spree.t(:back_to_store), spree.root_path, :target => '_blank' %></li>
   </ul>
 <% end %>
