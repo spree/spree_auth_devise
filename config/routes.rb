@@ -7,9 +7,7 @@ Spree::Core::Engine.routes.draw do
              :skip => [:unlocks, :omniauth_callbacks],
              :path_names => { :sign_out => 'logout' },
              :path_prefix => :user
-end
 
-Spree::Core::Engine.routes.prepend do
   resources :users, :only => [:edit, :update]
 
   devise_scope :spree_user do
