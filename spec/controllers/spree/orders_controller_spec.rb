@@ -106,6 +106,17 @@ describe Spree::OrdersController do
           spree_get :show, {:id => 'R123', :token => order.token }
           session[:access_token].should == order.token
         end
+
+        context 'when accessing multiple orders in succession' do
+          let(:second_order) { create(:order, :number => 'R456') }
+
+          it 'should store each token as guest_token in session' do
+            spree_get :show, {:id => 'R123', :token => order.token }
+            session[:access_token].should == order.token
+            spree_get :show, {:id => 'R456', :token => second_order.token }
+            session[:access_token].should == second_order.token
+          end
+        end
       end
 
       context 'when no token present' do
