@@ -31,7 +31,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'pry'
-  s.add_development_dependency 'debugger'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'pg'
