@@ -13,9 +13,14 @@ Spree::CheckoutController.class_eval do
     fire_event("spree.user.signup", :order => current_order)
     # hack - temporarily change the state to something other than cart so we can validate the order email address
     current_order.state = current_order.checkout_steps.first
-    if current_order.update_attributes(order_params)
+    current_order.update_column(:email, params[:order][:email])
+    # Run validations, then check for errors
+    # valid? may return false if the address state validations are present
+    current_order.valid?
+    if current_order.errors[:email].blank?
       redirect_to checkout_path
     else
+      flash[:registration_error] = t(:email_cannot_be_blank, :scope => [:errors, :messages])
       @user = Spree::User.new
       render 'registration'
     end
