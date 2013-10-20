@@ -43,7 +43,7 @@ en:
       signed_out: Signed out successfully.
   errors:
     messages:
-      email_cannot_be_blank: Email address cannot be blank
+      email_is_invalid: Email address cannot be blank
       already_confirmed: was already confirmed
       not_found: not found
       not_locked: was not locked
