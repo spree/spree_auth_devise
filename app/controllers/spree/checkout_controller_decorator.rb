@@ -19,7 +19,7 @@ Spree::CheckoutController.class_eval do
     if current_order.errors[:email].blank?
       redirect_to checkout_path
     else
-      flash[:registration_error] = t(:email_cannot_be_blank, :scope => [:errors, :messages])
+      flash[:registration_error] = t(:email_is_invalid, :scope => [:errors, :messages])
       @user = Spree::User.new
       render 'registration'
     end
