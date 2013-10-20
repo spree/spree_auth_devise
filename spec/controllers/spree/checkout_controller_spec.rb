@@ -117,7 +117,7 @@ describe Spree::CheckoutController do
       controller.stub :check_authorization
       order.stub :update_attributes => true
       controller.should_not_receive :check_registration
-      spree_put :update_registration
+      spree_put :update_registration, { :order => { } }
     end
 
     it 'should render the registration view if unable to save' do
