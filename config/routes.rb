@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.draw do
+Spree::Core::Engine.add_routes do
   devise_for :spree_user,
              :class_name => 'Spree::User',
              :controllers => { :sessions => 'spree/user_sessions',
