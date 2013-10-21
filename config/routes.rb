@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.draw do
+routes = lambda do
   devise_for :spree_user,
              :class_name => 'Spree::User',
              :controllers => { :sessions => 'spree/user_sessions',
@@ -36,4 +36,10 @@ Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :users
   end
+end
+
+if Spree::Core::Engine.respond_to?(:add_routes)
+  Spree::Core::Engine.add_routes(&routes)
+else
+  Spree::Core::Engine.routes.draw(&routes)
 end
