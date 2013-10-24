@@ -39,7 +39,7 @@ class Spree::UsersController < Spree::StoreController
 
   private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(Spree::PermittedAttributes.user_attributes)
     end
 
     def load_object
