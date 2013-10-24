@@ -9,7 +9,9 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::SSL
-
+  
+  include Spree::Auth::StrongParameters
+  
   ssl_required
   before_filter :check_permissions, :only => [:edit, :update]
   skip_before_filter :require_no_authentication
@@ -66,6 +68,6 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
 
   private
     def spree_user_params
-      params.require(:spree_user).permit(:email, :password, :password_confirmation)
+      params.require(:spree_user).permit(*permitted_spree_user_attributes)
     end
 end
