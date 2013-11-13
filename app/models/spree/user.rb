@@ -1,11 +1,11 @@
 module Spree
   class User < ActiveRecord::Base
+    include Core::UserAddress
+
     devise :database_authenticatable, :token_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
 
     has_many :orders
-    belongs_to :ship_address, :foreign_key => 'ship_address_id', :class_name => 'Spree::Address'
-    belongs_to :bill_address, :foreign_key => 'bill_address_id', :class_name => 'Spree::Address'
 
     before_validation :set_login
     before_destroy :check_completed_orders
