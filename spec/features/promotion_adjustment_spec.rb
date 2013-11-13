@@ -53,7 +53,7 @@ describe 'promotion adjustments', :js => true do
     end
 
     # Regression test for #839
-    it "doesn't blow up the signup page" do
+    xit "doesn't blow up the signup page" do
       visit "/signup"
       fill_in "Email", :with => "user@example.com"
       fill_in "Password", :with => "Password"
@@ -69,7 +69,7 @@ describe 'promotion adjustments', :js => true do
         click_button "Add To Cart"
       end
 
-      it "correctly applies the adjustment if a user signs up as a real user" do
+      xit "correctly applies the adjustment if a user signs up as a real user" do
         visit "/signup"
         fill_in "Email", :with => "user@example.com"
         fill_in "Password", :with => "password"
@@ -84,7 +84,7 @@ describe 'promotion adjustments', :js => true do
 
     # Covering the registration prior to order case for #836
     context "without an order" do
-      it "signing up, then placing an order" do
+      xit "signing up, then placing an order" do
         visit '/signup'
         fill_in "Email", :with => "user@example.com"
         fill_in "Password", :with => "password"
