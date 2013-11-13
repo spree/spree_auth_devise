@@ -94,7 +94,7 @@ module Spree
 
       private
         def user_params
-          params.require(:user).permit(:email, :password, :password_confirmation, :spree_role_ids)
+          params.require(:user).permit(PermittedAttributes.user_attributes.push :spree_role_ids)
         end
 
         # handling raise from Spree::Admin::ResourceController#destroy
