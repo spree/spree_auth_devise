@@ -1,6 +1,8 @@
 module Spree
   class User < ActiveRecord::Base
-    include Core::UserAddress
+    if Spree.version > '2.1.3'
+      include Core::UserAddress
+    end
 
     devise :database_authenticatable, :token_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
