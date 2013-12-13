@@ -28,11 +28,6 @@ module Spree
       has_spree_role?('admin')
     end
 
-    def send_reset_password_instructions
-      generate_reset_password_token!
-      UserMailer.reset_password_instructions(self.id).deliver
-    end
-
     protected
       def password_required?
         !persisted? || password.present? || password_confirmation.present?
