@@ -13,7 +13,7 @@ describe Spree::UserMailer do
   describe '#reset_password_instructions' do
     describe 'message contents' do
       before do
-        Spree::UserMailer.reset_password_instructions(user.id).deliver
+        Spree::UserMailer.reset_password_instructions(user, 'token goes here').deliver
         @message = ActionMailer::Base.deliveries.last
       end
 
@@ -39,7 +39,7 @@ describe Spree::UserMailer do
     describe 'legacy support for User object' do
       it 'should send an email' do
         lambda {
-          Spree::UserMailer.reset_password_instructions(user).deliver
+          Spree::UserMailer.reset_password_instructions(user, 'token goes here').deliver
         }.should change(ActionMailer::Base.deliveries, :size).by(1)
       end
     end
