@@ -10,9 +10,6 @@ module Spree
     before_validation :set_login
     before_destroy :check_completed_orders
 
-    # Setup accessible (or protected) attributes for your model
-    # attr_accessible :email, :password, :password_confirmation, :remember_me, :persistence_token, :login
-
     users_table_name = User.table_name
     roles_table_name = Role.table_name
 
