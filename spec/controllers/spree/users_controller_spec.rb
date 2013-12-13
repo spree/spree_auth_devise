@@ -29,7 +29,5 @@ describe Spree::UsersController do
       spree_put :update, :user => { :spree_role_ids => [role.id] }
       expect(assigns[:user].spree_roles).to_not include role
     end
-
-    pending "figure out why ActiveModel::ForbiddenAttributesError is not raised when passing spree_role_ids"
   end
 end
