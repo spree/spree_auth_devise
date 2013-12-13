@@ -25,15 +25,6 @@ describe Spree::Order do
     end
   end
 
-  context 'with bogus email' do
-    it 'should not be valid' do
-      order.stub(:new_record? => false)
-      order.email = 'foo'
-      order.state = 'address'
-      order.should_not be_valid
-    end
-  end
-
   context '#create' do
     it 'should create a token permission' do
       order.save
