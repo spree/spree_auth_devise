@@ -1,4 +1,5 @@
 require_dependency 'spree/checkout_controller'
+require 'spree/core/validators/email'
 Spree::CheckoutController.class_eval do
   before_filter :check_authorization
   before_filter :check_registration, :except => [:registration, :update_registration]
@@ -10,13 +11,8 @@ Spree::CheckoutController.class_eval do
   end
 
   def update_registration
-    # hack - temporarily change the state to something other than cart so we can validate the order email address
-    current_order.state = current_order.checkout_steps.first
     current_order.update_column(:email, params[:order][:email])
-    # Run validations, then check for errors
-    # valid? may return false if the address state validations are present
-    current_order.valid?
-    if current_order.errors[:email].blank?
+    if EmailValidator.new(:attributes => current_order.attributes).valid?(current_order.email)
       redirect_to checkout_path
     else
       flash[:registration_error] = t(:email_is_invalid, :scope => [:errors, :messages])
