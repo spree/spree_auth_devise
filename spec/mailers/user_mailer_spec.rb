@@ -5,7 +5,7 @@ describe Spree::UserMailer do
   before do
     ActionMailer::Base.default_url_options[:host] = "http://example.com"
     user = create(:user)
-    Spree::UserMailer.reset_password_instructions(user).deliver
+    Spree::UserMailer.reset_password_instructions(user, 'token goes here').deliver
     @message = ActionMailer::Base.deliveries.last
   end
 
