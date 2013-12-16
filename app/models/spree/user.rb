@@ -44,18 +44,5 @@ module Spree
         # for now force login to be same as email, eventually we will make this configurable, etc.
         self.login ||= self.email if self.email
       end
-
-      # Generate a friendly string randomically to be used as token.
-      def self.friendly_token
-        SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
-      end
-
-      # Generate a token by looping and ensuring does not already exist.
-      def self.generate_token(column)
-        loop do
-          token = friendly_token
-          break token unless where(column => token).first
-        end
-      end
   end
 end
