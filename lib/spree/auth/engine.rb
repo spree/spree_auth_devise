@@ -24,10 +24,10 @@ module Spree
 
       initializer "spree_auth_devise.check_secret_token" do
         if Spree::Auth.default_secret_key == Devise.secret_key
-          puts "[WARNING] You are not setting Devise.secret_token within your application!"
+          puts "[WARNING] You are not setting Devise.secret_key within your application!"
           puts "You must set this in config/initializers/devise.rb. Here's an example:"
           puts " "
-          puts %Q{Devise.secret_token = "#{SecureRandom.hex(50)}"}
+          puts %Q{Devise.secret_key = "#{SecureRandom.hex(50)}"}
         end
       end
 
