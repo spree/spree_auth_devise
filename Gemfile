@@ -21,7 +21,7 @@ group :test do
   gem 'shoulda-matchers', '~> 1.4.2'
   gem 'capybara', '~> 2.1'
   gem 'database_cleaner', '~> 1.0.1'
-  gem 'selenium-webdriver', '2.35.1'
+  gem 'selenium-webdriver', '2.39.0'
   gem 'launchy'
 end
 
