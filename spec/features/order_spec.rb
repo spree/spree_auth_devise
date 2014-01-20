@@ -44,15 +44,5 @@ describe "Orders" do
       page.should have_content("RoR Mug")
       page.should have_content("RoR Shirt")
     end
-
-    using_session("first") do
-      visit spree.root_path
-
-      click_link "Cart"
-
-      # order should have been merged with second session
-      page.should have_content("RoR Mug")
-      page.should have_content("RoR Shirt")
-    end
   end
 end
