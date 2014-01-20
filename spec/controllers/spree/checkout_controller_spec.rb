@@ -67,34 +67,69 @@ describe Spree::CheckoutController do
       before do
         order.update_column(:email, 'spree@example.com')
         order.update_column(:state, 'confirm')
-
-        # So that the order can transition to complete successfully
-        order.stub :payment_required? => false
       end
 
-      context "with a token" do
-        before do
-          order.stub :token => 'ABC'
+      context "with no payment required" do
+        before { order.stub :payment_required? => false }
+
+        context "with a token" do
+          before do
+            order.stub :token => 'ABC'
+          end
+
+          it 'should redirect to the tokenized order view' do
+            spree_post :update, { :state => 'confirm' }, { :access_token => "ABC" }
+            response.should redirect_to spree.token_order_path(order, 'ABC')
+            flash.notice.should == Spree.t(:order_processed_successfully)
+          end
         end
 
-        it 'should redirect to the tokenized order view' do
-          spree_post :update, { :state => 'confirm' }, { :access_token => "ABC" }
-          response.should redirect_to spree.token_order_path(order, 'ABC')
-          flash.notice.should == Spree.t(:order_processed_successfully)
+        context 'with a registered user' do
+          before do
+            controller.stub :spree_current_user => user
+            order.stub :user => user
+            order.stub :token => nil
+          end
+
+          it 'should redirect to the standard order view' do
+            spree_post :update, { :state => 'confirm' }
+            response.should redirect_to spree.order_path(order)
+          end
         end
       end
 
-      context 'with a registered user' do
+      context "with payment required" do
         before do
-          controller.stub :spree_current_user => user
-          order.stub :user => user
-          order.stub :token => nil
+          order.stub :payment_required? => true
+          payment = create(:payment)
+          order.payments << payment
         end
 
-        it 'should redirect to the standard order view' do
-          spree_post :update, { :state => 'confirm' }
-          response.should redirect_to spree.order_path(order)
+        context "with a token" do
+          before do
+            order.stub :token => 'ABC'
+          end
+
+          it 'should redirect to the tokenized order view' do
+            spree_post :update, { :state => 'confirm' }, { :access_token => "ABC" }
+            response.should redirect_to spree.token_order_path(order, 'ABC')
+            flash.notice.should == Spree.t(:order_processed_successfully)
+          end
         end
+
+        context 'with a registered user' do
+          before do
+            controller.stub :spree_current_user => user
+            order.stub :user => user
+            order.stub :token => nil
+          end
+
+          it 'should redirect to the standard order view' do
+            spree_post :update, { :state => 'confirm' }
+            response.should redirect_to spree.order_path(order)
+          end
+        end
+
       end
     end
   end
