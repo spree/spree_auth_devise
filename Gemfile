@@ -25,7 +25,7 @@ group :test do
   gem 'launchy'
 end
 
-gem 'spree', :github => "spree/spree", :branch => "master"
+gem 'spree', :github => "spree/spree", :branch => "2-2-stable"
 gem 'pry'
 
 gemspec
