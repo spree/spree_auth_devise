@@ -1,8 +1,5 @@
+---
 en:
-  spree:
-    admin:
-      tab:
-        users: "Users"
   devise:
     confirmations:
       confirmed: Your account was successfully confirmed. You are now signed in.
@@ -12,7 +9,7 @@ en:
       invalid: Invalid email or password.
       invalid_token: Invalid authentication token.
       locked: Your account is locked.
-      timeout: Your session expired, please sign in again to continue.
+      timeout: 'Your session expired, please sign in again to continue.'
       unauthenticated: You need to sign in or sign up before continuing.
       unconfirmed: You have to confirm your account before continuing.
     mailer:
@@ -23,8 +20,8 @@ en:
       unlock_instructions:
         subject: Unlock Instructions
     oauth_callbacks:
-      failure: Could not authorize you from %{kind} because "%{reason}".
-      success: Successfully authorized from %{kind} account.
+      failure: 'Could not authorize you from %{kind} because %{reason}.'
+      success: 'Successfully authorized from %{kind} account.'
     unlocks:
       send_instructions: You will receive an email with instructions about how to unlock your account in a few minutes.
       unlocked: Your account was successfully unlocked. You are now signed in.
@@ -35,7 +32,7 @@ en:
         updated: Your password was changed successfully. You are now signed in.
     user_registrations:
       destroyed: Bye! Your account was successfully cancelled. We hope to see you again soon.
-      inactive_signed_up: You have signed up successfully. However, we could not sign you in because your account is %{reason}.
+      inactive_signed_up: 'You have signed up successfully. However, we could not sign you in because your account is %{reason}.'
       signed_up: Welcome! You have signed up successfully.
       updated: You updated your account successfully.
     user_sessions:
@@ -43,10 +40,10 @@ en:
       signed_out: Signed out successfully.
   errors:
     messages:
-      email_is_invalid: Email address cannot be blank
       already_confirmed: was already confirmed
+      email_is_invalid: Email address cannot be blank
       not_found: not found
       not_locked: was not locked
       not_saved:
-        one: ! '1 error prohibited this %{resource} from being saved:'
-        other: ! '%{count} errors prohibited this %{resource} from being saved:'
+        one: '1 error prohibited this %{resource} from being saved:'
+        other: '%{count} errors prohibited this %{resource} from being saved:'

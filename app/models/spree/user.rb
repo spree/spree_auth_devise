@@ -13,7 +13,7 @@ module Spree
     users_table_name = User.table_name
     roles_table_name = Role.table_name
 
-    scope :admin, lambda { includes(:spree_roles).where("#{roles_table_name}.name" => "admin") }
+    scope :admin, -> { includes(:spree_roles).where("#{roles_table_name}.name" => "admin") }
 
     class DestroyWithOrdersError < StandardError; end
 
