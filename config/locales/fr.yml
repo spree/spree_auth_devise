@@ -1,56 +1,49 @@
+---
 fr:
-  logged_in_as: "Connecté(e) en tant que"
-  logged_in_succesfully: "Connecté(e) avec succès"
-  logged_out: "Vous avez été déconnecté."
-  login: Connexion
-  login_as_existing: "Connectez-vous en tant que client(e) existant(e)"
-  login_failed: "L'authentification a échoué."
-  login_name: Identifiant
-  logout: Déconnexion
-
+  devise:
+    confirmations:
+      confirmed: Votre compte a été confirmé. Vous êtes maintenant connecté(e).
+      send_instructions: Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de confirmer votre compte.
+    failure:
+      inactive: Votre compte n'a pas encore été activé.
+      invalid: Courriel ou mot de passe non valide.
+      invalid_token: Jeton d'authentification non valide.
+      locked: Votre compte est bloqué.
+      timeout: 'Votre session a expiré, merci de bien vouloir vous connecter à nouveau pour continuer.'
+      unauthenticated: Vous devez vous identifier ou vous inscrire avant de poursuivre.
+      unconfirmed: Vous devez confirmer votre compte avant de continuer.
+    mailer:
+      confirmation_instructions:
+        subject: Instructions de confirmation d'inscription
+      reset_password_instructions:
+        subject: Instructions pour réinitialiser votre mot de passe
+      unlock_instructions:
+        subject: Instructions pour déverrouiller votre compte
+    oauth_callbacks:
+      failure: 'Connexion impossible pour le compte %{kind} car %{reason}.'
+      success: 'Connexion avec succès pour le compte %{kind}.'
+    unlocks:
+      send_instructions: Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de déverrouiller votre compte.
+      unlocked: Votre compte a été déverrouillé. Vous êtes maintenant connecté(e).
+    user_passwords:
+      spree_user:
+        cannot_be_blank: Votre mot de passe ne peut pas être vide.
+        send_instructions: Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de réinitialiser votre mot de passe.
+        updated: Votre mot de passe a été changé avec succès. Vous êtes maintenant connecté(e).
+    user_registrations:
+      destroyed: Au revoir! Votre compte a été annulé. Nous espérons vous revoir bientôt.
+      inactive_signed_up: "Vous vous êtes inscrit(e) avec succès. Cependant, nous n'avons pu vous connecter car votre compte est %{reason}."
+      signed_up: Bienvenue! Vous vous êtes inscrit(e) avec succès.
+      updated: Vous avez mis à jour votre compte avec succès.
+    user_sessions:
+      signed_in: Connexion avec succès.
+      signed_out: Déconnexion avec succès.
   errors:
     messages:
+      already_confirmed: a déjà été confirmé
+      email_is_invalid: adresse e-mail ne peut pas être vide
       not_found: "n'a pas été trouvé"
-      already_confirmed: 'a déjà été confirmé'
       not_locked: "n'a pas été bloqué"
       not_saved:
         one: "1 erreur interdit cette %{ressource} d'être enregistrée :"
         other: "%{count} erreurs interdisent cette %{resource} d'être enregistrée :"
-  devise:
-    failure:
-      unauthenticated: 'Vous devez vous identifier ou vous inscrire avant de poursuivre.'
-      unconfirmed: 'Vous devez confirmer votre compte avant de continuer.'
-      locked: 'Votre compte est bloqué.'
-      invalid: 'Courriel ou mot de passe non valide.'
-      invalid_token: "Jeton d'authentification non valide."
-      timeout: "Votre session a expiré, merci de bien vouloir vous connecter à nouveau pour continuer."
-      inactive: "Votre compte n'a pas encore été activé."
-    user_passwords:
-      spree_user:
-        cannot_be_blank: 'Votre mot de passe ne peut pas être vide.'
-        send_instructions: 'Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de réinitialiser votre mot de passe.'
-        updated: 'Votre mot de passe a été changé avec succès. Vous êtes maintenant connecté(e).'
-    confirmations:
-      send_instructions: 'Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de confirmer votre compte.'
-      confirmed: 'Votre compte a été confirmé. Vous êtes maintenant connecté(e).'
-    user_registrations:
-      signed_up: 'Bienvenue! Vous vous êtes inscrit(e) avec succès.'
-      inactive_signed_up: "Vous vous êtes inscrit(e) avec succès. Cependant, nous n'avons pu vous connecter car votre compte est %{reason}."
-      updated: 'Vous avez mis à jour votre compte avec succès.'
-      destroyed: 'Au revoir! Votre compte a été annulé. Nous espérons vous revoir bientôt.'
-    user_sessions:
-      signed_in: 'Connexion avec succès.'
-      signed_out: 'Déconnexion avec succès.'
-    unlocks:
-      send_instructions: "Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de déverrouiller votre compte."
-      unlocked: 'Votre compte a été déverrouillé. Vous êtes maintenant connecté(e).'
-    oauth_callbacks:
-      success: 'Connexion avec succès pour le compte %{kind}.'
-      failure: 'Connexion impossible pour le compte %{kind} car "%{reason}".'
-    mailer:
-      confirmation_instructions:
-        subject: "Instructions de confirmation d'inscription"
-      reset_password_instructions:
-        subject: 'Instructions pour réinitialiser votre mot de passe'
-      unlock_instructions:
-        subject: 'Instructions pour déverrouiller votre compte'
