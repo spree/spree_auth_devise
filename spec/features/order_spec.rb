@@ -1,58 +1,59 @@
 require 'spec_helper'
 
-describe "Orders", :js => true do
-  it "should allow a user to view their cart at any time" do
+feature 'Orders', js: true, focus: true do
+
+  scenario 'allow a user to view their cart at any time' do
     visit spree.cart_path
-    page.should have_content("Your cart is empty")
+    expect(page).to have_text 'Your cart is empty'
   end
 
   # regression test for spree/spree#1687
-  it "should merge incomplete orders from different sessions" do
-    create(:product, :name => "RoR Mug")
-    create(:product, :name => "RoR Shirt")
+  scenario 'merge incomplete orders from different sessions' do
+    create(:product, name: 'RoR Mug')
+    create(:product, name: 'RoR Shirt')
 
-    user = create(:user, :email => "email@person.com", :password => "password", :password_confirmation => "password")
+    user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
 
-    using_session("first") do
+    using_session('first') do
       visit spree.root_path
 
-      click_link "RoR Mug"
-      click_button "Add To Cart"
+      click_link 'RoR Mug'
+      click_button 'Add To Cart'
 
       visit spree.login_path
-      fill_in "Email", :with => user.email
-      fill_in "Password", :with => user.password
-      click_button "Login"
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Login'
 
-      click_link "Cart"
-      page.should have_content("RoR Mug")
+      click_link 'Cart'
+      expect(page).to have_text 'RoR Mug'
     end
 
-    using_session("second") do
+    using_session('second') do
       visit spree.root_path
 
-      click_link "RoR Shirt"
-      click_button "Add To Cart"
+      click_link 'RoR Shirt'
+      click_button 'Add To Cart'
 
       visit spree.login_path
-      fill_in "Email", :with => user.email
-      fill_in "Password", :with => user.password
-      click_button "Login"
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Login'
 
       # order should have been merged with first session
-      click_link "Cart"
-      page.should have_content("RoR Mug")
-      page.should have_content("RoR Shirt")
+      click_link 'Cart'
+      expect(page).to have_text 'RoR Mug'
+      expect(page).to have_text 'RoR Shirt'
     end
 
-    using_session("first") do
+    using_session('first') do
       visit spree.root_path
 
-      click_link "Cart"
+      click_link 'Cart'
 
       # order should have been merged with second session
-      page.should have_content("RoR Mug")
-      page.should have_content("RoR Shirt")
+      expect(page).to have_text 'RoR Mug'
+      expect(page).to have_text 'RoR Shirt'
     end
   end
 end

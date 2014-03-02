@@ -9,20 +9,22 @@ Provides authentication services for Spree, using the Devise gem.
 
 At one stage in the past, this used to be the auth component for Spree. If that's the feature that you're now finding lacking from Spree, that's easy fixed.
 
-Just add this line to your Gemfile:
+Just add this line to your `Gemfile`:
+```ruby
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'
+```
 
-    gem "spree_auth_devise", :github => "spree/spree_auth_devise"
-
-Please ensure you're using the correct branch of spree_auth_devise relative to
-your version of Spree.
+Please ensure you're using the correct branch of `spree_auth_devise` relative to your version of Spree.
 
 Spree 1.3.x or 1-3-stable:
-
-    gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "1-3-stable"
+```ruby
+gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
+```
 
 Spree 1.2.x or 1-2-stable:
-
-    gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "1-2-stable"
+```ruby
+gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-2-stable'
+```
 
 Then run `bundle install`. Authentication will then work exactly as it did in previous versions of Spree.
 
@@ -46,5 +48,4 @@ Then run the rspec tests.
 
     bundle exec rake spec
 
-If everything doesn't pass on your machine (using Ruby (1.9.3 or 2.0.0) and (MySQL or PostgreSQL or SQLite3)) then we would consider that a bug. Please file a bug report on the issues page for this project with your test output
-and we will investigate it.
+If everything doesn't pass on your machine (using Ruby (1.9.3 or 2.0.0) and (MySQL or PostgreSQL or SQLite3)) then we would consider that a bug. Please file a bug report on the issues page for this project with your test output and we will investigate it.

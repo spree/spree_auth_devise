@@ -1,41 +1,45 @@
 require 'spec_helper'
 
-describe "Sign In" do
-  before(:each) do
-    @user = create(:user, :email => "email@person.com", :password => "secret", :password_confirmation => "secret")
+feature 'Sign In' do
+  background do
+    @user = create(:user, email: 'email@person.com', password: 'secret', password_confirmation: 'secret')
     visit spree.login_path
   end
 
-  it "should ask use to sign in" do
+  scenario 'ask use to sign in' do
     visit spree.admin_path
-    page.should_not have_content("Authorization Failure")
+    expect(page).not_to have_text 'Authorization Failure'
   end
 
-  it "should let a user sign in successfully" do
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
-    click_button "Login"
-    page.should have_content("Logged in successfully")
-    page.should_not have_content("Login")
-    page.should have_content("Logout")
-    current_path.should == "/"
+  scenario 'let a user sign in successfully' do
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+    click_button 'Login'
+
+    expect(page).to have_text 'Logged in successfully'
+    expect(page).not_to have_text 'Login'
+    expect(page).to have_text 'Logout'
+    expect(current_path).to eq '/'
   end
 
-  it "should show validation erros" do
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => "wrong_password"
-    click_button "Login"
-    page.should have_content("Invalid email or password")
-    page.should have_content("Login")
+  scenario 'show validation erros' do
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: 'wrong_password'
+    click_button 'Login'
+
+    expect(page).to have_text 'Invalid email or password'
+    expect(page).to have_text 'Login'
   end
 
-  it "should allow a user to access a restricted page after logging in" do
-    user = create(:admin_user, :email => "admin@person.com", :password => "password", :password_confirmation => "password")
+  scenario 'allow a user to access a restricted page after logging in' do
+    user = create(:admin_user, email: 'admin@person.com', password: 'password', password_confirmation: 'password')
     visit spree.admin_path
-    fill_in "Email", :with => user.email
-    fill_in "Password", :with => user.password
-    click_button "Login"
-    page.should have_content("Logged in as: admin@person.com")
-    current_path.should == "/admin"
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Login'
+
+    expect(page).to have_text 'Logged in as: admin@person.com'
+    expect(current_path).to eq '/admin'
   end
 end

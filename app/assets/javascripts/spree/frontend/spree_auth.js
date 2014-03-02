@@ -1,1 +1,1 @@
-// Placeholder for backend dummy application
+//= require spree/frontend
