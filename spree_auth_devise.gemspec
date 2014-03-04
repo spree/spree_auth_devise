@@ -21,8 +21,6 @@ Gem::Specification.new do |s|
   spree_version = '~> 2.3.0.beta'
 
   s.add_dependency 'spree_core', spree_version
-  s.add_dependency 'spree_frontend', spree_version
-  s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'devise', '~> 3.2.3'
   s.add_dependency 'devise-encryptable', '0.1.2'
   s.add_dependency 'cancan', '~> 1.6.10'
@@ -30,6 +28,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'json'
   s.add_dependency 'multi_json'
 
+  s.add_development_dependency 'spree_backend', spree_version
+  s.add_development_dependency 'spree_frontend', spree_version
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'mysql2'
   s.add_development_dependency 'pg'
