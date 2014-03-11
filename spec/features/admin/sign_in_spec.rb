@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-feature 'Sign In' do
+feature 'Admin - Sign In' do
   background do
     @user = create(:user, email: 'email@person.com', password: 'secret', password_confirmation: 'secret')
-    visit spree.login_path
+    visit spree.admin_login_path
   end
 
   scenario 'ask user to sign in' do
