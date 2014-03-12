@@ -48,6 +48,5 @@ Spree::Core::Engine.add_routes do
       get '/logout' => 'user_sessions#destroy', :as => :logout
     end
 
-    resources :users
   end
 end
