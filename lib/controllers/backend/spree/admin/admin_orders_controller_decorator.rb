@@ -1,12 +1,10 @@
 Spree::Admin::OrdersController.class_eval do
-
   before_filter :check_authorization
 
   private
-
     def check_authorization
       action = params[:action].to_sym
-      if action == :index
+      if action == :index || action == :new
         authorize! :index, Spree::Order
       else
         load_order
@@ -15,5 +13,4 @@ Spree::Admin::OrdersController.class_eval do
         authorize! action, resource, session[:access_token]
       end
     end
-
 end
