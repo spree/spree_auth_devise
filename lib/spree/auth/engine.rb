@@ -50,15 +50,15 @@ module Spree
       end
 
       def self.backend_available?
-        @@backend_available ||= Rails::Application::Railties.engines.map{ |e| e.class.to_s }.include?('Spree::Backend::Engine')
+        @@backend_available ||= Rails::Engine::Railties.engines.map{ |e| e.class.to_s }.include?('Spree::Backend::Engine')
       end
 
       def self.dash_available?
-        @@dash_available ||= Rails::Application::Railties.engines.map{ |e| e.class.to_s }.include?('Spree::Dash::Engine')
+        @@dash_available ||= Rails::Engine::Railties.engines.map{ |e| e.class.to_s }.include?('Spree::Dash::Engine')
       end
 
       def self.frontend_available?
-        @@frontend_available ||= Rails::Application::Railties.engines.map{ |e| e.class.to_s }.include?('Spree::Frontend::Engine')
+        @@frontend_available ||= Rails::Engine::Railties.engines.map{ |e| e.class.to_s }.include?('Spree::Frontend::Engine')
       end
 
       if self.backend_available?
