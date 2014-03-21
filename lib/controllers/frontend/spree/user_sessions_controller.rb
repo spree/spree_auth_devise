@@ -27,8 +27,15 @@ class Spree::UserSessionsController < Devise::SessionsController
         }
       end
     else
-      flash.now[:error] = t('devise.failure.invalid')
-      render :new
+      respond_to do |format|
+        format.html {
+          flash.now[:error] = t('devise.failure.invalid')
+          render :new
+        }
+        format.js {
+          render :json => { error: t('devise.failure.invalid') }
+        }
+      end
     end
   end
 
