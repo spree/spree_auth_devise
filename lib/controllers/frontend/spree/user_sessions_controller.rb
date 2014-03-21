@@ -33,7 +33,7 @@ class Spree::UserSessionsController < Devise::SessionsController
           render :new
         }
         format.js {
-          render :json => { error: t('devise.failure.invalid') }
+          render :json => { error: t('devise.failure.invalid') }, status: :unauthorized
         }
       end
     end
