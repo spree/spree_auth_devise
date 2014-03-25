@@ -22,7 +22,8 @@ class Spree::UserSessionsController < Devise::SessionsController
           redirect_back_or_default(after_sign_in_path_for(spree_current_user))
         }
         format.js {
-          render :json => {:ship_address => spree_current_user.ship_address,
+          render :json => {:user => spree_current_user,
+                           :ship_address => spree_current_user.ship_address,
                            :bill_address => spree_current_user.bill_address}.to_json
         }
       end
