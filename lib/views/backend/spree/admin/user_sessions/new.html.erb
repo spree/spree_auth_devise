@@ -4,7 +4,7 @@
 
 <% @body_id = 'login' %>
 <div id="existing-customer">
-  <h6><%= Spree.t(:login_as_existing) %></h6>
+  <h6><%= Spree.t(:admin_login) %></h6>
   <div data-hook="login">
     <%= form_for Spree::User.new, :as => :spree_user, :url => spree.admin_create_new_session_path do |f| %>
       <div id="password-credentials">
