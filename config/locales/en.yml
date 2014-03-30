@@ -1,5 +1,7 @@
 ---
 en:
+  spree:
+    admin_login: "Admin login"
   devise:
     confirmations:
       confirmed: Your account was successfully confirmed. You are now signed in.
