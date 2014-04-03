@@ -46,5 +46,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'poltergeist', '~> 1.5.0'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'simplecov', '~> 0.7.1'
+  s.add_development_dependency 'route_translator', '~> 3.2.0'
   s.add_development_dependency 'pry'
 end
