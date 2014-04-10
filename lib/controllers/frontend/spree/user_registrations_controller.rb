@@ -9,6 +9,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::SSL
+  include Spree::Core::ControllerHelpers::Store
 
   ssl_required
   before_filter :check_permissions, :only => [:edit, :update]

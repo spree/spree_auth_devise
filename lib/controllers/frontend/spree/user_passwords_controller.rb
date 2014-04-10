@@ -9,6 +9,7 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::SSL
+  include Spree::Core::ControllerHelpers::Store
 
   ssl_required
 
