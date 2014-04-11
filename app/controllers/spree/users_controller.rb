@@ -40,7 +40,11 @@ class Spree::UsersController < Spree::StoreController
   private
     def load_object
       @user ||= spree_current_user
-      authorize! params[:action].to_sym, @user
+      if @user
+        authorize! params[:action].to_sym, @user
+      else
+        redirect_to spree.signup_path
+      end
     end
 
     def authorize_actions
