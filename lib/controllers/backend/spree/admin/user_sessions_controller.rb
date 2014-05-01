@@ -44,4 +44,11 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
       redirect_to(session["spree_user_return_to"] || default)
       session["spree_user_return_to"] = nil
     end
+
+    # Used to determine what kind of layout the page should have
+    # False by default, overriden in controllers that provide an ember frontend
+    def ember?
+      false
+    end
+    helper_method :ember?
 end
