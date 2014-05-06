@@ -29,7 +29,8 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
       sign_in(:spree_user, @user)
       session[:spree_user_signup] = true
       associate_user
-      sign_in_and_redirect(:spree_user, @user)
+      sign_in(:spree_user, @user)
+      redirect_back_or_default(after_sign_in_path_for(spree_current_user))
     else
       clean_up_passwords(resource)
       render :new
