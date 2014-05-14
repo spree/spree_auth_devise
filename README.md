@@ -7,7 +7,7 @@ Provides authentication services for Spree, using the Devise gem.
 
 ## Installation
 
-At one stage in the past, this used to be the auth component for Spree. If that's the feature that you're now finding lacking from Spree, that's easy fixed.
+At one stage in the past, this used to be the auth component for Spree. If that's the feature that you're now finding lacking from Spree, that's easily fixed.
 
 Just add this line to your `Gemfile`:
 ```ruby
