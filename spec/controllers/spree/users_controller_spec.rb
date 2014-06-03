@@ -13,7 +13,7 @@ describe Spree::UsersController do
     it 'should redirect to signup path if user is not found' do
       controller.stub(:spree_current_user => nil)
       spree_put :update, { :user => { :email => 'foobar@example.com' } }
-      response.should redirect_to('/signup')
+      response.should redirect_to('/login')
     end
   end
 
