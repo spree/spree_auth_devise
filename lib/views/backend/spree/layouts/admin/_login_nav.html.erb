@@ -2,7 +2,7 @@
   <ul id="login-nav" class="inline-menu">
     <li data-hook="user-logged-in-as"><%= Spree.t(:logged_in_as) %>: <%= spree_current_user.email %></li>
     <li data-hook="user-account-link" class='fa fa-user'><%= link_to Spree.t(:account), spree.edit_user_path(spree_current_user) %></li>
-    <li data-hook="user-logout-link" class='fa fa-sign-out'><%= link_to Spree.t(:logout), spree.logout_path %></li>
+    <li data-hook="user-logout-link" class='fa fa-sign-out'><%= link_to Spree.t(:logout), spree.admin_logout_path %></li>
 
     <% if spree.respond_to? :root_path %>
       <li data-hook="store-frontend-link" class='fa fa-external-link'>
