@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 feature 'Admin - Reset Password' do
+
+  let!(:store) { create(:store) }
+
   background do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
   end

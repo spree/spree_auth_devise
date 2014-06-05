@@ -19,7 +19,6 @@ feature 'Checkout', js: true do
     @product.master.stock_items.first.update_column(:count_on_hand, 1)
 
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
-    Spree::Config[:enable_mail_delivery] = true
 
     # Bypass gateway error on checkout | ..or stub a gateway
     Spree::Config[:allow_checkout_on_gateway_error] = true
@@ -30,8 +29,8 @@ feature 'Checkout', js: true do
   context 'without payment being required' do
     background do
       # So that we don't have to setup payment methods just for the sake of it
-      Spree::Order.any_instance.stub has_available_payment: true
-      Spree::Order.any_instance.stub payment_required?: false
+      allow_any_instance_of(Spree::Order).to receive(:has_available_payment).and_return(true)
+      allow_any_instance_of(Spree::Order).to receive(:payment_required?).and_return(false)
     end
 
     scenario 'allow a visitor to checkout as guest, without registration' do
@@ -58,8 +57,6 @@ feature 'Checkout', js: true do
       check 'order_use_billing'
 
       click_button 'Save and Continue'
-      click_button 'Save and Continue'
-      # coupon code step
       click_button 'Save and Continue'
 
       expect(page).to have_text 'Your order has been processed successfully'
@@ -91,8 +88,6 @@ feature 'Checkout', js: true do
 
       click_button 'Save and Continue'
       click_button 'Save and Continue'
-      # coupon code step
-      click_button 'Save and Continue'
 
       expect(page).to have_text 'Your order has been processed successfully'
       expect(Spree::Order.first.user).to eq user
@@ -100,6 +95,7 @@ feature 'Checkout', js: true do
 
     # Regression test for #890
     scenario 'associate an incomplete guest order with user after successful password reset' do
+      create(:store)
       user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
       click_link 'RoR Mug'
       click_button 'Add To Cart'
@@ -161,8 +157,6 @@ feature 'Checkout', js: true do
       check 'order_use_billing'
 
       click_button 'Save and Continue'
-      click_button 'Save and Continue'
-      # coupon code step
       click_button 'Save and Continue'
 
       expect(page).to have_text 'Your order has been processed successfully'

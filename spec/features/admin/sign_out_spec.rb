@@ -1,17 +1,15 @@
 require 'spec_helper'
 
 feature 'Admin - Sign Out' do
+
   given!(:user) do
-   create(:user,
-          email: 'email@person.com',
-          password: 'secret',
-          password_confirmation: 'secret')
+   create :user, email: 'email@person.com'
   end
 
   background do
     visit spree.admin_login_path
     fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Password', with: 'secret'
     # Regression test for #1257
     check 'Remember me'
     click_button 'Login'

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Spree::UserMailer do
+  let!(:store) { create(:store) }
   let(:user) { create(:user) }
 
   before do
@@ -25,7 +26,7 @@ describe Spree::UserMailer do
         end
 
         it 'Spree site name' do
-          expect(@message.subject).to include Spree::Config[:site_name]
+          expect(@message.subject).to include store.name
         end
       end
 

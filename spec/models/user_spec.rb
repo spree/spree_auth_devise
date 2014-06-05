@@ -4,8 +4,8 @@ describe Spree::User do
   before(:all) { Spree::Role.create name: 'admin' }
 
   it '#admin?' do
-    expect(create(:admin_user).admin?).to be_true
-    expect(create(:user).admin?).to be_false
+    expect(create(:admin_user).admin?).to be true
+    expect(create(:user).admin?).to be false
   end
 
   it 'generate the reset password token' do
