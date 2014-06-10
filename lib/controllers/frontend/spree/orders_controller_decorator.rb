@@ -3,11 +3,11 @@ Spree::OrdersController.class_eval do
 
   private
     def check_authorization
-      session[:access_token] = params[:token] if params[:token]
+      cookies.permanent.signed[:guest_token] = params[:token] if params[:token]
       order = Spree::Order.find_by_number(params[:id]) || current_order
 
       if order
-        authorize! :edit, order, session[:access_token]
+        authorize! :edit, order, cookies.signed[:guest_token]
       else
         authorize! :create, Spree::Order.new
       end

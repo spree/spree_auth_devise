@@ -32,7 +32,7 @@ Spree::CheckoutController.class_eval do
     end
 
     def check_authorization
-      authorize!(:edit, current_order, session[:access_token])
+      authorize!(:edit, current_order, cookies.signed[:guest_token])
     end
 
     # Introduces a registration step whenever the +registration_step+ preference is true.
@@ -47,6 +47,6 @@ Spree::CheckoutController.class_eval do
     # are redirected to the tokenized order url unless authenticated as a registered user.
     def completion_route
       return order_path(@order) if spree_current_user
-      spree.token_order_path(@order, @order.token)
+      spree.token_order_path(@order, @order.guest_token)
     end
 end
