@@ -24,11 +24,4 @@ describe Spree::Order do
       expect(order.user).not_to eq guest_user
     end
   end
-
-  context '#create' do
-    it 'create a token permission' do
-      order.save
-      expect(order.token).not_to be_nil
-    end
-  end
 end

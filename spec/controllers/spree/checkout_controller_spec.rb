@@ -74,11 +74,12 @@ describe Spree::CheckoutController do
 
       context 'with a token' do
         before do
-          order.stub token: 'ABC'
+          order.stub guest_token: 'ABC'
         end
 
         it 'redirect to the tokenized order view' do
-          spree_post :update, { state: 'confirm' }, { access_token: 'ABC' }
+          request.cookie_jar.signed[:guest_token] = 'ABC'
+          spree_post :update, { state: 'confirm' }
           expect(response).to redirect_to spree.token_order_path(order, 'ABC')
           expect(flash.notice).to eq Spree.t(:order_processed_successfully)
         end
@@ -88,7 +89,7 @@ describe Spree::CheckoutController do
         before do
           controller.stub spree_current_user: user
           order.stub user: user
-          order.stub token: nil
+          order.stub guest_token: nil
         end
 
         it 'redirect to the standard order view' do
@@ -108,7 +109,8 @@ describe Spree::CheckoutController do
 
     it 'check if the user is authorized for :edit' do
       controller.should_receive(:authorize!).with(:edit, order, token)
-      spree_get :registration, {}, { access_token: token }
+      request.cookie_jar.signed[:guest_token] = token
+      spree_get :registration, {}
     end
   end
 
@@ -137,9 +139,10 @@ describe Spree::CheckoutController do
     end
 
     it 'check if the user is authorized for :edit' do
+      request.cookie_jar.signed[:guest_token] = token
       order.stub update_attributes: true
       controller.should_receive(:authorize!).with(:edit, order, token)
-      spree_put :update_registration, { order: { email: 'jobs@spreecommerce.com' } }, { access_token: token }
+      spree_put :update_registration, { order: { email: 'jobs@spreecommerce.com' } }
     end
   end
 end
