@@ -25,12 +25,6 @@ Spree::Core::Engine.add_routes do
   get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration
   put '/checkout/registration' => 'checkout#update_registration', :as => :update_checkout_registration
 
-  resource :session do
-    member do
-      get :nav_bar
-    end
-  end
-
   resource :account, :controller => 'users'
 
   namespace :admin do
