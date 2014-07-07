@@ -40,10 +40,6 @@ class Spree::UserSessionsController < Devise::SessionsController
     end
   end
 
-  def nav_bar
-    render :partial => 'spree/shared/nav_bar'
-  end
-
   private
     def accurate_title
       Spree.t(:login)

@@ -25,12 +25,6 @@ Spree::Core::Engine.routes.draw do
   match '/checkout/registration' => 'checkout#registration', :via => :get, :as => :checkout_registration
   match '/checkout/registration' => 'checkout#update_registration', :via => :put, :as => :update_checkout_registration
 
-  resource :session do
-    member do
-      get :nav_bar
-    end
-  end
-
   resource :account, :controller => 'users'
 
   namespace :admin do
