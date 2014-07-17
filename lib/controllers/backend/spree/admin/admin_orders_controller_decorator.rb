@@ -5,7 +5,7 @@ Spree::Admin::OrdersController.class_eval do
     def not_load_order_action
       [:index, :new]
     end
-    
+
     def check_authorization
       action = params[:action].to_sym
       if not_load_order_action.include?(action)
