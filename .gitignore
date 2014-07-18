@@ -2,3 +2,4 @@ spec/dummy
 .sass-cache
 Gemfile.lock
 *.swp
+coverage
