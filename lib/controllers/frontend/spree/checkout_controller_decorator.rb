@@ -9,13 +9,19 @@ Spree::CheckoutController.class_eval do
 
   def update_registration
     current_order.update_column(:email, params[:order][:email])
-    if EmailValidator.new(:attributes => current_order.attributes).valid?(current_order.email)
-      redirect_to checkout_path
+    if Spree::User.find_by(email: params[:order][:email]) != nil
+      render_email_error :email_already_registered
+    elsif !EmailValidator.new(:attributes => current_order.attributes).valid?(current_order.email)
+      render_email_error :email_is_invalid
     else
-      flash[:registration_error] = t(:email_is_invalid, :scope => [:errors, :messages])
-      @user = Spree::User.new
-      render 'registration'
+      redirect_to checkout_path
     end
+  end
+
+  def render_email_error (error_name)
+    flash[:registration_error] = t(error_name, :scope => [:errors, :messages])
+    @user = Spree::User.new
+    render 'registration'
   end
 
   private
