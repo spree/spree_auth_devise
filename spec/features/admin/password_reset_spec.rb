@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-feature 'Admin - Reset Password' do
+RSpec.feature 'Admin - Reset Password', type: :feature do
 
   let!(:store) { create(:store) }
 
@@ -8,7 +6,7 @@ feature 'Admin - Reset Password' do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
   end
 
-  scenario 'allow a user to supply an email for the password reset' do
+  scenario 'allows a user to supply an email for the password reset' do
     user = create(:user, email: 'foobar@example.com', password: 'secret', password_confirmation: 'secret')
     visit spree.admin_login_path
     click_link 'Forgot Password?'

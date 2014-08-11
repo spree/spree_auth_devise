@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-feature 'Admin - Sign Out' do
+RSpec.feature 'Admin - Sign Out', type: :feature do
 
   given!(:user) do
    create :user, email: 'email@person.com'
@@ -15,7 +13,7 @@ feature 'Admin - Sign Out' do
     click_button 'Login'
   end
 
-  scenario 'allow a signed in user to logout' do
+  scenario 'allows a signed in user to logout' do
     click_link 'Logout'
     visit spree.admin_login_path
     expect(page).to have_text 'Login'

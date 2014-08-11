@@ -1,6 +1,5 @@
-require 'spec_helper'
+RSpec.feature 'Sign Up', type: :feature do
 
-feature 'Sign Up' do
   context 'with valid data' do
     scenario 'create a new user' do
       visit spree.signup_path

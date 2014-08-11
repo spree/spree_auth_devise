@@ -1,6 +1,5 @@
-require 'spec_helper'
+RSpec.feature 'Checkout', :js, type: :feature do
 
-feature 'Checkout', js: true do
   given!(:country) { create(:country, name: 'United States', states_required: true) }
   given!(:state)   { create(:state, name: 'Maryland', country: country) }
   given!(:shipping_method) do

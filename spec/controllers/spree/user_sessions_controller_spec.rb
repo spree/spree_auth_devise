@@ -1,13 +1,10 @@
-require 'spec_helper'
+RSpec.describe Spree::UserSessionsController, type: :controller do
 
-describe Spree::UserSessionsController do
   let(:user) { create(:user) }
-  before do
-    @request.env["devise.mapping"] = Devise.mappings[:spree_user]
-  end
+
+  before { @request.env['devise.mapping'] = Devise.mappings[:spree_user] }
 
   context "#create" do
-
     context "using correct login information" do
       it 'properly assigns orders user from guest_token' do
         order1 = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
@@ -23,7 +20,6 @@ describe Spree::UserSessionsController do
       context "and html format is used" do
         it "redirects to default after signing in" do
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
-
           expect(response).to redirect_to spree.root_path
         end
       end
@@ -44,7 +40,7 @@ describe Spree::UserSessionsController do
         it "renders new template again with errors" do
           spree_post :create, spree_user: { email: user.email, password: 'wrong' }
           expect(response).to render_template('new')
-          expect(flash[:error]).to eq I18n.t('devise.failure.invalid')
+          expect(flash[:error]).to eq I18n.t(:'devise.failure.invalid')
         end
       end
 

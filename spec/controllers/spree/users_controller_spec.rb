@@ -1,24 +1,21 @@
-require 'spec_helper'
+RSpec.describe Spree::UsersController, type: :controller do
 
-describe Spree::UsersController do
   let(:admin_user) { create(:user) }
   let(:user) { create(:user) }
   let(:role) { create(:role) }
 
-  before do
-    controller.stub spree_current_user: user
-  end
+  before { allow(controller).to receive(:spree_current_user) { user } }
 
   context '#load_object' do
-    it 'should redirect to signup path if user is not found' do
-      controller.stub(:spree_current_user => nil)
-      spree_put :update, { :user => { :email => 'foobar@example.com' } }
-      response.should redirect_to('/login')
+    it 'redirects to signup path if user is not found' do
+      allow(controller).to receive(:spree_current_user) { nil }
+      spree_put :update, { user: { email: 'foobar@example.com' } }
+      expect(response).to redirect_to('/login')
     end
   end
 
   context '#create' do
-    it 'create a new user' do
+    it 'creates a new user' do
       spree_post :create, { user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
       expect(assigns[:user].new_record?).to be false
     end
@@ -26,7 +23,7 @@ describe Spree::UsersController do
 
   context '#update' do
     context 'when updating own account' do
-      it 'perform update' do
+      it 'performs update' do
         spree_put :update, { user: { email: 'mynew@email-address.com' } }
         expect(assigns[:user].email).to eq 'mynew@email-address.com'
         expect(response).to redirect_to spree.account_url(only_path: true)
