@@ -9,6 +9,7 @@ module Spree
         end
 
         def generate_devise_key
+          return if ENV['TRAVIS']
           template 'config/initializers/devise.rb', 'config/initializers/devise.rb'
         end
 
