@@ -21,8 +21,6 @@ describe Spree::CheckoutController do
         before { controller.stub spree_current_user: user }
 
         it 'proceed to the first checkout step' do
-          user.should_receive(:ship_address)
-
           spree_get :edit, { state: 'address' }
           expect(response).to render_template :edit
         end
@@ -46,8 +44,6 @@ describe Spree::CheckoutController do
         before { controller.stub spree_current_user: user }
 
         it 'proceed to the first checkout step' do
-          user.should_receive(:ship_address)
-
           spree_get :edit, { state: 'address' }
           expect(response).to render_template :edit
         end
