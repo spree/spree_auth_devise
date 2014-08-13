@@ -5,7 +5,6 @@ describe Spree::UserMailer do
   let(:user) { create(:user) }
 
   before do
-    ActionMailer::Base.default_url_options[:host] = 'http://example.com'
     user = create(:user)
     Spree::UserMailer.reset_password_instructions(user, 'token goes here').deliver
     @message = ActionMailer::Base.deliveries.last
@@ -32,7 +31,7 @@ describe Spree::UserMailer do
 
       context 'body includes' do
         it 'password reset url' do
-          expect(@message.body.raw_source).to include 'http://example.com/user/spree_user/password/edit'
+          expect(@message.body.raw_source).to include "http://#{store.url}/user/spree_user/password/edit"
         end
       end
     end
