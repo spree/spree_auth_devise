@@ -3,7 +3,8 @@ class Spree::UsersController < Spree::StoreController
   skip_before_filter :set_current_order, :only => :show
   prepend_before_filter :load_object, :only => [:show, :edit, :update]
   prepend_before_filter :authorize_actions, :only => :new
-
+  prepend_before_filter :store_location
+  
   include Spree::Core::ControllerHelpers
 
   def show
