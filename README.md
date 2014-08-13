@@ -39,13 +39,14 @@ and then, run this command in order to set up the admin user for the application
     bundle exec rake spree_auth:admin:create
 
 ## Using in an existing Rails application
+
 If you are installing Spree inside of a host application in which you want your own permission setup, you can do this using spree_auth_devise's register_ability method.
 
 First create your own CanCan Ability class following the CanCan documentation.
 
 For example: app/models/your_ability_class.rb
 
-```
+```ruby
 class YourAbilityClass
   include CanCan::Ability
 
@@ -58,26 +59,24 @@ class YourAbilityClass
        can :create, SomeRailsAdminObject
      end
    end
-
 end
 ```
 
-Then register your class in your spree initializer:  config/initializers/spree.rb
-```
+Then register your class in your spree initializer: config/initializers/spree.rb
+```ruby
 Spree::Ability.register_ability(YourAbilityClass)
 ```
 
-Inside of your host application you can then use CanCan like you normally out.
-```
+Inside of your host application you can then use CanCan like you normally would.
+```ruby
 <% if can? :show SomeRailsObject %>
 
 <% end %>
 ```
 
-###Adding Permissions to Gems
+### Adding Permissions to Gems
+
 This methodology can also be used by gems that extend spree and want/need to add permissions.
-
-
 
 ## Testing
 

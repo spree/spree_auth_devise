@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-feature 'Change email' do
+RSpec.feature 'Change email', type: :feature do
 
   background do
     user = create(:user)

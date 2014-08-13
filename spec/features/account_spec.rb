@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-feature 'Accounts' do
+RSpec.feature 'Accounts', type: :feature do
 
   context 'editing' do
     scenario 'can edit an admin user' do
@@ -21,7 +19,7 @@ feature 'Accounts' do
 
       fill_in 'Email', with: 'email@person.com'
       fill_in 'Password', with: 'password'
-      fill_in 'Password Confirmation', :with => 'password'
+      fill_in 'Password Confirmation', with: 'password'
       click_button 'Create'
 
       click_link 'My Account'

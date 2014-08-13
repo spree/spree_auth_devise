@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-feature 'Reset Password' do
+RSpec.feature 'Reset Password', type: :feature do
 
   let!(:store) { create(:store) }
 

@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-feature 'Orders', js: true, focus: true do
+RSpec.feature 'Orders', :js, type: :feature do
 
   scenario 'allow a user to view their cart at any time' do
     visit spree.cart_path
@@ -45,7 +43,7 @@ feature 'Orders', js: true, focus: true do
       fill_in 'Password', with: user.password
       click_button 'Login'
 
-      # order should have been merged with first session
+      # Order should have been merged with first session
       click_link 'Cart'
       expect(page).to have_text 'RoR Mug'
       expect(page).to have_text 'RoR Shirt'
@@ -56,7 +54,7 @@ feature 'Orders', js: true, focus: true do
 
       click_link 'Cart'
 
-      # order should have been merged with second session
+      # Order should have been merged with second session
       expect(page).to have_text 'RoR Mug'
       expect(page).to have_text 'RoR Shirt'
     end

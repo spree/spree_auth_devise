@@ -1,6 +1,5 @@
-require 'spec_helper'
+RSpec.feature 'Sign Out', type: :feature do
 
-feature 'Sign Out' do
   given!(:user) do
    create(:user,
           email: 'email@person.com',
