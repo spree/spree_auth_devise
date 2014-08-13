@@ -14,11 +14,8 @@ feature 'Checkout', js: true do
   given!(:address) { create(:address, state: state, country: country) }
 
   background do
-    ActionMailer::Base.default_url_options[:host] = 'http://example.com'
     @product = create(:product, name: 'RoR Mug')
     @product.master.stock_items.first.update_column(:count_on_hand, 1)
-
-    ActionMailer::Base.default_url_options[:host] = 'http://example.com'
 
     # Bypass gateway error on checkout | ..or stub a gateway
     Spree::Config[:allow_checkout_on_gateway_error] = true
@@ -108,7 +105,7 @@ feature 'Checkout', js: true do
       # Need to do this now because the token stored in the DB is the encrypted version
       # The 'plain-text' version is sent in the email and there's one way to get that!
       reset_password_email = ActionMailer::Base.deliveries.first
-      token_url_regex = /^http:\/\/example.com\/user\/spree_user\/password\/edit\?reset_password_token=(.*)$/
+      token_url_regex = /^http:\/\/www.example.com\/user\/spree_user\/password\/edit\?reset_password_token=(.*)$/
       token = token_url_regex.match(reset_password_email.body.to_s)[1]
 
       visit spree.edit_spree_user_password_path(reset_password_token: token)
