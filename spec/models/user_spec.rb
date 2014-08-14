@@ -1,6 +1,5 @@
-require 'spec_helper'
+RSpec.describe Spree::User, type: :model do
 
-describe Spree::User do
   before(:all) { Spree::Role.create name: 'admin' }
 
   it '#admin?' do
@@ -8,9 +7,9 @@ describe Spree::User do
     expect(create(:user).admin?).to be false
   end
 
-  it 'generate the reset password token' do
+  it 'generates the reset password token' do
     user = build(:user)
-    Spree::UserMailer.should_receive(:reset_password_instructions).with(user, anything, {}).and_return(double(deliver: true))
+    expect(Spree::UserMailer).to receive(:reset_password_instructions).with(user, anything, {}).and_return(double(deliver: true))
     user.send_reset_password_instructions
     expect(user.reset_password_token).not_to be_nil
   end
@@ -20,7 +19,6 @@ describe Spree::User do
       order = build(:order, completed_at: Time.now)
       order.save
       user = order.user
-
       expect { user.destroy }.to raise_exception(Spree::User::DestroyWithOrdersError)
     end
   end

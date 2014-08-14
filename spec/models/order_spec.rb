@@ -1,24 +1,23 @@
-require 'spec_helper'
+RSpec.describe Spree::Order, type: :model do
 
-describe Spree::Order do
   let(:order) { described_class.new }
 
   context '#associate_user!' do
-    let(:user) { mock_model Spree::User, email: 'spree@example.com', anonymous?: false }
-    before { order.stub(save!: true) }
+    let(:user) { build_stubbed(:user, email: 'spree@example.com') }
+    before { allow(order).to receive(:save!) { true } }
 
-    it 'associate the order with the specified user' do
+    it 'associates the order with the specified user' do
       order.associate_user! user
       expect(order.user).to eq user
     end
 
-    it "set the order's email attribute to that of the specified user" do
+    it "sets the order's email attribute to that of the specified user" do
       order.associate_user! user
       expect(order.email).to eq user.email
     end
 
-    it 'destroy any previous association with a guest user' do
-      guest_user = mock_model Spree::User
+    it 'destroys any previous association with a guest user' do
+      guest_user = build_stubbed(:user)
       order.user = guest_user
       order.associate_user! user
       expect(order.user).not_to eq guest_user
