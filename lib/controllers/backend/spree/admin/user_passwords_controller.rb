@@ -8,7 +8,6 @@ class Spree::Admin::UserPasswordsController < Devise::PasswordsController
 
   helper 'spree/admin/navigation'
   helper 'spree/admin/tables'
-  layout 'spree/layouts/admin'
 
   ssl_required
 
