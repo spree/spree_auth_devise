@@ -20,6 +20,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
       context "and html format is used" do
         it "redirects to default after signing in" do
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
           expect(response).to redirect_to spree.root_path
         end
       end

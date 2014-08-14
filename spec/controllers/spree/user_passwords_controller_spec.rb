@@ -1,9 +1,12 @@
-RSpec.describe Spree::UserPasswordsController, type: :controller do
+require 'spec_helper'
 
+describe Spree::UserPasswordsController do
   let(:token) { 'some_token' }
-
-  before { @request.env['devise.mapping'] = Devise.mappings[:spree_user] }
-
+  
+  before do
+    @request.env["devise.mapping"] = Devise.mappings[:spree_user]
+  end
+  
   context '#update' do
     context 'when updating password with blank password' do
       it 'shows error flash message, sets spree_user with token and re-displays password edit form' do
