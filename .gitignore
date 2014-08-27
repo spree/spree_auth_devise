@@ -6,3 +6,4 @@ Gemfile.lock
 .rvmrc
 .ruby-gemsets
 .ruby-version
+.bundle

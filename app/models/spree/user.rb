@@ -1,7 +1,7 @@
 module Spree
   class User < ActiveRecord::Base
-    include Core::UserAddress
-    include Core::UserPaymentSource
+    include UserAddress
+    include UserPaymentSource
 
     devise :database_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
