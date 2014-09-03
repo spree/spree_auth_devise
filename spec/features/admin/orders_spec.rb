@@ -5,7 +5,7 @@ RSpec.feature 'Admin orders', type: :feature do
   end
 
   # Regression #203
-  scenario 'can lists orders' do
+  scenario 'can list orders' do
     expect { visit spree.admin_orders_path }.not_to raise_error
   end
 
