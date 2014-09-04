@@ -15,11 +15,17 @@ RSpec.describe Spree::User, type: :model do
   end
 
   context '#destroy' do
-    it 'can not delete if it has completed orders' do
+    it 'will soft delete' do
       order = build(:order, completed_at: Time.now)
       order.save
       user = order.user
-      expect { user.destroy }.to raise_exception(Spree::User::DestroyWithOrdersError)
+      user.destroy
+      expect(Spree::User.find_by_id(user.id)).to be_nil
+      expect(Spree::User.with_deleted.find_by_id(user.id)).to eq(user)
+      expect(Spree::User.with_deleted.find_by_id(user.id).orders.first).to eq(order)
+
+      expect(Spree::Order.find_by_user_id(user.id)).not_to be_nil
+      expect(Spree::Order.where(user_id: user.id).first).to eq(order)
     end
   end
 end
