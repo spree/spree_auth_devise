@@ -27,5 +27,18 @@ RSpec.describe Spree::User, type: :model do
       expect(Spree::Order.find_by_user_id(user.id)).not_to be_nil
       expect(Spree::Order.where(user_id: user.id).first).to eq(order)
     end
+    
+    it 'will allow users to register later with same email address as previously deleted account' do
+      user1 = build(:user)
+      user1.save
+
+      user2 = build(:user)
+      user2.email = user1.email
+      expect(user2.save).to be false
+      expect(user2.errors.messages[:email].first).to eq "has already been taken"
+      
+      user1.destroy
+      expect(user2.save).to be true
+    end
   end
 end
