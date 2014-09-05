@@ -44,6 +44,7 @@ en:
     messages:
       already_confirmed: was already confirmed
       email_is_invalid: Email address cannot be blank
+      email_already_registered: That email address is already registered. If you're a returning customer, please log in using the form below.
       not_found: not found
       not_locked: was not locked
       not_saved:
