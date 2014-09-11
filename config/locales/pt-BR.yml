@@ -1,0 +1,51 @@
+---
+pt-BR:
+  spree:
+    admin_login: "Entrada do Administrador"
+  devise:
+    confirmations:
+      confirmed: Sua conta foi confirmada com sucesso. Agora você está conectado.
+      send_instructions: Você receberá um e-mail com instruções sobre como confirmar sua conta em poucos minutos.
+    failure:
+      inactive: Sua conta não foi ativada ainda.
+      invalid: Email ou senha inválida.
+      invalid_token: Token de autenticação inválido.
+      locked: Sua conta está bloqueada.
+      timeout: 'Sua sessão expirou, por favor entre novamente para continuar.'
+      unauthenticated: Você precisa conectar ou cadastrar-se antes de continuar.
+      unconfirmed: Voce tem que confirmar sua conta antes de continuar.
+    mailer:
+      confirmation_instructions:
+        subject: Instruções de confirmação
+      reset_password_instructions:
+        subject: Instruções de redefinição de senha
+      unlock_instructions:
+        subject: Instruções de desbloqueio
+    oauth_callbacks:
+      failure: '%{kind} não foi autorizada porque %{reason}.'
+      success: 'Conta %{kind} foi autorizada com sucesso.'
+    unlocks:
+      send_instructions: Você receberá um e-mail com instruções sobre como desbloquear sua conta em poucos minutos.
+      unlocked: Sua conta foi desbloqueada com sucesso. Agora você está conectado.
+    user_passwords:
+      spree_user:
+        cannot_be_blank: Sua senha não pode estar em branco.
+        send_instructions: Você receberá um e-mail com instruções sobre como redefinir sua senha em poucos minutos.
+        updated: Sua senha foi alterada com sucesso. Agora você está conectado.
+    user_registrations:
+      destroyed: Até logo! Sua conta foi cancelada com sucesso. Esperamos ver você em breve.
+      inactive_signed_up: 'Seu cadastro foi feito com sucesso. No entanto, não o conectamos porque sua conta está %{reason}.'
+      signed_up: Bem vindo! Seu cadastro foi feito com sucesso.
+      updated: Sua conta foi atualizada com sucesso.
+    user_sessions:
+      signed_in: Entrou com sucesso.
+      signed_out: Saiu com sucesso.
+  errors:
+    messages:
+      already_confirmed: já foi confirmado
+      email_is_invalid: E-mail não pode estar em branco
+      not_found: não encontrado
+      not_locked: não bloqueado
+      not_saved:
+        one: '1 erro não permitiu este %{resource} ser salvo:'
+        other: '%{count} erros não permitiram %{resource} ser salvo:'
