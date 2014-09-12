@@ -20,7 +20,7 @@ describe Spree::UsersController do
   context '#create' do
     it 'create a new user' do
       spree_post :create, { user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
-      expect(assigns[:user].new_record?).to be_false
+      expect(assigns[:user].new_record?).to be false
     end
   end
 
