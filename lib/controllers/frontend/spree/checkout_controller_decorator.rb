@@ -8,7 +8,7 @@ Spree::CheckoutController.class_eval do
   end
 
   def update_registration
-    if params[:order][:email] =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i && current_order.update_attribute(:email, params[:order][:email])
+    if params[:order][:email] =~ Devise.email_regexp && current_order.update_attribute(:email, params[:order][:email])
       redirect_to checkout_path
     else
       flash[:registration_error] = t(:email_is_invalid, :scope => [:errors, :messages])
