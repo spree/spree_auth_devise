@@ -42,4 +42,12 @@ feature 'Sign In' do
     expect(page).to have_text 'Logged in as: admin@person.com'
     expect(current_path).to eq '/admin'
   end
+
+  it "should store the user previous location" do
+    visit spree.account_path
+    fill_in "Email", :with => @user.email
+    fill_in "Password", :with => @user.password
+    click_button "Login"
+    current_path.should == "/account"
+  end
 end
