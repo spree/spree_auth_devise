@@ -10,7 +10,7 @@ RSpec.describe Spree::UsersController, type: :controller do
     it 'redirects to signup path if user is not found' do
       allow(controller).to receive(:spree_current_user) { nil }
       spree_put :update, { user: { email: 'foobar@example.com' } }
-      expect(response).to redirect_to('/login')
+      expect(response.status).to eq 401
     end
   end
 
