@@ -45,9 +45,9 @@ feature 'Sign In' do
 
   it "should store the user previous location" do
     visit spree.account_path
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: @user.password
     click_button "Login"
-    current_path.should == "/account"
+    expect(current_path).to eq "/account"
   end
 end
