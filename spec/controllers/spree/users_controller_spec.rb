@@ -11,7 +11,7 @@ describe Spree::UsersController do
 
   context '#load_object' do
     it 'redirects to login path if user is not found' do
-      allow(controller).to receive(:spree_current_user) { nil }
+      controller.stub(spree_current_user: nil)
       spree_put :update, { user: { email: 'foobar@example.com' } }
       expect(response).to redirect_to spree.login_path
     end
