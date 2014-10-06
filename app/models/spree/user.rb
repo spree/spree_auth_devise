@@ -6,6 +6,9 @@ module Spree
     devise :database_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
 
+
+    devise :confirmable #if USERS_CONFIRMABLE
+
     has_many :orders
 
     before_validation :set_login
