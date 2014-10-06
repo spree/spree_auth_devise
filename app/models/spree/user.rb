@@ -9,6 +9,8 @@ module Spree
     acts_as_paranoid
     after_destroy :scramble_email_and_password
 
+    devise :confirmable #if USERS_CONFIRMABLE
+
     has_many :orders
 
     before_validation :set_login
@@ -37,7 +39,7 @@ module Spree
         # for now force login to be same as email, eventually we will make this configurable, etc.
         self.login ||= self.email if self.email
       end
-      
+
       def scramble_email_and_password
         self.email = SecureRandom.uuid + "@example.net"
         self.login = self.email
