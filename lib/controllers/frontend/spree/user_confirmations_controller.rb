@@ -6,8 +6,7 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
     if signed_in?(resource_name)
       signed_in_root_path(resource)
     else
-      binding.pry
-      new_session_path(resource_name)
+      login_path
     end
   end
 end
