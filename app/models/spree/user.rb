@@ -5,11 +5,10 @@ module Spree
 
     devise :database_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
+    devise :confirmable if Spree::Auth::Config[:confirmable]
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password
-
-    devise :confirmable #if USERS_CONFIRMABLE
 
     has_many :orders
 
