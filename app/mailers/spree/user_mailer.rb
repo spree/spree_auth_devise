@@ -5,5 +5,13 @@ module Spree
 
       mail to: user.email, from: from_address, subject: Spree::Store.current.name + ' ' + I18n.t(:subject, :scope => [:devise, :mailer, :reset_password_instructions])
     end
+
+
+
+    def confirmation_instructions(user, token, opts={})
+      @email = user.email
+      @user = spree.confirm_url(confirmation_token: token)
+      mail(:to => user.email, :from => "from@example.com" ,:subject => "Please confirm your mail")
+    end
   end
 end
