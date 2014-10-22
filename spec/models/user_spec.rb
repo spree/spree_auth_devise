@@ -41,4 +41,18 @@ RSpec.describe Spree::User, type: :model do
       expect(user2.save).to be true
     end
   end
+
+  describe "confirmable" do
+    it "is confirmable if the confirmable option is enabled" do
+      set_confirmable_option(true)
+      Spree::UserMailer.stub(:confirmation_instructions).and_return(double(deliver: true))
+      expect(Spree::User.devise_modules).to include(:confirmable)
+      set_confirmable_option(false)
+    end
+
+    it "is not confirmable if the confirmable option is disabled" do
+      set_confirmable_option(false)
+      expect(Spree::User.devise_modules).to_not include(:confirmable)
+    end
+  end
 end
