@@ -8,6 +8,7 @@ describe Spree::CheckoutController do
   before do
     controller.stub current_order: order
     order.stub confirmation_required?: true
+    user.stub_chain(:orders, :incomplete, :where).and_return([])
   end
 
   context '#edit' do
