@@ -1,4 +1,4 @@
-# Spree Auth (Devise)
+# Spree Auth (Devise) - With Confirmation Emails!
 
 [![Build Status](https://secure.travis-ci.org/spree/spree_auth_devise.png?branch=master)](https://travis-ci.org/spree/spree_auth_devise)
 [![Code Climate](https://codeclimate.com/github/spree/spree_auth_devise.png)](https://codeclimate.com/github/spree/spree_auth_devise)

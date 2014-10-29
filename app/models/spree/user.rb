@@ -4,7 +4,8 @@ module Spree
     include Core::UserPaymentSource
 
     devise :database_authenticatable, :registerable, :recoverable,
-           :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
+           :rememberable, :trackable, :validatable, :confirmable, 
+           :encryptable, encryptor: 'authlogic_sha512'
 
     has_many :orders
 
