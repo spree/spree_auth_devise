@@ -4,6 +4,6 @@ coverage
 Gemfile.lock
 *.swp
 .rvmrc
-.ruby-gemsets
+.ruby-gemset
 .ruby-version
 .bundle
