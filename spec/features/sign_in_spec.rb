@@ -39,7 +39,7 @@ RSpec.feature 'Sign In', type: :feature do
     click_button 'Login'
 
     expect(page).to have_text 'Logged in as: admin@person.com'
-    expect(current_path).to eq '/admin'
+    expect(current_path).to eq '/admin/orders'
   end
 
   it "should store the user previous location" do
