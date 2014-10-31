@@ -3,7 +3,9 @@ Spree::Core::Engine.add_routes do
              :class_name => 'Spree::User',
              :controllers => { :sessions => 'spree/user_sessions',
                                :registrations => 'spree/user_registrations',
-                               :passwords => 'spree/user_passwords' },
+                               :passwords => 'spree/user_passwords',
+                               :confirmations => 'spree/user_confirmations'
+                             },
              :skip => [:unlocks, :omniauth_callbacks],
              :path_names => { :sign_out => 'logout' },
              :path_prefix => :user
@@ -20,6 +22,9 @@ Spree::Core::Engine.add_routes do
     post '/password/recover' => 'user_passwords#create', :as => :reset_password
     get '/password/change' => 'user_passwords#edit', :as => :edit_password
     put '/password/change' => 'user_passwords#update', :as => :update_password
+    get '/user/confirmation/new' => 'user_confirmations#new'
+    get '/user/confirmation' => 'user_confirmations#show'
+    post '/user/confirmation' => 'user_confirmations#create', :as => :confirmation
   end
 
   get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration
@@ -38,7 +43,7 @@ Spree::Core::Engine.add_routes do
                :class_name => 'Spree::User',
                :controllers => { :sessions => 'spree/admin/user_sessions',
                                  :passwords => 'spree/admin/user_passwords' },
-               :skip => [:unlocks, :omniauth_callbacks, :registrations],
+               :skip => [:unlocks, :omniauth_callbacks, :registrations, :confirmable],
                :path_names => { :sign_out => 'logout' },
                :path_prefix => :user
     devise_scope :spree_user do
