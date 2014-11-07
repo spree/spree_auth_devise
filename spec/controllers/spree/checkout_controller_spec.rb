@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe Spree::CheckoutController do
   let(:order) { create(:order_with_totals, email: nil, user: nil) }
-  let(:user)  { mock_model Spree::User, last_incomplete_spree_order: nil, has_spree_role?: true, spree_api_key: 'fake' }
+  let(:user)  {
+    user = mock_model Spree::User, last_incomplete_spree_order: nil, has_spree_role?: true, spree_api_key: 'fake'
+    user.stub_chain(:orders, :incomplete, :where).and_return([])
+    user
+  }
   let(:token) { 'some_token' }
 
   before do
