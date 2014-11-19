@@ -1,13 +1,34 @@
 <% if spree_current_user %>
-  <ul id="login-nav" class="inline-menu">
-    <li data-hook="user-logged-in-as"><%= Spree.t(:logged_in_as) %>: <%= spree_current_user.email %></li>
-    <li data-hook="user-account-link" class='fa fa-user'><%= link_to Spree.t(:account), spree.edit_user_path(spree_current_user) %></li>
-    <li data-hook="user-logout-link" class='fa fa-sign-out'><%= link_to Spree.t(:logout), spree.admin_logout_path %></li>
-
-    <% if spree.respond_to? :root_path %>
-      <li data-hook="store-frontend-link" class='fa fa-external-link'>
-         <%= link_to Spree.t(:back_to_store), spree.root_path, :target => '_blank' %>
+<ul class="nav navbar-nav">
+  <li class="dropdown user user-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <i class="glyphicon glyphicon-user"></i>
+      <span><%= spree_current_user.email %> <i class="caret"></i></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="user-header bg-light-blue">
+        <p>
+          <%= spree_current_user.email %>
+          <small>Member since <%= spree_current_user.created_at.strftime("%B %Y") %></small>
+        </p>
       </li>
-    <% end %>
-  </ul>
+      <% if spree.respond_to? :root_path %>
+        <li class="user-body">
+          <div class="col-xs-12 text-center" data-hook="store-frontend-link">
+            <%= link_to Spree.t(:back_to_store), spree.root_path, :target => '_blank' %>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="user-footer" id="login-nav">
+        <div class="pull-left" data-hook="user-account-link">
+          <%= link_to Spree.t(:account), spree.edit_user_path(spree_current_user), class: "btn btn-default btn-flat" %>
+        </div>
+        <div class="pull-right" data-hook="user-logout-link">
+          <%= link_to Spree.t(:logout), spree.admin_logout_path, class: "btn btn-default btn-flat" %>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
 <% end %>
