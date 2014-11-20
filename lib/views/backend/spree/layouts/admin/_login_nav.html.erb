@@ -9,7 +9,6 @@
       <li class="user-header bg-light-blue">
         <p>
           <%= spree_current_user.email %>
-          <small>Member since <%= spree_current_user.created_at.strftime("%B %Y") %></small>
         </p>
       </li>
       <% if spree.respond_to? :root_path %>
