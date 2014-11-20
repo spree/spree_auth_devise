@@ -32,6 +32,7 @@ en:
     user_passwords:
       spree_user:
         cannot_be_blank: Your password cannot be blank.
+        no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
         send_instructions: You will receive an email with instructions about how to reset your password in a few minutes.
         updated: Your password was changed successfully. You are now signed in.
     user_registrations:
