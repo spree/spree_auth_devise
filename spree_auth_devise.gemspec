@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Provides authentication and authorization services for use with Spree by using Devise and CanCan.'
   s.description = s.summary
 
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.0.0'
   s.author      = 'Sean Schofield'
   s.email       = 'sean@spreecommerce.com'
   s.homepage    = 'http://spreecommerce.com'
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  spree_version = '~> 2.4.0.rc3'
+  spree_version = '~> 3.0.0.beta'
 
   s.add_dependency 'spree_core', spree_version
   s.add_dependency 'devise', '~> 3.2.3'
