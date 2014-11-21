@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.version     = '2.2.0'
   s.summary     = 'Provides authentication and authorization services for use with Spree by using Devise and CanCan.'
   s.description = s.summary
-
   s.required_ruby_version = '>= 2.1.0'
+  
   s.author      = 'Sean Schofield'
   s.email       = 'sean@spreecommerce.com'
   s.homepage    = 'http://spreecommerce.com'
