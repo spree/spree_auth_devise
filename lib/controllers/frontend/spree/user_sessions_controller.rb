@@ -23,6 +23,11 @@ class Spree::UserSessionsController < Devise::SessionsController
           redirect_back_or_default(after_sign_in_path_for(spree_current_user))
         }
         format.js {
+          api_key=spree_current_user.spree_api_key
+          if api_key.nil?
+            spree_current_user.generate_spree_api_key!
+            api_key=spree_current_user.spree_api_key
+          end
           render :json => {:user => spree_current_user,
                            :ship_address => spree_current_user.ship_address,
                            :bill_address => spree_current_user.bill_address}.to_json
@@ -40,7 +45,26 @@ class Spree::UserSessionsController < Devise::SessionsController
       end
     end
   end
+  
+  # DELETE /resource/sign_out
+  def destroy
+    user = spree_current_user
+    redirect_path = after_sign_out_path_for(resource_name)
+    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+    set_flash_message :notice, :signed_out if signed_out && is_flashing_format?
+    yield resource if block_given?
 
+    # We actually need to hardcode this as Rails default responder doesn't
+    # support returning empty response on GET request
+    respond_to do |format|      
+      format.all do
+        user.clear_spree_api_key!
+        head :no_content         
+      end
+      format.any(*navigational_formats) { redirect_to redirect_path }
+    end
+  end
+  
   def nav_bar
     render :partial => 'spree/shared/nav_bar'
   end
