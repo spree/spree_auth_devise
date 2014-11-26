@@ -37,8 +37,9 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'secret'
     click_button 'Login'
-
-    expect(page).to have_text 'Logged in as: admin@person.com'
+    within '.user-menu' do
+      expect(page).to have_text 'admin@person.com'
+    end
     expect(current_path).to eq '/admin/orders'
   end
 end
