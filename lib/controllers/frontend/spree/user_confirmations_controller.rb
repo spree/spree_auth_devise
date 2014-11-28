@@ -14,11 +14,8 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   ssl_required
 
   protected
+
   def after_confirmation_path_for(resource_name, resource)
-    if signed_in?(resource_name)
-      signed_in_root_path(resource)
-    else
-      login_path
-    end
+    signed_in?(resource_name) ? spree.signed_in_root_path(resource) : spree.login_path
   end
 end
