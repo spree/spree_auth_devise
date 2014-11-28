@@ -9,7 +9,7 @@ Spree::CheckoutController.class_eval do
 
   def update_registration
     if params[:order][:email] =~ Devise.email_regexp && current_order.update_attribute(:email, params[:order][:email])
-      redirect_to checkout_path
+      redirect_to spree.checkout_path
     else
       flash[:registration_error] = t(:email_is_invalid, :scope => [:errors, :messages])
       @user = Spree::User.new
@@ -19,11 +19,7 @@ Spree::CheckoutController.class_eval do
 
   private
     def order_params
-      if params[:order]
-        params.require(:order).permit(:email)
-      else
-        {}
-      end
+      params[:order] ? params.require(:order).permit(:email) : {}
     end
 
     def skip_state_validation?
@@ -45,7 +41,7 @@ Spree::CheckoutController.class_eval do
     # Overrides the equivalent method defined in Spree::Core.  This variation of the method will ensure that users
     # are redirected to the tokenized order url unless authenticated as a registered user.
     def completion_route
-      return order_path(@order) if spree_current_user
+      return spree.order_path(@order) if spree_current_user
       spree.token_order_path(@order, @order.guest_token)
     end
 end
