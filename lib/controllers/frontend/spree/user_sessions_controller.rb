@@ -32,6 +32,16 @@ class Spree::UserSessionsController < Devise::SessionsController
                            :ship_address => spree_current_user.ship_address,
                            :bill_address => spree_current_user.bill_address}.to_json
         }
+        format.json {
+          api_key=spree_current_user.spree_api_key
+          if api_key.nil?
+            spree_current_user.generate_spree_api_key!
+            api_key=spree_current_user.spree_api_key
+          end
+          render :json => {:user => spree_current_user,
+                           :ship_address => spree_current_user.ship_address,
+                           :bill_address => spree_current_user.bill_address}.to_json
+        }
       end
     else
       respond_to do |format|
@@ -40,6 +50,9 @@ class Spree::UserSessionsController < Devise::SessionsController
           render :new
         }
         format.js {
+          render :json => { error: t('devise.failure.invalid') }, status: :unprocessable_entity
+        }
+        format.json {
           render :json => { error: t('devise.failure.invalid') }, status: :unprocessable_entity
         }
       end

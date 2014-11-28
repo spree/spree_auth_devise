@@ -23,16 +23,52 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
 
   # POST /resource/sign_up
   def create
+    #byebug
     @user = build_resource(spree_user_params)
     if resource.save
-      set_flash_message(:notice, :signed_up)
-      sign_in(:spree_user, @user)
-      session[:spree_user_signup] = true
-      associate_user
-      respond_with resource, location: after_sign_up_path_for(resource)
+      respond_to do |format|
+        format.html {
+        
+          set_flash_message(:notice, :signed_up)
+          sign_in(:spree_user, @user)
+          session[:spree_user_signup] = true
+          associate_user
+          respond_with resource, location: after_sign_up_path_for(resource)
+        }
+        format.js {
+          api_key=@user.spree_api_key
+          if api_key.nil?
+            @user.generate_spree_api_key!
+            api_key=@user.spree_api_key
+          end
+          render :json => {:user => @user
+            
+          }
+        }
+        format.json {
+          api_key=@user.spree_api_key
+          if api_key.nil?
+            @user.generate_spree_api_key!
+            api_key=@user.spree_api_key
+          end
+          render :json => {:user => @user
+            
+          }
+        }
+      end
     else
-      clean_up_passwords(resource)
-      render :new
+      respond_to do |format|
+        format.html {
+          clean_up_passwords(resource)
+          render :new
+        }
+        format.js {
+          render :json => { error: resource.errors.messages }, status: :unprocessable_entity
+        }
+        format.json {
+          render :json => { error: resource.errors.messages }, status: :unprocessable_entity
+        }
+      end
     end
   end
 
@@ -61,12 +97,12 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   end
 
   protected
-    def check_permissions
-      authorize!(:create, resource)
-    end
+  def check_permissions
+    authorize!(:create, resource)
+  end
 
   private
-    def spree_user_params
-      params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
-    end
+  def spree_user_params
+    params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+  end
 end

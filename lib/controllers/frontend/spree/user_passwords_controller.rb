@@ -24,10 +24,48 @@ class Spree::UserPasswordsController < Devise::PasswordsController
     self.resource = resource_class.send_reset_password_instructions(params[resource_name])
 
     if resource.errors.empty?
-      set_flash_message(:notice, :send_instructions) if is_navigational_format?
-      respond_with resource, :location => spree.login_path
+      respond_to do |format|
+        format.html {
+          set_flash_message(:notice, :send_instructions) if is_navigational_format?
+          respond_with resource, :location => spree.login_path
+        }
+        format.js {
+          api_key=@user.spree_api_key
+          if api_key.nil?
+            @user.generate_spree_api_key!
+            api_key=@user.spree_api_key
+          end
+          render :json => {:user => @user
+            
+          }
+        }
+        format.json {
+          api_key=@user.spree_api_key
+          if api_key.nil?
+            @user.generate_spree_api_key!
+            api_key=@user.spree_api_key
+          end
+          render :json => {:user => @user
+            
+          }
+        }
+      end
     else
-      respond_with_navigational(resource) { render :new }
+      respond_to do |format|
+        format.html {
+          respond_with_navigational(resource) { render :new }
+        }
+        format.js {
+          
+            render :json => { error: resource.errors.messages }, status: :unprocessable_entity
+         
+        }
+        format.json {
+          
+            render :json => { error: resource.errors.messages }, status: :unprocessable_entity
+         
+        }
+      end
     end
   end
 
