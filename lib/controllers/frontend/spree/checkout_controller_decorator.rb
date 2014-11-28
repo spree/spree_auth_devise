@@ -19,11 +19,7 @@ Spree::CheckoutController.class_eval do
 
   private
     def order_params
-      if params[:order]
-        params.require(:order).permit(:email)
-      else
-        {}
-      end
+      params[:order] ? params.require(:order).permit(:email) : {}
     end
 
     def skip_state_validation?
