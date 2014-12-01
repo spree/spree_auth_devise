@@ -1,6 +1,7 @@
 class Spree::UserRegistrationsController < Devise::RegistrationsController
   helper 'spree/base', 'spree/store'
-
+ protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+ 
   if Spree::Auth::Engine.dash_available?
     helper 'spree/analytics'
   end
