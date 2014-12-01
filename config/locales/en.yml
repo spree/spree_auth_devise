@@ -43,6 +43,7 @@ en:
     user_sessions:
       signed_in: Signed in successfully.
       signed_out: Signed out successfully.
+      already_signed_in: Already signed in.
   errors:
     messages:
       already_confirmed: was already confirmed
