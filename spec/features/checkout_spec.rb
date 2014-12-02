@@ -135,8 +135,6 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
       expect(page).to have_text 'Registration'
 
-      click_link 'Create a new account'
-
       fill_in 'Email', with: 'email@person.com'
       fill_in 'Password', with: 'spree123'
       fill_in 'Password Confirmation', with: 'spree123'
