@@ -25,6 +25,7 @@ class Spree::UserPasswordsController < Devise::PasswordsController
     self.resource = resource_class.send_reset_password_instructions(params[resource_name])
 
     if resource.errors.empty?
+      @user=resource
       respond_to do |format|
         format.html {
           set_flash_message(:notice, :send_instructions) if is_navigational_format?
