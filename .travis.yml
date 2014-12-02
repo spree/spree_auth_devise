@@ -1,7 +1,6 @@
 language: ruby
 rvm:
-  - 1.9.3
-  - 2.1.3
+  - 2.1.5
 env:
   - DB=mysql
   - DB=postgres
