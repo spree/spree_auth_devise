@@ -45,4 +45,9 @@ class Spree::UserPasswordsController < Devise::PasswordsController
     end
   end
 
+  protected
+
+  def new_session_path(resource_name)
+    spree.send("new_#{resource_name}_session_path")
+  end
 end
