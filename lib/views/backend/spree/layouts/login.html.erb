@@ -1,0 +1,26 @@
+<!doctype html>
+  <!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+  <!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+  <!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+  <!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+  <!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+  <head data-hook="admin_inside_head">
+    <%= render partial: 'spree/admin/shared/head' %>
+  </head>
+
+  <body class="admin skin-blue">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <%= render partial: 'spree/admin/shared/header' %>
+
+          <%= flash_alert(flash) %>
+          <%= render partial: 'spree/admin/shared/alert', collection: session[:alerts] %>
+
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

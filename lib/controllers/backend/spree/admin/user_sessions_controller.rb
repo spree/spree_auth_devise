@@ -8,7 +8,7 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
 
   helper 'spree/admin/navigation'
   helper 'spree/admin/tables'
-  layout 'spree/layouts/admin'
+  layout :resolve_layout
 
   ssl_required :new, :create, :destroy, :update
 
@@ -43,5 +43,14 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
     def redirect_back_or_default(default)
       redirect_to(session["spree_user_return_to"] || default)
       session["spree_user_return_to"] = nil
+    end
+
+    def resolve_layout
+      case action_name
+      when "new", "create"
+        "spree/layouts/login"
+      else
+        "spree/layouts/admin"
+      end
     end
 end
