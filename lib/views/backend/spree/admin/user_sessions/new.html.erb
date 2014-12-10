@@ -10,15 +10,17 @@
       <%= f.label :password, Spree.t(:password), class: "sr-only" %>
       <%= f.password_field :password, :class => 'form-control', :tabindex => 2, placeholder: Spree.t(:password) %>
     </div>
-    <div class="checkbox">
+    <div class="checkbox form-group">
       <%= f.label :remember_me do %>
         <%= f.check_box :remember_me, :tabindex => 3 %>
         <%= Spree.t(:remember_me) %>
       <% end %>
     </div>
-    <%= f.submit Spree.t(:login), :class => 'btn btn-lg btn-primary btn-block', :tabindex => 4 %>
+    <div class="form-group">
+      <%= f.submit Spree.t(:login), :class => 'btn btn-primary btn-block', :tabindex => 4 %>
+    </div>
   <% end %>
-  <p class="margint">
+  <p>
     <%= Spree.t(:or) %> <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
   </p>
 </div>
