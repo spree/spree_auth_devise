@@ -21,13 +21,13 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     expect(current_path).to eq '/'
   end
 
-  scenario 'shows validation erros' do
+  scenario 'shows validation errors' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong_password'
     click_button 'Login'
 
     expect(page).to have_text 'Invalid email or password'
-    expect(page).to have_text 'Login'
+    expect(page).to have_button 'Login'
   end
 
   scenario 'allows a user to access a restricted page after logging in' do
