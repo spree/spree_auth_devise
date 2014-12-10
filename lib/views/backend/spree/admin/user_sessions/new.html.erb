@@ -1,31 +1,28 @@
 <% if flash[:alert] %>
-  <div class="flash errors"><%= flash[:alert] %></div>
+  <div class="alert alert-danger"><%= flash[:alert] %></div>
 <% end %>
 
-<% @body_id = 'login' %>
-<div id="existing-customer">
-  <h6><%= Spree.t(:admin_login) %></h6>
-  <div data-hook="login">
-    <%= form_for Spree::User.new, :as => :spree_user, :url => spree.admin_create_new_session_path do |f| %>
-      <div id="password-credentials">
-        <p>
-          <%= f.label :email, Spree.t(:email) %><br />
-          <%= f.email_field :email, :class => 'title', :tabindex => 1 %>
-        </p>
-        <p>
-          <%= f.label :password, Spree.t(:password) %><br />
-          <%= f.password_field :password, :class => 'title', :tabindex => 2 %>
-        </p>
-      </div>
-      <p>
+<div data-hook="login">
+  <%= form_for Spree::User.new, :as => :spree_user, :url => spree.admin_create_new_session_path do |f| %>
+    <div id="password-credentials">
+      <%= f.label :email, Spree.t(:email), class: "sr-only" %>
+      <%= f.email_field :email, class: 'form-control', tabindex: 1, placeholder: Spree.t(:email) %>
+      <%= f.label :password, Spree.t(:password), class: "sr-only" %>
+      <%= f.password_field :password, :class => 'form-control', :tabindex => 2, placeholder: Spree.t(:password) %>
+    </div>
+    <div class="checkbox form-group">
+      <%= f.label :remember_me do %>
         <%= f.check_box :remember_me, :tabindex => 3 %>
-        <%= f.label :remember_me, Spree.t(:remember_me) %>
-      </p>
-
-      <p><%= f.submit Spree.t(:login), :class => 'button primary', :tabindex => 4 %></p>
-    <% end %>
-    <%= Spree.t(:or) %>
-    <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
-  </div>
+        <%= Spree.t(:remember_me) %>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <%= f.submit Spree.t(:login), :class => 'btn btn-primary btn-block', :tabindex => 4 %>
+    </div>
+  <% end %>
+  <p>
+    <%= Spree.t(:or) %> <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
+  </p>
 </div>
+
 <div data-hook="login_extras"></div>
