@@ -2,11 +2,11 @@
   <div id="password-credentials">
     <p>
       <%= f.label :email, Spree.t(:email) %><br />
-      <%= f.email_field :email, :class => 'title', :tabindex => 1, autofocus: true %>
+      <%= f.email_field :email, :class => 'form-control', :tabindex => 1, autofocus: true %>
     </p>
     <p>
       <%= f.label :password, Spree.t(:password) %><br />
-      <%= f.password_field :password, :class => 'title', :tabindex => 2 %>
+      <%= f.password_field :password, :class => 'form-control', :tabindex => 2 %>
     </p>
   </div>
   <p>
@@ -14,5 +14,5 @@
     <%= f.label :remember_me, Spree.t(:remember_me) %>
   </p>
 
-  <p><%= f.submit Spree.t(:login), :class => 'button primary', :tabindex => 4 %></p>
+  <p><%= f.submit Spree.t(:login), :class => 'btn btn-lg btn-success btn-block', :tabindex => 4 %></p>
 <% end %>
