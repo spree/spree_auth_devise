@@ -14,7 +14,7 @@
     <table class="table table-striped order-summary">
       <thead class="active">
       <tr>
-        <th class="order-number"><%= Spree.t(:order_number) %></th>
+        <th class="order-number"><%= Spree::Order.human_attribute_name(:number) %></th>
         <th class="order-date"><%= Spree.t(:date) %></th>
         <th class="order-status"><%= Spree.t(:status) %></th>
         <th class="order-payment-state"><%= Spree.t(:payment_state) %></th>
