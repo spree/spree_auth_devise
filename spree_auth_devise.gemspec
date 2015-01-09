@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.description = s.summary
 
   s.required_ruby_version = '>= 2.1.0'
-  
+
   s.author      = 'Sean Schofield'
   s.email       = 'sean@spreecommerce.com'
   s.homepage    = 'http://spreecommerce.com'
@@ -21,30 +21,28 @@ Gem::Specification.new do |s|
 
   spree_version = '~> 3.0.0.beta'
 
-  s.add_dependency 'spree_core', spree_version
   s.add_dependency 'devise', '~> 3.4.1'
   s.add_dependency 'devise-encryptable', '0.1.2'
-
   s.add_dependency 'json'
   s.add_dependency 'multi_json'
+  s.add_dependency 'spree_core', spree_version
 
+  s.add_development_dependency 'capybara', '~> 2.4.1'
+  s.add_development_dependency 'coffee-rails', '~> 4.0.0'
+  s.add_development_dependency 'database_cleaner', '~> 1.2.0'
+  s.add_development_dependency 'email_spec', '~> 1.5.0'
+  s.add_development_dependency 'factory_girl', '~> 4.4'
+  s.add_development_dependency 'ffaker'
+  s.add_development_dependency 'launchy'
+  s.add_development_dependency 'mysql2'
+  s.add_development_dependency 'pg'
+  s.add_development_dependency 'poltergeist', '~> 1.5.0'
+  s.add_development_dependency 'pry'
+  s.add_development_dependency 'rspec-rails', '~> 3.0.0'
+  s.add_development_dependency 'sass-rails', '~> 4.0.0'
+  s.add_development_dependency 'shoulda-matchers', '~> 2.6.2'
+  s.add_development_dependency 'simplecov', '~> 0.9.0'
   s.add_development_dependency 'spree_backend', spree_version
   s.add_development_dependency 'spree_frontend', spree_version
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'mysql2'
-  s.add_development_dependency 'pg'
-  s.add_development_dependency 'sass-rails', '~> 4.0.0'
-  s.add_development_dependency 'coffee-rails', '~> 4.0.0'
-  s.add_development_dependency 'rspec-rails', '~> 3.0.0'
-  s.add_development_dependency 'factory_girl', '~> 4.4'
-  s.add_development_dependency 'email_spec', '~> 1.5.0'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'shoulda-matchers', '~> 2.6.2'
-  s.add_development_dependency 'capybara', '~> 2.4.1'
-  s.add_development_dependency 'database_cleaner', '~> 1.2.0'
-  s.add_development_dependency 'selenium-webdriver'
-  s.add_development_dependency 'poltergeist', '~> 1.5.0'
-  s.add_development_dependency 'launchy'
-  s.add_development_dependency 'simplecov', '~> 0.9.0'
-  s.add_development_dependency 'pry'
 end
