@@ -38,4 +38,12 @@ describe "Sign In" do
     page.should have_content("Logged in as: admin@person.com")
     current_path.should == "/admin"
   end
+
+  it "should store the user previous location" do
+    visit spree.account_path
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: @user.password
+    click_button "Login"
+    expect(current_path).to eq "/account"
+  end
 end

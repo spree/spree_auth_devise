@@ -9,6 +9,14 @@ describe Spree::UsersController do
     controller.stub(:spree_current_user => user)
   end
 
+  context '#load_object' do
+    it 'redirects to login path if user is not found' do
+      controller.stub(spree_current_user: nil)
+      spree_put :update, { user: { email: 'foobar@example.com' } }
+      expect(response).to redirect_to spree.login_path
+    end
+  end
+
   context '#create' do
     it 'should create a new user' do
       spree_post :create, { :user => { :email => 'foobar@example.com', :password => 'foobar123', :password_confirmation => 'foobar123' } }
