@@ -1,6 +1,8 @@
 module Spree
   class User < ActiveRecord::Base
-    if Spree.version > '2.1.3'
+    require 'spree/comparison_helpers'
+    include Spree::ComparisonHelpers
+    if Spree::ComparisonHelpers.v1_gte_v2(Spree.version, '2.1.4')
       include Core::UserAddress
     end
 
