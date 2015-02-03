@@ -9,7 +9,8 @@ module Spree
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password
-
+    validates :unconfirmed_email, presence: true, email: true
+    
     has_many :orders
 
     before_validation :set_login
