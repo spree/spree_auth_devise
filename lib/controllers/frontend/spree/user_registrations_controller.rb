@@ -1,9 +1,5 @@
 class Spree::UserRegistrationsController < Devise::RegistrationsController
-  helper 'spree/base', 'spree/store'
-
-  if Spree::Auth::Engine.dash_available?
-    helper 'spree/analytics'
-  end
+  helper 'spree/base'
 
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
