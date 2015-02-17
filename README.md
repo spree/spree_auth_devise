@@ -44,12 +44,12 @@ and then, run this command in order to set up the admin user for the application
 
 To enable Devise's Confirmable module, which will send the user an email with a link to confirm their account, you must do the following:
 
-1. Add this line to an initializer in your Rails project (typically `config/initializers/spree.rb`):
+* Add this line to an initializer in your Rails project (typically `config/initializers/spree.rb`):
 ```ruby
 Spree::Auth::Config[:confirmable] = true
 ```
 
-2. Add a Devise initializer to your Rails project (typically `config/initializers/devise.rb`):
+* Add a Devise initializer to your Rails project (typically `config/initializers/devise.rb`):
 ```ruby
 Devise.setup do |config|
   # Required so users don't lose their carts when they need to confirm.
