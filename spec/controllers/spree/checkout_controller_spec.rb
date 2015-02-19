@@ -73,7 +73,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
         it 'redirects to the tokenized order view' do
           request.cookie_jar.signed[:guest_token] = 'ABC'
           spree_post :update, { state: 'confirm' }
-          expect(response).to redirect_to spree.token_order_path(order, 'ABC')
+          expect(response).to redirect_to spree.order_path(order)
           expect(flash.notice).to eq Spree.t(:order_processed_successfully)
         end
       end

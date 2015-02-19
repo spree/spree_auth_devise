@@ -37,11 +37,4 @@ Spree::CheckoutController.class_eval do
       store_location
       redirect_to spree.checkout_registration_path
     end
-
-    # Overrides the equivalent method defined in Spree::Core.  This variation of the method will ensure that users
-    # are redirected to the tokenized order url unless authenticated as a registered user.
-    def completion_route
-      return spree.order_path(@order) if spree_current_user
-      spree.token_order_path(@order, @order.guest_token)
-    end
 end
