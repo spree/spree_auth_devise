@@ -1,5 +1,6 @@
-require 'spree/core/validators/email'
-Spree::CheckoutController.class_eval do
+defined?(Spree::CheckoutController) && Spree::CheckoutController.class_eval do
+  require 'spree/core/validators/email'
+
   before_filter :check_authorization
   before_filter :check_registration, :except => [:registration, :update_registration]
 
