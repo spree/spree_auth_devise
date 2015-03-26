@@ -7,12 +7,12 @@
     <div class="panel-body">
       <%= form_for @spree_user, :as => :spree_user, :url => spree.update_password_path, :method => :put do |f| %>
         <p>
-          <%= f.label :password, Spree.t(:password) %><br />
-          <%= f.password_field :password, :class => "form-control" %><br />
+          <%= f.label :password, Spree.t(:password) %>
+          <%= f.password_field :password, :class => "form-control" %>
         </p>
         <p>
-          <%= f.label :password_confirmation, Spree.t(:confirm_password) %><br />
-          <%= f.password_field :password_confirmation, :class => "form-control" %><br />
+          <%= f.label :password_confirmation, Spree.t(:confirm_password) %>
+          <%= f.password_field :password_confirmation, :class => "form-control" %>
         </p>
         <%= f.hidden_field :reset_password_token %>
         <%= f.submit Spree.t(:update), :class => 'btn btn-lg btn-success btn-block' %>
