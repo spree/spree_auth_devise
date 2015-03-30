@@ -1,5 +1,5 @@
 RSpec.feature 'Checkout', :js, type: :feature do
-
+  given!(:store) { create(:store) }
   given!(:country) { create(:country, name: 'United States', states_required: true) }
   given!(:state)   { create(:state, name: 'Maryland', country: country) }
   given!(:shipping_method) do
