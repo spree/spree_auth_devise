@@ -24,7 +24,6 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
 
   # POST /resource/sign_up
   def create
-    #byebug
     @user = build_resource(spree_user_params)
     if resource.save
       respond_to do |format|
