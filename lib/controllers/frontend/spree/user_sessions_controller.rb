@@ -13,13 +13,10 @@ class Spree::UserSessionsController < Devise::SessionsController
 
   ssl_required :new, :create, :destroy, :update
   ssl_allowed :login_bar
-  def failure
-  end
+  
   def create
     authenticate_spree_user!
-    
     if spree_user_signed_in?
-      puts "In here"
       respond_to do |format|
         format.html {
           flash[:success] = Spree.t(:logged_in_succesfully)
@@ -31,10 +28,9 @@ class Spree::UserSessionsController < Devise::SessionsController
             spree_current_user.generate_spree_api_key!
             api_key=spree_current_user.spree_api_key
           end
-          render :json => {:user => spree_current_user,
-                           :ship_address => spree_current_user.ship_address,
-                           :bill_address => spree_current_user.bill_address,
-                           :account_type => spree_current_user.account_type}.to_json
+          render json: spree_current_user.to_json(include: [:spree_roles, 
+                :ship_address, :bill_address])
+        
         }
         format.json {
           api_key=spree_current_user.spree_api_key
@@ -42,10 +38,8 @@ class Spree::UserSessionsController < Devise::SessionsController
             spree_current_user.generate_spree_api_key!
             api_key=spree_current_user.spree_api_key
           end
-          render :json => {:user => spree_current_user,
-                           :ship_address => spree_current_user.ship_address,
-                           :bill_address => spree_current_user.bill_address,
-                            :account_type => spree_current_user.account_type}.to_json
+          render json: spree_current_user.to_json(include: [:spree_roles, 
+                :ship_address, :bill_address])
         }
       end
     else
