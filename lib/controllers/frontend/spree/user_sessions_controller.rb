@@ -28,8 +28,8 @@ class Spree::UserSessionsController < Devise::SessionsController
             spree_current_user.generate_spree_api_key!
             api_key=spree_current_user.spree_api_key
           end
-          render json: spree_current_user.to_json(include: [:spree_roles, 
-                :ship_address, :bill_address])
+          render json: spree_current_user.to_json(include: [:ship_address, :bill_address,:spree_roles => {:only => [ :scan_limit, :name ]}
+                ])
         
         }
         format.json {
@@ -38,8 +38,8 @@ class Spree::UserSessionsController < Devise::SessionsController
             spree_current_user.generate_spree_api_key!
             api_key=spree_current_user.spree_api_key
           end
-          render json: spree_current_user.to_json(include: [:spree_roles, 
-                :ship_address, :bill_address])
+           render json: spree_current_user.to_json(include: [:ship_address, :bill_address,:spree_roles => {:only => [ :scan_limit, :name ]}
+                ])
         }
       end
     else
