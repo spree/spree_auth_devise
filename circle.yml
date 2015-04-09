@@ -1,0 +1,11 @@
+machine:
+  environment:
+    DB: postgres
+  services:
+    - postgresql
+  ruby:
+    version: '2.2'
+
+dependencies:
+  post:
+    - bundle exec rake test_app
