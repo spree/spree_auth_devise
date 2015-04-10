@@ -16,11 +16,13 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  spree_version = '~> 2.1.0'
+  spree_version = '~> 2.1.12'
   s.add_dependency 'spree_core', spree_version
   s.add_dependency 'spree_frontend', spree_version
   s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'devise', '~> 3.2.2'
   s.add_dependency 'devise-encryptable', '0.1.2'
   s.add_dependency 'cancan', '~> 1.6.7'
+
+  s.add_development_dependency 'test-unit'
 end
