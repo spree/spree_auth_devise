@@ -51,8 +51,4 @@ if defined? Spree::StoreController
         Spree.t(:my_account)
       end
   end
-elsif Rails.env.test?
-  puts '--------------------------------------'
-  puts "Spree::StoreController is not defined."
-  puts '--------------------------------------'
 end
