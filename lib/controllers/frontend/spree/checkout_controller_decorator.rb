@@ -1,5 +1,6 @@
 if defined? Spree::CheckoutController
   require 'spree/core/validators/email'
+
   Spree::CheckoutController.class_eval do
     before_filter :check_authorization
     before_filter :check_registration, :except => [:registration, :update_registration]
@@ -39,4 +40,8 @@ if defined? Spree::CheckoutController
         redirect_to spree.checkout_registration_path
       end
   end
+elsif Rails.env.test?
+  puts '-----------------------------------------'
+  puts "Spree::CheckoutController is not defined."
+  puts '-----------------------------------------'
 end
