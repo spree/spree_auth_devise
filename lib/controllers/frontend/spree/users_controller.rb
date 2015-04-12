@@ -1,4 +1,4 @@
-if defined? Spree::StoreController
+if defined? Spree::Frontend
   class Spree::UsersController < Spree::StoreController
     skip_before_filter :set_current_order, :only => :show
     prepend_before_filter :load_object, :only => [:show, :edit, :update]
