@@ -1,6 +1,10 @@
 class AddMissingIndicesOnUser < ActiveRecord::Migration
   def change
-    add_index :spree_users, :bill_address_id
-    add_index :spree_users, :ship_address_id
+    unless index_exists?(:spree_users, :bill_address_id)
+      add_index :spree_users, :bill_address_id
+    end
+    unless index_exists?(:spree_users, :ship_address_id)
+      add_index :spree_users, :ship_address_id
+    end
   end
 end
