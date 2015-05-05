@@ -9,7 +9,6 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     include Spree::Core::ControllerHelpers::Auth
     include Spree::Core::ControllerHelpers::Common
     include Spree::Core::ControllerHelpers::Order
-    #  include Spree::Core::ControllerHelpers::SSL
     include Spree::Core::ControllerHelpers::Store
 
     #  ssl_required

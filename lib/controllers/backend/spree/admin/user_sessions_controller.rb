@@ -3,14 +3,11 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
 
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
-#  include Spree::Core::ControllerHelpers::SSL
   include Spree::Core::ControllerHelpers::Store
 
   helper 'spree/admin/navigation'
   helper 'spree/admin/tables'
   layout 'spree/layouts/admin'
-
-#  ssl_required :new, :create, :destroy, :update
  force_ssl if: :ssl_configured?
 
     def ssl_configured?

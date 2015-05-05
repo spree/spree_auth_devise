@@ -8,7 +8,6 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
-#  include Spree::Core::ControllerHelpers::SSL
   include Spree::Core::ControllerHelpers::Store
   
 
