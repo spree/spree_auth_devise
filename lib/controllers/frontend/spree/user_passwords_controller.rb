@@ -9,11 +9,16 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
-  include Spree::Core::ControllerHelpers::SSL
+#  include Spree::Core::ControllerHelpers::SSL
   include Spree::Core::ControllerHelpers::Store
 
-  ssl_required
+#  ssl_required
+  
+     force_ssl if: :ssl_configured?
 
+    def ssl_configured?
+      !Rails.env.development?
+    end  
   # Overridden due to bug in Devise.
   #   respond_with resource, :location => new_session_path(resource_name)
   # is generating bad url /session/new.user

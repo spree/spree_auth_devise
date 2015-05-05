@@ -8,11 +8,13 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
-  include Spree::Core::ControllerHelpers::SSL
+#  include Spree::Core::ControllerHelpers::SSL
   include Spree::Core::ControllerHelpers::Store
+  
 
-  ssl_required :new, :create, :destroy, :update
-  ssl_allowed :login_bar
+
+#  ssl_required :new, :create, :destroy, :update
+#  ssl_allowed :login_bar
   
   def create
     authenticate_spree_user!
@@ -89,5 +91,9 @@ class Spree::UserSessionsController < Devise::SessionsController
     def redirect_back_or_default(default)
       redirect_to(session["spree_user_return_to"] || default)
       session["spree_user_return_to"] = nil
+    end
+    
+    def ssl_configured?
+      !Rails.env.development?
     end
 end
