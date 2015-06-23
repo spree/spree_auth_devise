@@ -30,35 +30,27 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
       @user = build_resource(spree_user_params)
       if resource.save
         respond_to do |format|
-          format.html {
+          format.html do
         
             set_flash_message(:notice, :signed_up)
             sign_in(:spree_user, @user)
             session[:spree_user_signup] = true
             associate_user
             respond_with resource, location: after_sign_up_path_for(resource)
-          }
-          format.js {
-            api_key=@user.spree_api_key
-            if api_key.nil?
-              @user.generate_spree_api_key!
-              api_key=@user.spree_api_key
-            end
-            render :json => {:user => @user
-            
-            }
-          }
-          format.json {
-            api_key=@user.spree_api_key
-            if api_key.nil?
-              @user.generate_spree_api_key!
-              api_key=@user.spree_api_key
-            end
-           
-            render json: @user.to_json(include: [:ship_address, :bill_address,:spree_roles => {:only => [ :scan_limit, :name ]}
+          end
+          format.js do
+            @user.spree_api_key || @user.generate_spree_api_key!
+            render json: @user.to_json(include: [:ship_address, :bill_address, 
+                spree_roles: {only: [ :scan_limit, :name ]}
               ])
-          
-          }
+          end
+          format.json do
+            @user.spree_api_key || @user.generate_spree_api_key!
+           
+            render json: @user.to_json(include: [:ship_address, :bill_address, 
+                spree_roles: {only: [ :scan_limit, :name ]}
+              ])          
+          end
         end
       else
         respond_to do |format|
