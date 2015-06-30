@@ -9,6 +9,6 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   protected
 
   def after_confirmation_path_for(resource_name, resource)
-    signed_in?(resource_name) ? spree.signed_in_root_path(resource) : spree.login_path
+    signed_in?(resource_name) ? signed_in_root_path(resource) : spree.login_path
   end
 end
