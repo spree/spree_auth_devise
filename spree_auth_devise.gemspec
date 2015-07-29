@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'poltergeist', '~> 1.5'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rspec-rails', '~> 3.0.0'
-  s.add_development_dependency 'sass-rails', '~> 4.0.0'
+  s.add_development_dependency 'sass-rails', '~> 5.0.3'
   s.add_development_dependency 'shoulda-matchers', '~> 2.6.2'
   s.add_development_dependency 'simplecov', '~> 0.9.0'
   s.add_development_dependency 'spree_backend', spree_version
