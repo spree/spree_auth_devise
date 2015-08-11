@@ -23,9 +23,11 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     if resource_saved
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up
+        if current_order
+          current_order.associate_user! @user
+        end
         sign_up(resource_name, resource)
         session[:spree_user_signup] = true
-        associate_user
         respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}"
@@ -63,12 +65,14 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   end
 
   protected
-    def check_permissions
-      authorize!(:create, resource)
-    end
+
+  def check_permissions
+    authorize!(:create, resource)
+  end
 
   private
-    def spree_user_params
-      params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
-    end
+
+  def spree_user_params
+    params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+  end
 end
