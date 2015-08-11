@@ -7,7 +7,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
   context "#create" do
     context "using correct login information" do
       it 'properly assigns orders user from guest_token' do
-        order1 = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+        order1 = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
         order2 = create(:order, guest_token: 'ABC', user_id: 200)
         request.cookie_jar.signed[:guest_token] = 'ABC'
         spree_post :create, spree_user: { email: user.email, password: 'secret' }
