@@ -18,6 +18,7 @@ module Spree
     roles_table_name = Role.table_name
 
     scope :admin, -> { includes(:spree_roles).where("#{roles_table_name}.name" => "admin") }
+    scope :with_role, -> (role_name) { includes(:spree_roles).where("#{roles_table_name}.name" => role_name) if role_name.present? }
 
     def self.admin_created?
       User.admin.count > 0
@@ -33,6 +34,10 @@ module Spree
       end
 
     private
+
+      def self.ransackable_scopes(_auth_object)
+        %i(with_role)
+      end
 
       def set_login
         # for now force login to be same as email, eventually we will make this configurable, etc.
