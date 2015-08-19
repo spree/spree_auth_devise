@@ -2,5 +2,5 @@
 
 <div class="form-group">
   <%= f.label :with_role, Spree.t(:with_role) %>
-  <%= f.select :with_role, options_for_select(Spree::Role.all.collect { |x| [x.name.humanize, x.name] }, selected: (params[:q][:with_role] if params[:q])), {}, { class: 'form-control' } %>
+  <%= f.select :with_role, options_for_select(Spree::Role.all.collect { |x| [x.name.humanize, x.name] }, selected: (params[:q][:with_role] if params[:q])), { include_blank: true }, { class: 'select2' } %>
 </div>
