@@ -40,7 +40,7 @@ de:
       signed_out: Erfolgreich abgemeldet.
   errors:
     messages:
-      already_confirmed: wurde berreits bestätigt
+      already_confirmed: wurde bereits bestätigt
       email_is_invalid: E-Mail-Adresse darf nicht leer sein
       not_found: nicht gefunden
       not_locked: war nicht gesperrt
