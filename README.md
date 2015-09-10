@@ -62,6 +62,27 @@ Devise.setup do |config|
 end
 ```
 
+### Encryptable
+
+**Warning:** Changing the encryptor will invalidate all existing passwords in your users table!
+
+Spree Auth (Devise) by default uses the `authlogic_sha512` encryptor provided by the [Devise Encryptable](https://github.com/plataformatec/devise-encryptable) gem. New projects (or older projects migrating to Spree) may require the more the secure `bcrypt` (Devise's default) or some other encryptor provided by Devise Encryptable.
+
+To change the encryptor:
+
+* Add this line to an initializer in your Rails project (typically `config/initializers/spree.rb`):
+```ruby
+Spree::Auth::Config[:encryptor] = 'bcrypt'
+```
+
+* Add a Devise initializer to your Rails project (typically `config/initializers/devise.rb`):
+```ruby
+Devise.setup do |config|
+  # Set stretches to at least 10 (the default)
+  config.stretches = 10
+end
+```
+
 ## Using in an existing Rails application
 
 If you are installing Spree inside of a host application in which you want your own permission setup, you can do this using spree_auth_devise's register_ability method.
