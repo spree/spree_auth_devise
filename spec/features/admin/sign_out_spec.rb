@@ -19,4 +19,12 @@ RSpec.feature 'Admin - Sign Out', type: :feature do
     expect(page).to have_button 'Login'
     expect(page).not_to have_text 'Logout'
   end
+
+  scenario 'does not allow logging out by a GET request' do
+    expect do
+      visit spree.admin_logout_path
+    end.to raise_error(ActionController::RoutingError)
+    visit spree.admin_login_path
+    expect(page).to have_text('You are already signed in')
+  end
 end
