@@ -29,7 +29,7 @@ Spree::Core::Engine.add_routes do
 
   resource :account, :controller => 'users'
 
-  namespace :admin do
+  namespace :admin, path: Spree.admin_path do
     devise_for :spree_user,
                :class_name => 'Spree::User',
                :controllers => { :sessions => 'spree/admin/user_sessions',
