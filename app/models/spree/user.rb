@@ -13,7 +13,7 @@ module Spree
 
     validates_presence_of     :password, if: :password_required?
     validates_confirmation_of :password, if: :password_required?
-    validates_length_of       :password, within: 8..128, allow_blank: true
+    validates_length_of       :password, within: 1..128, allow_blank: true
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password
