@@ -4,8 +4,16 @@ module Spree
     include UserPaymentSource
 
     devise :database_authenticatable, :registerable, :recoverable,
-           :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
+           :rememberable, :trackable, :encryptable, :encryptor => 'authlogic_sha512'
     devise :confirmable if Spree::Auth::Config[:confirmable]
+
+    validates_presence_of   :email, if: :email_required?
+    validates_uniqueness_of :email, allow_blank: true, scope: :store_group, if: :email_changed?
+    validates_format_of     :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, allow_blank: true, if: :email_changed?
+
+    validates_presence_of     :password, if: :password_required?
+    validates_confirmation_of :password, if: :password_required?
+    validates_length_of       :password, within: 8..128, allow_blank: true
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password
@@ -50,6 +58,10 @@ module Spree
         self.password = SecureRandom.hex(8)
         self.password_confirmation = self.password
         self.save
+      end
+
+      def email_required?
+        true
       end
   end
 end
