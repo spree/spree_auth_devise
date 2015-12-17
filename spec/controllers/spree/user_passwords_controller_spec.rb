@@ -41,4 +41,28 @@ RSpec.describe Spree::UserPasswordsController, type: :controller do
       end
     end
   end
+
+  context '#create' do
+
+    context 'when resetting password' do
+      it 'puts an error on the object' do
+        spree_post :create, spree_user: {email: 'made-up-email@made-up-domain.com'}
+        expect(response).to be_success
+        expect(assigns(:spree_user).kind_of?(Spree::User)).to eq true
+        expect(assigns(:spree_user).errors.messages[:email].first).to eq I18n.t(:not_found, scope: [:errors, :messages])
+      end
+
+      context 'with paranoid mode' do
+        before { Devise.paranoid = true }
+        after  { Devise.paranoid = false }
+        it 'does not indicate whether the user exists' do
+          spree_post :create, spree_user: {email: 'made-up-email@made-up-domain.com'}
+          expect(response).to redirect_to spree.login_path
+          expect(flash[:notice]).to eq I18n.t(:send_paranoid_instructions, scope: [:devise, :user_passwords, :spree_user])
+        end
+      end
+
+    end
+
+  end
 end
