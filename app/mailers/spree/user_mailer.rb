@@ -3,13 +3,13 @@ module Spree
     def reset_password_instructions(user, token, *args)
       @edit_password_reset_url = spree.edit_spree_user_password_url(
         reset_password_token: token, host: Spree::Store.current.url)
-      reset_password_template
+      reset_password_template(user)
     end
 
     def reset_admin_password_instructions(user, token, *args)
       @edit_password_reset_url = spree.admin_edit_password_url(
         reset_password_token: token, host: Spree::Store.current.url)
-      reset_password_template
+      reset_password_template(user)
     end
 
     def confirmation_instructions(user, token, opts={})
@@ -20,7 +20,7 @@ module Spree
 
     protected
 
-    def reset_password_template
+    def reset_password_template(user)
       mail(to: user.email,
            from: from_address,
            subject: "#{Spree::Store.current.name}
