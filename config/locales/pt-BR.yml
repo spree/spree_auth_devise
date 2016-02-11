@@ -27,7 +27,7 @@ pt-BR:
     unlocks:
       send_instructions: Você receberá um e-mail com instruções sobre como desbloquear sua conta em poucos minutos.
       unlocked: Sua conta foi desbloqueada com sucesso. Agora você está conectado.
-    user_passwords:
+    passwords:
       spree_user:
         cannot_be_blank: Sua senha não pode estar em branco.
         send_instructions: Você receberá um e-mail com instruções sobre como redefinir sua senha em poucos minutos.

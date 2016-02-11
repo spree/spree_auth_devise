@@ -25,7 +25,7 @@ tr:
     unlocks:
       send_instructions: Birkaç dakika içinde hesabınızın kilidini nasıl açacağınızı anlatan bir e-posta alacaksınız.
       unlocked: Hesabınızın kilidi başarıyla açıldı. Oturumunuz açıldı.
-    user_passwords:
+    passwords:
       spree_user:
         cannot_be_blank: Boş parola giremezsiniz.
         send_instructions: Birkaç dakika içinde şifrenizi nasıl yeniden ayarlayacağınızı anlatan bir e-posta alacaksınız.
