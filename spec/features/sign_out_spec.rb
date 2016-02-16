@@ -22,4 +22,12 @@ RSpec.feature 'Sign Out', type: :feature do
     expect(page).to have_text 'Login'
     expect(page).not_to have_text 'Logout'
   end
+
+  scenario 'restrict signing out by a GET request' do
+    expect do
+      visit spree.logout_path
+    end.to raise_error(ActionController::RoutingError)
+    visit spree.login_path
+    expect(page).to have_text('You are already signed in')
+  end
 end
