@@ -13,7 +13,7 @@ RSpec.feature 'Admin - Sign Out', type: :feature do
     click_button 'Login'
   end
 
-  scenario 'allows a signed in user to logout' do
+  scenario 'allows a signed in user to logout', js: true do
     click_link 'Logout'
     visit spree.admin_login_path
     expect(page).to have_button 'Login'
