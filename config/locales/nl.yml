@@ -25,7 +25,7 @@ nl:
     unlocks:
       send_instructions: Binnen enkele minuten ontvang je een e-mail om je account te ontgrendelen.
       unlocked: Je account is succesvol ontgrendeld. Je bent nu ingelogd.
-    user_passwords:
+    passwords:
       spree_user:
         cannot_be_blank: Je wachtwoord kan niet leeg zijn.
         send_instructions: Binnen enkele minuten ontvang je een e-mail met instructies om je wachtwoord te resetten.
