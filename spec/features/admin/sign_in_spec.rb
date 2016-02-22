@@ -10,7 +10,7 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     expect(page).not_to have_text 'Authorization Failure'
   end
 
-  scenario 'lets a user sign in successfully' do
+  scenario 'lets a user sign in successfully', js: true do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'secret'
     click_button 'Login'

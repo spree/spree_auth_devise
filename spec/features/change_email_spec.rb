@@ -12,7 +12,7 @@ RSpec.feature 'Change email', type: :feature do
     visit spree.edit_account_path
   end
 
-  scenario 'work with correct password' do
+  scenario 'work with correct password', js: true do
     fill_in 'user_email', with: 'tests@example.com'
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
