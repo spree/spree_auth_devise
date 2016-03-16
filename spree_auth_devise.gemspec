@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   spree_version = '~> 2.4.0'
 
   s.add_dependency 'spree_core', spree_version
-  s.add_dependency 'devise', '~> 3.2.3'
+  s.add_dependency 'devise', '~> 3.5.4'
   s.add_dependency 'devise-encryptable', '0.1.2'
 
   s.add_dependency 'json'
@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pg'
   s.add_development_dependency 'sass-rails', '~> 4.0.0'
   s.add_development_dependency 'coffee-rails', '~> 4.0.0'
-  s.add_development_dependency 'rspec-rails', '~> 3.0.0'
+  s.add_development_dependency 'rspec-rails', '~> 3.4.1'
   s.add_development_dependency 'factory_girl', '~> 4.4'
   s.add_development_dependency 'email_spec', '~> 1.5.0'
   s.add_development_dependency 'ffaker'
