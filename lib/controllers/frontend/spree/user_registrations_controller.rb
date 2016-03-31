@@ -26,9 +26,6 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     @user = build_resource(spree_user_params)
     if resource.save
       set_flash_message(:notice, :signed_up)
-      if current_order
-        current_order.associate_user! @user
-      end
       sign_in(:spree_user, @user)
       session[:spree_user_signup] = true
       respond_with resource, location: after_sign_up_path_for(resource)
