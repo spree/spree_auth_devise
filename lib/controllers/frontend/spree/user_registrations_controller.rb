@@ -23,9 +23,6 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     if resource_saved
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up
-        if current_order
-          current_order.associate_user! @user
-        end
         sign_up(resource_name, resource)
         session[:spree_user_signup] = true
         respond_with resource, location: after_sign_up_path_for(resource)
