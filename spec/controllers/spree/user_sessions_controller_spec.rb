@@ -20,6 +20,15 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           expect(order.created_by_id).to eq user.id
         end
 
+        it 'assigns orders with the correct token and no user or email present' do
+          order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+          order.reload
+          expect(order.user_id).to eq user.id
+          expect(order.created_by_id).to eq user.id
+        end
+
         it 'does not assign completed orders' do
           order = create(:order, email: user.email, guest_token: 'ABC',
                          user_id: nil, created_by_id: nil,
