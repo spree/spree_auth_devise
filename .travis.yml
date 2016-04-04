@@ -5,6 +5,8 @@ rvm:
 env:
   - DB=mysql
   - DB=postgres
+before_install:
+  - gem update bundler
 before_script:
   - bundle exec rake test_app
   - export DISPLAY=:99.0
