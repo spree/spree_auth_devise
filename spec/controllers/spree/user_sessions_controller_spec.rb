@@ -6,15 +6,53 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
   context "#create" do
     context "using correct login information" do
-      it 'properly assigns orders user from guest_token' do
-        order1 = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
-        order2 = create(:order, guest_token: 'ABC', user_id: 200)
-        request.cookie_jar.signed[:guest_token] = 'ABC'
-        spree_post :create, spree_user: { email: user.email, password: 'secret' }
+      context 'with a guest token present' do
+        before do
+          request.cookie_jar.signed[:guest_token] = 'ABC'
+        end
 
-        expect(order1.reload.user_id).to eq user.id
-        expect(order1.reload.created_by_id).to eq user.id
-        expect(order2.reload.user_id).to eq 200
+        it 'assigns orders with the correct token and no user present' do
+          order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+          order.reload
+          expect(order.user_id).to eq user.id
+          expect(order.created_by_id).to eq user.id
+        end
+
+        it 'assigns orders with the correct token and no user or email present' do
+          order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+          order.reload
+          expect(order.user_id).to eq user.id
+          expect(order.created_by_id).to eq user.id
+        end
+
+        it 'does not assign completed orders' do
+          order = create(:order, email: user.email, guest_token: 'ABC',
+                         user_id: nil, created_by_id: nil,
+                         completed_at: 1.minute.ago)
+          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+          order.reload
+          expect(order.user_id).to be_nil
+          expect(order.created_by_id).to be_nil
+        end
+
+        it 'does not assign orders with an existing user' do
+          order = create(:order, guest_token: 'ABC', user_id: 200)
+          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+          expect(order.reload.user_id).to eq 200
+        end
+
+        it 'does not assign orders with a different token' do
+          order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
+          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+          expect(order.reload.user_id).to be_nil
+        end
       end
 
       context "and html format is used" do
