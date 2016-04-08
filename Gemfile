@@ -1,9 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'spree', github: 'spree/spree', branch: 'master'
-
-group :test do
-  gem 'mysql2'
-end
+gem 'spree', github: 'spree/spree', branch: '3-1-stable'
 
 gemspec
