@@ -3,8 +3,10 @@ rvm:
   - 1.9.3
   - 2.1.3
 env:
-  - DB=mysql
+  - DB=mysql2
   - DB=postgres
+before_install:
+  - gem update bundler
 before_script:
   - bundle exec rake test_app
   - export DISPLAY=:99.0
