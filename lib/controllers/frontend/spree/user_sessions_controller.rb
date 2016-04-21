@@ -34,6 +34,12 @@ class Spree::UserSessionsController < Devise::SessionsController
     end
   end
 
+  protected
+
+  def translation_scope
+    'devise.user_sessions'
+  end
+
   private
     def accurate_title
       Spree.t(:login)
