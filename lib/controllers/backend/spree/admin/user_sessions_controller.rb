@@ -31,6 +31,12 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
   def authorization_failure
   end
 
+  protected
+
+  def translation_scope
+    'devise.user_sessions'
+  end
+
   private
     def accurate_title
       Spree.t(:login)
