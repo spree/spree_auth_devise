@@ -6,7 +6,6 @@ class Spree::Admin::UserPasswordsController < Devise::PasswordsController
   include Spree::Core::ControllerHelpers::Store
 
   helper 'spree/admin/navigation'
-  helper 'spree/admin/tables'
   layout 'spree/layouts/admin'
 
   # Overridden due to bug in Devise.
