@@ -1,6 +1,7 @@
 module Spree
   class User < Spree::Base
     include UserAddress
+    include UserMethods
     include UserPaymentSource
 
     devise :database_authenticatable, :registerable, :recoverable,
@@ -9,8 +10,6 @@ module Spree
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password
-
-    has_many :orders
 
     before_validation :set_login
 
