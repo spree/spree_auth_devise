@@ -6,7 +6,6 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Store
 
   helper 'spree/admin/navigation'
-  helper 'spree/admin/tables'
   layout :resolve_layout
 
   def create
