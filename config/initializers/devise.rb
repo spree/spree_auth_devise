@@ -134,4 +134,10 @@ Devise.setup do |config|
   config.sign_out_via = :get
 
   config.case_insensitive_keys = [:email]
+
+  # keep old config
+  config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  config.reconfirmable = false
+  config.skip_session_storage = []
+  config.strip_whitespace_keys = []
 end
