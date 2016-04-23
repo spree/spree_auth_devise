@@ -4,8 +4,10 @@ machine:
   services:
     - postgresql
   ruby:
-    version: '2.2'
+    version: '2.2.4'
 
 dependencies:
+  pre:
+    - gem install bundler
   post:
     - bundle exec rake test_app
