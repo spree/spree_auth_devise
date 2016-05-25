@@ -26,6 +26,23 @@ module Spree
       has_spree_role?('admin')
     end
 
+    def self.send_reset_admin_password_instructions(attributes = {})
+      recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+      recoverable.send_reset_admin_password_instructions if recoverable.persisted?
+      recoverable
+    end
+
+    def send_reset_admin_password_instructions
+      token = set_reset_password_token
+      send_reset_admin_password_instructions_notification(token)
+
+      token
+    end
+
+    def send_reset_admin_password_instructions_notification(token)
+      send_devise_notification(:reset_admin_password_instructions, token, {})
+    end
+
     protected
       def password_required?
         !persisted? || password.present? || password_confirmation.present?
