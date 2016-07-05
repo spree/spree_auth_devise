@@ -36,9 +36,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pg'
   s.add_development_dependency 'poltergeist', '~> 1.6'
   s.add_development_dependency 'pry'
-  s.add_development_dependency 'shoulda-matchers', '~> 2.6.2'
   s.add_development_dependency 'simplecov', '~> 0.11.2'
   s.add_development_dependency 'rspec-rails', '~> 3.5'
+  s.add_development_dependency 'shoulda-matchers', '~> 3.1'
   s.add_development_dependency 'spree_backend', spree_version
   s.add_development_dependency 'spree_frontend', spree_version
   s.add_development_dependency 'sqlite3'
