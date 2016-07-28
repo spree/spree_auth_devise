@@ -15,8 +15,8 @@ RSpec.describe Spree::User, type: :model do
   end
 
   context '#destroy' do
-    it 'will soft delete' do
-      order = build(:order, completed_at: Time.now)
+    it 'will soft delete with uncompleted orders' do
+      order = build(:order)
       order.save
       user = order.user
       user.destroy
@@ -26,6 +26,13 @@ RSpec.describe Spree::User, type: :model do
 
       expect(Spree::Order.find_by_user_id(user.id)).not_to be_nil
       expect(Spree::Order.where(user_id: user.id).first).to eq(order)
+    end
+
+    it 'will not soft delete with completed orders' do
+      order = build(:order, completed_at: Time.now)
+      order.save
+      user = order.user
+      expect { user.destroy }.to raise_error(Spree::Core::DestroyWithOrdersError)
     end
 
     it 'will allow users to register later with same email address as previously deleted account' do
