@@ -19,7 +19,7 @@ module Spree
     scope :admin, -> { includes(:spree_roles).where("#{roles_table_name}.name" => "admin") }
 
     def self.admin_created?
-      User.admin.count > 0
+      User.admin.exists?
     end
 
     def admin?
