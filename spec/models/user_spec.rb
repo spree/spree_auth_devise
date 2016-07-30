@@ -14,6 +14,18 @@ RSpec.describe Spree::User, type: :model do
     expect(user.reset_password_token).not_to be_nil
   end
 
+  describe '.admin_created?' do
+    it 'returns true when admin exists' do
+      create(:admin_user)
+
+      expect(Spree::User).to be_admin_created
+    end
+
+    it 'returns false when admin does not exist' do
+      expect(Spree::User).to_not be_admin_created
+    end
+  end
+
   context '#destroy' do
     it 'will soft delete with uncompleted orders' do
       order = build(:order)
