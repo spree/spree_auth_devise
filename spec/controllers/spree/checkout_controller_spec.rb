@@ -120,7 +120,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
     it 'renders the registration view if unable to save' do
       allow(controller).to receive(:check_authorization)
       spree_put :update_registration, { order: { email: 'invalid' } }
-      expect(flash[:registration_error]).to eq I18n.t(:email_is_invalid, scope: [:errors, :messages])
+      expect(flash[:error]).to eq I18n.t(:email_is_invalid, scope: [:errors, :messages])
       expect(response).to render_template :registration
     end
 
