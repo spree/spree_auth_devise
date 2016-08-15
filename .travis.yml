@@ -24,4 +24,4 @@ rvm:
   - 2.3.1
   - 2.2.5
 
-sudo: false
+sudo: required
