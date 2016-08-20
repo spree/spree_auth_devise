@@ -2,6 +2,7 @@
 pt:
   spree:
     admin_login: "Entrar como Administrador"
+    change_your_password: "Altere a sua senha"
   devise:
     confirmations:
       confirmed: A sua conta foi confirmada com sucesso. Já se encontra conectado.
@@ -31,6 +32,7 @@ pt:
       spree_user:
         cannot_be_blank: A sua senha não pode estar em branco.
         send_instructions: Receberá um e-mail com as instruções de redefinição da sua senha em poucos minutos.
+        no_token: "Não pode aceder a esta página sem ser através de um e-mail de redefinição de senha. Se está a aceder através de um e-mail de redefinição de senha, verifique se está a usar o URL completo."
         updated: A sua senha foi alterada com sucesso. Já se encontra conectado.
     user_registrations:
       destroyed: Até logo! A sua conta foi cancelada com sucesso. Esperamos voltar a vê-lo em breve.
@@ -40,12 +42,14 @@ pt:
     user_sessions:
       signed_in: Entrou com sucesso.
       signed_out: Saiu com sucesso.
+      already_signed_in: Já está conectado.
+      already_signed_out: Já não está conectado.
   errors:
     messages:
       already_confirmed: já foi confirmado
       email_is_invalid: O e-mail não pode estar em branco
       not_found: não foi encontrado
-      not_locked: não bloqueado
+      not_locked: não estava bloqueado
       not_saved:
         one: '1 erro não permitiu que este %{resource} fosse guardado:'
         other: '%{count} erros não permitiram que este %{resource} fosse guardado:'
