@@ -1,0 +1,55 @@
+---
+pt:
+  spree:
+    admin_login: "Entrar como Administrador"
+    change_your_password: "Altere a sua senha"
+  devise:
+    confirmations:
+      confirmed: A sua conta foi confirmada com sucesso. Já se encontra conectado.
+      send_instructions: Receberá, brevemente, um e-mail com as instruções de confirmação da sua conta.
+    failure:
+      inactive: A sua conta ainda não foi ativada.
+      invalid: E-mail ou senha inválida.
+      invalid_token: Token de autenticação inválido.
+      locked: A sua conta está bloqueada.
+      timeout: A sua sessão expirou! Por favor, entre novamente para continuar.
+      unauthenticated: Precisa de se autenticar ou de se registar antes de continuar.
+      unconfirmed: Precisa de confirmar a sua conta antes de continuar.
+    mailer:
+      confirmation_instructions:
+        subject: Instruções de confirmação
+      reset_password_instructions:
+        subject: Instruções de redefinição de senha
+      unlock_instructions:
+        subject: Instruções de desbloqueio
+    oauth_callbacks:
+      failure: '%{kind} não foi autorizada porque %{reason}.'
+      success: 'Conta %{kind} foi autorizada com sucesso.'
+    unlocks:
+      send_instructions: Receberá um e-mail com as instruções de desbloqueio da sua conta em poucos minutos.
+      unlocked: A sua conta foi desbloqueada com sucesso. Já se encontra conectado.
+    passwords:
+      spree_user:
+        cannot_be_blank: A sua senha não pode estar em branco.
+        send_instructions: Receberá um e-mail com as instruções de redefinição da sua senha em poucos minutos.
+        no_token: "Não pode aceder a esta página sem ser através de um e-mail de redefinição de senha. Se está a aceder através de um e-mail de redefinição de senha, verifique se está a usar o URL completo."
+        updated: A sua senha foi alterada com sucesso. Já se encontra conectado.
+    user_registrations:
+      destroyed: Até logo! A sua conta foi cancelada com sucesso. Esperamos voltar a vê-lo em breve.
+      inactive_signed_up: 'O seu registo foi concluído com sucesso. No entanto, não conectado porque a sua conta está %{reason}.'
+      signed_up: Bem vindo! O seu registo foi concluído com sucesso.
+      updated: A sua conta foi atualizada com sucesso.
+    user_sessions:
+      signed_in: Entrou com sucesso.
+      signed_out: Saiu com sucesso.
+      already_signed_in: Já está conectado.
+      already_signed_out: Já não está conectado.
+  errors:
+    messages:
+      already_confirmed: já foi confirmado
+      email_is_invalid: O e-mail não pode estar em branco
+      not_found: não foi encontrado
+      not_locked: não estava bloqueado
+      not_saved:
+        one: '1 erro não permitiu que este %{resource} fosse guardado:'
+        other: '%{count} erros não permitiram que este %{resource} fosse guardado:'
