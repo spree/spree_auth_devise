@@ -3,11 +3,11 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_auth_devise'
-  s.version     = '3.2.0.alpha'
+  s.version     = '3.2.0.beta'
   s.summary     = 'Provides authentication and authorization services for use with Spree by using Devise and CanCan.'
   s.description = s.summary
 
-  s.required_ruby_version = '>= 2.1.0'
+  s.required_ruby_version = '>= 2.2.2'
 
   s.author      = 'Sean Schofield'
   s.email       = 'sean@spreecommerce.com'
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', spree_version
 
   s.add_development_dependency 'capybara', '~> 2.7'
+  s.add_development_dependency 'capybara-screenshot'
   s.add_development_dependency 'coffee-rails', '~> 4.2'
   s.add_development_dependency 'database_cleaner', '~> 1.5'
   s.add_development_dependency 'email_spec', '~> 2.1'
@@ -42,4 +43,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spree_backend', spree_version
   s.add_development_dependency 'spree_frontend', spree_version
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rails-controller-testing'
 end
