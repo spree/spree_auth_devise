@@ -3,7 +3,8 @@ Spree::Core::Engine.add_routes do
              :class_name => 'Spree::User',
              :controllers => { :sessions => 'spree/user_sessions',
                                :registrations => 'spree/user_registrations',
-                               :passwords => 'spree/user_passwords' },
+                               :passwords => 'spree/user_passwords',
+                               :confirmations => 'spree/user_confirmations' },
              :skip => [:unlocks, :omniauth_callbacks],
              :path_names => { :sign_out => 'logout' },
              :path_prefix => :user
@@ -20,6 +21,7 @@ Spree::Core::Engine.add_routes do
     post '/password/recover' => 'user_passwords#create', :as => :reset_password
     get '/password/change' => 'user_passwords#edit', :as => :edit_password
     put '/password/change' => 'user_passwords#update', :as => :update_password
+    get '/confirm' => 'user_confirmations#show', :as => :confirmation if Spree::Auth::Config[:confirmable]
   end
 
   get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration

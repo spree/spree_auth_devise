@@ -21,6 +21,8 @@ en:
         subject: Reset password instructions
       unlock_instructions:
         subject: Unlock Instructions
+      confirmation_instructions:
+        subject: Confirmation instructions
     oauth_callbacks:
       failure: 'Could not authorize you from %{kind} because %{reason}.'
       success: 'Successfully authorized from %{kind} account.'
