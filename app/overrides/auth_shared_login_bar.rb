@@ -1,4 +1,4 @@
-Deface::Override.new(:virtual_path => "spree/shared/_nav_bar",
+Deface::Override.new(:virtual_path => "spree/shared/_header",
                      :name => "auth_shared_login_bar",
                      :insert_before => "li#search-bar",
                      :partial => "spree/shared/login_bar",
