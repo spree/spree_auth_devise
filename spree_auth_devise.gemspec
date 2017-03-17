@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_auth_devise'
-  s.version     = '3.0.0'
+  s.version     = '3.0.1'
   s.summary     = 'Provides authentication and authorization services for use with Spree by using Devise and CanCan.'
   s.description = s.summary
 
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   spree_version = '~> 3.0.0.rc4'
 
-  s.add_dependency 'devise', '~> 3.4.1'
+  s.add_dependency 'devise', '~> 3.5.4'
   s.add_dependency 'devise-encryptable', '0.1.2'
   s.add_dependency 'json'
   s.add_dependency 'multi_json'
@@ -38,8 +38,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pg'
   s.add_development_dependency 'poltergeist', '~> 1.5'
   s.add_development_dependency 'pry'
-  s.add_development_dependency 'rspec-rails', '~> 3.0.0'
-  s.add_development_dependency 'sass-rails', '~> 4.0.0'
+  s.add_development_dependency 'rspec-rails', '~> 3.0'
+  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'shoulda-matchers', '~> 2.6.2'
   s.add_development_dependency 'simplecov', '~> 0.9.0'
   s.add_development_dependency 'spree_backend', spree_version
