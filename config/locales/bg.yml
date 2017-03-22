@@ -1,0 +1,54 @@
+bg:
+  spree:
+    admin_login: "Админ вход"
+    change_your_password: "Промени своята парола"
+  devise:
+    confirmations:
+      confirmed: Вашият акаунт е потвърден. Вече сте вписан.
+      send_instructions: До няколко минути ще получите съобщение с обяснение как да потвърдите своя акаунт.
+    failure:
+      inactive: Вашият акаунт все още не е активен.
+      invalid: Грешен имейл или парола.
+      invalid_token: Невалиден token.
+      locked: Вашият акаунт е заключен.
+      timeout: 'Вашата сесия е изтекла, моля влезте отново.'
+      unauthenticated: За да продължите трябва да влезете в профила си.
+      unconfirmed: Трябва да потвърдите акаунта си преди да продължите.
+    mailer:
+      confirmation_instructions:
+        subject: Инструкции за потвърждаване
+      reset_password_instructions:
+        subject: Инструкции за смяна на паролата
+      unlock_instructions:
+        subject: Инструкции за отключване
+    oauth_callbacks:
+      failure: "Не можете да бъдете оторизиран от %{kind}, поради %{reason}."
+      success: "Влязохте успешно с вашият %{kind} профил."
+    unlocks:
+      send_instructions: До няколко минути ще получите имейл с инструкции как да отключите своя акаунт.
+      unlocked: Вашият акаунт бе отключен успешно. Вече сте вписани.
+    passwords:
+      spree_user:
+        cannot_be_blank: Вашата парола не може бъде празна.
+        no_token: Не можете да достъпите тази страница ако не влезете през мейла за забравена парола.
+        send_instructions: До няколко минути ще получите имейл с инструкции как да промените паролата си.
+        updated: Вашата парола бе променена успешко. Вече сте вписани.
+    user_registrations:
+      destroyed: Вашият акаунт бе отменен успешно. Надяваме се да Ви видим скоро.
+      inactive_signed_up: 'Вие се регистрирахте успешно, въпреки това не можете да се логнете в системата, поради %{reason}.'
+      signed_up: Вие се регистрирахте успешно.
+      updated: Успешно обновихте своя акаунт.
+    user_sessions:
+      signed_in: Успешно влизане
+      signed_out: Успешно излизане
+      already_signed_in: Вече сте влезли
+      already_signed_out: Вече сте излезли
+  errors:
+    messages:
+      already_confirmed: Вече бе потвърден
+      email_is_invalid: Email не може да бъде празен
+      not_found: Не е намерен
+      not_locked: Не е заключен
+      not_saved:
+        one: '1 грешка предотврати запазването на %{resource}:'
+        other: '%{count} грешки предотвратиха запазването на %{resource}:'
