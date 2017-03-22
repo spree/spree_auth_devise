@@ -11,4 +11,9 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   def after_confirmation_path_for(resource_name, resource)
     signed_in?(resource_name) ? signed_in_root_path(resource) : spree.login_path
   end
+
+  def translation_scope
+    'devise.confirmations'
+  end
+
 end
