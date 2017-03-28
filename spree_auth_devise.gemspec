@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'devise',
+  s.add_dependency 'devise'
   s.add_dependency 'devise-encryptable'
 
   spree_version = '>= 3.1.0', '< 4.0'
