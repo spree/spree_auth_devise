@@ -60,7 +60,7 @@ def create_admin_user
       role = Spree::Role.find_or_create_by(name: 'admin')
       admin.spree_roles << role
       admin.save
-      admin.generate_spree_api_key!
+      admin.generate_spree_api_key! if Spree::Auth::Engine.api_available?
       say "Done!"
     else
       say "There was some problems with persisting new admin user:"

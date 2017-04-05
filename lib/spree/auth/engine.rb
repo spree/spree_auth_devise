@@ -49,12 +49,12 @@ module Spree
         ApplicationController.send :include, Spree::AuthenticationHelpers
       end
 
-      def self.backend_available?
-        @@backend_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Backend::Engine')
+      def self.api_available?
+        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
       end
 
-      def self.dash_available?
-        @@dash_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Dash::Engine')
+      def self.backend_available?
+        @@backend_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Backend::Engine')
       end
 
       def self.frontend_available?
