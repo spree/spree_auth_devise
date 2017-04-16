@@ -20,7 +20,7 @@ feature 'Admin - Sign Out' do
   scenario 'allow a signed in user to logout' do
     click_link 'Logout'
     visit spree.admin_login_path
-    expect(page).to have_text 'Login'
-    expect(page).not_to have_text 'Logout'
+    expect(page).to have_button 'Login'
+    expect(page).not_to have_link 'Logout'
   end
 end

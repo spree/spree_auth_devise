@@ -28,7 +28,7 @@ feature 'Admin - Sign In' do
     click_button 'Login'
 
     expect(page).to have_text 'Invalid email or password'
-    expect(page).to have_text 'Login'
+    expect(page).to have_button 'Login'
   end
 
   scenario 'allow a user to access a restricted page after logging in' do
