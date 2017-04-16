@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise', '~> 3.2.3'
   s.add_dependency 'devise-encryptable', '0.1.2'
   s.add_dependency 'cancan', '~> 1.6.10'
+  s.add_dependency 'coffee-script', '>= 2.2.0'
 
   s.add_dependency 'json'
   s.add_dependency 'multi_json'
