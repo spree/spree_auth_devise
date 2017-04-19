@@ -93,7 +93,7 @@ Spree::Ability.register_ability(YourAbilityClass)
 
 Inside of your host application you can then use CanCan like you normally would.
 ```ruby
-<% if can? :show SomeRailsObject %>
+<% if can? :show, SomeRailsObject %>
 
 <% end %>
 ```
