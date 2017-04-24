@@ -2,6 +2,8 @@ module Spree
   module Auth
     module Generators
       class InstallGenerator < Rails::Generators::Base
+        class_option :migrate, type: :boolean, default: true, banner: 'Migrate the database'
+
         def self.source_paths
           paths = self.superclass.source_paths
           paths << File.expand_path('../templates', __FILE__)
@@ -22,7 +24,11 @@ module Spree
         end
 
         def run_migrations
-          run 'bundle exec rake db:migrate'
+         if options[:migrate]
+           run 'bundle exec rake db:migrate VERBOSE=false'
+         else
+           puts "Skiping rake db:migrate, don't forget to run it!"
+         end
         end
       end
     end
