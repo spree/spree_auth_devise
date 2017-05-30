@@ -5,7 +5,7 @@ else
 end
 CreateUsers.class_eval do
   def up
-    unless table_exists?("spree_users")
+    unless data_source_exists?("spree_users")
       create_table "spree_users", :force => true do |t|
         t.string   "crypted_password",          :limit => 128
         t.string   "salt",                      :limit => 128
