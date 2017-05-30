@@ -1,4 +1,9 @@
-class CreateUsers < ActiveRecord::Migration[4.2]
+if ActiveRecord.gem_version >= Gem::Version.new('5.0')
+  class CreateUsers < ActiveRecord::Migration[4.2]; end
+else
+  class CreateUsers < ActiveRecord::Migration; end
+end
+CreateUsers.class_eval do
   def up
     unless table_exists?("spree_users")
       create_table "spree_users", :force => true do |t|
