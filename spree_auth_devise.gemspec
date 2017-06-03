@@ -44,4 +44,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spree_frontend', spree_version
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rails-controller-testing'
+  s.add_development_dependency 'appraisal'
 end
