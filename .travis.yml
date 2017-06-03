@@ -8,9 +8,16 @@ cache:
 env:
   - DB=mysql
   - DB=postgres
+
 language: ruby
+
 rvm:
   - 2.3.1
   - 2.2.7
+
+gemfile:
+  - gemfiles/spree_3_1.gemfile
+  - gemfiles/spree_3_2.gemfile
+  - gemfiles/spree_master.gemfile
 
 sudo: false
