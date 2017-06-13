@@ -41,6 +41,9 @@ RSpec.describe Spree::User, type: :model do
     end
 
     it 'will not soft delete with completed orders' do
+      # depends on Spree Core
+      # this was introduced in Spree 3.2
+      skip "this is't supported in Spree 3.1 and lower" if Spree.version.to_f < 3.2
       order = build(:order, completed_at: Time.now)
       order.save
       user = order.user
