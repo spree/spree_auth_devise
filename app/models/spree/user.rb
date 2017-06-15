@@ -5,8 +5,14 @@ module Spree
     include UserPaymentSource
 
     devise :database_authenticatable, :registerable, :recoverable,
-           :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
+           :rememberable, :trackable, :validatable
     devise :confirmable if Spree::Auth::Config[:confirmable]
+
+    # Devise's default encryptor is bcrypt and does not require the encryptable
+    # module to be loaded.
+    if Spree::Auth::Config[:encryptor] != 'bcrypt'
+      devise :encryptable, :encryptor => Spree::Auth::Config[:encryptor]
+    end
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password

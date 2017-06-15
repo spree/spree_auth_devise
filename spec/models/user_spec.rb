@@ -77,4 +77,36 @@ RSpec.describe Spree::User, type: :model do
       expect(Spree::User.devise_modules).to_not include(:confirmable)
     end
   end
+
+  describe 'encryptable' do
+    context 'when encryptor option is set to authlogic_sha512' do
+      around do |example|
+        with_config_option(:encryptor, 'authlogic_sha512') { example.run }
+      end
+
+      it 'includes encryptable module' do
+        expect(Spree::User.devise_modules).to include(:encryptable)
+      end
+
+      describe '.encryptor' do
+        it 'returns authlogic_sha512' do
+          expect(Spree::User.encryptor).to eq('authlogic_sha512')
+        end
+      end
+    end
+
+    context 'when encryptor option is set to bcrypt' do
+      around do |example|
+        with_config_option(:encryptor, 'bcrypt') { example.run }
+      end
+
+      it 'does not include encryptable module' do
+        expect(Spree::User.devise_modules).to_not include(:encryptable)
+      end
+
+      it 'does not respond to .encryptor' do
+        expect(Spree::User).to_not respond_to(:encryptor)
+      end
+    end
+  end
 end
