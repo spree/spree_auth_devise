@@ -108,6 +108,10 @@ You need to do a quick one-time creation of a test application and then you can 
 
     bundle exec rake test_app
 
+You'll also need `phantomjs` (an NPM package) installed.
+
+    npm install -g phantomjs
+
 Then run the rspec tests.
 
     bundle exec rake spec
