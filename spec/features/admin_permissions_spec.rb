@@ -1,5 +1,4 @@
 RSpec.feature 'Admin Permissions', type: :feature do
-
   context 'orders' do
     background do
       user = create(:admin_user, email: 'admin@person.com', password: 'password', password_confirmation: 'password')

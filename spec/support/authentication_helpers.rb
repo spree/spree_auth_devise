@@ -10,5 +10,5 @@ end
 RSpec.configure do |config|
   config.include AuthenticationHelpers, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Rack::Test::Methods,   type: :feature
+  config.include Rack::Test::Methods, type: :feature
 end

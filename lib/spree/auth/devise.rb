@@ -9,7 +9,7 @@ module Spree
   module Auth
     mattr_accessor :default_secret_key
 
-    def self.config(&block)
+    def self.config
       yield(Spree::Auth::Config)
     end
   end

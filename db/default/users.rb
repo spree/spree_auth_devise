@@ -39,15 +39,15 @@ def create_admin_user
     email = 'spree@example.com'
   else
     puts 'Create the admin user (press enter for defaults).'
-    #name = prompt_for_admin_name unless name
+    # name = prompt_for_admin_name unless name
     email = prompt_for_admin_email
     password = prompt_for_admin_password
   end
   attributes = {
-    :password => password,
-    :password_confirmation => password,
-    :email => email,
-    :login => email
+    password: password,
+    password_confirmation: password,
+    email: email,
+    login: email
   }
 
   load 'spree/user.rb'

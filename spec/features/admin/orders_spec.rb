@@ -1,5 +1,4 @@
 RSpec.feature 'Admin orders', type: :feature do
-
   background do
     sign_in_as! create(:admin_user)
   end

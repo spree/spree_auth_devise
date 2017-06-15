@@ -1,5 +1,4 @@
 RSpec.feature 'Admin - Reset Password', type: :feature do
-
   let!(:store) { create(:store) }
 
   background do

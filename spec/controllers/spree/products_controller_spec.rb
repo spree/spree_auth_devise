@@ -1,5 +1,4 @@
 RSpec.describe Spree::ProductsController, type: :controller do
-
   let!(:product) { create(:product, available_on: 1.year.from_now) }
   let!(:user)    { build(:user, spree_api_key: 'fake') }
 

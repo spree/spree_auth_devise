@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.author      = 'Sean Schofield'
   s.email       = 'sean@spreecommerce.com'
   s.homepage    = 'http://spreecommerce.com'
-  s.license     = %q{BSD-3}
+  s.license     = 'BSD-3'
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- spec/*`.split("\n")

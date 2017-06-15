@@ -7,11 +7,11 @@ module Spree
       isolate_namespace Spree
       engine_name 'spree_auth'
 
-      initializer "spree.auth.environment", :before => :load_config_initializers do |app|
+      initializer "spree.auth.environment", before: :load_config_initializers do |_app|
         Spree::Auth::Config = Spree::AuthConfiguration.new
       end
 
-      initializer "spree_auth_devise.set_user_class", :after => :load_config_initializers do
+      initializer "spree_auth_devise.set_user_class", after: :load_config_initializers do
         Spree.user_class = "Spree::User"
       end
 
@@ -20,7 +20,7 @@ module Spree
           puts "[WARNING] You are not setting Devise.secret_key within your application!"
           puts "You must set this in config/initializers/devise.rb. Here's an example:"
           puts " "
-          puts %Q{Devise.secret_key = "#{SecureRandom.hex(50)}"}
+          puts %{Devise.secret_key = "#{SecureRandom.hex(50)}"}
         end
       end
 
@@ -61,12 +61,12 @@ module Spree
         @@frontend_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Frontend::Engine')
       end
 
-      if self.backend_available?
+      if backend_available?
         paths["app/controllers"] << "lib/controllers/backend"
         paths["app/views"] << "lib/views/backend"
       end
 
-      if self.frontend_available?
+      if frontend_available?
         paths["app/controllers"] << "lib/controllers/frontend"
         paths["app/views"] << "lib/views/frontend"
       end

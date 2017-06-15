@@ -1,5 +1,4 @@
 RSpec.describe Spree::UserMailer, type: :mailer do
-
   let!(:store) { create(:store) }
   let(:user) { create(:user) }
 

@@ -1,5 +1,4 @@
 RSpec.describe Spree::CheckoutController, type: :controller do
-
   let(:order) { create(:order_with_totals, email: nil, user: nil) }
   let(:user)  { build(:user, spree_api_key: 'fake') }
   let(:token) { 'some_token' }
@@ -114,7 +113,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
       controller.stub :check_authorization
       order.stub update_attributes: true
       controller.should_not_receive :check_registration
-      spree_put :update_registration, { order: { } }
+      spree_put :update_registration, { order: {} }
     end
 
     it 'renders the registration view if unable to save' do
