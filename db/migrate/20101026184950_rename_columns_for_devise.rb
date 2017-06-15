@@ -1,4 +1,9 @@
-class RenameColumnsForDevise < ActiveRecord::Migration[4.2]
+if ActiveRecord.gem_version >= Gem::Version.new('5.0')
+  class RenameColumnsForDevise < ActiveRecord::Migration[4.2]; end
+else
+  class RenameColumnsForDevise < ActiveRecord::Migration; end
+end
+RenameColumnsForDevise.class_eval do
   def up
     return if column_exists?(:spree_users, :password_salt)
     rename_column :spree_users, :crypted_password, :encrypted_password

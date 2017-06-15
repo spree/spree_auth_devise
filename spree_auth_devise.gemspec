@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'devise', '~> 4.3.0'
-  s.add_dependency 'devise-encryptable', '0.1.2'
+  s.add_dependency 'devise-encryptable', '0.2.0'
 
-  spree_version = '>= 3.2.0', '< 4.0'
+  spree_version = '>= 3.1.0', '< 4.0'
   s.add_dependency 'spree_core', spree_version
 
   s.add_development_dependency 'capybara', '~> 2.7'
@@ -43,5 +43,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spree_backend', spree_version
   s.add_development_dependency 'spree_frontend', spree_version
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'rails-controller-testing'
+  s.add_development_dependency 'appraisal'
 end
