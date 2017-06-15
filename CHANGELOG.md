@@ -1,9 +1,17 @@
-## Spree Auth Devise v3.2.0 (master, unreleased)
+## Spree Auth Devise v3.2.0 (2017-06-15)
 
-* Supports `Spree 3.1` and any other newer version lesser than `4.0` (https://github.com/spree/spree_auth_devise/pull/353)
-* `devise` updated to `4.0` (https://github.com/spree/spree_auth_devise/pull/344)
+* `Rails 5` support
+* Supports `Spree 3.1` `Spree 3.2` and any other newer version lesser than `4.0` (https://github.com/spree/spree_auth_devise/pull/353, https://github.com/spree/spree_auth_devise/pull/386)
+* `devise` updated to `4.3` (https://github.com/spree/spree_auth_devise/pull/382)
+* `devise-encryptable` updated to `0.2.0` (https://github.com/spree/spree_auth_devise/commit/5f51e6e4e81dbf99fe95848dbd4fa9cba03b6910)
 * updated development dependencies (https://github.com/spree/spree_auth_devise/pull/351)
 * include `Spree::UserMethods` in `Spree::User` (https://github.com/spree/spree_auth_devise/pull/343)
+* fixed: Unnecessary breaking changes of I18n key (https://github.com/spree/spree_auth_devise/pull/387)
+* fixed: use proper scoping to find translations related to order states (https://github.com/spree/spree_auth_devise/pull/384)
+* fixed: spree_api is not required anymore (https://github.com/spree/spree_auth_devise/pull/380)
+* Install generator: Add option to skip migrations (https://github.com/spree/spree_auth_devise/pull/378)
+* Added Portuguese translation (https://github.com/spree/spree_auth_devise/pull/365)
+* Replaced registration_error flash with standard error (https://github.com/spree/spree_auth_devise/pull/361)
 
 ## Spree Auth Devise v3.1.0 (2016-04-05)
 
