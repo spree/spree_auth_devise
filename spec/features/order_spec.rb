@@ -1,5 +1,4 @@
 RSpec.feature 'Orders', :js, type: :feature do
-
   scenario 'allow a user to view their cart at any time' do
     visit spree.cart_path
     expect(page).to have_text 'Your cart is empty'

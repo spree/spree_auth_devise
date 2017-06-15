@@ -1,5 +1,4 @@
 RSpec.feature 'Sign In', type: :feature do
-
   background do
     @user = create(:user, email: 'email@person.com', password: 'secret', password_confirmation: 'secret')
     visit spree.login_path

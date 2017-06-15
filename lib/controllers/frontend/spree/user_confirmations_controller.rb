@@ -15,5 +15,4 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   def translation_scope
     'devise.confirmations'
   end
-
 end

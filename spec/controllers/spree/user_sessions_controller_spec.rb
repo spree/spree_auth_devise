@@ -1,5 +1,4 @@
 RSpec.describe Spree::UserSessionsController, type: :controller do
-
   let(:user) { create(:user) }
 
   before { @request.env['devise.mapping'] = Devise.mappings[:spree_user] }

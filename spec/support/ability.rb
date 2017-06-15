@@ -8,7 +8,7 @@ if defined? CanCan::Ability
   class AbilityDecorator
     include CanCan::Ability
 
-    def initialize(user)
+    def initialize(_user)
       cannot :manage, Spree::Order
     end
   end

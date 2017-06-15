@@ -1,5 +1,4 @@
 RSpec.describe Spree::User, type: :model do
-
   before(:all) { Spree::Role.create name: 'admin' }
 
   it '#admin?' do

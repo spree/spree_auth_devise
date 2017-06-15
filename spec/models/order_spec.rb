@@ -1,5 +1,4 @@
 RSpec.describe Spree::Order, type: :model do
-
   let(:order) { described_class.new }
 
   context '#associate_user!' do

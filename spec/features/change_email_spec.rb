@@ -1,5 +1,4 @@
 RSpec.feature 'Change email', type: :feature do
-
   background do
     user = create(:user)
     visit spree.root_path
