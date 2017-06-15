@@ -29,7 +29,7 @@ it:
     omniauth_callbacks:
       failure: Non è stato possibile autorizzarti da %{kind} perché "%{reason}".
       success: Autorizzato con successo dall'account %{kind}.
-    passwords:
+    user_passwords:
       no_token: Puoi accedere a questa pagina solamente dalla email di reset della password. Se vieni dalla email controlla di aver inserito l'url completo riportato nella email.
       send_instructions: Riceverai un messaggio email con le istruzioni per reimpostare la tua password entro qualche minuto.
       send_paranoid_instructions: Se la tua e-mail esiste nel nostro database, riceverai un messaggio email contentente un link per il ripristino della password
@@ -50,7 +50,7 @@ it:
       send_instructions: Riceverai un messaggio email con le istruzioni per sbloccare il tuo account entro qualche minuto.
       send_paranoid_instructions: Se la tua e-mail esiste nel nostro database, riceverai un messaggio email con le istruzioni per sbloccare il tuo account entro qualche minuto.
       unlocked: Il tuo account è stato correttamente sbloccato. Ora sei collegato.
-    passwords:
+    user_passwords:
       spree_user:
         cannot_be_blank: La tua password non può essere vuota.
         send_instructions: Riceverai un'email con le istruzioni per resettare la tua password entro qualche minuto.

@@ -25,7 +25,7 @@ de:
     unlocks:
       send_instructions: In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Konto freizuschalten.
       unlocked: Ihr Konto wurde erfolgreich freigeschaltet.
-    passwords:
+    user_passwords:
       spree_user:
         cannot_be_blank: Ihr Passwort darf nicht leer sein.
         send_instructions: In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Passwort zurücksetzen.

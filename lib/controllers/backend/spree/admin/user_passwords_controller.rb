@@ -38,4 +38,10 @@ class Spree::Admin::UserPasswordsController < Devise::PasswordsController
     end
   end
 
+  protected
+
+  def translation_scope
+    'devise.user_passwords'
+  end
+
 end

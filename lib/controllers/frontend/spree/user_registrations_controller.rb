@@ -67,6 +67,10 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     authorize!(:create, resource)
   end
 
+  def translation_scope
+    'devise.user_registrations'
+  end
+
   private
 
   def spree_user_params
