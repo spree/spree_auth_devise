@@ -11,7 +11,7 @@ module Spree
     acts_as_paranoid
     after_destroy :scramble_email_and_password
 
-    before_validation :set_login
+    before_validation :set_login, if: :email_changed?
 
     users_table_name = User.table_name
     roles_table_name = Role.table_name
@@ -35,7 +35,7 @@ module Spree
 
       def set_login
         # for now force login to be same as email, eventually we will make this configurable, etc.
-        self.login ||= self.email if self.email
+        self.login = self.email
       end
 
       def scramble_email_and_password
