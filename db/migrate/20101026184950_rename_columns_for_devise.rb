@@ -1,4 +1,4 @@
-class RenameColumnsForDevise < ActiveRecord::Migration[4.2]
+class RenameColumnsForDevise < SpreeExtension::Migration[4.2]
   def up
     return if column_exists?(:spree_users, :password_salt)
     rename_column :spree_users, :crypted_password, :encrypted_password

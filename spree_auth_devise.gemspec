@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
 
   spree_version = '>= 3.1.0', '< 4.0'
   s.add_dependency 'spree_core', spree_version
+  s.add_dependency 'spree_extension'
 
   s.add_development_dependency 'capybara', '~> 2.7'
   s.add_development_dependency 'capybara-screenshot'

@@ -1,4 +1,4 @@
-class MakeUsersEmailIndexUnique < ActiveRecord::Migration[4.2]
+class MakeUsersEmailIndexUnique < SpreeExtension::Migration[4.2]
   def up
     add_index "spree_users", ["email"], name: "email_idx_unique", unique: true
   end

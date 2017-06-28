@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration[4.2]
+class CreateUsers < SpreeExtension::Migration[4.2]
   def up
     unless data_source_exists?("spree_users")
       create_table "spree_users", force: true do |t|
