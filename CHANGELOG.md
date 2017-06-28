@@ -1,3 +1,7 @@
+## Spree Auth Devise v3.3.0 (unreleased)
+
+* `Rails 5.1` support with `spree_extension` gem for compatiblity with all Rails version 4.2+
+
 ## Spree Auth Devise v3.2.0 (2017-06-15)
 
 * `Rails 5` support
