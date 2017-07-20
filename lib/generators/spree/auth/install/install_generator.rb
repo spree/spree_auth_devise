@@ -20,7 +20,7 @@ module Spree
         end
 
         def add_migrations
-          run 'bundle exec rake railties:install:migrations FROM=spree_auth_devise'
+          run 'bundle exec rake railties:install:migrations FROM=spree_auth'
         end
 
         def run_migrations
