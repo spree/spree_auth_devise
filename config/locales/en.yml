@@ -3,6 +3,8 @@ en:
   spree:
     admin_login: "Admin Login"
     change_your_password: "Change your password"
+    store_credits:
+      credit_balance: Store Credit Balance
   devise:
     confirmations:
       confirmed: Your account was successfully confirmed. You are now signed in.
