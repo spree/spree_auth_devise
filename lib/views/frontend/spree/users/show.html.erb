@@ -4,6 +4,11 @@
   <dl id="user-info">
     <dt><%= Spree.t(:email) %></dt>
     <dd><%= @user.email %> (<%= link_to Spree.t(:edit), spree.edit_account_path %>)</dd>
+    <br />
+    <dt><%= Spree.t(:credit_balance, scope: [:store_credits])%></dt>
+    <dd>
+      <%= Spree::Money.new(spree_current_user.total_available_store_credit, currency: Spree::Config[:currency]) %>
+    </dd>
   </dl>
 </div>
 
