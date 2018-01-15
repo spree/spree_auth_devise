@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'mysql2'
-  s.add_development_dependency 'pg'
+  s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'poltergeist', '~> 1.6'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rspec-rails', '~> 3.5'
