@@ -28,7 +28,11 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
     end
   end
 
-  def authorization_failure; end
+  def authorization_failure
+    return if try_spree_current_user
+    store_location
+    return redirect_to spree.admin_login_path
+  end
 
   protected
 
