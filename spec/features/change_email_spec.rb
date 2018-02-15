@@ -1,6 +1,8 @@
 RSpec.feature 'Change email', type: :feature do
   background do
-    user = create(:user)
+    allow_bypass_sign_in
+
+    user = create(:user, email: 'old@spree.com', password: 'secret')
     visit spree.root_path
     click_link 'Login'
 
