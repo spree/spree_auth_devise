@@ -67,6 +67,14 @@ Devise.setup do |config|
 end
 ```
 
+### Sign out after password change
+
+To disable signout after password change you must add this line to an initializer in your Rails project (typically `config/initializers/spree.rb`):
+
+```ruby
+Spree::Auth::Config[:signout_after_password_change] = false
+```
+
 ## Using in an existing Rails application
 
 If you are installing Spree inside of a host application in which you want your own permission setup, you can do this using spree_auth_devise's register_ability method.
