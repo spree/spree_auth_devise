@@ -19,6 +19,9 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mock|
     mock.syntax = [:should, :expect]
   end
+
+  config.order = :random
+  Kernel.srand(config.seed)
 end
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }

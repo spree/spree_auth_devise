@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Confirmation' do
+RSpec.feature 'Confirmation', type: :feature, reload_user: true do
   before do
     set_confirmable_option(true)
     Spree::UserMailer.stub(:confirmation_instructions).and_return(double(deliver: true))
