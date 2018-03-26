@@ -1,4 +1,3 @@
-require 'spree/core/validators/email'
 Spree::CheckoutController.class_eval do
   before_action :check_authorization
   before_action :check_registration, except: [:registration, :update_registration]
