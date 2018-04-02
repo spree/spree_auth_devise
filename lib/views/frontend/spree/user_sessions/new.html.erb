@@ -10,8 +10,10 @@
           <% end %>
           <%= render :partial => 'spree/shared/login' %>
           <div class="text-center">
-            <%= Spree.t(:or) %> 
-                <%= link_to Spree.t(:create_a_new_account), spree.signup_path %> |
+            <%= Spree.t(:or) %>
+                <% if Spree::Auth::Config[:registerable] %>
+                  <%= link_to Spree.t(:create_a_new_account), spree.signup_path %> |
+                <% end %>
                 <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
           </div>
           <div data-hook="login_extras"></div>
