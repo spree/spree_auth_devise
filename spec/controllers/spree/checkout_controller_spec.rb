@@ -127,7 +127,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
       allow(order).to receive(:update_attributes) { true }
       allow(controller).to receive(:check_authorization)
       spree_put :update_registration, { order: { email: 'jobs@spreecommerce.com' } }
-      expect(response).to redirect_to spree.checkout_path
+      expect(response).to redirect_to spree.checkout_state_path(:address)
     end
 
     it 'checks if the user is authorized for :edit' do

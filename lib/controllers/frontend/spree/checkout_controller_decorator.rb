@@ -9,7 +9,7 @@ Spree::CheckoutController.class_eval do
 
   def update_registration
     if order_params[:email] =~ Devise.email_regexp && current_order.update_attribute(:email, order_params[:email])
-      redirect_to spree.checkout_path
+      redirect_to spree.checkout_state_path(:address)
     else
       flash[:error] = t(:email_is_invalid, scope: [:errors, :messages])
       @user = Spree::User.new
