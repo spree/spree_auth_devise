@@ -5,8 +5,9 @@ module Spree
     include UserPaymentSource
 
     devise :database_authenticatable, :registerable, :recoverable,
-           :rememberable, :trackable, :validatable, :encryptable, encryptor: 'authlogic_sha512'
+           :rememberable, :trackable, :encryptable, encryptor: 'authlogic_sha512'
     devise :confirmable if Spree::Auth::Config[:confirmable]
+    devise :validatable if Spree::Auth::Config[:validatable]
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password
