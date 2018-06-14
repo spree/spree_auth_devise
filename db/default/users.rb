@@ -8,8 +8,8 @@ def prompt_for_admin_password
   else
     password = ask('Password [spree123]: ') do |q|
       q.echo = false
-      q.validate = /^(|.{5,40})$/
-      q.responses[:not_valid] = 'Invalid password. Must be at least 5 characters long.'
+      q.validate = /^(|.{6,40})$/
+      q.responses[:not_valid] = 'Invalid password. Must be at least 6 characters long.'
       q.whitespace = :strip
     end
     password = 'spree123' if password.blank?
