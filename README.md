@@ -115,6 +115,14 @@ Inside of your host application you can then use CanCan like you normally would.
 
 This methodology can also be used by gems that extend spree and want/need to add permissions.
 
+### Ruby 2.5 issues
+
+If you encounter issues when using Ruby 2.5, please run:
+
+```
+bundle update devise
+```
+
 ## Testing
 
 You need to do a quick one-time creation of a test application and then you can use it to run the tests.
