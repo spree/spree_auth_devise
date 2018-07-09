@@ -5,7 +5,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
   context "#create" do
     context "using correct login information" do
-      if Gem.loaded_specs['spree_core'].version >= Gem::Version.create('3.6.0')
+      if Gem.loaded_specs['spree_core'].version >= Gem::Version.create('3.7.0')
         #regression tests for https://github.com/spree/spree_auth_devise/pull/438
         context 'with a token present' do
           before do
