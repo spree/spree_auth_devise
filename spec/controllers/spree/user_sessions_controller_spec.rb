@@ -5,6 +5,58 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
   context "#create" do
     context "using correct login information" do
+      if Gem.loaded_specs['spree_core'].version >= Gem::Version.create('3.6.0')
+        #regression tests for https://github.com/spree/spree_auth_devise/pull/438
+        context 'with a token present' do
+          before do
+            request.cookie_jar.signed[:token] = 'ABC'
+          end
+
+          it 'assigns orders with the correct token and no user present' do
+            order = create(:order, email: user.email, token: 'ABC', user_id: nil, created_by_id: nil)
+            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+            order.reload
+            expect(order.user_id).to eq user.id
+            expect(order.created_by_id).to eq user.id
+          end
+
+          it 'assigns orders with the correct token and no user or email present' do
+            order = create(:order, token: 'ABC', user_id: nil, created_by_id: nil)
+            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+            order.reload
+            expect(order.user_id).to eq user.id
+            expect(order.created_by_id).to eq user.id
+          end
+
+          it 'does not assign completed orders' do
+            order = create(:order, email: user.email, token: 'ABC',
+                           user_id: nil, created_by_id: nil,
+                           completed_at: 1.minute.ago)
+            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+            order.reload
+            expect(order.user_id).to be_nil
+            expect(order.created_by_id).to be_nil
+          end
+
+          it 'does not assign orders with an existing user' do
+            order = create(:order, token: 'ABC', user_id: 200)
+            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+            expect(order.reload.user_id).to eq 200
+          end
+
+          it 'does not assign orders with a different token' do
+            order = create(:order, token: 'DEF', user_id: nil, created_by_id: nil)
+            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+            expect(order.reload.user_id).to be_nil
+          end
+        end
+      end
+
       context 'with a guest token present' do
         before do
           request.cookie_jar.signed[:guest_token] = 'ABC'
