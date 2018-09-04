@@ -15,5 +15,6 @@ Warden::Manager.after_set_user except: :fetch do |user, auth, _opts|
 end
 
 Warden::Manager.before_logout do |_user, auth, _opts|
-  auth.cookies.delete :guest_token
+  auth.cookies.delete(:guest_token)
+  auth.cookies.delete(:token)
 end
