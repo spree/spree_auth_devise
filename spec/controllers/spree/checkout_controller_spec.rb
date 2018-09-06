@@ -67,7 +67,10 @@ RSpec.describe Spree::CheckoutController, type: :controller do
       end
 
       context 'with a token' do
-        before { allow(order).to receive(:guest_token) { 'ABC' } }
+        before do
+          allow(order).to receive(:guest_token) { 'ABC' }
+          allow(order).to receive(:token)       { 'ABC' }
+        end
 
         it 'redirects to the tokenized order view' do
           request.cookie_jar.signed[:guest_token] = 'ABC'
