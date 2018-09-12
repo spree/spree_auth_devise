@@ -1,11 +1,11 @@
 <% @body_id = 'signup' %>
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
-<div class="col-md-6 col-md-offset-3">
-  <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= Spree.t(:new_customer) %></h3>
-    </div>
-      <div id="new-customer" class="panel-body" data-hook="login">
+<div class="col-lg-6 offset-lg-3">
+  <div class="card mb-3">
+      <div class="card-header">
+        <h3 class="card-title mb-0 h6"><%= Spree.t(:new_customer) %></h3>
+      </div>
+      <div id="new-customer" class="card-body" data-hook="login">
           <%= form_for resource, :as => :spree_user, :url => spree.registration_path do |f| %>
             <div data-hook="signup_inside_form">
               <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>

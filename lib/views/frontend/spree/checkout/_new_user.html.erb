@@ -1,9 +1,9 @@
-<div class="col-md-6">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= Spree.t(:create_a_new_account) %></h3>
+<div>
+  <div class="card mb-3">
+    <div class="card-header">
+      <h3 class="card-title mb-0 h6"><%= Spree.t(:create_a_new_account) %></h3>
     </div>
-    <div id="new-customer" class="panel-body" data-hook="login">
+    <div id="new-customer" class="card-body" data-hook="login">
       <%= form_for @user, :as => :spree_user, :url => spree.registration_path(@user) do |f| %>
         <div data-hook="signup_inside_form">
           <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>

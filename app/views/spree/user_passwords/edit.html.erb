@@ -1,10 +1,10 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user } %>
-<div class="col-md-6 col-md-offset-3">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= Spree.t(:change_your_password) %></h3>
+<div class="col-lg-6 offset-lg-3">
+  <div class="card mb-3">
+    <div class="card-header">
+      <h3 class="card-title mb-0 h6"><%= Spree.t(:change_your_password) %></h3>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
       <%= form_for @spree_user, :as => :spree_user, :url => spree.update_password_path, :method => :put do |f| %>
         <div class="form-group">
           <%= f.label :password, Spree.t(:password) %>
