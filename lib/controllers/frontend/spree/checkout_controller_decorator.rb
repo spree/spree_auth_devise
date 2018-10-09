@@ -1,3 +1,4 @@
+require 'spree/core/validators/email' if Spree.version.to_f < 3.5
 Spree::CheckoutController.class_eval do
   before_action :check_authorization
   before_action :check_registration, except: [:registration, :update_registration]
