@@ -6,11 +6,11 @@
     </div>
     <div class="panel-body">
       <%= form_for @spree_user, :as => :spree_user, :url => spree.update_password_path, :method => :put do |f| %>
-        <p>
+        <p class="form-group">
           <%= f.label :password, Spree.t(:password) %>
           <%= f.password_field :password, :class => "form-control" %>
         </p>
-        <p>
+        <p class="form-group">
           <%= f.label :password_confirmation, Spree.t(:confirm_password) %>
           <%= f.password_field :password_confirmation, :class => "form-control" %>
         </p>
