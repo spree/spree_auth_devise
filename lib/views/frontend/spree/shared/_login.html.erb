@@ -2,11 +2,11 @@
   <div id="password-credentials">
     <p class="form-group">
       <%= f.label :email, Spree.t(:email) %>
-      <%= f.email_field :email, :class => 'form-control', :tabindex => 1, autofocus: true %>
+      <%= f.email_field :email, placeholder: "#{Spree.t(:email)}", :class => 'form-control', :tabindex => 1, autofocus: true %>
     </p>
     <p class="form-group">
       <%= f.label :password, Spree.t(:password) %>
-      <%= f.password_field :password, :class => 'form-control', :tabindex => 2 %>
+      <%= f.password_field :password, placeholder: "#{Spree.t(:password)}", :class => 'form-control', :tabindex => 2 %>
     </p>
   </div>
   <p>
