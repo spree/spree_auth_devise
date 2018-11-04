@@ -5,6 +5,9 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
+  if Gem.loaded_specs['spree_i18n']
+    include SpreeI18n::ControllerLocaleHelper
+  end
 
   before_action :check_permissions, only: [:edit, :update]
   skip_before_action :require_no_authentication

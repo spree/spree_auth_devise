@@ -5,6 +5,9 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
+  if Gem.loaded_specs['spree_i18n']
+    include SpreeI18n::ControllerLocaleHelper
+  end
 
   def create
     authenticate_spree_user!

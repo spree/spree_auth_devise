@@ -1,18 +1,18 @@
 <%= form_for Spree::User.new, :as => :spree_user, :url => spree.create_new_session_path do |f| %>
   <div id="password-credentials">
-    <p class="form-group">
+    <div class="form-group">
       <%= f.label :email, Spree.t(:email) %>
       <%= f.email_field :email, placeholder: "#{Spree.t(:email)}", :class => 'form-control', :tabindex => 1, autofocus: true %>
-    </p>
-    <p class="form-group">
+    </div>
+    <div class="form-group">
       <%= f.label :password, Spree.t(:password) %>
       <%= f.password_field :password, placeholder: "#{Spree.t(:password)}", :class => 'form-control', :tabindex => 2 %>
-    </p>
+    </div>
   </div>
-  <p>
+  <div>
     <%= f.check_box :remember_me, :tabindex => 3 %>
     <%= f.label :remember_me, Spree.t(:remember_me) %>
-  </p>
+  </div>
 
-  <p><%= f.submit Spree.t(:login), :class => 'btn btn-lg btn-success btn-block', :tabindex => 4 %></p>
+  <div><%= f.submit Spree.t(:login), :class => 'btn btn-lg btn-success btn-block', :tabindex => 4 %></div>
 <% end %>

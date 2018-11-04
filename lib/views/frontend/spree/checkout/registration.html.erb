@@ -12,11 +12,11 @@
         </div>
         <div id="guest_checkout" class="panel-body" data-hook>
           <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
-            <p class="form-group">
+            <div class="form-group">
               <%= f.label :email, Spree.t(:email), class: 'required', title: 'required' %>
               <%= f.email_field :email, :class => 'form-control title', :placeholder => Spree.t(:email) %>
-            </p>
-            <p><%= f.submit Spree.t(:continue), :class => 'btn btn-lg btn-success btn-block' %></p>
+            </div>
+            <div><%= f.submit Spree.t(:continue), :class => 'btn btn-lg btn-success btn-block' %></div>
           <% end %>
         </div>
       </div>

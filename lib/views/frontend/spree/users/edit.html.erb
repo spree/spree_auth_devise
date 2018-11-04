@@ -5,12 +5,12 @@
     </div>
     <div class="panel-body">
       <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
-      
+
       <%= form_for Spree::User.new, :as => @user, :url => spree.user_path(@user), :method => :put do |f| %>
         <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
-        <p>
+        <div>
           <%= f.submit Spree.t(:update), :class => 'btn btn-primary' %>
-        </p>
+        </div>
       <% end %>
     </div>
   </div>
