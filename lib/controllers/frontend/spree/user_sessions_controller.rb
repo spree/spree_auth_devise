@@ -5,7 +5,8 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
-  if Gem.loaded_specs['spree_i18n']
+
+  if defined?(SpreeI18n::ControllerLocaleHelper)
     include SpreeI18n::ControllerLocaleHelper
   end
 
