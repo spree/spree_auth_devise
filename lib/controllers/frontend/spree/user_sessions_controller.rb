@@ -6,6 +6,10 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
+  if defined?(SpreeI18n::ControllerLocaleHelper)
+    include SpreeI18n::ControllerLocaleHelper
+  end
+
   def create
     authenticate_spree_user!
 

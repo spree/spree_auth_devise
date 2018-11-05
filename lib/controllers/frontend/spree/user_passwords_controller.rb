@@ -6,6 +6,10 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
+  if defined?(SpreeI18n::ControllerLocaleHelper)
+    include SpreeI18n::ControllerLocaleHelper
+  end
+
   # Overridden due to bug in Devise.
   #   respond_with resource, :location => new_session_path(resource_name)
   # is generating bad url /session/new.user

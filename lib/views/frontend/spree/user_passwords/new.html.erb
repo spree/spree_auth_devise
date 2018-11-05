@@ -8,13 +8,13 @@
       <p><%= Spree.t(:instructions_to_reset_password) %></p>
 
       <%= form_for Spree::User.new, :as => :spree_user, :url => spree.reset_password_path do |f| %>
-        <p>
+        <div class="form-group">
           <%= f.label :email, Spree.t(:email) %>
           <%= f.email_field :email, :class => "form-control" %>
-        </p>
-        <p>
+        </div>
+        <div>
           <%= f.submit Spree.t(:reset_password), :class => 'btn btn-lg btn-success btn-block' %>
-        </p>
+        </div>
       <% end %>
     </div>
   </div>
