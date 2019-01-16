@@ -132,3 +132,14 @@ You need to do a quick one-time creation of a test application and then you can 
 Then run the rspec tests.
 
     bundle exec rspec
+
+About Spark Solutions
+----------------------
+[![Spark Solutions](http://sparksolutions.co/wp-content/uploads/2015/01/logo-ss-tr-221x100.png)][spark]
+
+Spree Auth Devise is maintained by [Spark Solutions Sp. z o.o.][spark].
+
+We are passionate about open source software.
+We are [available for hire][spark].
+
+[spark]:http://sparksolutions.co?utm_source=github
