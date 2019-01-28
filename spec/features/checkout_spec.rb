@@ -76,11 +76,15 @@ RSpec.feature 'Checkout', :js, type: :feature do
         end
       end
       click_button 'Add To Cart'
+      wait_for_condition do
+        expect(page).to have_content(Spree.t(:shopping_cart))
+      end
 
       visit spree.login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Login'
+      expect(page).to have_text('Cart')
       click_link 'Cart'
 
       expect(page).to have_text 'RoR Mug'
@@ -133,7 +137,9 @@ RSpec.feature 'Checkout', :js, type: :feature do
       fill_in 'Password Confirmation', with: 'password'
       click_button 'Update'
 
+      expect(page).to have_text('Cart')
       click_link 'Cart'
+      expect(page).to have_text('RoR Mug')
       click_button 'Checkout'
 
       str_addr = 'bill_address'
