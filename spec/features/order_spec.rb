@@ -20,6 +20,13 @@ RSpec.feature 'Orders', :js, type: :feature do
       visit spree.root_path
 
       click_link 'RoR Mug'
+      if Spree.version.to_f > 3.6
+        expect(page).to have_selector('form#add-to-cart-form')
+        expect(page).to have_selector('button#add-to-cart-button')
+        wait_for_condition do
+          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
+        end
+      end
       click_button 'Add To Cart'
 
       visit spree.login_path
@@ -35,6 +42,13 @@ RSpec.feature 'Orders', :js, type: :feature do
       visit spree.root_path
 
       click_link 'RoR Shirt'
+      if Spree.version.to_f > 3.6
+        expect(page).to have_selector('form#add-to-cart-form')
+        expect(page).to have_selector('button#add-to-cart-button')
+        wait_for_condition do
+          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
+        end
+      end
       click_button 'Add To Cart'
 
       visit spree.login_path
