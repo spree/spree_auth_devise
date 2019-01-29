@@ -17,10 +17,7 @@ RSpec.feature 'Orders', :js, type: :feature do
     user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
 
     using_session('first') do
-      visit spree.root_path
-
-      click_link 'RoR Mug'
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Mug'
 
       visit spree.login_path
       fill_in 'Email', with: user.email
@@ -32,10 +29,7 @@ RSpec.feature 'Orders', :js, type: :feature do
     end
 
     using_session('second') do
-      visit spree.root_path
-
-      click_link 'RoR Shirt'
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Shirt'
 
       visit spree.login_path
       fill_in 'Email', with: user.email

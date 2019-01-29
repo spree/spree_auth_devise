@@ -31,9 +31,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
     scenario 'allow a visitor to checkout as guest, without registration' do
       Spree::Auth::Config.set(registration_step: true)
-      click_link 'RoR Mug'
-      click_button 'Add To Cart'
-      within('h1') { expect(page).to have_text 'Shopping Cart' }
+      add_to_cart 'RoR Mug'
       click_button 'Checkout'
 
       expect(page).to have_content(/Checkout as a Guest/i)
@@ -60,13 +58,13 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
     scenario 'associate an uncompleted guest order with user after logging in' do
       user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
-      click_link 'RoR Mug'
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Mug'
 
       visit spree.login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Login'
+      expect(page).to have_text('Cart')
       click_link 'Cart'
 
       expect(page).to have_text 'RoR Mug'
@@ -93,8 +91,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
     scenario 'associate an incomplete guest order with user after successful password reset' do
       create(:store)
       user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
-      click_link 'RoR Mug'
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Mug'
 
       visit spree.login_path
       click_link 'Forgot Password?'
@@ -112,7 +109,9 @@ RSpec.feature 'Checkout', :js, type: :feature do
       fill_in 'Password Confirmation', with: 'password'
       click_button 'Update'
 
+      expect(page).to have_text('Cart')
       click_link 'Cart'
+      expect(page).to have_text('RoR Mug')
       click_button 'Checkout'
 
       str_addr = 'bill_address'
@@ -129,8 +128,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
     end
 
     scenario 'allow a user to register during checkout' do
-      click_link 'RoR Mug'
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Mug'
       click_button 'Checkout'
 
       expect(page).to have_text 'Registration'
