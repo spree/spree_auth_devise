@@ -17,17 +17,7 @@ RSpec.feature 'Orders', :js, type: :feature do
     user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
 
     using_session('first') do
-      visit spree.root_path
-
-      click_link 'RoR Mug'
-      if Spree.version.to_f > 3.6
-        expect(page).to have_selector('form#add-to-cart-form')
-        expect(page).to have_selector('button#add-to-cart-button')
-        wait_for_condition do
-          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
-        end
-      end
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Mug'
 
       visit spree.login_path
       fill_in 'Email', with: user.email
@@ -39,17 +29,7 @@ RSpec.feature 'Orders', :js, type: :feature do
     end
 
     using_session('second') do
-      visit spree.root_path
-
-      click_link 'RoR Shirt'
-      if Spree.version.to_f > 3.6
-        expect(page).to have_selector('form#add-to-cart-form')
-        expect(page).to have_selector('button#add-to-cart-button')
-        wait_for_condition do
-          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
-        end
-      end
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Shirt'
 
       visit spree.login_path
       fill_in 'Email', with: user.email

@@ -31,20 +31,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     let!(:other_user) { create(:user) }
 
     it 'clears token cookies' do
-      visit spree.root_path
-
-      click_link 'RoR Mug'
-      if Spree.version.to_f > 3.6
-        expect(page).to have_selector('form#add-to-cart-form')
-        expect(page).to have_selector('button#add-to-cart-button')
-        wait_for_condition do
-          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
-        end
-      end
-      click_button 'Add To Cart'
-      wait_for_condition do
-        expect(page).to have_content(Spree.t(:shopping_cart))
-      end
+      add_to_cart 'RoR Mug'
       expect(page).to have_text 'RoR Mug'
 
       click_link 'Logout'

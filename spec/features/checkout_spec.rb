@@ -31,16 +31,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
     scenario 'allow a visitor to checkout as guest, without registration' do
       Spree::Auth::Config.set(registration_step: true)
-      click_link 'RoR Mug'
-      if Spree.version.to_f > 3.6
-        expect(page).to have_selector('form#add-to-cart-form')
-        expect(page).to have_selector('button#add-to-cart-button')
-        wait_for_condition do
-          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
-        end
-      end
-      click_button 'Add To Cart'
-      within('h1') { expect(page).to have_text 'Shopping Cart' }
+      add_to_cart 'RoR Mug'
       click_button 'Checkout'
 
       expect(page).to have_content(/Checkout as a Guest/i)
@@ -67,18 +58,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
     scenario 'associate an uncompleted guest order with user after logging in' do
       user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
-      click_link 'RoR Mug'
-      if Spree.version.to_f > 3.6
-        expect(page).to have_selector('form#add-to-cart-form')
-        expect(page).to have_selector('button#add-to-cart-button')
-        wait_for_condition do
-          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
-        end
-      end
-      click_button 'Add To Cart'
-      wait_for_condition do
-        expect(page).to have_content(Spree.t(:shopping_cart))
-      end
+      add_to_cart 'RoR Mug'
 
       visit spree.login_path
       fill_in 'Email', with: user.email
@@ -111,15 +91,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
     scenario 'associate an incomplete guest order with user after successful password reset' do
       create(:store)
       user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
-      click_link 'RoR Mug'
-      if Spree.version.to_f > 3.6
-        expect(page).to have_selector('form#add-to-cart-form')
-        expect(page).to have_selector('button#add-to-cart-button')
-        wait_for_condition do
-          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
-        end
-      end
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Mug'
 
       visit spree.login_path
       click_link 'Forgot Password?'
@@ -156,15 +128,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
     end
 
     scenario 'allow a user to register during checkout' do
-      click_link 'RoR Mug'
-      if Spree.version.to_f > 3.6
-        expect(page).to have_selector('form#add-to-cart-form')
-        expect(page).to have_selector('button#add-to-cart-button')
-        wait_for_condition do
-          expect(page.find('#add-to-cart-button').disabled?).to eq(false)
-        end
-      end
-      click_button 'Add To Cart'
+      add_to_cart 'RoR Mug'
       click_button 'Checkout'
 
       expect(page).to have_text 'Registration'
