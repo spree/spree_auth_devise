@@ -119,8 +119,16 @@ This methodology can also be used by gems that extend spree and want/need to add
 
 If you encounter issues when using Ruby 2.5, please run:
 
-```
+```bash
 bundle update devise
+```
+
+### Creating the default Admin user
+
+If you didn't created the Admin user from the installer you can run this rake task:
+
+```bash
+bundle exec rake spree_auth:admin:create
 ```
 
 ## Testing
