@@ -2,8 +2,8 @@
   <div class="alert alert-danger"><%= flash[:alert] %></div>
 <% end %>
 
-<div data-hook="login" class="panel">
-  <div class="panel-body">
+<div data-hook="login" class="card border-0">
+  <div class="card-body">
     <%= form_for Spree::User.new, :as => :spree_user, :url => spree.admin_create_new_session_path do |f| %>
       <div id="password-credentials">
         <div class="form-group text-center">
@@ -17,13 +17,13 @@
       </div>
       <div class="checkbox form-group">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <%= f.label :remember_me do %>
               <%= f.check_box :remember_me, :tabindex => 3 %>
               <%= Spree.t(:remember_me) %>
             <% end %>  
           </div>
-          <div class="col-md-6 text-right">
+          <div class="col-lg-6 text-right">
             <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
           </div>  
         </div>      

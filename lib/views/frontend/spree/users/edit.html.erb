@@ -1,9 +1,9 @@
-<div class="col-md-6 col-md-offset-3">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= Spree.t(:editing_user) %></h3>
+<div class="col-lg-6 offset-lg-3">
+  <div class="card mb-3">
+    <div class="card-header">
+      <h3 class="card-title mb-0 h6"><%= Spree.t(:editing_user) %></h3>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
       <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
 
       <%= form_for Spree::User.new, :as => @user, :url => spree.user_path(@user), :method => :put do |f| %>

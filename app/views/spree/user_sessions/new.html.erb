@@ -1,10 +1,10 @@
 <% @body_id = 'login' %>
-<div class="col-md-6 <%= request.path == spree.login_path ? "col-md-offset-3" : "" %>">
-  <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= Spree.t(:login_as_existing) %></h3>
-    </div>
-      <div id="existing-customer" class="panel-body" data-hook="login">
+<div class="col-lg-6 <%= request.path == spree.login_path ? "offset-lg-3" : "" %>">
+  <div class="card mb-3">
+      <div class="card-header">
+        <h3 class="card-title mb-0 h6"><%= Spree.t(:login_as_existing) %></h3>
+      </div>
+      <div id="existing-customer" class="card-body" data-hook="login">
           <%= render :partial => 'spree/shared/login' %>
           <div class="text-center">
             <%= Spree.t(:or) %>
