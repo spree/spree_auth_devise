@@ -11,11 +11,19 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
 
     context 'with a guest token present' do
       before do
-        request.cookie_jar.signed[:guest_token] = 'ABC'
+        if Spree.version.to_f > 3.6
+          request.cookie_jar.signed[:token] = 'ABC'
+        else
+          request.cookie_jar.signed[:guest_token] = 'ABC'
+        end
       end
 
       it 'assigns orders with the correct token and no user present' do
-        order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+        if Spree.version.to_f > 3.6
+          order = create(:order, token: 'ABC', user_id: nil, created_by_id: nil)
+        else
+          order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+        end
         spree_post :create, spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }
         user = Spree::User.find_by_email('foobar@example.com')
 
@@ -25,14 +33,22 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       end
 
       it 'does not assign orders with an existing user' do
-        order = create(:order, guest_token: 'ABC', user_id: 200)
+        if Spree.version.to_f > 3.6
+          order = create(:order, token: 'ABC', user_id: 200)
+        else
+          order = create(:order, guest_token: 'ABC', user_id: 200)
+        end
         spree_post :create, spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }
 
         expect(order.reload.user_id).to eq 200
       end
 
       it 'does not assign orders with a different token' do
-        order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
+        if Spree.version.to_f > 3.6
+          order = create(:order, token: 'DEF', user_id: nil, created_by_id: nil)
+        else
+          order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
+        end
         spree_post :create, spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }
 
         expect(order.reload.user_id).to be_nil
