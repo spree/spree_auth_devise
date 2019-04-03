@@ -91,7 +91,11 @@ RSpec.describe Spree::CheckoutController, type: :controller do
         before do
           allow(controller).to receive(:spree_current_user) { user }
           allow(order).to receive(:user) { user }
-          allow(order).to receive(:guest_token) { nil }
+          if Spree.version.to_f > 3.6
+            allow(order).to receive(:token) { nil }
+          else
+            allow(order).to receive(:guest_token) { nil }
+          end
         end
 
         it 'redirects to the standard order view' do
@@ -111,7 +115,11 @@ RSpec.describe Spree::CheckoutController, type: :controller do
 
     it 'checks if the user is authorized for :edit' do
       expect(controller).to receive(:authorize!).with(:edit, order, token)
-      request.cookie_jar.signed[:guest_token] = token
+      if Spree.version.to_f > 3.6
+        request.cookie_jar.signed[:token] = token
+      else
+        request.cookie_jar.signed[:guest_token] = token
+      end
       spree_get :registration, {}
     end
   end
@@ -141,7 +149,11 @@ RSpec.describe Spree::CheckoutController, type: :controller do
     end
 
     it 'checks if the user is authorized for :edit' do
-      request.cookie_jar.signed[:guest_token] = token
+      if Spree.version.to_f > 3.6
+        request.cookie_jar.signed[:token] = token
+      else
+        request.cookie_jar.signed[:guest_token] = token
+      end
       allow(order).to receive(:update_attributes) { true }
       expect(controller).to receive(:authorize!).with(:edit, order, token)
       spree_put :update_registration, { order: { email: 'jobs@spreecommerce.com' } }

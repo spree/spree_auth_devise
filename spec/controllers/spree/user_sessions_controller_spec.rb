@@ -59,11 +59,19 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
       context 'with a guest token present' do
         before do
-          request.cookie_jar.signed[:guest_token] = 'ABC'
+          if Spree.version.to_f > 3.6
+            request.cookie_jar.signed[:token] = 'ABC'
+          else
+            request.cookie_jar.signed[:guest_token] = 'ABC'
+          end
         end
 
         it 'assigns orders with the correct token and no user present' do
-          order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          if Spree.version.to_f > 3.6
+            order = create(:order, email: user.email, token: 'ABC', user_id: nil, created_by_id: nil)
+          else
+            order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          end
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
 
           order.reload
@@ -72,7 +80,11 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
         end
 
         it 'assigns orders with the correct token and no user or email present' do
-          order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          if Spree.version.to_f > 3.6
+            order = create(:order, token: 'ABC', user_id: nil, created_by_id: nil)
+          else
+            order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          end
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
 
           order.reload
@@ -81,9 +93,15 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
         end
 
         it 'does not assign completed orders' do
-          order = create(:order, email: user.email, guest_token: 'ABC',
-                         user_id: nil, created_by_id: nil,
-                         completed_at: 1.minute.ago)
+          if Spree.version.to_f > 3.6
+            order = create(:order, email: user.email, token: 'ABC',
+                           user_id: nil, created_by_id: nil,
+                           completed_at: 1.minute.ago)
+          else
+            order = create(:order, email: user.email, guest_token: 'ABC',
+                           user_id: nil, created_by_id: nil,
+                           completed_at: 1.minute.ago)
+          end
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
 
           order.reload
@@ -92,14 +110,22 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
         end
 
         it 'does not assign orders with an existing user' do
-          order = create(:order, guest_token: 'ABC', user_id: 200)
+          if Spree.version.to_f > 3.6
+              order = create(:order, token: 'ABC', user_id: 200)
+          else
+              order = create(:order, guest_token: 'ABC', user_id: 200)
+          end
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
 
           expect(order.reload.user_id).to eq 200
         end
 
         it 'does not assign orders with a different token' do
-          order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
+          if Spree.version.to_f > 3.6
+              order = create(:order, token: 'DEF', user_id: nil, created_by_id: nil)
+          else
+              order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
+          end
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
 
           expect(order.reload.user_id).to be_nil
