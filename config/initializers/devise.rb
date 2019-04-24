@@ -40,7 +40,7 @@ Devise.setup do |config|
   config.stretches = 20
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = Rails.configuration.secret_token
+  #  config.pepper = '<%= SecureRandom.hex(64) %>'
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
