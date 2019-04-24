@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'capybara', '~> 2.7'
   s.add_development_dependency 'capybara-screenshot'
-  s.add_development_dependency 'coffee-rails', '~> 4.2'
+  s.add_development_dependency 'coffee-rails', '~> 5.0'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'database_cleaner', '~> 1.5'
   s.add_development_dependency 'email_spec', '~> 2.1'
