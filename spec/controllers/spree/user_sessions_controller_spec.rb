@@ -106,6 +106,26 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
         end
       end
 
+      context 'with a guest_token from a pre-3.7 version of Spree present' do
+        before do
+          request.cookie_jar.signed[:guest_token] = 'ABC'
+          request.cookie_jar.signed[:token] = 'DEF'
+        end
+          
+        it 'assigns the correct token attribute for the order' do 
+          if Spree.version.to_f > 3.6
+            order = create(:order, email: user.email, token: 'ABC', user_id: nil, created_by_id: nil)
+          else
+            order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
+          end
+          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+
+          order.reload
+          expect(order.user_id).to eq user.id
+          expect(order.created_by_id).to eq user.id
+        end 
+      end
+
       context "and html format is used" do
         it "redirects to default after signing in" do
           spree_post :create, spree_user: { email: user.email, password: 'secret' }
