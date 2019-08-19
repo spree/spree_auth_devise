@@ -13,6 +13,13 @@ appraise 'spree-3-7' do
   gem 'rails-controller-testing'
 end
 
+appraise 'spree-4-0' do
+  gem 'acts-as-taggable-on', '~> 6.0', github: 'spark-solutions/acts-as-taggable-on', branch: 'fix/rails-6-and-failing-specs'
+  gem 'devise', github: 'plataformatec/devise', branch: 'master'
+  gem 'spree', '~> 4.0.0.beta', github: 'spark-solutions/spree', branch: 'feature/rails-6'
+  gem 'rails-controller-testing'
+end
+
 appraise 'spree-master' do
   gem 'spree', github: 'spree/spree', branch: 'master'
   gem 'rails-controller-testing'
