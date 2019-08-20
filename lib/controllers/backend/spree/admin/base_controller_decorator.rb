@@ -1,4 +1,4 @@
-Spree::Admin::BaseController.class_eval do
+module Spree::Admin::BaseControllerDecorator
   # Redirect as appropriate when an access request fails.  The default action is to redirect to the login screen.
   # Override this method in your controllers if you want to have special behavior in case the user is not authorized
   # to access the requested action.  For example, a popup window might simply close itself.
@@ -22,3 +22,4 @@ Spree::Admin::BaseController.class_eval do
     nil
   end
 end
+Spree::Admin::BaseController.prepend(Spree::Admin::BaseControllerDecorator)

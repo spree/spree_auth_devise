@@ -1,5 +1,8 @@
-Spree::Admin::OrdersController.class_eval do
-  before_action :check_authorization
+module Spree::Admin::OrdersControllerDecorator
+
+  def prepend(base)
+    base.before_action :check_authorization
+  end
 
   private
 
@@ -19,3 +22,4 @@ Spree::Admin::OrdersController.class_eval do
     end
   end
 end
+Spree::Admin::OrdersController.prepend(Spree::Admin::OrdersControllerDecorator)
