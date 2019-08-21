@@ -1,5 +1,5 @@
 module Spree::Admin::ResourceControllerDecorator
-  def prepend(base)
+  def self.prepend(base)
     base.rescue_from CanCan::AccessDenied, with: :unauthorized
   end
 end

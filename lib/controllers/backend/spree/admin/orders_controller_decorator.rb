@@ -1,6 +1,6 @@
 module Spree::Admin::OrdersControllerDecorator
 
-  def prepend(base)
+  def self.prepend(base)
     base.before_action :check_authorization
   end
 
