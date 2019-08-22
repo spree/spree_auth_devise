@@ -6,6 +6,5 @@ gem 'acts-as-taggable-on', '~> 6.0', github: 'spark-solutions/acts-as-taggable-o
 
 gem "rails-controller-testing"
 gem "spree", "~> 4.0.0.beta", github: "spark-solutions/spree", branch: "feature/rails-6"
-gem "devise", github: "plataformatec/devise", branch: "master"
 
 gemspec path: "../"
