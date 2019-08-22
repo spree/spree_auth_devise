@@ -42,6 +42,8 @@ matrix:
       - rvm: 2.5.1
         gemfile: gemfiles/spree_3_2.gemfile
       - rvm: 2.5.1
+        gemfile: gemfiles/spree_3_2.gemfile
+      - rvm: 2.5.1
         gemfile: gemfiles/spree_3_5.gemfile
 
 before_install:
