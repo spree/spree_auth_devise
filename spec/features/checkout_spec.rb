@@ -133,11 +133,10 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
       expect(page).to have_text 'Registration'
 
-      fill_in 'Email', with: 'email@person.com'
+      fill_in 'Email', with: 'email@person.com', match: :first
       fill_in 'Password', with: 'spree123'
       fill_in 'Password Confirmation', with: 'spree123'
       click_button 'Create'
-
       expect(page).to have_text 'You have signed up successfully.'
 
       str_addr = 'bill_address'
