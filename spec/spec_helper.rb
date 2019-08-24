@@ -24,8 +24,9 @@ RSpec.configure do |config|
   Kernel.srand(config.seed)
 
   config.before(:each) do
-    return unless Rails.gem_version >= Gem::Version.new('6.0.0.beta1')
-    allow(RSpec::Rails::ViewRendering::EmptyTemplateHandler).to receive(:call).and_return(%(""))
+    allow(RSpec::Rails::ViewRendering::EmptyTemplateHandler)
+      .to receive(:call)
+      .and_return(%("")) if Rails.gem_version >= Gem::Version.new('6.0.0.beta1')
   end
 end
 
