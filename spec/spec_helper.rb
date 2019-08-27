@@ -22,6 +22,12 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand(config.seed)
+
+  config.before(:each) do
+    allow(RSpec::Rails::ViewRendering::EmptyTemplateHandler)
+      .to receive(:call)
+      .and_return(%("")) if Rails.gem_version >= Gem::Version.new('6.0.0.beta1')
+  end
 end
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
