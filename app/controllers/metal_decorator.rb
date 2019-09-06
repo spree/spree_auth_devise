@@ -1,5 +1,5 @@
 # For the API
-ActionController::Metal.class_eval do
+module MetalDecorator
   def spree_current_user
     @spree_current_user ||=  if defined? env
                                env['warden'].user
@@ -8,3 +8,5 @@ ActionController::Metal.class_eval do
                              end
   end
 end
+
+ActionController::Metal.prepend(MetalDecorator)
