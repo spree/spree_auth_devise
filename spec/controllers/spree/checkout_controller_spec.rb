@@ -129,7 +129,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
 
     it 'does not check registration' do
       controller.stub :check_authorization
-      order.stub update_attributes: true
+      order.stub update: true
       controller.should_not_receive :check_registration
       spree_put :update_registration, { order: {} }
     end
@@ -142,7 +142,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
     end
 
     it 'redirects to the checkout_path after saving' do
-      allow(order).to receive(:update_attributes) { true }
+      allow(order).to receive(:update) { true }
       allow(controller).to receive(:check_authorization)
       spree_put :update_registration, { order: { email: 'jobs@spreecommerce.com' } }
       expect(response).to redirect_to spree.checkout_state_path(:address)
@@ -154,7 +154,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
       else
         request.cookie_jar.signed[:guest_token] = token
       end
-      allow(order).to receive(:update_attributes) { true }
+      allow(order).to receive(:update) { true }
       expect(controller).to receive(:authorize!).with(:edit, order, token)
       spree_put :update_registration, { order: { email: 'jobs@spreecommerce.com' } }
     end

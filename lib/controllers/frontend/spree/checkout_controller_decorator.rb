@@ -10,7 +10,7 @@ module Spree::CheckoutControllerDecorator
   end
 
   def update_registration
-    if order_params[:email] =~ Devise.email_regexp && current_order.update_attribute(:email, order_params[:email])
+    if order_params[:email] =~ Devise.email_regexp && current_order.update(email: order_params[:email])
       redirect_to spree.checkout_state_path(:address)
     else
       flash[:error] = t(:email_is_invalid, scope: [:errors, :messages])
