@@ -3,6 +3,6 @@
 source "https://rubygems.org"
 
 gem "rails-controller-testing"
-gem "spree", github: "spree/spree", tag: "v4.0.0.beta"
+gem "spree", "~> 4.0.0"
 
 gemspec path: "../"
