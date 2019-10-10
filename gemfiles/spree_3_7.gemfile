@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "rails-controller-testing"
-gem "spree", "~> 3.7.0.rc3"
+gem "spree", "~> 3.7.0"
 gem "sass-rails"
 
 gemspec path: "../"
