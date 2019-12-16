@@ -1,6 +1,0 @@
-<% if spree_current_user %>
-  <li class="nav-item"><%= link_to Spree.t(:my_account), spree.account_path, :class => 'nav-link text-white' %></li>
-  <li class="nav-item"><%= link_to Spree.t(:logout), spree.logout_path, :class => 'nav-link text-white' %></li>
-<% else %>
-  <li id="link-to-login" class="nav-item"><%= link_to Spree.t(:login), spree.login_path, :class => 'nav-link text-white' %></li>
-<% end %>
