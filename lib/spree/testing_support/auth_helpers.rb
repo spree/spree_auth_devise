@@ -11,14 +11,14 @@ module Spree
         first('label', text: 'Remember me').click if remember_me
         click_button 'Log in'
 
-        expect(page).to have_content "Logged in successfully"
+        expect(page).to have_content 'Logged in successfully'
       end
 
       def log_out
         show_user_menu
         click_link 'LOG OUT'
 
-        expect(page).to have_content "Signed out successfully"
+        expect(page).to have_content 'Signed out successfully'
       end
 
       def show_user_menu
