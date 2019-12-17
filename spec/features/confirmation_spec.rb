@@ -20,7 +20,7 @@ RSpec.feature 'Confirmation', type: :feature, reload_user: true do
     fill_in 'Email', with: 'email@person.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password Confirmation', with: 'password'
-    click_button 'Create'
+    click_button 'Sign Up'
 
     expect(page).to have_text 'You have signed up successfully.'
     expect(Spree::User.last.confirmed?).to be(false)
