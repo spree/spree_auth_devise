@@ -10,20 +10,18 @@ RSpec.feature 'Admin - Sign In', type: :feature do
   end
 
   scenario 'lets a user sign in successfully', js: true do
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: 'secret'
-    click_button 'Log in'
+    log_in(email: @user.email, password: 'secret')
+    show_user_menu
 
-    expect(page).to have_text 'Logged in successfully'
     expect(page).not_to have_text 'Login'
-    expect(page).to have_text 'Logout'
+    expect(page).to have_text 'LOG OUT'
     expect(current_path).to eq '/'
   end
 
   scenario 'shows validation errors' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong_password'
-    click_button 'Log in'
+    click_button 'Login'
 
     expect(page).to have_text 'Invalid email or password'
     expect(page).to have_button 'Login'
