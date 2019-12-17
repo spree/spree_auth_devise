@@ -9,11 +9,11 @@ RSpec.feature 'Admin - Sign Out', type: :feature do
     fill_in 'Password', with: 'secret'
     # Regression test for #1257
     check 'Remember me'
-    click_button 'Log in'
+    click_button 'Login'
   end
 
   scenario 'allows a signed in user to logout', js: true do
-    click_link 'Logout'
+    log_out
     visit spree.admin_login_path
     expect(page).to have_button 'Login'
     expect(page).not_to have_text 'Logout'
