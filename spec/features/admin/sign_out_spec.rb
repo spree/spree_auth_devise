@@ -9,7 +9,7 @@ RSpec.feature 'Admin - Sign Out', type: :feature do
     fill_in 'Password', with: 'secret'
     # Regression test for #1257
     check 'Remember me'
-    click_button 'Login'
+    click_button 'Log in'
   end
 
   scenario 'allows a signed in user to logout', js: true do
