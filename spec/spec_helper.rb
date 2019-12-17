@@ -10,6 +10,8 @@ require 'shoulda-matchers'
 require 'ffaker'
 require 'pry'
 
+require 'spree/testing_support/auth_helpers'
+
 RSpec.configure do |config|
   config.filter_run focus: true
   config.infer_spec_type_from_file_location!
@@ -29,6 +31,8 @@ RSpec.configure do |config|
       .to receive(:call)
       .and_return(%("")) if Rails.gem_version >= Gem::Version.new('6.0.0.beta1')
   end
+
+  config.include Spree::TestingSupport::AuthHelpers, type: :feature
 end
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
