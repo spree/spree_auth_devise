@@ -12,7 +12,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     fill_in 'Password', with: user.password
     # Regression test for #1257
     check 'Remember me'
-    click_button 'Login'
+    click_button 'Log in'
   end
 
   scenario 'allow a signed in user to logout' do
@@ -42,7 +42,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
       visit spree.login_path
       fill_in 'Email', with: other_user.email
       fill_in 'Password', with: other_user.password
-      click_button 'Login'
+      click_button 'Log in'
 
       click_link 'Cart'
       expect(page).to have_text Spree.t(:your_cart_is_empty)

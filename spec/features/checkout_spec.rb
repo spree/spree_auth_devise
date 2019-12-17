@@ -63,7 +63,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       visit spree.login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
-      click_button 'Login'
+      click_button 'Log in'
       expect(page).to have_text('Cart')
       click_link 'Cart'
 

@@ -8,6 +8,7 @@ require File.expand_path('../dummy/config/environment', __FILE__)
 require 'rspec/rails'
 require 'shoulda-matchers'
 require 'ffaker'
+require 'pry'
 
 RSpec.configure do |config|
   config.filter_run focus: true
