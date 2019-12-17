@@ -12,7 +12,7 @@ RSpec.feature 'Accounts', type: :feature do
       fill_in 'Password', with: user.password
       click_button 'Log in'
 
-      click_link 'My Account'
+      show_user_account
       expect(page).to have_text 'admin@person.com'
     end
 
@@ -22,11 +22,12 @@ RSpec.feature 'Accounts', type: :feature do
       fill_in 'Email', with: 'email@person.com'
       fill_in 'Password', with: 'password'
       fill_in 'Password Confirmation', with: 'password'
-      click_button 'Create'
+      click_button 'Sign Up'
 
-      click_link 'My Account'
+      show_user_account
       expect(page).to have_text 'email@person.com'
-      click_link 'Edit'
+
+      find('a.account-page-user-info-item-title-edit').click
 
       fill_in 'Password', with: 'foobar'
       fill_in 'Password Confirmation', with: 'foobar'
@@ -44,9 +45,10 @@ RSpec.feature 'Accounts', type: :feature do
       fill_in 'Password', with: user.password
       click_button 'Log in'
 
-      click_link 'My Account'
+      show_user_account
       expect(page).to have_text 'email@person.com'
-      click_link 'Edit'
+
+      find('a.account-page-user-info-item-title-edit').click
 
       fill_in 'Password', with: 'foobar'
       fill_in 'Password Confirmation', with: 'foobar'

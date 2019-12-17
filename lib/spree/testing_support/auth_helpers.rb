@@ -24,6 +24,13 @@ module Spree
       def show_user_menu
         find("button[aria-label='Show user menu']").click
       end
+
+      def show_user_account
+        within '#nav-bar' do
+          show_user_menu
+          click_link 'MY ACCOUNT'
+        end
+      end
     end
   end
 end
