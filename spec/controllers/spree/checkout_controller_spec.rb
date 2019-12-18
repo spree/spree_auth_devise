@@ -83,7 +83,6 @@ RSpec.describe Spree::CheckoutController, type: :controller do
           end
           spree_post :update, { state: 'confirm' }
           expect(response).to redirect_to spree.order_path(order)
-          expect(flash.notice).to eq Spree.t(:order_processed_successfully)
         end
       end
 
