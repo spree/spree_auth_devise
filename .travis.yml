@@ -28,6 +28,7 @@ matrix:
       - gemfile: gemfiles/spree_master.gemfile
 
 before_install:
+  - gem update bundler
   - mysql -u root -e "GRANT ALL ON *.* TO 'travis'@'%';"
   - wget -N https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip -P ~/
   - unzip ~/chromedriver_linux64.zip -d ~/
