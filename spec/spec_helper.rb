@@ -11,6 +11,7 @@ require 'ffaker'
 require 'pry'
 
 require 'spree/testing_support/auth_helpers'
+require 'spree/testing_support/checkout_helpers'
 
 RSpec.configure do |config|
   config.filter_run focus: true
@@ -33,6 +34,7 @@ RSpec.configure do |config|
   end
 
   config.include Spree::TestingSupport::AuthHelpers, type: :feature
+  config.include Spree::TestingSupport::CheckoutHelpers, type: :feature
 end
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
