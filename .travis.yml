@@ -17,7 +17,7 @@ language: ruby
 
 rvm:
   - 2.5.1
-  - 2.6.5
+  # - 2.6.5
 
 gemfile:
   - gemfiles/spree_4_1.gemfile
