@@ -17,31 +17,18 @@ language: ruby
 
 rvm:
   - 2.5.1
-  - 2.4.4
-  - 2.3.8
+  # - 2.6.5
 
 gemfile:
-  - gemfiles/spree_3_5.gemfile
-  - gemfiles/spree_3_7.gemfile
-  - gemfiles/spree_4_0.gemfile
+  - gemfiles/spree_4_1.gemfile
   - gemfiles/spree_master.gemfile
 
 matrix:
     allow_failures:
       - gemfile: gemfiles/spree_master.gemfile
-    exclude:
-      - rvm: 2.3.8
-        gemfile: gemfiles/spree_4_0.gemfile
-      - rvm: 2.4.4
-        gemfile: gemfiles/spree_4_0.gemfile
-      - rvm: 2.3.8
-        gemfile: gemfiles/spree_master.gemfile
-      - rvm: 2.4.4
-        gemfile: gemfiles/spree_master.gemfile
-      - rvm: 2.5.1
-        gemfile: gemfiles/spree_3_5.gemfile
 
 before_install:
+  - gem update bundler
   - mysql -u root -e "GRANT ALL ON *.* TO 'travis'@'%';"
   - wget -N https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip -P ~/
   - unzip ~/chromedriver_linux64.zip -d ~/

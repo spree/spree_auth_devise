@@ -6,7 +6,8 @@ RSpec.feature 'Sign Up', type: :feature do
       fill_in 'Email', with: 'email@person.com'
       fill_in 'Password', with: 'password'
       fill_in 'Password Confirmation', with: 'password'
-      click_button 'Create'
+
+      click_button 'Sign Up'
 
       expect(page).to have_text 'You have signed up successfully.'
       expect(Spree::User.count).to eq(1)
@@ -20,7 +21,8 @@ RSpec.feature 'Sign Up', type: :feature do
       fill_in 'Email', with: 'email@person.com'
       fill_in 'Password', with: 'password'
       fill_in 'Password Confirmation', with: ''
-      click_button 'Create'
+
+      click_button 'Sign Up'
 
       expect(page).to have_css '#errorExplanation'
       expect(Spree::User.count).to eq(0)

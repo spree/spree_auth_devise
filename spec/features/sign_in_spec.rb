@@ -10,23 +10,21 @@ RSpec.feature 'Sign In', type: :feature do
   end
 
   scenario 'let a user sign in successfully', js: true do
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Login'
+    log_in(email: @user.email, password: @user.password)
+    show_user_menu
 
-    expect(page).to have_text 'Logged in successfully'
     expect(page).not_to have_text 'Login'
-    expect(page).to have_text 'Logout'
+    expect(page).to have_text 'LOG OUT'
     expect(current_path).to eq '/'
   end
 
   scenario 'show validation erros' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong_password'
-    click_button 'Login'
+    click_button 'Log in'
 
     expect(page).to have_text 'Invalid email or password'
-    expect(page).to have_text 'Login'
+    expect(page).to have_text 'Log in'
   end
 
   scenario 'allow a user to access a restricted page after logging in' do
@@ -35,7 +33,7 @@ RSpec.feature 'Sign In', type: :feature do
 
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-    click_button 'Login'
+    click_button 'Log in'
 
     within '.user-menu' do
       expect(page).to have_text 'admin@person.com'

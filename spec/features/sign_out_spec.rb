@@ -7,44 +7,37 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
   end
 
   background do
-    visit spree.login_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    # Regression test for #1257
-    check 'Remember me'
-    click_button 'Login'
+    log_in(email: user.email, password: user.password)
   end
 
   scenario 'allow a signed in user to logout' do
-    click_link 'Logout'
+    log_out
+
     visit spree.root_path
-    expect(page).to have_text 'Login'
-    expect(page).not_to have_text 'Logout'
+    show_user_menu
+
+    expect(page).to have_link 'LOG IN'
+    expect(page).not_to have_link 'LOG OUT'
   end
 
   describe 'before_logout' do
-    before do
-      create(:product, name: 'RoR Mug')
-      create(:product, name: 'RoR Shirt')
-    end
-
+    let!(:mug) { create(:product, name: 'RoR Mug') }
+    let!(:shirt) { create(:product, name: 'RoR Shirt') }
     let!(:other_user) { create(:user) }
 
     it 'clears token cookies' do
-      add_to_cart 'RoR Mug'
-      expect(page).to have_text 'RoR Mug'
+      add_to_cart(mug) do
+        find('.close').click
+      end
 
-      click_link 'Logout'
+      log_out
 
-      click_link 'Cart'
+      find('#link-to-cart').click
       expect(page).to have_text Spree.t(:your_cart_is_empty)
 
-      visit spree.login_path
-      fill_in 'Email', with: other_user.email
-      fill_in 'Password', with: other_user.password
-      click_button 'Login'
+      log_in(email: other_user.email, password: user.password)
+      find('#link-to-cart').click
 
-      click_link 'Cart'
       expect(page).to have_text Spree.t(:your_cart_is_empty)
     end
   end

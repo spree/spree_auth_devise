@@ -9,12 +9,13 @@ RSpec.feature 'Checkout', :js, type: :feature do
     shipping_method.tap(&:save)
   end
 
+  given!(:user) { create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password') }
   given!(:zone)    { create(:zone) }
   given!(:address) { create(:address, state: state, country: country) }
+  given!(:mug) { create(:product, name: 'RoR Mug') }
 
   background do
-    @product = create(:product, name: 'RoR Mug')
-    @product.master.stock_items.first.update_column(:count_on_hand, 1)
+    mug.master.stock_items.first.update_column(:count_on_hand, 1)
 
     # Bypass gateway error on checkout | ..or stub a gateway
     Spree::Config[:allow_checkout_on_gateway_error] = true
@@ -31,71 +32,56 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
     scenario 'allow a visitor to checkout as guest, without registration' do
       Spree::Auth::Config.set(registration_step: true)
-      add_to_cart 'RoR Mug'
-      click_button 'Checkout'
+      add_to_cart(mug)
+      click_link 'checkout'
 
-      expect(page).to have_content(/Checkout as a Guest/i)
+      expect(page).to have_selector(:button, 'Continue as a guest')
 
-      within('#guest_checkout') { fill_in 'Email', with: 'spree@test.com' }
+      within('#checkout_form_registration') { fill_in 'Email', with: 'spree@test.com' }
       click_button 'Continue'
 
       expect(page).to have_text(/Billing Address/i)
       expect(page).to have_text(/Shipping Address/i)
 
-      str_addr = 'bill_address'
-      select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
-        fill_in "order_#{str_addr}_attributes_#{field}", with: address.send(field).to_s
-      end
-      select address.state.name.to_s, from: "order_#{str_addr}_attributes_state_id"
-      check 'order_use_billing'
-
+      fill_in_address
       click_button 'Save and Continue'
       click_button 'Save and Continue'
 
-      expect(page).to have_text 'Your order has been processed successfully'
+      expect(page).to have_text 'Order placed successfully'
     end
 
     scenario 'associate an uncompleted guest order with user after logging in' do
-      user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
-      add_to_cart 'RoR Mug'
+      add_to_cart(mug)
 
       visit spree.login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
-      click_button 'Login'
-      expect(page).to have_text('Cart')
-      click_link 'Cart'
+      click_button 'Log in'
+      expect(page).to have_text('Logged in successfully')
+      find('a.cart-icon').click
 
       expect(page).to have_text 'RoR Mug'
-      within('h1') { expect(page).to have_text 'Shopping Cart' }
+      within('h1') { expect(page).to have_text 'YOUR SHOPPING BAG' }
 
-      click_button 'Checkout'
+      click_link 'checkout'
 
-      str_addr = 'bill_address'
-      select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
-        fill_in "order_#{str_addr}_attributes_#{field}", with: address.send(field).to_s
-      end
-      select address.state.name.to_s, from: "order_#{str_addr}_attributes_state_id"
-      check 'order_use_billing'
-
+      fill_in_address
       click_button 'Save and Continue'
       click_button 'Save and Continue'
 
-      expect(page).to have_text 'Your order has been processed successfully'
+      expect(page).to have_text 'Order placed successfully'
       expect(Spree::Order.first.user).to eq user
     end
 
     # Regression test for #890
     scenario 'associate an incomplete guest order with user after successful password reset' do
-      create(:store)
-      user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
-      add_to_cart 'RoR Mug'
+      add_to_cart(mug)
 
       visit spree.login_path
-      click_link 'Forgot Password?'
-      fill_in 'spree_user_email', with: 'email@person.com'
+      click_link 'Forgot password?'
+      fill_in('Email', with: 'email@person.com')
+      find('#spree_user_email').set('email@person.com')
+
       click_button 'Reset my password'
 
       # Need to do this now because the token stored in the DB is the encrypted version
@@ -109,49 +95,39 @@ RSpec.feature 'Checkout', :js, type: :feature do
       fill_in 'Password Confirmation', with: 'password'
       click_button 'Update'
 
-      expect(page).to have_text('Cart')
-      click_link 'Cart'
+      expect(page).to have_text('Your password was changed successfully')
+      find('a.cart-icon').click
       expect(page).to have_text('RoR Mug')
-      click_button 'Checkout'
+      click_link 'checkout'
 
-      str_addr = 'bill_address'
-      select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
-        fill_in "order_#{str_addr}_attributes_#{field}", with: address.send(field).to_s
-      end
-      select address.state.name.to_s, from: "order_#{str_addr}_attributes_state_id"
-      check 'order_use_billing'
-
+      fill_in_address
       click_button 'Save and Continue'
 
       expect(page).not_to have_text 'Email is invalid'
     end
 
     scenario 'allow a user to register during checkout' do
-      add_to_cart 'RoR Mug'
-      click_button 'Checkout'
+      add_to_cart(mug)
+      click_link 'checkout'
 
-      expect(page).to have_text 'Registration'
+      expect(page).to have_selector(:link, 'Sign Up')
 
-      fill_in 'Email', with: 'email@person.com', match: :first
+      click_link 'Sign Up'
+
+      fill_in 'Email', with: 'test@person.com'
       fill_in 'Password', with: 'spree123'
       fill_in 'Password Confirmation', with: 'spree123'
-      click_button 'Create'
+
+      click_button 'Sign Up'
+
       expect(page).to have_text 'You have signed up successfully.'
 
-      str_addr = 'bill_address'
-      select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
-        fill_in "order_#{str_addr}_attributes_#{field}", with: address.send(field).to_s
-      end
-      select address.state.name.to_s, from: "order_#{str_addr}_attributes_state_id"
-      check 'order_use_billing'
-
+      fill_in_address
       click_button 'Save and Continue'
       click_button 'Save and Continue'
 
-      expect(page).to have_text 'Your order has been processed successfully'
-      expect(Spree::Order.first.user).to eq Spree::User.find_by_email('email@person.com')
+      expect(page).to have_text 'Order placed successfully'
+      expect(Spree::Order.first.user).to eq Spree::User.find_by_email('test@person.com')
     end
   end
 end
