@@ -14,7 +14,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
           it 'assigns orders with the correct token and no user present' do
             order = create(:order, email: user.email, token: 'ABC', user_id: nil, created_by_id: nil)
-            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
             order.reload
             expect(order.user_id).to eq user.id
@@ -23,7 +23,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
           it 'assigns orders with the correct token and no user or email present' do
             order = create(:order, token: 'ABC', user_id: nil, created_by_id: nil)
-            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
             order.reload
             expect(order.user_id).to eq user.id
@@ -34,7 +34,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
             order = create(:order, email: user.email, token: 'ABC',
                            user_id: nil, created_by_id: nil,
                            completed_at: 1.minute.ago)
-            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
             order.reload
             expect(order.user_id).to be_nil
@@ -43,14 +43,14 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
           it 'does not assign orders with an existing user' do
             order = create(:order, token: 'ABC', user_id: 200)
-            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
             expect(order.reload.user_id).to eq 200
           end
 
           it 'does not assign orders with a different token' do
             order = create(:order, token: 'DEF', user_id: nil, created_by_id: nil)
-            spree_post :create, spree_user: { email: user.email, password: 'secret' }
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
             expect(order.reload.user_id).to be_nil
           end
@@ -72,7 +72,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
             order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
           end
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
           order.reload
           expect(order.user_id).to eq user.id
@@ -85,7 +85,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
             order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
           end
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
           order.reload
           expect(order.user_id).to eq user.id
@@ -102,7 +102,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
                            user_id: nil, created_by_id: nil,
                            completed_at: 1.minute.ago)
           end
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
           order.reload
           expect(order.user_id).to be_nil
@@ -115,7 +115,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
               order = create(:order, guest_token: 'ABC', user_id: 200)
           end
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
           expect(order.reload.user_id).to eq 200
         end
@@ -126,7 +126,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
               order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
           end
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
           expect(order.reload.user_id).to be_nil
         end
@@ -144,7 +144,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
             order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
           end
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
 
           order.reload
           expect(order.user_id).to eq user.id
@@ -153,15 +153,15 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
       end
 
       context "and html format is used" do
-        it "redirects to default after signing in" do
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }
-          expect(response).to redirect_to spree.root_path
+        it "redirects to account path after signing in" do
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+          expect(response).to redirect_to spree.account_path
         end
       end
 
       context "and js format is used" do
         it "returns a json with ship and bill address" do
-          spree_post :create, spree_user: { email: user.email, password: 'secret' }, format: 'js'
+          post :create, params: { spree_user: { email: user.email, password: 'secret' }, format: 'js' }
           parsed = ActiveSupport::JSON.decode(response.body)
           expect(parsed).to have_key("user")
           expect(parsed).to have_key("ship_address")
@@ -173,7 +173,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
     context "using incorrect login information" do
       context "and html format is used" do
         it "renders new template again with errors" do
-          spree_post :create, spree_user: { email: user.email, password: 'wrong' }
+          post :create, params: { spree_user: { email: user.email, password: 'wrong' }}
           expect(response).to render_template('new')
           expect(flash[:error]).to eq I18n.t(:'devise.failure.invalid')
         end
@@ -181,7 +181,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
       context "and js format is used" do
         it "returns a json with the error" do
-          spree_post :create, spree_user: { email: user.email, password: 'wrong' }, format: 'js'
+          post :create, params: { spree_user: { email: user.email, password: 'wrong' }, format: 'js' }
           parsed = ActiveSupport::JSON.decode(response.body)
           expect(parsed).to have_key("error")
         end
