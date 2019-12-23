@@ -22,7 +22,7 @@ RSpec.feature 'Confirmation', type: :feature, reload_user: true do
     fill_in 'Password Confirmation', with: 'password'
     click_button 'Sign Up'
 
-    expect(page).to have_text 'You have signed up successfully.'
+    expect(page).to have_text I18n.t('devise.user_registrations.signed_up_but_unconfirmed')
     expect(Spree::User.last.confirmed?).to be(false)
   end
 end
