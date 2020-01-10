@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'puma'
   s.add_development_dependency 'rails-controller-testing'
   s.add_development_dependency 'rspec-rails', '~> 4.0.0.beta2'
-  s.add_development_dependency 'shoulda-matchers', '~> 3.1'
+  s.add_development_dependency 'shoulda-matchers', '~> 4.2'
   s.add_development_dependency 'simplecov', '~> 0.12'
   s.add_development_dependency 'spree_backend', spree_version
   s.add_development_dependency 'spree_frontend', spree_version
