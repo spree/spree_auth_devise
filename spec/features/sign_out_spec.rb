@@ -21,9 +21,10 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
   end
 
   describe 'before_logout' do
-    let!(:mug) { create(:product, name: 'RoR Mug') }
-    let!(:shirt) { create(:product, name: 'RoR Shirt') }
+    let!(:mug)        { create(:product_in_stock, name: 'RoR Mug') }
+    let!(:shirt)      { create(:product, name: 'RoR Shirt') }
     let!(:other_user) { create(:user) }
+    let!(:store)      { create(:store) }
 
     it 'clears token cookies' do
       add_to_cart(mug) do

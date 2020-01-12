@@ -17,7 +17,7 @@ class Spree::UserSessionsController < Devise::SessionsController
       respond_to do |format|
         format.html {
           flash[:success] = Spree.t(:logged_in_succesfully)
-          redirect_back_or_default(after_sign_in_path_for(spree_current_user))
+          redirect_back_or_default(after_sign_in_redirect(spree_current_user))
         }
         format.js {
           render json: { user: spree_current_user,
@@ -53,5 +53,25 @@ class Spree::UserSessionsController < Devise::SessionsController
   def redirect_back_or_default(default)
     redirect_to(session["spree_user_return_to"] || default)
     session["spree_user_return_to"] = nil
+  end
+
+  def after_sign_in_redirect(resource_or_scope)
+    stored_location_for(resource_or_scope) || account_path
+  end
+
+  def respond_to_on_destroy
+    # We actually need to hardcode this as Rails default responder doesn't
+    # support returning empty response on GET request
+    respond_to do |format|
+      format.all { head :no_content }
+      format.any(*navigational_formats) { redirect_to after_sign_out_redirect(resource_name) }
+    end
+  end
+
+  def after_sign_out_redirect(resource_or_scope)
+    scope = Devise::Mapping.find_scope!(resource_or_scope)
+    router_name = Devise.mappings[scope].router_name
+    context = router_name ? send(router_name) : self
+    context.respond_to?(:login_path) ? context.login_path : "/"
   end
 end
