@@ -24,7 +24,6 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     let!(:mug)        { create(:product_in_stock, name: 'RoR Mug') }
     let!(:shirt)      { create(:product, name: 'RoR Shirt') }
     let!(:other_user) { create(:user) }
-    let!(:store)      { create(:store) }
 
     it 'clears token cookies' do
       add_to_cart(mug) do

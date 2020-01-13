@@ -1,6 +1,6 @@
 RSpec.describe Spree::UserMailer, type: :mailer do
-  let!(:store) { create(:store) }
   let(:user) { create(:user) }
+  let(:store) { Spree::Store.default }
 
   describe '#reset_password_instructions' do
     describe 'message contents' do
