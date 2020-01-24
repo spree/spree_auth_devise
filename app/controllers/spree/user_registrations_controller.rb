@@ -29,7 +29,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, :signed_up
         sign_up(resource_name, resource)
         session[:spree_user_signup] = true
-        respond_with resource, location: after_sign_up_path_for(resource)
+        redirect_to_checkout_or_account_path(resource)
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
@@ -87,5 +87,15 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
 
   def after_sign_in_redirect(resource_or_scope)
     stored_location_for(resource_or_scope) || account_path
+  end
+
+  def redirect_to_checkout_or_account_path(resource)
+    resource_path = after_sign_up_path_for(resource)
+
+    if resource_path == spree.checkout_state_path(:address)
+      respond_with resource, location: spree.checkout_state_path(:address)
+    else
+      respond_with resource, location: account_path
+    end
   end
 end
