@@ -6,6 +6,8 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
+  before_action :set_current_order
+  
   protected
 
   def after_confirmation_path_for(resource_name, resource)
