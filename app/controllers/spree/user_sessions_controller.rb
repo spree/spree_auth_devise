@@ -10,6 +10,8 @@ class Spree::UserSessionsController < Devise::SessionsController
     include SpreeI18n::ControllerLocaleHelper
   end
 
+  before_action :set_current_order
+
   def create
     authenticate_spree_user!
 

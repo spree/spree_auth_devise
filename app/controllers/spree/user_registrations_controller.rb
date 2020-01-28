@@ -11,6 +11,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   end
 
   before_action :check_permissions, only: [:edit, :update]
+  before_action :set_current_order
   skip_before_action :require_no_authentication
 
   # GET /resource/sign_up
