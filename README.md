@@ -10,20 +10,11 @@ Provides authentication services for [Spree](https://spreecommerce.org), using t
 
 1. Add this extension to your Gemfile with this line:
 
-  #### Spree >= 3.1
-
   ```ruby
-  gem 'spree_auth_devise', '~> 3.3'
+  gem 'spree_auth_devise'
   ```
-
-  #### Spree 3.0 and Spree 2.x
-
-  ```ruby
-  gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'X-X-stable'
-  ```
-
-  The `branch` option is important: it must match the version of Spree you're using.
-  For example, use `3-0-stable` if you're using Spree `3-0-stable` or any `3.0.x` version.
+  
+  if you run into any version-mismatch problems please run `bundle update`
 
 2. Install the gem using Bundler:
   ```ruby
