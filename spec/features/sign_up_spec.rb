@@ -10,7 +10,7 @@ RSpec.feature 'Sign Up', type: :feature do
       click_button 'Sign Up'
 
       expect(page).to have_text 'You have signed up successfully.'
-      expect(Spree::User.count).to eq(1)
+      expect(Spree.user_class.count).to eq(1)
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.feature 'Sign Up', type: :feature do
       click_button 'Sign Up'
 
       expect(page).to have_css '#errorExplanation'
-      expect(Spree::User.count).to eq(0)
+      expect(Spree.user_class.count).to eq(0)
     end
   end
 end

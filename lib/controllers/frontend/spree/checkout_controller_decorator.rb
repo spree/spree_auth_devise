@@ -6,7 +6,7 @@ module Spree::CheckoutControllerDecorator
   end
 
   def registration
-    @user = Spree::User.new
+    @user = Spree.user_class.new
   end
 
   def update_registration
@@ -14,7 +14,7 @@ module Spree::CheckoutControllerDecorator
       redirect_to spree.checkout_state_path(:address)
     else
       flash[:error] = t(:email_is_invalid, scope: [:errors, :messages])
-      @user = Spree::User.new
+      @user = Spree.user_class.new
       render 'registration'
     end
   end

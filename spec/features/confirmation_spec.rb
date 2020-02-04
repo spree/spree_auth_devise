@@ -21,6 +21,6 @@ RSpec.feature 'Confirmation', type: :feature, reload_user: true do
     click_button 'Sign Up'
 
     expect(page).to have_text 'You have signed up successfully.'
-    expect(Spree::User.last.confirmed?).to be(false)
+    expect(Spree.user_class.last.confirmed?).to be(false)
   end
 end
