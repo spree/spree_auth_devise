@@ -126,7 +126,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       click_button 'Save and Continue'
 
       expect(page).to have_text 'Order placed successfully'
-      expect(Spree::Order.first.user).to eq Spree::User.find_by_email('test@person.com')
+      expect(Spree::Order.first.user).to eq Spree.user_class.find_by_email('test@person.com')
     end
   end
 end

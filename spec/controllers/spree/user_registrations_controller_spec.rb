@@ -25,7 +25,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
           order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
         end
         post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }}
-        user = Spree::User.find_by_email('foobar@example.com')
+        user = Spree.user_class.find_by_email('foobar@example.com')
 
         order.reload
         expect(order.user_id).to eq user.id
