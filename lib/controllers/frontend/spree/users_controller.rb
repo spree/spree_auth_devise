@@ -1,5 +1,5 @@
 class Spree::UsersController < Spree::StoreController
-  skip_before_action :set_current_order, only: :show
+  before_action :set_current_order, except: :show
   prepend_before_action :load_object, only: [:show, :edit, :update]
   prepend_before_action :authorize_actions, only: :new
 
@@ -10,7 +10,7 @@ class Spree::UsersController < Spree::StoreController
   end
 
   def create
-    @user = Spree::User.new(user_params)
+    @user = Spree.user_class.new(user_params)
     if @user.save
 
       if current_order
@@ -27,7 +27,7 @@ class Spree::UsersController < Spree::StoreController
     if @user.update(user_params)
       if params[:user][:password].present?
         # this logic needed b/c devise wants to log us out after password changes
-        Spree::User.reset_password_by_token(params[:user])
+        Spree.user_class.reset_password_by_token(params[:user])
         if Spree::Auth::Config[:signout_after_password_change]
           sign_in(@user, event: :authentication)
         else
@@ -52,7 +52,7 @@ class Spree::UsersController < Spree::StoreController
   end
 
   def authorize_actions
-    authorize! params[:action].to_sym, Spree::User.new
+    authorize! params[:action].to_sym, Spree.user_class.new
   end
 
   def accurate_title

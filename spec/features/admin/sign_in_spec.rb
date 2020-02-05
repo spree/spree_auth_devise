@@ -15,7 +15,7 @@ RSpec.feature 'Admin - Sign In', type: :feature do
 
     expect(page).not_to have_text 'Login'
     expect(page).to have_text 'LOG OUT'
-    expect(current_path).to eq '/'
+    expect(current_path).to eq '/account'
   end
 
   scenario 'shows validation errors' do

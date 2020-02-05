@@ -2,11 +2,11 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
   before { @request.env['devise.mapping'] = Devise.mappings[:spree_user] }
 
   context '#create' do
-    before { allow(controller).to receive(:after_sign_up_path_for).and_return(spree.root_path(thing: 7)) }
+    before { allow(controller).to receive(:after_sign_up_path_for).and_return(spree.account_path) }
 
-    it 'redirects to after_sign_up_path_for' do
-      spree_post :create, { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
-      expect(response).to redirect_to spree.root_path(thing: 7)
+    it 'redirects to account_path' do
+      post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
+      expect(response).to redirect_to spree.account_path
     end
 
     context 'with a guest token present' do
@@ -24,8 +24,8 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
         else
           order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
         end
-        spree_post :create, spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }
-        user = Spree::User.find_by_email('foobar@example.com')
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }}
+        user = Spree.user_class.find_by_email('foobar@example.com')
 
         order.reload
         expect(order.user_id).to eq user.id
@@ -38,7 +38,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
         else
           order = create(:order, guest_token: 'ABC', user_id: 200)
         end
-        spree_post :create, spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }}
 
         expect(order.reload.user_id).to eq 200
       end
@@ -49,7 +49,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
         else
           order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
         end
-        spree_post :create, spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }}
 
         expect(order.reload.user_id).to be_nil
       end

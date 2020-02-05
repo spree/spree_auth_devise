@@ -11,6 +11,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   end
 
   before_action :check_permissions, only: [:edit, :update]
+  before_action :set_current_order
   skip_before_action :require_no_authentication
 
   # GET /resource/sign_up
@@ -75,9 +76,17 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     'devise.user_registrations'
   end
 
+  def after_sign_up_path_for(resource)
+    after_sign_in_redirect(resource) if is_navigational_format?
+  end
+
   private
 
   def spree_user_params
     params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+  end
+
+  def after_sign_in_redirect(resource_or_scope)
+    stored_location_for(resource_or_scope) || account_path
   end
 end

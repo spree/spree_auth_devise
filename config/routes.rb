@@ -1,6 +1,6 @@
 Spree::Core::Engine.add_routes do
   devise_for :spree_user,
-             class_name: 'Spree::User',
+             class_name: Spree.user_class.to_s,
              controllers: { sessions: 'spree/user_sessions',
                                registrations: 'spree/user_registrations',
                                passwords: 'spree/user_passwords',
@@ -27,12 +27,11 @@ Spree::Core::Engine.add_routes do
   get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration
   put '/checkout/registration' => 'checkout#update_registration', :as => :update_checkout_registration
 
-  get '/account_link' => 'store#account_link'
   resource :account, controller: 'users'
 
   namespace :admin, path: Spree.admin_path do
     devise_for :spree_user,
-               class_name: 'Spree::User',
+               class_name: Spree.user_class.to_s,
                controllers: { sessions: 'spree/admin/user_sessions',
                                  passwords: 'spree/admin/user_passwords' },
                skip: [:unlocks, :omniauth_callbacks, :registrations],

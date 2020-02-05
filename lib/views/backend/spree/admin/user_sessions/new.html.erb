@@ -4,7 +4,7 @@
 
 <div data-hook="login" class="card border-0">
   <div class="card-body">
-    <%= form_for Spree::User.new, :as => :spree_user, :url => spree.admin_create_new_session_path do |f| %>
+    <%= form_for Spree.user_class.new, :as => :spree_user, :url => spree.admin_create_new_session_path do |f| %>
       <div id="password-credentials">
         <div class="form-group text-center">
           <%= f.label :email, Spree.t(:email) %>

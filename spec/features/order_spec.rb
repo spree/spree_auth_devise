@@ -6,30 +6,25 @@ RSpec.feature 'Orders', :js, type: :feature do
 
   # regression test for spree/spree#1687
   scenario 'merge incomplete orders from different sessions' do
-    skip %{
-      TODO: has been broken for ~2 months as of:
-      https://github.com/spree/spree_auth_devise/commit/3157b47b22c559817d34ec34024587d8aa6136dc
-      I dont think we can decode these sessions anymore since Rails 4 switched to encrypted cookies I believe devise stores session encrypted.
-    }
-    create(:product, name: 'RoR Mug')
-    create(:product, name: 'RoR Shirt')
+    ror_mug = create(:product, name: 'RoR Mug')
+    ror_shirt = create(:product, name: 'RoR Shirt')
 
     user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
 
     using_session('first') do
-      add_to_cart 'RoR Mug'
+      add_to_cart ror_mug
 
       visit spree.login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Log in'
 
-      click_link 'Cart'
+      visit spree.cart_path
       expect(page).to have_text 'RoR Mug'
     end
 
     using_session('second') do
-      add_to_cart 'RoR Shirt'
+      add_to_cart ror_shirt
 
       visit spree.login_path
       fill_in 'Email', with: user.email
@@ -37,15 +32,14 @@ RSpec.feature 'Orders', :js, type: :feature do
       click_button 'Log in'
 
       # Order should have been merged with first session
-      click_link 'Cart'
+      visit spree.cart_path
       expect(page).to have_text 'RoR Mug'
       expect(page).to have_text 'RoR Shirt'
     end
 
     using_session('first') do
       visit spree.root_path
-
-      click_link 'Cart'
+      visit spree.cart_path
 
       # Order should have been merged with second session
       expect(page).to have_text 'RoR Mug'
