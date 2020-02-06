@@ -10,8 +10,7 @@
 
           <%= form_for Spree.user_class.new, as: :spree_user, url: spree.reset_password_path do |f| %>
             <div class="form-group">
-              <%= f.label :email, Spree.t(:email), class: 'spree-flat-label' %>
-              <%= f.email_field :email, class: "spree-flat-input" %>
+              <%= f.email_field :email, class: "spree-flat-input", placeholder: Spree.t(:email) %>
             </div>
             <div>
               <%= f.submit Spree.t(:reset_password), class: 'btn btn-primary btn-block spree-btn mt-2' %>
