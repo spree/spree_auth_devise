@@ -102,7 +102,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     if resource_path == spree.checkout_state_path(:address)
       respond_with resource, location: spree.checkout_state_path(:address)
     else
-      respond_with resource, location: account_path
+      respond_with resource, location: spree.account_path
     end
   end
 end
