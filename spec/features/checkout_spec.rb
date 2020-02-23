@@ -60,7 +60,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       find('a.cart-icon').click
 
       expect(page).to have_text 'RoR Mug'
-      within('h1') { expect(page).to have_text 'YOUR SHOPPING BAG' }
+      within('h1') { expect(page).to have_text 'YOUR SHOPPING CART' }
 
       click_link 'checkout'
 
