@@ -50,5 +50,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spree_backend', spree_version
   s.add_development_dependency 'spree_frontend', spree_version
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'webdrivers', '~> 4.2.0'
+  s.add_development_dependency 'webdrivers', '~> 4.3.0'
 end
