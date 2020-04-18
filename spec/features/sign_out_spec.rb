@@ -26,9 +26,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     let!(:other_user) { create(:user) }
 
     it 'clears token cookies' do
-      add_to_cart(mug) do
-        find('.close').click
-      end
+      add_to_cart(mug)
 
       log_out
 
