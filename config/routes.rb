@@ -44,4 +44,12 @@ Spree::Core::Engine.add_routes do
       get '/logout' => 'user_sessions#destroy', :as => :logout
     end
   end
+
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v2 do
+      namespace :storefront do
+        resource :account, controller: :account, only: %i[show create]
+      end
+    end
+  end
 end
