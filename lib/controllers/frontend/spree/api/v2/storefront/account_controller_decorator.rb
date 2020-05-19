@@ -8,16 +8,16 @@ module Spree
           end
 
           def create
-            user = build_resource(spree_user_params)
+            user = Spree.user_class.new_with_session(spree_user_params, session)
             if user.save
               render_serialized_payload { serialize_resource(user) }
             else
-              render json: {error: 'error'}
+              render json: { errors: user.errors.messages }
             end
           end
 
           def spree_user_params
-            params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+            params.require(:user).permit(Spree::PermittedAttributes.user_attributes)
           end
         end
       end
@@ -25,4 +25,4 @@ module Spree
   end
 end
 
-Spree::Api::V2::Storefront::AccountController.prepend(Spree::Api::V2::Storefront::AccountControllerDecorator)
+::Spree::Api::V2::Storefront::AccountController.prepend(Spree::Api::V2::Storefront::AccountControllerDecorator)
