@@ -46,6 +46,11 @@ module Spree
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
         end
+        if Spree::Auth::Engine.api_available?
+          Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/api/**/*_decorator*.rb")) do |c|
+            Rails.configuration.cache_classes ? require(c) : load(c)
+          end
+        end
         ApplicationController.send :include, Spree::AuthenticationHelpers
       end
 
@@ -61,6 +66,10 @@ module Spree
         @@frontend_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Frontend::Engine')
       end
 
+      def self.api_available?
+        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
+      end
+
       if backend_available?
         paths["app/controllers"] << "lib/controllers/backend"
         paths["app/views"] << "lib/views/backend"
@@ -69,6 +78,10 @@ module Spree
       if frontend_available?
         paths["app/controllers"] << "lib/controllers/frontend"
         paths["app/views"] << "lib/views/frontend"
+      end
+
+      if api_available?
+        paths["app/controllers"] << "lib/controllers/api"
       end
 
       config.to_prepare &method(:activate).to_proc
