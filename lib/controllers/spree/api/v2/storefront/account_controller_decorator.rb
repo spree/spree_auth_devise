@@ -10,6 +10,18 @@ module Spree
           def create
             result = Spree::Account::Create.call(user_params: spree_user_params)
 
+            render_payload(result)
+          end
+
+          def update
+            result = Spree::Account::Update.call(user: spree_current_user, user_params: spree_user_params)
+
+            render_payload(result)
+          end
+
+          private
+
+          def render_payload(result)
             if result.success?
               render_serialized_payload { serialize_resource(result.value) }
             else
