@@ -3,6 +3,8 @@ module Spree
     module V2
       module Storefront
         class PasswordsController < ::Devise::PasswordsController
+          skip_before_action :verify_authenticity_token
+
           def create
             user = Spree.user_class.find_by(email: params[:user][:email])
 

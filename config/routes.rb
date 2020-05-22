@@ -45,11 +45,17 @@ Spree::Core::Engine.add_routes do
     end
   end
 
+  devise_for :api_spree_user, class_name: Spree.user_class.to_s, controllers: {
+    :passwords          => 'api/v2/storefront/passwords'
+  }
+
   namespace :api, defaults: { format: 'json' } do
     namespace :v2 do
       namespace :storefront do
         resource :account, controller: :account, only: %i[show create update]
-        resources :passwords, controller: :passwords, only: %i[create update]
+        devise_scope :api_spree_user do
+          resources :passwords, controller: :passwords, only: %i[create update]
+        end
       end
     end
   end
