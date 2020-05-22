@@ -2,7 +2,8 @@ module Spree
   module Api
     module V2
       module Storefront
-        class PasswordsController < ::Devise::PasswordsController
+        class PasswordsController < ::Spree::Api::V2::BaseController
+
           def create
             user = Spree.user_class.find_by(email: params[:user][:email])
 
