@@ -5,6 +5,13 @@ de:
     change_your_password: Kennwort zurücksetzen
     store_credits:
       credit_balance: Saldo des Guthabens
+    user_mailer:
+      reset_password_instructions:
+        instructions_1: "Es wurde eine Anfrage zum Zurücksetzen Ihres Passworts gestellt.\nWenn Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail.\n\nWenn Sie diese Anfrage gestellt haben, klicken Sie bitte auf den folgenden Link:"
+        instructions_2: "Falls die obige URL nicht funktioniert, bitte URL kopieren und in Ihren Browser einfügen\nWenn Sie weiterhin Probleme haben, können Sie sich gerne an uns wenden."
+      confirmation_instructions:
+        welcome: "Schön, dass Sie hier sind %{email}"
+        confirm: "Sie können Ihre Konto-E-Mail-Adresse über die folgende URL bestätigen:"
   devise:
     confirmations:
       confirmed: Ihr Konto wurde erfolgreich aktiviert.
