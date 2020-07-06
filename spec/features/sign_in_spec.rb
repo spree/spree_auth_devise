@@ -35,17 +35,23 @@ RSpec.feature 'Sign In', type: :feature do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    within '.user-menu' do
-      expect(page).to have_text 'admin@person.com'
+    if Spree.version.to_f > 4.1
+      within '.navbar .dropdown-menu' do
+        expect(page).to have_text 'admin@person.com'
+      end
+    else
+      within '.user-menu' do
+        expect(page).to have_text 'admin@person.com'
+      end
     end
     expect(current_path).to eq '/admin/orders'
   end
 
-  xit "should store the user previous location" do
+  it 'should store the user previous location' do
     visit spree.account_path
-    fill_in "Email", with: @user.email
-    fill_in "Password", with: @user.password
-    click_button "Login"
-    expect(current_path).to eq "/account"
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+    click_button 'Log in'
+    expect(current_path).to eq '/account'
   end
 end

@@ -3,11 +3,12 @@ module Spree
     module V2
       module Storefront
         class PasswordsController < ::Spree::Api::V2::BaseController
+          include Spree::Core::ControllerHelpers::Store
 
           def create
             user = Spree.user_class.find_by(email: params[:user][:email])
 
-            if user&.send_reset_password_instructions
+            if user&.send_reset_password_instructions(current_store)
               head :ok
             else
               head :not_found

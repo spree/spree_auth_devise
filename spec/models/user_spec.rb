@@ -1,5 +1,6 @@
 RSpec.describe Spree::User, type: :model do
   before(:all) { Spree::Role.create name: 'admin' }
+  let!(:store) { create(:store) }
 
   it '#admin?' do
     expect(create(:admin_user).admin?).to be true
@@ -8,8 +9,9 @@ RSpec.describe Spree::User, type: :model do
 
   it 'generates the reset password token' do
     user = build(:user)
-    expect(Spree::UserMailer).to receive(:reset_password_instructions).with(user, anything, {}).and_return(double(deliver: true))
-    user.send_reset_password_instructions
+    current_store = Spree::Store.current
+    expect(Spree::UserMailer).to receive(:reset_password_instructions).with(user, anything, { current_store_id: current_store.id }).and_return(double(deliver: true))
+    user.send_reset_password_instructions(current_store)
     expect(user.reset_password_token).not_to be_nil
   end
 
