@@ -27,6 +27,23 @@ module Spree
       has_spree_role?('admin')
     end
 
+    def self.send_reset_password_instructions(attributes={}, current_store)
+      recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+      recoverable.send_reset_password_instructions(current_store) if recoverable.persisted?
+      recoverable
+    end
+
+    def send_reset_password_instructions(current_store)
+      token = set_reset_password_token
+      send_reset_password_instructions_notification(token, current_store.id)
+
+      token
+    end
+
+    def send_reset_password_instructions_notification(token, current_store_id)
+      send_devise_notification(:reset_password_instructions, token, { current_store_id: current_store_id })
+    end
+
     protected
 
     def password_required?

@@ -5,6 +5,13 @@ en:
     change_your_password: "Change your password"
     store_credits:
       credit_balance: Store Credit Balance
+    user_mailer:
+      reset_password_instructions:
+        instructions_1: "A request to reset your password has been made.\nIf you did not make this request, simply ignore this email.\n\nIf you did make this request just click the link below:"
+        instructions_2: "If the above URL does not work try copying and pasting it into your browser.\nIf you continue to have problems please feel free to contact us."
+      confirmation_instructions:
+        welcome: "Welcome %{email}!"
+        confirm: "You can confirm your account email through the url below:"
   devise:
     confirmations:
       confirmed: Your account was successfully confirmed. You are now signed in.

@@ -1,6 +1,7 @@
 RSpec.describe Spree::Api::V2::Storefront::PasswordsController, type: :controller do
   let(:user) { create(:user) }
   let(:password) { 'new_password' }
+  let(:store) { create(:store) }
 
   describe 'POST create' do
     before { post :create, params: params }
@@ -31,7 +32,7 @@ RSpec.describe Spree::Api::V2::Storefront::PasswordsController, type: :controlle
     context 'when updating password with blank password' do
       let(:params) {
         {
-          id: user.send_reset_password_instructions,
+          id: user.send_reset_password_instructions(Spree::Store.current),
           user: {
             password: '',
             password_confirmation: ''
@@ -48,7 +49,7 @@ RSpec.describe Spree::Api::V2::Storefront::PasswordsController, type: :controlle
     context 'when updating password with specified password' do
       let(:params) {
         {
-          id: user.send_reset_password_instructions,
+          id: user.send_reset_password_instructions(Spree::Store.current),
           user: {
             password: password,
             password_confirmation: password

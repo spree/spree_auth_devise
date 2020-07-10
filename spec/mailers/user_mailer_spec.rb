@@ -5,7 +5,7 @@ RSpec.describe Spree::UserMailer, type: :mailer do
   describe '#reset_password_instructions' do
     describe 'message contents' do
       before do
-        @message = described_class.reset_password_instructions(user, 'token goes here')
+        @message = described_class.reset_password_instructions(user, 'token goes here', { current_store_id: Spree::Store.current.id })
       end
 
       context 'subject includes' do
@@ -30,7 +30,7 @@ RSpec.describe Spree::UserMailer, type: :mailer do
     describe 'legacy support for User object' do
       it 'sends an email' do
         expect {
-          described_class.reset_password_instructions(user, 'token goes here').deliver_now
+          described_class.reset_password_instructions(user, 'token goes here', { current_store_id: Spree::Store.current.id }).deliver_now
         }.to change(ActionMailer::Base.deliveries, :size).by(1)
       end
     end
