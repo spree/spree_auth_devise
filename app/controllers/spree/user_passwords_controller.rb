@@ -53,4 +53,10 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   def new_session_path(resource_name)
     spree.send("new_#{resource_name}_session_path")
   end
+
+  private
+
+  def accurate_title
+    Spree.t(:reset_password)
+  end
 end
