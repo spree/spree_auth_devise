@@ -6,7 +6,12 @@ module Spree::CheckoutControllerDecorator
   end
 
   def registration
-    @user = Spree.user_class.new
+    @user = Spree.user_class.new 
+    @title = Spree.t(:registration)
+  end
+
+  def edit
+    @title = Spree.t(@order.state)
   end
 
   def update_registration
