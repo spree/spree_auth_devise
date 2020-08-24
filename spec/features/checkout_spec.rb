@@ -89,7 +89,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       token_url_regex = /^http:\/\/www.example.com\/user\/spree_user\/password\/edit\?reset_password_token=(.*)$/
       token = token_url_regex.match(reset_password_email.body.encoded)[1]
 
-      visit spree.edit_spree_user_password_path(reset_password_token: token)
+      visit spree.edit_spree_user_password_path(reset_password_token: token).tr("%0D","")
       fill_in 'Password', with: 'password'
       fill_in 'Password Confirmation', with: 'password'
       click_button 'Update'
