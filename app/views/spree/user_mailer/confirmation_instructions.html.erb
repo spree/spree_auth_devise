@@ -1,0 +1,20 @@
+<h1>
+  <%= Spree.t('user_mailer.confirmation_instructions.welcome', email: @email) %>
+</h1>
+<p>
+  <%= Spree.t('user_mailer.confirmation_instructions.instructions_1', { store_name: @current_store.name }) %>
+</p>
+<p>
+  <%= Spree.t('user_mailer.confirmation_instructions.instructions_2') %>
+</p>
+<p class="body-action">
+  <a href="<%= @confirmation_url %>" class="button button--green"><%= Spree.t('user_mailer.confirmation_instructions.button') %></a>
+</p>
+<p>
+  <%= Spree.t('user_mailer.confirmation_instructions.instructions_3') %>
+</p>
+<p>
+  <%= Spree.t('user_mailer.confirmation_instructions.thanks') %>
+  <br />
+  <%= Spree.t('user_mailer.confirmation_instructions.store_team', { store_name: @current_store.name }) %>
+</p>

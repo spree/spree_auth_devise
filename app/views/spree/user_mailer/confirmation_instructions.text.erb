@@ -1,5 +1,8 @@
-<%= Spree.t('confirmation_instructions.welcome', email: @email) %>
-
-<%= Spree.t('confirmation_instructions.confirm') %>
-
+<%= Spree.t('user_mailer.confirmation_instructions.welcome', email: @email) %>
+<%= Spree.t('user_mailer.confirmation_instructions.instructions_1', { store_name: @current_store.name }) %>
+<%= Spree.t('user_mailer.confirmation_instructions.instructions_2') %>
+<%= Spree.t('user_mailer.confirmation_instructions.button') %>
 <%= @confirmation_url %>
+<%= Spree.t('user_mailer.confirmation_instructions.instructions_3') %>
+<%= Spree.t('user_mailer.confirmation_instructions.thanks') %>
+<%= Spree.t('user_mailer.confirmation_instructions.store_team', { store_name: @current_store.name }) %>
