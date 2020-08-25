@@ -7,8 +7,13 @@ en:
       credit_balance: Store Credit Balance
     user_mailer:
       reset_password_instructions:
-        instructions_1: "A request to reset your password has been made.\nIf you did not make this request, simply ignore this email.\n\nIf you did make this request just click the link below:"
-        instructions_2: "If the above URL does not work try copying and pasting it into your browser.\nIf you continue to have problems please feel free to contact us."
+        welcome: "Hi %{email}"
+        instructions_1: "A request to reset the password for your %{store_name} account has been made."
+        instructions_2: Click the button below to reset it.
+        instructions_3: If you did not request a password change ignore this email or contact us.
+        button: Reset your password
+        thanks: Thank you,
+        store_team: "%{store_name} Team"
       confirmation_instructions:
         welcome: "Welcome %{email}!"
         confirm: "You can confirm your account email through the url below:"
