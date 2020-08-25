@@ -16,7 +16,12 @@ en:
         store_team: "%{store_name} Team"
       confirmation_instructions:
         welcome: "Welcome %{email}!"
-        confirm: "You can confirm your account email through the url below:"
+        instructions_1: "Thanks for registering at %{store_name}."
+        instructions_2: "Click the button below to confirm your account:"
+        instructions_3: If you have any questions, feel free to simply reply to this email.
+        button: Confirm email address
+        thanks: Thank you,
+        store_team: "%{store_name} Team"
   devise:
     confirmations:
       confirmed: Your account was successfully confirmed. You are now signed in.
