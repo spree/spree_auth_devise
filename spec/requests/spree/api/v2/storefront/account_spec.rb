@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe 'Storefront API v2 Account spec', type: :request do
-  describe 'account#create' do
-    before { post '/api/v2/storefront/account', params: params }
-
+  describe 'account#create', reload_user: true do
     context 'valid user params' do
       let(:params) do
         {
@@ -15,10 +13,29 @@ describe 'Storefront API v2 Account spec', type: :request do
         }
       end
 
-      it_behaves_like 'returns 200 HTTP status'
+      context 'registration enabled' do
+        before { post '/api/v2/storefront/account', params: params }
 
-      it 'return JSON API payload of User' do
-        expect(JSON.parse(response.body)['data']['attributes']['email']).to eq('hello@example.com')
+        it_behaves_like 'returns 200 HTTP status'
+
+        it 'return JSON API payload of User' do
+          expect(JSON.parse(response.body)['data']['attributes']['email']).to eq('hello@example.com')
+        end
+      end
+
+      context 'registration is disabled' do
+        before do
+          set_registerable_option(false)
+          post '/api/v2/storefront/account', params: params
+        end
+
+        after do
+          set_registerable_option(true)
+        end
+
+        it 'return JSON API payload of error' do
+          expect(JSON.parse(response.body)['error']).to eq('User registration is disabled')
+        end
       end
     end
 
@@ -32,6 +49,8 @@ describe 'Storefront API v2 Account spec', type: :request do
           }
         }
       end
+
+      before { post '/api/v2/storefront/account', params: params }
 
       it 'return JSON API payload of error' do
         expect(JSON.parse(response.body)['error']).to eq("Password Confirmation doesn't match Password")
