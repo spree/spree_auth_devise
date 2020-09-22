@@ -78,4 +78,17 @@ RSpec.describe Spree::User, type: :model do
       expect(Spree.user_class.devise_modules).to_not include(:confirmable)
     end
   end
+
+  describe "registerable", reload_user: true do
+    it "is registerable if the registerable option is enabled" do
+      set_registerable_option(true)
+      expect(Spree.user_class.devise_modules).to include(:registerable)
+      set_confirmable_option(false)
+    end
+
+    it "is not registerable if the registerable option is disabled" do
+      set_registerable_option(false)
+      expect(Spree.user_class.devise_modules).to_not include(:registerable)
+    end
+  end
 end
