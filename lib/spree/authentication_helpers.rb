@@ -3,7 +3,7 @@ module Spree
     def self.included(receiver)
       receiver.send :helper_method, :spree_current_user
       receiver.send :helper_method, :spree_login_path
-      receiver.send :helper_method, :spree_signup_path
+      receiver.send :helper_method, :spree_signup_path if Spree::Auth::Config[:registerable]
       receiver.send :helper_method, :spree_logout_path
     end
 
@@ -16,6 +16,8 @@ module Spree
     end
 
     def spree_signup_path
+      return spree.root_path unless Spree::Auth::Config[:registerable]
+
       spree.signup_path
     end
 

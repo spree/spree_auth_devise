@@ -8,6 +8,8 @@ module Spree
           end
 
           def create
+            return render_error_payload('User registration is disabled') unless Spree::Auth::Config[:registerable]
+
             result = Spree::Account::Create.call(user_params: spree_user_params)
 
             render_payload(result)
