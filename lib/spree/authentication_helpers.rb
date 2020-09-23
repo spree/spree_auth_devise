@@ -16,7 +16,7 @@ module Spree
     end
 
     def spree_signup_path
-      return '/' unless Spree::Auth::Config[:registerable]
+      return spree.root_path unless Spree::Auth::Config[:registerable]
 
       spree.signup_path
     end
