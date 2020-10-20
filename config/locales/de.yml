@@ -3,8 +3,6 @@ de:
   spree:
     admin_login: Admin Login
     change_your_password: Kennwort zurücksetzen
-    store_credits:
-      credit_balance: Saldo des Guthabens
     user_mailer:
       reset_password_instructions:
         instructions_1: "Es wurde eine Anfrage zum Zurücksetzen Ihres Passworts gestellt.\nWenn Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail.\n\nWenn Sie diese Anfrage gestellt haben, klicken Sie bitte auf den folgenden Link:"
