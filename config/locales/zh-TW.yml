@@ -3,8 +3,6 @@ zh-TW:
   spree:
     admin_login: "管理員登入"
     change_your_password: "更改密碼"
-    store_credits:
-      credit_balance: 商城購物金餘額
   devise:
     confirmations:
       confirmed: 你的帳號已經確認完成，現在你已經登入網站了。
