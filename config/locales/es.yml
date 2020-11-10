@@ -28,7 +28,7 @@ es:
     user_passwords:
       spree_user:
         cannot_be_blank: La contraseña no puede estar en blanco.
-        send_instructions: Recibirá un email con instrucciones acerca de como restaurar su contraseña en pocos minutos.
+        send_instructions: El usuario actual recibirá un correo electrónico con detalles para restablecer su contraseña..
         updated: Su contraseña ha sido cambiada correctamente. Ahora está conectado.
     user_registrations:
       destroyed: Hasta luego! Su cuenta ha sido cancelada correctamente. Esperamos volver a verle pronto.
