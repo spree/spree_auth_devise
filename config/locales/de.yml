@@ -41,7 +41,7 @@ de:
       spree_user:
         cannot_be_blank: Ihr Passwort darf nicht leer sein.
         no_token: Sie können nicht auf diese Seite zugreifen, wenn Sie den Link aus einer E-Mail zum Zurücksetzen des Kennworts nicht verwenden. Wenn Sie den Link aus einer E-Mail zum Zurücksetzen des Passworts verwenden, stellen Sie bitte sicher, dass Sie die vollständige URL verwendet haben.
-        send_instructions: In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Passwort zurücksetzen.
+        send_instructions: Bestehende Benutzer erhalten in wenigen Minuten eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts.
         updated: Ihr Passwort wurde erfolgreich geändert.
     user_registrations:
       destroyed: Ihr Konto wurde erfolgreich gelöscht. Auf Wiedersehen!
