@@ -28,7 +28,7 @@ nl:
     user_passwords:
       spree_user:
         cannot_be_blank: Je wachtwoord kan niet leeg zijn.
-        send_instructions: Binnen enkele minuten ontvang je een e-mail met instructies om je wachtwoord te resetten.
+        send_instructions: Binnen enkele minuten ontvangt de bestaande gebruiker een e-mail met instructies om uw wachtwoord opnieuw in te stellen.
         updated: Je wachtwoord is succesvol gewijzigd. Je bent nu ingelogd.
     user_registrations:
       destroyed: Tot ziens! Je account is succesvol opgezegd. We hopen je snel terug te zien.
