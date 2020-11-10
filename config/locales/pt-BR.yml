@@ -30,7 +30,7 @@ pt-BR:
     user_passwords:
       spree_user:
         cannot_be_blank: Sua senha não pode estar em branco.
-        send_instructions: Você receberá um e-mail com instruções sobre como redefinir sua senha em poucos minutos.
+        send_instructions: Os usuários existentes receberão um e-mail com instruções sobre como redefinir sua senha em minutos.
         updated: Sua senha foi alterada com sucesso. Agora você está conectado.
     user_registrations:
       destroyed: Até logo! Sua conta foi cancelada com sucesso. Esperamos ver você em breve.
