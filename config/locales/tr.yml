@@ -28,7 +28,7 @@ tr:
     user_passwords:
       spree_user:
         cannot_be_blank: Boş parola giremezsiniz.
-        send_instructions: Birkaç dakika içinde şifrenizi nasıl yeniden ayarlayacağınızı anlatan bir e-posta alacaksınız.
+        send_instructions: Mevcut Kullanıcılar, birkaç dakika içinde şifrenizi nasıl sıfırlayacaklarını açıklayan bir e-posta alacaklar..
         updated: Şifreniz başarıyla değiştirildi. Oturumunuz açıldı.
     user_registrations:
       destroyed: Güle Güle! Hesabınız başarıyla iptal edildi. Sizi tekrar aramızda görmeyi umuyoruz.
