@@ -11,7 +11,7 @@ module Spree
             if user&.send_reset_password_instructions(current_store)
               head :ok
             else
-              head :not_found
+              head :ok
             end
           end
 
