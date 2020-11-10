@@ -28,7 +28,7 @@ fr:
     user_passwords:
       spree_user:
         cannot_be_blank: Votre mot de passe ne peut pas être vide.
-        send_instructions: Vous recevrez dans quelques minutes un courriel avec les instructions sur la façon de réinitialiser votre mot de passe.
+        send_instructions: L'utilisateur existant recevra un e-mail avec des détails pour réinitialiser son mot de passe.
         updated: Votre mot de passe a été changé avec succès. Vous êtes maintenant connecté(e).
     user_registrations:
       destroyed: Au revoir! Votre compte a été annulé. Nous espérons vous revoir bientôt.
