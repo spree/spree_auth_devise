@@ -53,7 +53,7 @@ it:
     user_passwords:
       spree_user:
         cannot_be_blank: La tua password non può essere vuota.
-        send_instructions: Riceverai un'email con le istruzioni per resettare la tua password entro qualche minuto.
+        send_instructions: Gli utenti esistenti riceveranno un'e-mail con le istruzioni per reimpostare la password entro pochi minuti.
         updated: La tua password è stata cambiata con successo. Ora sei collegato.
     user_registrations:
       destroyed: Addio! Il tuo account è stato correttamente cancellato. Speriamo di rivederti presto.
