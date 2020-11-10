@@ -34,7 +34,7 @@ zh-TW:
       spree_user:
         cannot_be_blank: 密碼不能為空白。
         no_token: "你只能透過重新設定密碼的 Email 內的連結來訪問此頁面。如果你真的是透過那封 Email 來此頁面，請確定你是透過完整的網址過來的。"
-        send_instructions: 你在幾分鐘後會收到一封 Email 教你如何更改密碼。
+        send_instructions: 现有用户将在几分钟内收到一封电子邮件，教您如何更改密码。
         updated: 你的密碼已經更改成功，你已成功登入。
     user_registrations:
       destroyed: 再見！你的帳號已經被取消了，但我們希望能再服務你。
