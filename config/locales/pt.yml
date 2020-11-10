@@ -31,7 +31,7 @@ pt:
     user_passwords:
       spree_user:
         cannot_be_blank: A sua senha não pode estar em branco.
-        send_instructions: Receberá um e-mail com as instruções de redefinição da sua senha em poucos minutos.
+        send_instructions: Os usuários existentes receberão um e-mail com instruções sobre como redefinir sua senha em minutos.
         no_token: "Não pode aceder a esta página sem ser através de um e-mail de redefinição de senha. Se está a aceder através de um e-mail de redefinição de senha, verifique se está a usar o URL completo."
         updated: A sua senha foi alterada com sucesso. Já se encontra conectado.
     user_registrations:
