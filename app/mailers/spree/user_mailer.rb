@@ -12,10 +12,12 @@ module Spree
     end
 
     def confirmation_instructions(user, token, _opts = {})
-      @confirmation_url = spree.spree_user_confirmation_url(confirmation_token: token, host: Spree::Store.current.url)
+      current_store_id = _opts[:current_store_id]
+      @current_store = Spree::Store.find(current_store_id) || Spree::Store.current
+      @confirmation_url = spree_user_confirmation_url(confirmation_token: token, host: Spree::Store.current.url)
       @email = user.email
 
-      mail to: user.email, from: from_address, subject: Spree::Store.current.name + ' ' + I18n.t(:subject, scope: [:devise, :mailer, :confirmation_instructions])
+      mail to: user.email, from: from_address, subject: @current_store.name + ' ' + I18n.t(:subject, scope: [:devise, :mailer, :confirmation_instructions]), store_url: @current_store.url
     end
   end
 end
