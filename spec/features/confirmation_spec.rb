@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.feature 'Confirmation', type: :feature, reload_user: true do
   before do
     set_confirmable_option(true)
-    Spree::UserMailer.stub(:confirmation_instructions).and_return(double(deliver: true))
+    expect(Spree::UserMailer).to receive(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.current.id }).and_return(double(deliver: true))
   end
 
   after(:each) { set_confirmable_option(false) }
