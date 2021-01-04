@@ -19,8 +19,6 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'deface', '~> 1.0'
-
   s.add_dependency 'devise', '~> 4.7'
   s.add_dependency 'devise-encryptable', '0.2.0'
 
