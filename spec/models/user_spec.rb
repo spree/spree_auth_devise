@@ -68,7 +68,7 @@ RSpec.describe Spree::User, type: :model do
   describe "confirmable", reload_user: true do
     it "is confirmable if the confirmable option is enabled" do
       set_confirmable_option(true)
-      Spree::UserMailer.stub(:confirmation_instructions).and_return(double(deliver: true))
+      Spree::UserMailer.stub(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.current.id }).and_return(double(deliver: true))
       expect(Spree.user_class.devise_modules).to include(:confirmable)
       set_confirmable_option(false)
     end

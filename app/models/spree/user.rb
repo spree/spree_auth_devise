@@ -27,6 +27,31 @@ module Spree
       has_spree_role?('admin')
     end
 
+    def self.send_confirmation_instructions(attributes = {}, current_store)
+      confirmable = find_by_unconfirmed_email_with_errors(attributes) if reconfirmable
+      unless confirmable.try(:persisted?)
+        confirmable = find_or_initialize_with_errors(confirmation_keys, attributes, :not_found)
+      end
+      confirmable.resend_confirmation_instructions(current_store) if confirmable.persisted?
+      confirmable
+    end
+
+    def resend_confirmation_instructions(current_store)
+      pending_any_confirmation do
+        send_confirmation_instructions(current_store)
+      end
+    end
+
+    def send_confirmation_instructions(current_store)
+      unless @raw_confirmation_token
+        generate_confirmation_token!
+      end
+
+      opts = pending_reconfirmation? ? { to: unconfirmed_email } : {}
+      opts[:current_store_id] = current_store.id
+      send_devise_notification(:confirmation_instructions, @raw_confirmation_token, opts)
+    end
+
     def self.send_reset_password_instructions(attributes={}, current_store)
       recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
       recoverable.send_reset_password_instructions(current_store) if recoverable.persisted?
