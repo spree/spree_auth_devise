@@ -3,16 +3,23 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_auth_devise'
-  s.version     = '4.2.0'
+  s.version     = '4.3.0'
   s.summary     = 'Provides authentication and authorization services for use with Spree by using Devise and CanCan.'
   s.description = s.summary
 
   s.required_ruby_version = '>= 2.5.0'
 
-  s.author      = 'Sean Schofield'
-  s.email       = 'sean@spreecommerce.com'
+  s.authors     = ['Sean Schofield', 'Spark Solutions']
+  s.email       = 'hello@spreecommerce.org'
   s.homepage    = 'https://spreecommerce.org'
   s.license     = 'BSD-3-Clause'
+
+  s.metadata = {
+    "bug_tracker_uri"   => "https://github.com/spree/spree_auth_devise/issues",
+    "changelog_uri"     => "https://github.com/spree/spree_auth_devise/releases/tag/v#{s.version}",
+    "documentation_uri" => "https://guides.spreecommerce.org/",
+    "source_code_uri"   => "https://github.com/spree/spree_auth_devise/tree/v#{s.version}",
+  }
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- spec/*`.split("\n")
