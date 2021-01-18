@@ -71,6 +71,10 @@ module Spree
 
     protected
 
+    def send_on_create_confirmation_instructions(current_store = nil)
+      send_confirmation_instructions(current_store || Spree::Store.default)
+    end
+
     def password_required?
       !persisted? || password.present? || password_confirmation.present?
     end
