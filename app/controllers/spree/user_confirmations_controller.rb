@@ -5,6 +5,7 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
+  include Spree::Core::ControllerHelpers::Currency
 
   before_action :set_current_order
 
