@@ -6,6 +6,14 @@ class Spree::UserPasswordsController < Devise::PasswordsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
+  if defined?(Spree::Core::ControllerHelpers::Currency)
+    include Spree::Core::ControllerHelpers::Currency
+  end
+
+  if defined?(Spree::Core::ControllerHelpers::Locale)
+    include Spree::Core::ControllerHelpers::Locale
+  end
+
   if defined?(SpreeI18n::ControllerLocaleHelper)
     include SpreeI18n::ControllerLocaleHelper
   end

@@ -6,6 +6,14 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
+  if defined?(Spree::Core::ControllerHelpers::Currency)
+    include Spree::Core::ControllerHelpers::Currency
+  end
+
+  if defined?(Spree::Core::ControllerHelpers::Locale)
+    include Spree::Core::ControllerHelpers::Locale
+  end
+
   before_action :set_current_order
 
   if Spree.version.to_f >= 4.2
