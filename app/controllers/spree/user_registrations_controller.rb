@@ -5,7 +5,14 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
-  include Spree::Core::ControllerHelpers::Currency
+
+  if defined?(Spree::Core::ControllerHelpers::Currency)
+    include Spree::Core::ControllerHelpers::Currency
+  end
+
+  if defined?(Spree::Core::ControllerHelpers::Locale)
+    include Spree::Core::ControllerHelpers::Locale
+  end
 
   if defined?(SpreeI18n::ControllerLocaleHelper)
     include SpreeI18n::ControllerLocaleHelper

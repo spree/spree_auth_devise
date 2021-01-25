@@ -5,7 +5,14 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
-  include Spree::Core::ControllerHelpers::Currency
+
+  if defined?(Spree::Core::ControllerHelpers::Currency)
+    include Spree::Core::ControllerHelpers::Currency
+  end
+
+  if defined?(Spree::Core::ControllerHelpers::Locale)
+    include Spree::Core::ControllerHelpers::Locale
+  end
 
   before_action :set_current_order
 
