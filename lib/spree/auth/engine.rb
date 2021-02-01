@@ -12,7 +12,7 @@ module Spree
       end
 
       initializer "spree_auth_devise.set_user_class", after: :load_config_initializers do
-        Spree.user_class = "Spree::User"
+        Spree.user_class ||= "Spree::User"
       end
 
       initializer "spree_auth_devise.check_secret_token" do
