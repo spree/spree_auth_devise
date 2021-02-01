@@ -12,7 +12,7 @@ module Spree
       end
 
       initializer "spree_auth_devise.set_user_class", after: :load_config_initializers do
-        Spree.user_class = "Spree::User"
+        Spree.user_class = 'Spree::User' if Spree.user_class.blank? || Spree.user_class.to_s == 'Spree::LegacyUser'
       end
 
       initializer "spree_auth_devise.check_secret_token" do
@@ -29,19 +29,11 @@ module Spree
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
         if Spree::Auth::Engine.backend_available?
-          Rails.application.config.assets.precompile += [
-            'lib/assets/javascripts/spree/backend/spree_auth.js',
-            'lib/assets/javascripts/spree/backend/spree_auth.css'
-          ]
           Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/backend/*/*/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
         end
         if Spree::Auth::Engine.frontend_available?
-          Rails.application.config.assets.precompile += [
-            'lib/assets/javascripts/spree/frontend/spree_auth.js',
-            'lib/assets/javascripts/spree/frontend/spree_auth.css'
-          ]
           Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/frontend/**/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
