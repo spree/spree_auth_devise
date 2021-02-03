@@ -78,4 +78,33 @@ RSpec.describe Spree::User, type: :model do
       expect(Spree.user_class.devise_modules).to_not include(:confirmable)
     end
   end
+
+  describe "#send_confirmation_instructions" do
+    let(:default_store) { Spree::Store.default }
+
+    before { set_confirmable_option(true) }
+
+    context "when current store not exists" do
+      it 'takes default store and sends confirmation instruction' do
+        user = create(:user)
+        expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
+          user, anything, { current_store_id: default_store.id }).and_return(double(deliver: true)
+        )
+
+        user.send_confirmation_instructions(nil)
+      end
+    end
+
+    context "when current store exists" do
+      it 'takes current store and sends confirmation instruction' do
+        user = create(:user)
+
+        expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
+          user, anything, { current_store_id: store.id }).and_return(double(deliver: true)
+        )
+
+        user.send_confirmation_instructions(store)
+      end
+    end
+  end
 end
