@@ -48,7 +48,7 @@ module Spree
       end
 
       opts = pending_reconfirmation? ? { to: unconfirmed_email } : {}
-      opts[:current_store_id] = current_store.id
+      opts[:current_store_id] = current_store&.id || Spree::Store.default.id
       send_devise_notification(:confirmation_instructions, @raw_confirmation_token, opts)
     end
 
