@@ -11,7 +11,6 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
   def create
     authenticate_spree_user!
 
-    binding.pry
     if spree_user_signed_in?
       respond_to do |format|
         format.html {
