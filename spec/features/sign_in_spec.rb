@@ -33,13 +33,14 @@ RSpec.feature 'Sign In', type: :feature do
 
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-    click_button 'Log in'
 
     if Spree.version.to_f > 4.1
+      click_button 'Login'
       within '.navbar .dropdown-menu' do
         expect(page).to have_text 'admin@person.com'
       end
     else
+      click_button 'Log in'
       within '.user-menu' do
         expect(page).to have_text 'admin@person.com'
       end
