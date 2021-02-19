@@ -1,6 +1,7 @@
 RSpec.feature 'Admin orders', type: :feature do
   background do
-    sign_in_as! create(:admin_user)
+    user = create(:admin_user)
+    log_in email: user.email, password: user.password
   end
 
   # Regression #203

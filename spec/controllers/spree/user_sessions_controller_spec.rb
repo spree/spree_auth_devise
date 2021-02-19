@@ -137,7 +137,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           request.cookie_jar.signed[:guest_token] = 'ABC'
           request.cookie_jar.signed[:token] = 'DEF'
         end
-          
+
         it 'assigns the correct token attribute for the order' do 
           if Spree.version.to_f > 3.6
             order = create(:order, email: user.email, token: 'ABC', user_id: nil, created_by_id: nil)
@@ -156,6 +156,18 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
         it "redirects to account path after signing in" do
           post :create, params: { spree_user: { email: user.email, password: 'secret' }}
           expect(response).to redirect_to spree.account_path
+        end
+
+        context 'different locale' do
+          before do
+            Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
+          end
+
+          it 'redirects to localized account path after signing in' do
+            skip if Spree.version.to_f < 4.2
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: 'fr' }
+            expect(response).to redirect_to spree.account_path(locale: 'fr')
+          end
         end
       end
 
