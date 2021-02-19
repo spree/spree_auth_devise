@@ -14,14 +14,14 @@ RSpec.feature 'Sign In', type: :feature do
     show_user_menu
 
     expect(page).not_to have_text 'Login'
-    expect(page).to have_text 'LOG OUT'
+    expect(page).to have_text 'LOGOUT'
     expect(current_path).to eq '/account'
   end
 
   scenario 'show validation erros' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong_password'
-    click_button 'Log in'
+    click_button 'Login'
 
     expect(page).to have_text 'Invalid email or password'
     expect(page).to have_text 'Log in'
@@ -40,7 +40,7 @@ RSpec.feature 'Sign In', type: :feature do
         expect(page).to have_text 'admin@person.com'
       end
     else
-      click_button 'Log in'
+      click_button 'Login'
       within '.user-menu' do
         expect(page).to have_text 'admin@person.com'
       end
@@ -52,7 +52,28 @@ RSpec.feature 'Sign In', type: :feature do
     visit spree.account_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
-    click_button 'Log in'
+    click_button 'Login'
     expect(current_path).to eq '/account'
+  end
+
+  context 'localized' do
+    skip if Spree.version.to_f < 4.2
+
+    before do
+      add_french_locales
+      Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
+      I18n.locale = :fr
+    end
+
+    after { I18n.locale = :en }
+
+    scenario 'let a user sign in successfully', js: true do
+      log_in(email: @user.email, password: @user.password, locale: 'fr')
+      show_user_menu
+
+      expect(page).not_to have_text Spree.t(:login).upcase
+      expect(page).to have_text Spree.t(:logout).upcase
+      expect(current_url).to match(/\/account\?locale\=fr$/)
+    end
   end
 end

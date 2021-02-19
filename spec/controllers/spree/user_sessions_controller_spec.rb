@@ -157,6 +157,19 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           post :create, params: { spree_user: { email: user.email, password: 'secret' }}
           expect(response).to redirect_to spree.account_path
         end
+
+        context 'different locale' do
+          skip if Spree.version.to_f < 4.2
+
+          before do
+            Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
+          end
+
+          it 'redirects to localized account path after signing in' do
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: 'fr' }
+            expect(response).to redirect_to spree.account_path(locale: 'fr')
+          end
+        end
       end
 
       context "and js format is used" do

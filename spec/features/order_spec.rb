@@ -17,7 +17,7 @@ RSpec.feature 'Orders', :js, type: :feature do
       visit spree.login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
-      click_button 'Log in'
+      click_button 'Login'
 
       visit spree.cart_path
       expect(page).to have_text 'RoR Mug'
@@ -29,7 +29,7 @@ RSpec.feature 'Orders', :js, type: :feature do
       visit spree.login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
-      click_button 'Log in'
+      click_button 'Login'
 
       # Order should have been merged with first session
       visit spree.cart_path
