@@ -6,17 +6,16 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
-  if defined?(Spree::Core::ControllerHelpers::Currency)
-    include Spree::Core::ControllerHelpers::Currency
-  end
+  include SpreeI18n::ControllerLocaleHelper if defined?(SpreeI18n::ControllerLocaleHelper)
 
-  if defined?(Spree::Core::ControllerHelpers::Locale)
-    include Spree::Core::ControllerHelpers::Locale
-  end
+  include Spree::Core::ControllerHelpers::Currency if defined?(Spree::Core::ControllerHelpers::Currency)
+  include Spree::Core::ControllerHelpers::Locale if defined?(Spree::Core::ControllerHelpers::Locale)
 
-  if defined?(SpreeI18n::ControllerLocaleHelper)
-    include SpreeI18n::ControllerLocaleHelper
-  end
+  include Spree::LocaleUrls if defined?(Spree::LocaleUrls)
+
+  helper 'spree/locale' if defined?(Spree::LocaleHelper)
+  helper 'spree/currency' if defined?(Spree::CurrencyHelper)
+  helper 'spree/store' if defined?(Spree::StoreHelper)
 
   before_action :set_current_order
 
