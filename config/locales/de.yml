@@ -2,7 +2,6 @@
 de:
   spree:
     admin_login: Admin Login
-    change_your_password: Kennwort zurücksetzen
     user_mailer:
       reset_password_instructions:
         instructions_1: "Es wurde eine Anfrage zum Zurücksetzen Ihres Passworts gestellt.\nWenn Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail.\n\nWenn Sie diese Anfrage gestellt haben, klicken Sie bitte auf den folgenden Link:"
@@ -13,53 +12,19 @@ de:
   devise:
     confirmations:
       confirmed: Ihr Konto wurde erfolgreich aktiviert.
-      send_instructions: 'In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen, um Ihr Konto zu aktivieren.'
       spree_user:
         already_confirmed: Ihre E-Mail wurde bereits bestätigt. Bitte versuchen Sie erneut, sich anzumelden.
     failure:
-      inactive: Ihr Konto wurde noch nicht aktiviert.
       invalid: Ungültige E-Mail-Adresse oder Passwort.
       invalid_token: Ungültiger Authentifizierungsschlüssel.
-      locked: Ihr Konto ist gesperrt.
-      timeout: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an, um fortzufahren.'
-      unauthenticated: 'Sie müssen sich anmelden oder registrieren, bevor Sie fortfahren.'
-      unconfirmed: 'Sie müssen Ihre Registrierung bestätigen, bevor Sie fortfahren.'
-    mailer:
-      confirmation_instructions:
-        subject: Bestätigen Sie Ihre Registrierung
-      reset_password_instructions:
-        subject: Passwort zurücksetzen
-      unlock_instructions:
-        subject: Konto freischalten
-    oauth_callbacks:
-      failure: 'Autorisierung durch %{kind} fehlgeschlagen aufgrund von %{reason}.'
-      success: 'Erfolgreich autorisiert durch %{kind} Konto.'
     unlocks:
-      send_instructions: In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Konto freizuschalten.
       unlocked: Ihr Konto wurde erfolgreich freigeschaltet.
     user_passwords:
       spree_user:
         cannot_be_blank: Ihr Passwort darf nicht leer sein.
-        no_token: Sie können nicht auf diese Seite zugreifen, wenn Sie den Link aus einer E-Mail zum Zurücksetzen des Kennworts nicht verwenden. Wenn Sie den Link aus einer E-Mail zum Zurücksetzen des Passworts verwenden, stellen Sie bitte sicher, dass Sie die vollständige URL verwendet haben.
-        send_instructions: In ein paar Minuten erhalten Sie eine E-Mail mit Anweisungen um Ihr Passwort zurücksetzen.
-        updated: Ihr Passwort wurde erfolgreich geändert.
-    user_registrations:
-      destroyed: Ihr Konto wurde erfolgreich gelöscht. Auf Wiedersehen!
-      inactive_signed_up: 'Sie haben sich erfolgreich registriert. Wir konnten Sie jedoch nicht anmelden, da Ihr Konto %{reason} ist.'
-      signed_up_but_unconfirmed: Eine Nachricht mit einem Bestätigungslink wurde an Ihre E-Mail-Adresse gesendet. Bitte folgen Sie dem Link, um Ihr Konto zu aktivieren.
-      signed_up: Herzlich Willkommen! Sie haben sich erfolgreich registriert.
-      updated: Sie haben Ihr Konto erfolgreich aktualisiert.
     user_sessions:
-      signed_in: Erfolgreich angemeldet.
-      signed_out: Erfolgreich abgemeldet.
       already_signed_in: Bereits angemeldet.
       already_signed_out: Bereits abgemeldet.
   errors:
     messages:
-      already_confirmed: wurde bereits bestätigt
       email_is_invalid: E-Mail-Adresse darf nicht leer sein
-      not_found: nicht gefunden
-      not_locked: war nicht gesperrt
-      not_saved:
-        one: '1 Fehler verhindert das Speichern von %{resource}:'
-        other: '%{count} Fehler verhindern das Speichern von %{resource}:'
