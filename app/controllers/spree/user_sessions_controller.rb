@@ -6,9 +6,16 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
-  if defined?(SpreeI18n::ControllerLocaleHelper)
-    include SpreeI18n::ControllerLocaleHelper
-  end
+  include SpreeI18n::ControllerLocaleHelper if defined?(SpreeI18n::ControllerLocaleHelper)
+
+  include Spree::Core::ControllerHelpers::Currency if defined?(Spree::Core::ControllerHelpers::Currency)
+  include Spree::Core::ControllerHelpers::Locale if defined?(Spree::Core::ControllerHelpers::Locale)
+
+  include Spree::LocaleUrls if defined?(Spree::LocaleUrls)
+
+  helper 'spree/locale' if defined?(Spree::LocaleHelper)
+  helper 'spree/currency' if defined?(Spree::CurrencyHelper)
+  helper 'spree/store' if defined?(Spree::StoreHelper)
 
   before_action :set_current_order
 
@@ -58,7 +65,7 @@ class Spree::UserSessionsController < Devise::SessionsController
   end
 
   def after_sign_in_redirect(resource_or_scope)
-    stored_location_for(resource_or_scope) || account_path
+    stored_location_for(resource_or_scope) || spree.account_path
   end
 
   def respond_to_on_destroy
@@ -74,6 +81,6 @@ class Spree::UserSessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     router_name = Devise.mappings[scope].router_name
     context = router_name ? send(router_name) : self
-    context.respond_to?(:login_path) ? context.login_path : "/"
+    context.respond_to?(:login_path) ? context.login_path : spree.root_path
   end
 end

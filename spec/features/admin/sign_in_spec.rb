@@ -13,8 +13,8 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     log_in(email: @user.email, password: 'secret')
     show_user_menu
 
-    expect(page).not_to have_text 'Login'
-    expect(page).to have_text 'LOG OUT'
+    expect(page).not_to have_text login_button.upcase
+    expect(page).to have_text logout_button.upcase
     expect(current_path).to eq '/account'
   end
 
@@ -33,7 +33,8 @@ RSpec.feature 'Admin - Sign In', type: :feature do
 
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'secret'
-    click_button 'Log in'
+    click_button login_button
+
     if Spree.version.to_f > 4.1
       within '.navbar .dropdown-menu' do
         expect(page).to have_text 'admin@person.com'

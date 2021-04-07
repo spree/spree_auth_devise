@@ -25,7 +25,7 @@ RSpec.describe Spree::UsersController, type: :controller do
       it 'performs update' do
         put :update, params: { user: { email: 'mynew@email-address.com' } }
         expect(assigns[:user].email).to eq 'mynew@email-address.com'
-        expect(response).to redirect_to spree.account_url(only_path: true)
+        expect(response).to redirect_to spree.account_path
       end
     end
 

@@ -3,8 +3,6 @@ en:
   spree:
     admin_login: "Admin Login"
     change_your_password: "Change your password"
-    store_credits:
-      credit_balance: Store Credit Balance
     user_mailer:
       reset_password_instructions:
         welcome: "Hi %{email}"
@@ -24,7 +22,7 @@ en:
         store_team: "%{store_name} Team"
   devise:
     confirmations:
-      confirmed: Your account was successfully confirmed. You are now signed in.
+      confirmed: Your account was successfully confirmed. You can now log in.
       send_instructions: You will receive an email with instructions about how to confirm your account in a few minutes.
       spree_user:
         already_confirmed: Email was already confirmed, please try signing in.

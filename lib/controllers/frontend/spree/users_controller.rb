@@ -34,7 +34,7 @@ class Spree::UsersController < Spree::StoreController
           bypass_sign_in(@user)
         end
       end
-      redirect_to spree.account_url, notice: Spree.t(:account_updated)
+      redirect_to spree.account_path, notice: Spree.t(:account_updated)
     else
       render :edit
     end
