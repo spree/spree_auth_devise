@@ -24,6 +24,7 @@ env:
 
 gemfile:
   - gemfiles/spree_4_1.gemfile
+  - gemfiles/spree_4_2.gemfile
   - gemfiles/spree_master.gemfile
 
 jobs:
