@@ -27,6 +27,33 @@ RSpec.describe Spree::User, type: :model do
     end
   end
 
+  describe 'validations' do
+    context 'email' do
+      let(:user) { build(:user, email: nil) }
+
+      it 'cannot be empty' do
+        expect(user.valid?).to be false
+        expect(user.errors.messages[:email].first).to eq "can't be blank"
+      end
+    end
+
+    context 'password' do
+      let(:user) { build(:user, password_confirmation: nil) }
+
+      it 'password confirmation cannot be empty' do
+        expect(user.valid?).to be false
+        expect(user.errors.messages[:password_confirmation].first).to eq "doesn't match Password"
+      end
+
+      let(:user) { build(:user, password: 'pass1234', password_confirmation: 'pass') }
+
+      it 'passwords has to be equal to password confirmation' do
+        expect(user.valid?).to be false
+        expect(user.errors.messages[:password_confirmation].first).to eq "doesn't match Password"
+      end
+    end
+  end
+
   context '#destroy' do
     it 'will soft delete with uncompleted orders' do
       order = build(:order)
