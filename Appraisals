@@ -1,6 +1,6 @@
-appraise 'spree-4-1' do
+appraise 'spree-4-3' do
   gem 'rails-controller-testing'
-  gem 'spree', '~> 4.1'
+  gem 'spree', github: 'spree/spree', branch: 'master'
 end
 
 appraise 'spree-master' do

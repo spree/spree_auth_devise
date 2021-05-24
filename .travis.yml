@@ -23,13 +23,10 @@ env:
   - DB=postgres
 
 gemfile:
-  - gemfiles/spree_4_1.gemfile
+  - gemfiles/spree_4_3.gemfile
   - gemfiles/spree_master.gemfile
 
 jobs:
-  exclude:
-  - rvm: 3.0
-    gemfile: gemfiles/spree_4_1.gemfile
   allow_failures:
   - gemfile: gemfiles/spree_master.gemfile
 
