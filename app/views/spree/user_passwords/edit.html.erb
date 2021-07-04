@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-lg-6 offset-lg-3">
       <div class="card mb-3 user-passwords-no-border">
-        <h3 class="spree-mb-large spree-mt-large spree-header"><%= Spree.t(:change_your_password) %></h3>
+        <h3 class="spree-mb-large spree-mt-large spree-header"><%= I18n.t('devise.passwords.edit.change_your_password') %></h3>
         <div class="card-body">
           <%= form_for @spree_user, as: :spree_user, url: spree.update_password_path, method: :put do |f| %>
             <div class="form-group">

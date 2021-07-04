@@ -3,47 +3,14 @@ es:
   devise:
     confirmations:
       confirmed: Su cuenta ha sido confirmada. Ahora está conectado.
-      send_instructions: Recibirá un email con instrucciones acerca de como confirmar su cuenta en pocos minutos.
     failure:
-      inactive: Su cuenta no ha sido activada aún.
       invalid: Dirección de correo o contraseña no válidos.
       invalid_token: Token de autenticación no válido.
-      locked: Su cuenta está bloqueada.
-      timeout: 'Su sesión ha expirado, por favor conéctese de nuevo para continuar.'
-      unauthenticated: Necesita conectarse o registrarse para continuar.
-      unconfirmed: Necesita confirmar su cuenta para continuar.
-    mailer:
-      confirmation_instructions:
-        subject: Instrucciones de confirmación
-      reset_password_instructions:
-        subject: Instrucciones para restablecer la contraseña
-      unlock_instructions:
-        subject: Instrucciones de desbloqueo
-    oauth_callbacks:
-      failure: 'No es posible autorizarle desde %{kind} porque %{reason}.'
-      success: 'Cuenta autorizada correctamente desde %{kind}.'
     unlocks:
-      send_instructions: Recibirá un email con instrucciones acerca de cómo desbloquear su cuenta en pocos minutos.
       unlocked: Su cuenta ha sido desbloqueada correctamente. Ahora está conectado.
     user_passwords:
       spree_user:
         cannot_be_blank: La contraseña no puede estar en blanco.
-        send_instructions: Recibirá un email con instrucciones acerca de como restaurar su contraseña en pocos minutos.
-        updated: Su contraseña ha sido cambiada correctamente. Ahora está conectado.
-    user_registrations:
-      destroyed: Hasta luego! Su cuenta ha sido cancelada correctamente. Esperamos volver a verle pronto.
-      inactive_signed_up: 'Ha sido registrado correctamente. Sin embargo, no se puede acceder porque su cuenta está %{reason}.'
-      signed_up: Bienvenido! Ha sido registrado correctamente.
-      updated: Su cuenta ha sido actualizada correctamente .
-    user_sessions:
-      signed_in: Conectado correctamente.
-      signed_out: Desconectado correctamente.
   errors:
     messages:
-      already_confirmed: ya estaba confirmado
       email_is_invalid: dirección de correo electrónico no puede estar en blanco
-      not_found: no encontrado
-      not_locked: no estaba bloqueado
-      not_saved:
-        one: '1 error impidió guardar este %{resource}:'
-        other: '%{count} errores impidieron guardar este %{resource}:'

@@ -1,5 +1,5 @@
 <h1>
-  <%= Spree.t('user_mailer.confirmation_instructions.welcome', email: @email) %>
+  <%= I18n.t('devise.mailer.confirmation_instructions.greeting', recipient: @email) %>
 </h1>
 <p>
   <%= Spree.t('user_mailer.confirmation_instructions.instructions_1', { store_name: @current_store.name }) %>
