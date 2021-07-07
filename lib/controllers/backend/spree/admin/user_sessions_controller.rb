@@ -34,6 +34,10 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
     return redirect_to spree.admin_login_path
   end
 
+  def root_path
+    Spree.admin_path
+  end
+
   protected
 
   def translation_scope
