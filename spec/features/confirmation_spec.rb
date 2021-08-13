@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.feature 'Confirmation', type: :feature, confirmable: true do
   before do
-    expect(Spree::UserMailer).to receive(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.current.id }).and_return(double(deliver: true))
+    expect(Spree::UserMailer).to receive(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.first.id }).and_return(double(deliver: true))
   end
 
   background do

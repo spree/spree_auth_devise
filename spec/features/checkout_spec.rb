@@ -15,6 +15,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
   background do
     mug.master.stock_items.first.update_column(:count_on_hand, 1)
+    Spree::Store.default.update(default_country_id: country.id)
 
     # Bypass gateway error on checkout | ..or stub a gateway
     Spree::Config[:allow_checkout_on_gateway_error] = true

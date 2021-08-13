@@ -16,6 +16,11 @@ RSpec.configure do |config|
     allow(RSpec::Rails::ViewRendering::EmptyTemplateHandler)
       .to receive(:call)
       .and_return(%("")) if Rails.gem_version >= Gem::Version.new('6.0.0.beta1')
+
+    country = create(:country, name: 'United States of America', iso_name: 'UNITED STATES', iso: 'US', states_required: true)
+    Spree::Config[:default_country_id] = country.id
+
+    create(:store, default: true)
   end
 
   config.include Spree::TestingSupport::LocaleHelpers if defined?(Spree::TestingSupport::LocaleHelpers)
