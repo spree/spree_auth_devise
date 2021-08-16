@@ -46,10 +46,6 @@ module Spree
         ApplicationController.send :include, Spree::AuthenticationHelpers
       end
 
-      def self.api_available?
-        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
-      end
-
       def self.backend_available?
         @@backend_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Backend::Engine')
       end
@@ -60,6 +56,10 @@ module Spree
 
       def self.api_available?
         @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
+      end
+
+      def self.emails_available?
+        @@emails_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Emails::Engine')
       end
 
       if backend_available?
@@ -74,6 +74,10 @@ module Spree
 
       if api_available?
         paths["app/controllers"] << "lib/controllers/api"
+      end
+
+      if emails_available?
+        paths["app/mailers"] << "lib/mailers/emails"
       end
 
       config.to_prepare &method(:activate).to_proc
