@@ -24,7 +24,9 @@ env:
 
 gemfile:
   - gemfiles/spree_4_3.gemfile
+  - gemfiles/spree_4_3_headless.gemfile
   - gemfiles/spree_master.gemfile
+  - gemfiles/spree_master_headless.gemfile
 
 jobs:
   allow_failures:
