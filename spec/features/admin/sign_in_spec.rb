@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.backend_available?
+
 RSpec.feature 'Admin - Sign In', type: :feature do
   background do
     @user = create(:user, email: 'email@person.com')
@@ -7,15 +9,6 @@ RSpec.feature 'Admin - Sign In', type: :feature do
   scenario 'asks user to sign in' do
     visit spree.admin_path
     expect(page).not_to have_text 'Authorization Failure'
-  end
-
-  scenario 'lets a user sign in successfully', js: true do
-    log_in(email: @user.email, password: 'secret')
-    show_user_menu
-
-    expect(page).not_to have_text login_button.upcase
-    expect(page).to have_text logout_button.upcase
-    expect(current_path).to eq '/account'
   end
 
   scenario 'shows validation errors' do
@@ -45,5 +38,16 @@ RSpec.feature 'Admin - Sign In', type: :feature do
       end
     end
     expect(current_path).to eq '/admin/orders'
+  end
+
+  if Spree::Auth::Engine.frontend_available?
+    scenario 'lets a user sign in successfully', js: true do
+      log_in(email: @user.email, password: 'secret')
+      show_user_menu
+
+      expect(page).not_to have_text login_button.upcase
+      expect(page).to have_text logout_button.upcase
+      expect(current_path).to eq '/account'
+    end
   end
 end

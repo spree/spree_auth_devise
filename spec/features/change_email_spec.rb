@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.feature 'Change email', type: :feature do
   background do
     allow_bypass_sign_in

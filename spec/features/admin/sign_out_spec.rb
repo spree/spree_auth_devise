@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.backend_available?
+
 RSpec.feature 'Admin - Sign Out', type: :feature do
   given!(:user) do
    create :user, email: 'email@person.com'

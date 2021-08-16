@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.describe Spree::UsersController, type: :controller do
   let(:admin_user) { create(:user) }
   let(:user) { create(:user) }

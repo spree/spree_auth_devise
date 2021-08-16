@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.emails_available?
+
 RSpec.describe Spree::UserMailer, type: :mailer do
   let(:user) { create(:user) }
   let(:store) { Spree::Store.default }

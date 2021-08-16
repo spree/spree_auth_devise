@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.backend_available?
+
 RSpec.feature 'Admin - Reset Password', type: :feature do
   background do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'

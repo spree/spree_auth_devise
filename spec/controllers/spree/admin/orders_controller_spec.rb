@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.backend_available?
+
 module Spree
   module Admin
     RSpec.describe OrdersController, type: :controller do

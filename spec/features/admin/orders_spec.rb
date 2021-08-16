@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.backend_available?
+
 RSpec.feature 'Admin orders', type: :feature do
   background do
     user = create(:admin_user)

@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.feature 'Orders', :js, type: :feature do
   scenario 'allow a user to view their cart at any time' do
     visit spree.cart_path

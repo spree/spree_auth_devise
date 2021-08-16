@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.emails_available?
+
 require 'spec_helper'
 
 RSpec.feature 'Confirmation', type: :feature, confirmable: true do

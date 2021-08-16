@@ -138,7 +138,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           request.cookie_jar.signed[:token] = 'DEF'
         end
 
-        it 'assigns the correct token attribute for the order' do 
+        it 'assigns the correct token attribute for the order' do
           if Spree.version.to_f > 3.6
             order = create(:order, email: user.email, token: 'ABC', user_id: nil, created_by_id: nil)
           else
@@ -149,7 +149,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           order.reload
           expect(order.user_id).to eq user.id
           expect(order.created_by_id).to eq user.id
-        end 
+        end
       end
 
       context "and html format is used" do
@@ -183,11 +183,13 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
     end
 
     context "using incorrect login information" do
-      context "and html format is used" do
-        it "renders new template again with errors" do
-          post :create, params: { spree_user: { email: user.email, password: 'wrong' }}
-          expect(response).to render_template('new')
-          expect(flash[:error]).to eq I18n.t(:'devise.failure.invalid')
+      if Spree::Auth::Engine.frontend_available?
+        context "and html format is used" do
+          it "renders new template again with errors" do
+            post :create, params: { spree_user: { email: user.email, password: 'wrong' }}
+            expect(response).to render_template('new')
+            expect(flash[:error]).to eq I18n.t(:'devise.failure.invalid')
+          end
         end
       end
 

@@ -1,3 +1,6 @@
+return unless Spree::Auth::Engine.backend_available?
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.feature 'Admin Permissions', type: :feature do
   context 'orders' do
     background do

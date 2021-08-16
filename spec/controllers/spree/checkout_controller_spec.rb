@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.describe Spree::CheckoutController, type: :controller do
   let(:order) { create(:order_with_totals, email: nil, user: nil) }
   let(:user)  { build(:user, spree_api_key: 'fake') }

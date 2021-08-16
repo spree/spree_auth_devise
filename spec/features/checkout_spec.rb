@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.feature 'Checkout', :js, type: :feature do
   given!(:country) { create(:country, name: 'United States', states_required: true) }
   given!(:state)   { create(:state, name: 'Maryland', country: country) }

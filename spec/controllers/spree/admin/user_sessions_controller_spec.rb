@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.backend_available?
+
 RSpec.describe Spree::Admin::UserSessionsController, type: :controller do
   before { @request.env['devise.mapping'] = Devise.mappings[:spree_user] }
 

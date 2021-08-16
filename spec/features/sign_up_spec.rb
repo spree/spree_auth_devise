@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.feature 'Sign Up', type: :feature do
   context 'with valid data' do
     scenario 'create a new user' do

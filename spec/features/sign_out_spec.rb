@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.feature 'Sign Out', type: :feature, js: true do
   given!(:user) do
     create(:user,

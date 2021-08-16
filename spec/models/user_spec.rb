@@ -7,14 +7,6 @@ RSpec.describe Spree::User, type: :model do
     expect(create(:user).admin?).to be false
   end
 
-  it 'generates the reset password token' do
-    user = build(:user)
-    current_store = Spree::Store.current
-    expect(Spree::UserMailer).to receive(:reset_password_instructions).with(user, anything, { current_store_id: current_store.id }).and_return(double(deliver: true))
-    user.send_reset_password_instructions(current_store)
-    expect(user.reset_password_token).not_to be_nil
-  end
-
   describe '.admin_created?' do
     it 'returns true when admin exists' do
       create(:admin_user)
@@ -93,46 +85,60 @@ RSpec.describe Spree::User, type: :model do
   end
 
   describe "confirmable" do
-    it "is confirmable if the confirmable option is enabled", confirmable: true do
-      Spree::UserMailer.stub(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.current.id }).and_return(double(deliver: true))
-      expect(Spree.user_class.devise_modules).to include(:confirmable)
-    end
-
     it "is not confirmable if the confirmable option is disabled", confirmable: false do
       expect(Spree.user_class.devise_modules).not_to include(:confirmable)
     end
   end
 
-  describe "#send_confirmation_instructions", retry: 2 do
-    let(:default_store) { Spree::Store.default }
-
-    context "when current store not exists" do
-      it 'takes default store and sends confirmation instruction', confirmable: true do
-        user = Spree.user_class.new
-        user.email = FFaker::Internet.email
-        user.password = user.password_confirmation = 'pass1234'
-        user.save
-        
-        expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
-          user, anything, { current_store_id: default_store.id }).and_return(double(deliver: true)
-        )
-
-        user.send_confirmation_instructions(nil)
+  if Spree::Auth::Engine.emails_available?
+    context 'when spree_emails gem available' do
+      it 'generates the reset password token' do
+        user = build(:user)
+        current_store = Spree::Store.current
+        expect(Spree::UserMailer).to receive(:reset_password_instructions).with(user, anything, { current_store_id: current_store.id }).and_return(double(deliver: true))
+        user.send_reset_password_instructions(current_store)
+        expect(user.reset_password_token).not_to be_nil
       end
-    end
 
-    context "when current store exists" do
-      it 'takes current store and sends confirmation instruction', confirmable: true do
-        user = Spree.user_class.new
-        user.email = FFaker::Internet.email
-        user.password = user.password_confirmation = 'pass1234'
-        user.save
+      describe "confirmable" do
+        it "is confirmable if the confirmable option is enabled", confirmable: true do
+          Spree::UserMailer.stub(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.current.id }).and_return(double(deliver: true))
+          expect(Spree.user_class.devise_modules).to include(:confirmable)
+        end
+      end
 
-        expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
-          user, anything, { current_store_id: store.id }).and_return(double(deliver: true)
-        )
+      describe "#send_confirmation_instructions", retry: 2 do
+        let(:default_store) { Spree::Store.default }
 
-        user.send_confirmation_instructions(store)
+        context "when current store not exists" do
+          it 'takes default store and sends confirmation instruction', confirmable: true do
+            user = Spree.user_class.new
+            user.email = FFaker::Internet.email
+            user.password = user.password_confirmation = 'pass1234'
+            user.save
+
+            expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
+              user, anything, { current_store_id: default_store.id }).and_return(double(deliver: true)
+            )
+
+            user.send_confirmation_instructions(nil)
+          end
+        end
+
+        context "when current store exists" do
+          it 'takes current store and sends confirmation instruction', confirmable: true do
+            user = Spree.user_class.new
+            user.email = FFaker::Internet.email
+            user.password = user.password_confirmation = 'pass1234'
+            user.save
+
+            expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
+              user, anything, { current_store_id: store.id }).and_return(double(deliver: true)
+            )
+
+            user.send_confirmation_instructions(store)
+          end
+        end
       end
     end
   end

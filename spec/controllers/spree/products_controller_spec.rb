@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.describe Spree::ProductsController, type: :controller do
   let!(:product) { create(:product, available_on: 1.year.from_now) }
   let!(:user) { build_stubbed(:user, spree_api_key: 'fake') }

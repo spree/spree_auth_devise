@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.backend_available?
+
 RSpec.feature 'Admin products', type: :feature do
   context 'as anonymous user' do
     # Regression test for #1250

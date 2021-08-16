@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.describe Spree::UserPasswordsController, type: :controller do
   let(:token) { 'some_token' }
 

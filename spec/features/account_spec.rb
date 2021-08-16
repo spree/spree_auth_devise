@@ -1,3 +1,5 @@
+return unless Spree::Auth::Engine.frontend_available?
+
 RSpec.feature 'Accounts', type: :feature do
   describe 'editing', js: true do
     before do
