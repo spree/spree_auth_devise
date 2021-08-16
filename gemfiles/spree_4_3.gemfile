@@ -7,6 +7,7 @@ gem "spree", "~> 4.3.0.rc1"
 gem "spree_backend", "~> 4.3.0.rc1"
 gem "spree_emails", "~> 4.3.0.rc1"
 gem "spree_frontend", "~> 4.3.0.rc1"
+gem "redis", "~> 4.0"
 gem "pry", "~> 0.14.1"
 
 gemspec path: "../"
