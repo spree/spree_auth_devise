@@ -25,7 +25,7 @@ class Spree::UserSessionsController < Devise::SessionsController
     if spree_user_signed_in?
       respond_to do |format|
         format.html {
-          flash[:success] = Spree.t(:logged_in_succesfully)
+          flash[:success] = Spree.t(:logged_in_successfully)
           redirect_back_or_default(after_sign_in_redirect(spree_current_user))
         }
         format.js {

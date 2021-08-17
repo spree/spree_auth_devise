@@ -19,7 +19,7 @@ module Spree
         first('label', text: Spree.t(:remember_me)).click if remember_me
         click_button login_button
 
-        expect(page).to have_content Spree.t(:logged_in_succesfully)
+        expect(page).to have_content Spree.t(:logged_in_successfully)
       end
 
       def log_out
