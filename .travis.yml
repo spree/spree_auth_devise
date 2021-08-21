@@ -11,6 +11,7 @@ addons:
 services:
   - mysql
   - postgresql
+  - redis-server
 
 language: ruby
 
