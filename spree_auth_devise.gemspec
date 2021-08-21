@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise', '~> 4.7'
   s.add_dependency 'devise-encryptable', '0.2.0'
 
-  spree_version = '>= 4.3.0.alpha'
+  spree_version = '>= 4.3.0.rc1'
   s.add_dependency 'spree_core', spree_version
   s.add_dependency 'spree_extension'
 
