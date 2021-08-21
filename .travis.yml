@@ -22,9 +22,6 @@ env:
   - DB=mysql
   - DB=postgres
 
-gemfile:
-  - gemfiles/spree_master.gemfile
-
 before_install:
   - mysql -u root -e "GRANT ALL ON *.* TO 'travis'@'%';"
 
