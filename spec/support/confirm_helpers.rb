@@ -21,4 +21,12 @@ RSpec.configure do |config|
       load File.expand_path('../../../app/models/spree/user.rb', __FILE__)
     end
   end
+
+  config.after do |example|
+    if example.metadata.key?(:confirmable)
+      Spree::Auth::Config[:confirmable] = false
+      Spree.send(:remove_const, :User)
+      load File.expand_path('../../../app/models/spree/user.rb', __FILE__)
+    end
+  end
 end
