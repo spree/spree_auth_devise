@@ -36,7 +36,7 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     click_button login_button
 
     if Spree.version.to_f > 4.1
-      within '.navbar .dropdown-menu' do
+      within '.navbar .dropdown-menu-right' do
         expect(page).to have_text 'admin@person.com'
       end
     else
