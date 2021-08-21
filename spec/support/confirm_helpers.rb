@@ -15,6 +15,7 @@ RSpec.configure do |config|
 
   config.before do |example|
     if example.metadata.key?(:confirmable)
+      Rails.cache.clear
       Spree::Auth::Config[:confirmable] = example.metadata[:confirmable]
 
       Spree.send(:remove_const, :User)

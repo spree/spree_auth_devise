@@ -16,7 +16,8 @@ RSpec.feature 'Admin orders', type: :feature do
 
   # Regression #203
   scenario 'can not edit orders' do
-    expect { visit spree.edit_admin_order_path('nodata') }.to raise_error(ActiveRecord::RecordNotFound)
+    visit spree.edit_admin_order_path('nodata')
+    expect(page).to have_text('Order is not found')
   end
 
   # Regression #203
