@@ -35,14 +35,5 @@ describe 'Storefront API v2 Account Confirmation spec', type: :request do
         expect(JSON.parse(response.body)['error']).to eq("Confirmation token is invalid")
       end
     end
-
-    context 'blank confirmation_token param' do
-      let(:user) { build(:user) }
-      let(:confirmation_token) { '' }
-
-      it 'return 301 status' do
-        expect(response.code).to eq('301')
-      end
-    end
   end
 end
