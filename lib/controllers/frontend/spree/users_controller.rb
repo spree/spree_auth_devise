@@ -1,5 +1,5 @@
 class Spree::UsersController < Spree::StoreController
-  skip_before_action :set_current_order, only: :show
+skip_before_action :set_current_order, only: :show
   prepend_before_action :authorize_actions, only: :new
 
   include Spree::Core::ControllerHelpers
