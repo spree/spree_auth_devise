@@ -6,7 +6,16 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Store
 
-  before_action :set_current_order
+  include SpreeI18n::ControllerLocaleHelper if defined?(SpreeI18n::ControllerLocaleHelper)
+
+  include Spree::Core::ControllerHelpers::Currency if defined?(Spree::Core::ControllerHelpers::Currency)
+  include Spree::Core::ControllerHelpers::Locale if defined?(Spree::Core::ControllerHelpers::Locale)
+
+  include Spree::LocaleUrls if defined?(Spree::LocaleUrls)
+
+  helper 'spree/locale' if defined?(Spree::LocaleHelper)
+  helper 'spree/currency' if defined?(Spree::CurrencyHelper)
+  helper 'spree/store' if defined?(Spree::StoreHelper)
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
