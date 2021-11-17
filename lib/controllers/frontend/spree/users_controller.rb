@@ -1,11 +1,11 @@
 class Spree::UsersController < Spree::StoreController
   before_action :set_current_order, except: :show
-  prepend_before_action :load_object, only: [:show, :edit, :update]
   prepend_before_action :authorize_actions, only: :new
 
   include Spree::Core::ControllerHelpers
 
   def show
+    load_object
     @orders = @user.orders.complete.order('completed_at desc')
   end
 
@@ -23,7 +23,12 @@ class Spree::UsersController < Spree::StoreController
     end
   end
 
+  def edit
+    load_object
+  end
+
   def update
+    load_object
     if @user.update(user_params)
       if params[:user][:password].present?
         # this logic needed b/c devise wants to log us out after password changes
