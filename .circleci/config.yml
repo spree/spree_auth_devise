@@ -20,7 +20,6 @@ defaults_3_0: &defaults_3_0
 
 run_tests: &run_tests
   <<: *defaults
-  parallelism: 2
   steps:
     - checkout
     - restore_cache:
@@ -53,7 +52,6 @@ run_tests: &run_tests
 
 run_tests_3_0: &run_tests_3_0
   <<: *defaults_3_0
-  parallelism: 2
   steps:
     - checkout
     - restore_cache:
@@ -148,6 +146,20 @@ jobs:
       - image: *postgres_image
       - image: *redis_image
 
+  tests_mysql: &tests_mysql
+    <<: *run_tests
+    environment: &mysql_environment
+      <<: *environment
+      DB: mysql
+      DB_HOST: 127.0.0.1
+      DB_USERNAME: root
+      COVERAGE: true
+      COVERAGE_DIR: /tmp/workspace/simplecov
+    docker:
+      - image: *ruby_image
+      - image: *redis_image
+      - image: &mysql_image circleci/mysql:8-ram
+
 workflows:
   version: 2
   main:
@@ -160,3 +172,6 @@ workflows:
       - tests_postgres_ruby_3_0:
           requires:
             - bundle_ruby_3_0
+      - tests_mysql:
+          requires:
+            - bundle
