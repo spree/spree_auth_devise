@@ -1,9 +1,159 @@
-version: 2
+version: 2.1
+
+defaults: &defaults
+  environment: &environment
+    CIRCLE_TEST_REPORTS: /tmp/test-results
+    CIRCLE_ARTIFACTS: /tmp/test-artifacts
+    BUNDLE_JOBS: 4
+    BUNDLE_RETRY: 3
+    BUNDLE_PATH: ~/spree/vendor/bundle
+  working_directory: ~/spree
+  docker:
+    - image: &ruby_image circleci/ruby:2.7-node-browsers
+    - image: &redis_image circleci/redis:6.2-alpine
+
+defaults_3_0: &defaults_3_0
+  <<: *defaults
+  docker:
+    - image: &ruby_3_0_image circleci/ruby:3.0-node-browsers
+    - image: *redis_image
+
+run_tests: &run_tests
+  <<: *defaults
+  parallelism: 8
+  steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - spree-auth-devise-bundle-v9-ruby-2-7-{{ .Branch }}
+          - spree-auth-devise-bundle-v9-ruby-2-7
+    - run:
+        name: Set bundle path
+        command: bundle config --local path vendor/bundle
+    - run:
+        name: Ensure bundle Install
+        command: |
+          bundle check || bundle install
+    - run:
+        name: Create test app
+        command: |
+          bundle exec rake test_app
+    - run:
+        name: Run Rspec
+        command: |
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            -o ~/rspec/rspec.xml \
+                            -- ${TESTFILES}
+    - store_test_results:
+        path: ~/rspec
+    - store_artifacts:
+        path: tmp/capybara
+
+run_tests_3_0: &run_tests_3_0
+  <<: *defaults_3_0
+  parallelism: 8
+  steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
+          - spree-auth-devise-bundle-v9-ruby-3-0
+    - run:
+        name: Set bundle path
+        command: bundle config --local path vendor/bundle
+    - run:
+        name: Ensure bundle Install
+        command: |
+          bundle check || bundle install
+    - run:
+        name: Create test app
+        command: |
+          bundle exec rake test_app
+    - run:
+        name: Run Rspec
+        command: |
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            -o ~/rspec/rspec.xml \
+                            -- ${TESTFILES}
+    - store_test_results:
+        path: ~/rspec
+    - store_artifacts:
+        path: tmp/capybara
 
 jobs:
+  bundle:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - spree-auth-devise-bundle-v9-ruby-2-7-{{ .Branch }}
+            - spree-auth-devise-bundle-v9-ruby-2-7
+      - run:
+          name: Set bundle path
+          command: bundle config --local path vendor/bundle
+      - run:
+          name: Bundle Install
+          command: |
+            bundle check || bundle install
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: spree-auth-devise-bundle-v9-ruby-2-7-{{ checksum "Gemfile.lock" }}
+
+  bundle_ruby_3_0:
+    <<: *defaults_3_0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
+            - spree-auth-devise-bundle-v9-ruby-3-0
+      - run:
+          name: Set bundle path
+          command: bundle config --local path vendor/bundle
+      - run:
+          name: Bundle Install
+          command: |
+            bundle check || bundle install
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: spree-auth-devise-bundle-v9-ruby-3-0-{{ checksum "Gemfile.lock" }}
+
+  tests_postgres: &tests_postgres
+    <<: *run_tests
+    environment: &postgres_environment
+      <<: *environment
+      DB: postgres
+      DB_HOST: localhost
+      DB_USERNAME: postgres
+    docker:
+      - image: *ruby_image
+      - image: *redis_image
+      - image: &postgres_image circleci/postgres:12-alpine
+        environment:
+          POSTGRES_USER: postgres
+
+  tests_postgres_ruby_3_0: &tests_postgres_ruby_3_0
+    <<: *run_tests_3_0
+    environment:
+      <<: *postgres_environment
+    docker:
+      - image: *ruby_3_0_image
+      - image: *postgres_image
+      - image: *redis_image
+
   update_staging_repository:
     docker:
-      - image: circleci/ruby:2.6.3
+      - image: circleci/ruby:2.7.2
+      - image: postgres:13-alpine
+          environment:
+            POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - add_ssh_keys:
           fingerprints:
