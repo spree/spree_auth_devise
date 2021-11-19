@@ -152,7 +152,11 @@ workflows:
   version: 2
   update_staging_repository:
     jobs:
-      - update_staging_repository:
-          filters:
-            branches:
-              only: master
+      - bundle
+      - bundle_ruby_3_0
+      - tests_postgres:
+      requires:
+        - bundle
+      - tests_postgres_ruby_3_0:
+        requires:
+          - bundle_ruby_3_0
