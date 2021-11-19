@@ -1,41 +1,177 @@
-version: 2
+version: 2.1
+
+defaults: &defaults
+  environment: &environment
+    CIRCLE_TEST_REPORTS: /tmp/test-results
+    CIRCLE_ARTIFACTS: /tmp/test-artifacts
+    BUNDLE_JOBS: 4
+    BUNDLE_RETRY: 3
+    BUNDLE_PATH: ~/spree/vendor/bundle
+  working_directory: ~/spree
+  docker:
+    - image: &ruby_image circleci/ruby:2.7-node-browsers
+    - image: &redis_image circleci/redis:6.2-alpine
+
+defaults_3_0: &defaults_3_0
+  <<: *defaults
+  docker:
+    - image: &ruby_3_0_image circleci/ruby:3.0-node-browsers
+    - image: *redis_image
+
+run_tests: &run_tests
+  <<: *defaults
+  steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - spree-auth-devise-bundle-v9-ruby-2-7-{{ .Branch }}
+          - spree-auth-devise-bundle-v9-ruby-2-7
+    - run:
+        name: Set bundle path
+        command: bundle config --local path vendor/bundle
+    - run:
+        name: Ensure bundle Install
+        command: |
+          bundle check || bundle install
+    - run:
+        name: Create test app
+        command: |
+          bundle exec rake test_app
+    - run:
+        name: Run Rspec
+        command: |
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            -o ~/rspec/rspec.xml \
+                            -- ${TESTFILES}
+    - store_test_results:
+        path: ~/rspec
+    - store_artifacts:
+        path: tmp/capybara
+
+run_tests_3_0: &run_tests_3_0
+  <<: *defaults_3_0
+  steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
+          - spree-auth-devise-bundle-v9-ruby-3-0
+    - run:
+        name: Set bundle path
+        command: bundle config --local path vendor/bundle
+    - run:
+        name: Ensure bundle Install
+        command: |
+          bundle check || bundle install
+    - run:
+        name: Create test app
+        command: |
+          bundle exec rake test_app
+    - run:
+        name: Run Rspec
+        command: |
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            -o ~/rspec/rspec.xml \
+                            -- ${TESTFILES}
+    - store_test_results:
+        path: ~/rspec
+    - store_artifacts:
+        path: tmp/capybara
 
 jobs:
-  update_staging_repository:
-    docker:
-      - image: circleci/ruby:2.6.3
+  bundle:
+    <<: *defaults
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - 54:50:5e:4e:80:6d:2e:26:43:c6:99:bd:39:b2:71:dc
-      - run: mkdir -p ~/.ssh
-      - run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-      - run: ssh-add -D
-      - run: ssh-add ~/.ssh/id_rsa_54505e4e806d2e2643c699bd39b271dc
-      - run: git clone -b master git@github.com:spark-solutions/spree-designs.git
-      - run: gem install bundler -v 1.17.3
+      - checkout
+      - restore_cache:
+          keys:
+            - spree-auth-devise-bundle-v9-ruby-2-7-{{ .Branch }}
+            - spree-auth-devise-bundle-v9-ruby-2-7
       - run:
-          command: bundle update spree_auth_devise
-          working_directory: ~/project/spree-designs
+          name: Set bundle path
+          command: bundle config --local path vendor/bundle
       - run:
+          name: Bundle Install
           command: |
-            git config user.name 'AutoDeploy'
-            git config user.email 'autodeploy@sparksolutions.co'
-          working_directory: ~/project/spree-designs
+            bundle check || bundle install
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: spree-auth-devise-bundle-v9-ruby-2-7-{{ checksum "Gemfile.lock" }}
+
+  bundle_ruby_3_0:
+    <<: *defaults_3_0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
+            - spree-auth-devise-bundle-v9-ruby-3-0
       - run:
+          name: Set bundle path
+          command: bundle config --local path vendor/bundle
+      - run:
+          name: Bundle Install
           command: |
-            git add -A
-            git commit -m "Auto-commit v#${CIRCLE_BUILD_NUM}"
-          working_directory: ~/project/spree-designs
-      - run:
-          command: git push origin master
-          working_directory: ~/project/spree-designs
+            bundle check || bundle install
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: spree-auth-devise-bundle-v9-ruby-3-0-{{ checksum "Gemfile.lock" }}
+
+  tests_postgres: &tests_postgres
+    <<: *run_tests
+    environment: &postgres_environment
+      <<: *environment
+      DB: postgres
+      DB_HOST: localhost
+      DB_USERNAME: postgres
+    docker:
+      - image: *ruby_image
+      - image: *redis_image
+      - image: &postgres_image circleci/postgres:12-alpine
+        environment:
+          POSTGRES_USER: postgres
+
+  tests_postgres_ruby_3_0: &tests_postgres_ruby_3_0
+    <<: *run_tests_3_0
+    environment:
+      <<: *postgres_environment
+    docker:
+      - image: *ruby_3_0_image
+      - image: *postgres_image
+      - image: *redis_image
+
+  tests_mysql: &tests_mysql
+    <<: *run_tests
+    environment: &mysql_environment
+      <<: *environment
+      DB: mysql
+      DB_HOST: 127.0.0.1
+      DB_USERNAME: root
+      COVERAGE: true
+      COVERAGE_DIR: /tmp/workspace/simplecov
+    docker:
+      - image: *ruby_image
+      - image: *redis_image
+      - image: &mysql_image circleci/mysql:8-ram
 
 workflows:
   version: 2
-  update_staging_repository:
+  main:
     jobs:
-      - update_staging_repository:
-          filters:
-            branches:
-              only: master
+      - bundle
+      - bundle_ruby_3_0
+      - tests_postgres:
+          requires:
+            - bundle
+      - tests_postgres_ruby_3_0:
+          requires:
+            - bundle_ruby_3_0
+      - tests_mysql:
+          requires:
+            - bundle

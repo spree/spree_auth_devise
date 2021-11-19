@@ -3,6 +3,7 @@ module Spree
     include UserAddress
     include UserMethods
     include UserPaymentSource
+    include Metadata
 
     devise :database_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :encryptable, encryptor: 'authlogic_sha512'
