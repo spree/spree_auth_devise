@@ -155,8 +155,8 @@ workflows:
       - bundle
       - bundle_ruby_3_0
       - tests_postgres:
-      requires:
-        - bundle
+          requires:
+            - bundle
       - tests_postgres_ruby_3_0:
-        requires:
-          - bundle_ruby_3_0
+          requires:
+            - bundle_ruby_3_0
