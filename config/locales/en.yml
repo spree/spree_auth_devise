@@ -10,16 +10,12 @@ en:
         instructions_2: Click the button below to reset it.
         instructions_3: If you did not request a password change ignore this email or contact us.
         button: Reset your password
-        thanks: Thank you,
-        store_team: "%{store_name} Team"
       confirmation_instructions:
         welcome: "Welcome %{email}!"
         instructions_1: "Thanks for registering at %{store_name}."
         instructions_2: "Click the button below to confirm your account:"
         instructions_3: If you have any questions, feel free to simply reply to this email.
         button: Confirm email address
-        thanks: Thank you,
-        store_team: "%{store_name} Team"
   devise:
     confirmations:
       confirmed: Your account was successfully confirmed. You can now log in.
