@@ -2,7 +2,6 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
   helper 'spree/base'
 
   include Spree::Core::ControllerHelpers::Auth
-  include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Store
 
   helper 'spree/admin/navigation'
@@ -24,7 +23,7 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
       end
     else
       flash.now[:error] = t('devise.failure.invalid')
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

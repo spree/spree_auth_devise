@@ -7,7 +7,7 @@ RSpec.feature 'Admin - Reset Password', type: :feature do
     user = create(:user, email: 'foobar@example.com', password: 'secret', password_confirmation: 'secret')
     visit spree.admin_login_path
     click_link 'Forgot password?'
-    fill_in 'Email', with: 'foobar@example.com'
+    fill_in 'Email', with: user.email
     click_button 'Reset my password'
     expect(page).to have_text 'You will receive an email with instructions'
   end
