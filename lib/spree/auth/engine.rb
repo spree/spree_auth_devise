@@ -1,6 +1,8 @@
 require 'devise'
 require 'devise-encryptable'
 
+require_relative 'configuration'
+
 module Spree
   module Auth
     class Engine < Rails::Engine
@@ -8,7 +10,7 @@ module Spree
       engine_name 'spree_auth'
 
       initializer "spree.auth.environment", before: :load_config_initializers do |_app|
-        Spree::Auth::Config = Spree::AuthConfiguration.new
+        Spree::Auth::Config = Spree::Auth::Configuration.new
       end
 
       initializer "spree_auth_devise.set_user_class", after: :load_config_initializers do

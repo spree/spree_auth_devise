@@ -27,6 +27,9 @@ run_tests: &run_tests
           - spree-auth-devise-bundle-v9-ruby-2-7-{{ .Branch }}
           - spree-auth-devise-bundle-v9-ruby-2-7
     - run:
+        name: Install libvips
+        command: sudo apt-get install libvips
+    - run:
         name: Set bundle path
         command: bundle config --local path vendor/bundle
     - run:
@@ -58,6 +61,9 @@ run_tests_3_0: &run_tests_3_0
         keys:
           - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
           - spree-auth-devise-bundle-v9-ruby-3-0
+    - run:
+        name: Install libvips
+        command: sudo apt-get install libvips
     - run:
         name: Set bundle path
         command: bundle config --local path vendor/bundle
@@ -92,6 +98,9 @@ jobs:
             - spree-auth-devise-bundle-v9-ruby-2-7-{{ .Branch }}
             - spree-auth-devise-bundle-v9-ruby-2-7
       - run:
+          name: Install libvips
+          command: sudo apt-get install libvips
+      - run:
           name: Set bundle path
           command: bundle config --local path vendor/bundle
       - run:
@@ -111,6 +120,9 @@ jobs:
           keys:
             - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
             - spree-auth-devise-bundle-v9-ruby-3-0
+      - run:
+          name: Install libvips
+          command: sudo apt-get install libvips
       - run:
           name: Set bundle path
           command: bundle config --local path vendor/bundle
