@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'paranoia', github: 'payrollhero/paranoia', branch: 'rails7'
+gem 'rails', '~> 7.0.0.rc1'
 gem 'rails-controller-testing'
 gem 'devise', github: 'heartcombo/devise', branch: 'main'
 gem 'spree', github: 'spree/spree', branch: 'main'
