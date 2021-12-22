@@ -5,7 +5,7 @@ class Spree::Admin::UserPasswordsController < Devise::PasswordsController
   include Spree::Core::ControllerHelpers::Store
 
   helper 'spree/admin/navigation'
-  layout 'spree/layouts/admin'
+  layout 'spree/layouts/login'
 
   # Overridden due to bug in Devise.
   #   respond_with resource, :location => new_session_path(resource_name)

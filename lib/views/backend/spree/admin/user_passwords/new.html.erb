@@ -1,15 +1,15 @@
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @spree_user } %>
+<div id="forgot-password" class="card mt-5">
+  <div class="card-body">
+    <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @spree_user } %>
 
-<div id="forgot-password" class="col-lg-6">
-  <h1><%= Spree.t(:forgot_password) %></h1>
-
-  <p><%= Spree.t(:instructions_to_reset_password) %></p>
-
-  <%= form_for Spree.user_class.new, :as => :spree_user, :url => spree.admin_reset_password_path, data: { turbo: false } do |f| %>
-    <div class="form-group">
-      <%= f.label :email, Spree.t(:email) %>
-      <%= f.email_field :email, class: 'form-control', required: true %>
-    </div>
-    <%= f.submit Spree.t(:reset_password), class: 'btn btn-primary' %>
-  <% end %>
+    <h5 class="card-title"><%= Spree.t(:forgot_password) %></h5>
+    <p><%= Spree.t(:instructions_to_reset_password) %></p>
+    <%= form_for Spree.user_class.new, :as => :spree_user, :url => spree.admin_reset_password_path, data: { turbo: false } do |f| %>
+      <div class="form-group">
+        <%= f.label :email, Spree.t(:email) %>
+        <%= f.email_field :email, class: 'form-control', required: true %>
+      </div>
+      <%= f.submit Spree.t(:reset_password), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
 </div>
