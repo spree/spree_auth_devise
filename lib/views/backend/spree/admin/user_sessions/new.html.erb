@@ -1,17 +1,16 @@
-<% if flash[:alert] %>
-  <div class="alert alert-danger"><%= flash[:alert] %></div>
-<% end %>
-
-<div data-hook="login" class="card border-0">
+<div data-hook="login" class="card mt-5">
   <div class="card-body">
+    <% if flash[:error] %>
+      <div class="alert alert-danger"><%= flash[:error] %></div>
+    <% end %>
+    <h5 class="card-title"><%= Spree.t(:login) %></h5>
+
     <%= form_for Spree.user_class.new, :as => :spree_user, :url => spree.admin_create_new_session_path do |f| %>
       <div id="password-credentials">
-        <div class="form-group text-center">
-          <%= f.label :email, Spree.t(:email) %>
+        <div class="form-group">
           <%= f.email_field :email, class: 'form-control', tabindex: 1, placeholder: Spree.t(:email) %>
         </div>
-        <div class="form-group text-center">
-          <%= f.label :password, Spree.t(:password) %>
+        <div class="form-group">
           <%= f.password_field :password, :class => 'form-control', :tabindex => 2, placeholder: Spree.t(:password) %>
         </div>
       </div>

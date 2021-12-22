@@ -1,16 +1,19 @@
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @spree_user } %>
+<div id="forgot-password" class="card mt-5">
+  <div class="card-body">
+    <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @spree_user } %>
 
-<h2><%= Spree.t(:change_my_password) %></h2>
-
-<%= form_for @spree_user, as: :spree_user, url: spree.admin_update_password_path, method: :put do |f| %>
-  <div class="form-group">
-    <%= f.label :password, Spree.t(:password) %>
-    <%= f.password_field :password, class: 'form-control', required: true %>
+    <h5 class="card-header"><%= Spree.t(:change_my_password) %></h5>
+    <%= form_for @spree_user, as: :spree_user, url: spree.admin_update_password_path, method: :put do |f| %>
+      <div class="form-group">
+        <%= f.label :password, Spree.t(:password) %>
+        <%= f.password_field :password, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, Spree.t(:confirm_password) %>
+        <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+      </div>
+      <%= f.hidden_field :reset_password_token %>
+      <%= f.submit Spree.t(:update), class: 'btn btn-primary btn-block' %>
+    <% end %>
   </div>
-  <div class="form-group">
-    <%= f.label :password_confirmation, Spree.t(:confirm_password) %>
-    <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
-  </div>
-  <%= f.hidden_field :reset_password_token %>
-  <%= f.submit Spree.t(:update), class: 'btn btn-primary btn-block' %>
-<% end %>
+</div>
