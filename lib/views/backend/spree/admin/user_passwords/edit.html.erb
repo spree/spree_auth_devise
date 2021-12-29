@@ -1,8 +1,7 @@
 <div id="forgot-password" class="card mt-5 shadow-sm">
   <div class="card-body">
     <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @spree_user } %>
-
-    <h5 class="card-header"><%= Spree.t(:change_my_password) %></h5>
+    <h5 class="card-title"><%= Spree.t(:change_my_password) %></h5>
     <%= form_for @spree_user, as: :spree_user, url: spree.admin_update_password_path, method: :put do |f| %>
       <div class="form-group">
         <%= f.label :password, Spree.t(:password) %>
