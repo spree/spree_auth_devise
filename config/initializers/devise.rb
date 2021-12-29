@@ -6,7 +6,7 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me@config-initializers-devise.com'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'Spree::UserMailer'
+  config.mailer = 'Spree::UserMailer' if defined?(Spree::Emails)
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
