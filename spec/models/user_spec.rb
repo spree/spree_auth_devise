@@ -9,7 +9,7 @@ RSpec.describe Spree::User, type: :model do
 
   it 'generates the reset password token' do
     user = build(:user)
-    current_store = Spree::Store.current
+    current_store = Spree::Store.default
     expect(Spree::UserMailer).to receive(:reset_password_instructions).with(user, anything, { current_store_id: current_store.id }).and_return(double(deliver: true))
     user.send_reset_password_instructions(current_store)
     expect(user.reset_password_token).not_to be_nil
@@ -94,7 +94,7 @@ RSpec.describe Spree::User, type: :model do
 
   describe "confirmable" do
     it "is confirmable if the confirmable option is enabled", confirmable: true do
-      Spree::UserMailer.stub(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.current.id }).and_return(double(deliver: true))
+      Spree::UserMailer.stub(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.default.id }).and_return(double(deliver: true))
       expect(Spree.user_class.devise_modules).to include(:confirmable)
     end
 
@@ -112,7 +112,7 @@ RSpec.describe Spree::User, type: :model do
         user.email = FFaker::Internet.email
         user.password = user.password_confirmation = 'pass1234'
         user.save
-        
+
         expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
           user, anything, { current_store_id: default_store.id }).and_return(double(deliver: true)
         )
