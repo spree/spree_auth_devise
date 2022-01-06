@@ -6,7 +6,7 @@ gem 'spree', github: 'spree/spree', branch: 'main'
 gem 'spree_backend', github: 'spree/spree_backend', branch: 'main'
 gem 'spree_emails', github: 'spree/spree', branch: 'main'
 gem 'spree_frontend', github: 'spree/spree_legacy_frontend', branch: 'main'
-gem 'rspec_junit_formatter', '~> 0.4.1'
+gem 'rspec_junit_formatter', '~> 0.5.1'
 
 if ENV['DB'] == 'mysql'
   gem 'mysql2'
