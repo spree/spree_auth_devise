@@ -11,6 +11,7 @@ module Spree
     end
 
     def confirmation_instructions(user, token, opts = {})
+      @user = user
       @current_store = current_store(opts)
       @confirmation_url = spree.confirmation_url(confirmation_token: token, host: @current_store.url)
       @email = user.email
