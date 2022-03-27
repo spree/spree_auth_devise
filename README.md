@@ -4,6 +4,11 @@
 
 Provides authentication services for [Spree](https://spreecommerce.org), using the [Devise](https://github.com/plataformatec/devise) gem.
 
+## Developed by
+
+[![Vendo](https://assets-global.website-files.com/6230c485f2c32ea1b0daa438/623372f40a8c54ca9aea34e8_vendo%202.svg)](https://getvendo.com?utm_source=spree_auth_github)
+
+> All-in-one platform for all your Marketplace and B2B eCommerce needs. [Start your 30-day free trial](https://e98esoirr8c.typeform.com/contactvendo?typeform-source=spree_auth_github)
 
 ## Installation
 
@@ -130,14 +135,3 @@ You need to do a quick one-time creation of a test application and then you can 
 Then run the rspec tests.
 
     bundle exec rspec
-
-About Spark Solutions
-----------------------
-[![Spark Solutions](http://sparksolutions.co/wp-content/uploads/2015/01/logo-ss-tr-221x100.png)][spark]
-
-Spree Auth Devise is maintained by [Spark Solutions Sp. z o.o.][spark].
-
-We are passionate about open source software.
-We are [available for hire][spark].
-
-[spark]:http://sparksolutions.co?utm_source=github
