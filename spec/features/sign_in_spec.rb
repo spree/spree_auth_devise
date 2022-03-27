@@ -45,7 +45,7 @@ RSpec.feature 'Sign In', type: :feature do
         expect(page).to have_text 'admin@person.com'
       end
     end
-    expect(current_path).to eq '/admin/orders'
+    expect(current_path).to match('/admin')
   end
 
   it 'should store the user previous location' do
