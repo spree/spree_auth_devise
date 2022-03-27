@@ -33,7 +33,7 @@ class Spree::UserPasswordsController < Devise::PasswordsController
       set_flash_message(:notice, :send_instructions) if is_navigational_format?
       respond_with resource, location: spree.login_path
     else
-      respond_with_navigational(resource) { render :new }
+      respond_with_navigational(resource) { render :new, status: :unprocessable_entity }
     end
   end
 
@@ -45,7 +45,7 @@ class Spree::UserPasswordsController < Devise::PasswordsController
       self.resource = resource_class.new
       resource.reset_password_token = params[:spree_user][:reset_password_token]
       set_flash_message(:error, :cannot_be_blank)
-      render :edit
+      render :edit, status: :unprocessable_entity
     else
       super
     end
