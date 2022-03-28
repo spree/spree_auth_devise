@@ -38,7 +38,7 @@ class Spree::UserSessionsController < Devise::SessionsController
       respond_to do |format|
         format.html {
           flash.now[:error] = t('devise.failure.invalid')
-          render :new
+          render :new, status: :unprocessable_entity
         }
         format.js {
           render json: { error: t('devise.failure.invalid') }, status: :unprocessable_entity

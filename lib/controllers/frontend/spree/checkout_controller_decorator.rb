@@ -6,7 +6,7 @@ module Spree::CheckoutControllerDecorator
   end
 
   def registration
-    @user = Spree.user_class.new 
+    @user = Spree.user_class.new
     @title = Spree.t(:registration)
   end
 
@@ -16,7 +16,7 @@ module Spree::CheckoutControllerDecorator
     else
       flash[:error] = t(:email_is_invalid, scope: [:errors, :messages])
       @user = Spree.user_class.new
-      render 'registration'
+      render 'registration', status: :unprocessable_entity
     end
   end
 

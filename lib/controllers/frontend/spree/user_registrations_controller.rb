@@ -48,7 +48,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords(resource)
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
