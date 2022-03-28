@@ -28,6 +28,7 @@ RSpec.feature 'Accounts', type: :feature do
       expect(page).to have_text 'email@person.com'
 
       find('a.account-page-user-info-item-title-edit').click
+      wait_for_turbo
 
       fill_in 'Password', with: 'foobar'
       fill_in 'Password Confirmation', with: 'foobar'

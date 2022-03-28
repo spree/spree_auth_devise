@@ -39,6 +39,14 @@ module Spree
           click_link Spree.t(:my_account).upcase
         end
       end
+
+      def wait_for_turbo
+        if Spree.version.to_f < 4.5
+          expect(page).to have_no_css '.turbolinks-progress-bar'
+        else
+          expect(page).to have_no_css '.turbo-progress-bar'
+        end
+      end
     end
   end
 end

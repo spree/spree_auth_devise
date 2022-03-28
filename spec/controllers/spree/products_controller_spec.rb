@@ -17,6 +17,7 @@ RSpec.describe Spree::ProductsController, type: :controller do
   end
 
   it 'cannot view non-active products' do
+    skip if Spree.version.to_f > 4.0
     allow(user).to receive(:has_spree_role?) { false }
 
     # this behaviour was introduced in rails 5.1 & Spree 3.5
