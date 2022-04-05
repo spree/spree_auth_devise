@@ -1,4 +1,4 @@
-module Spree::Admin::OrdersControllerDecorator
+module Spree::Auth::Admin::OrdersControllerDecorator
 
   def self.prepended(base)
     base.before_action :check_authorization
@@ -22,4 +22,4 @@ module Spree::Admin::OrdersControllerDecorator
     end
   end
 end
-Spree::Admin::OrdersController.prepend(Spree::Admin::OrdersControllerDecorator)
+Spree::Admin::OrdersController.prepend(Spree::Auth::Admin::OrdersControllerDecorator)

@@ -1,4 +1,4 @@
-module Spree::Admin::Orders::CustomerDetailsControllerDecorator
+module Spree::Auth::Admin::Orders::CustomerDetailsControllerDecorator
 
   def self.prepended(base)
     base.before_action :check_authorization
@@ -17,4 +17,4 @@ module Spree::Admin::Orders::CustomerDetailsControllerDecorator
     authorize! action, resource, session[:access_token]
   end
 end
-Spree::Admin::Orders::CustomerDetailsController.prepend(Spree::Admin::Orders::CustomerDetailsControllerDecorator)
+Spree::Admin::Orders::CustomerDetailsController.prepend(Spree::Auth::Admin::Orders::CustomerDetailsControllerDecorator)
