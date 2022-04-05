@@ -1,5 +1,5 @@
 require 'spree/core/validators/email' if Spree.version.to_f < 3.5
-module Spree::CheckoutControllerDecorator
+module Spree::Auth::CheckoutControllerDecorator
   def self.prepended(base)
     base.before_action :check_authorization
     base.before_action :check_registration, except: [:registration, :update_registration]
@@ -42,4 +42,4 @@ module Spree::CheckoutControllerDecorator
     redirect_to spree.checkout_registration_path
   end
 end
-Spree::CheckoutController.prepend(Spree::CheckoutControllerDecorator)
+Spree::CheckoutController.prepend(Spree::Auth::CheckoutControllerDecorator)
