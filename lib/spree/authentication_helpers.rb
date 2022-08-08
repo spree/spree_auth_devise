@@ -11,16 +11,16 @@ module Spree
       current_spree_user
     end
 
-    def spree_login_path
-      spree.login_path
+    def spree_login_path(opts = {})
+      spree.login_path(opts)
     end
 
-    def spree_signup_path
-      spree.signup_path
+    def spree_signup_path(opts = {})
+      spree.signup_path(opts)
     end
 
-    def spree_logout_path
-      spree.logout_path
+    def spree_logout_path(opts = {})
+      spree.logout_path(opts)
     end
   end
 end
