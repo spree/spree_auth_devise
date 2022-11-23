@@ -51,14 +51,14 @@ Spree::Core::Engine.add_routes do
         end
       end
     end
+  end
 
-    namespace :api, defaults: { format: 'json' } do
-      namespace :v2 do
-        namespace :storefront do
-          resource :account, controller: :account, only: %i[show create update]
-          resources :account_confirmations, only: %i[show]
-          resources :passwords, controller: :passwords, only: %i[create update]
-        end
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v2 do
+      namespace :storefront do
+        resource :account, controller: :account, only: %i[show create update]
+        resources :account_confirmations, only: %i[show]
+        resources :passwords, controller: :passwords, only: %i[create update]
       end
     end
   end
