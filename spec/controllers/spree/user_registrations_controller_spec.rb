@@ -55,4 +55,27 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       end
     end
   end
+  
+  context '#timeout' do
+    let(:user) { build_stubbed(:user) }
+
+    before do 
+      Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
+      allow(Devise::Mapping).to receive(:find_scope!).and_return(:spree_user)
+    end
+
+    it 'redirect to sign in after timeout' do
+      expect(controller.send(:after_inactive_sign_up_path_for, :user)).to eq(spree.login_path)
+    end
+
+    context "with locale chagned to fr" do
+      before do
+        allow(controller).to receive(:locale_param).and_return('fr')
+      end
+
+      it 'redirect to sign in after timeout with changed locale' do
+        expect(controller.send(:after_inactive_sign_up_path_for, :user)).to eq(spree.login_path('fr'))
+      end
+    end
+  end
 end
