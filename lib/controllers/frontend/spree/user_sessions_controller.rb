@@ -81,6 +81,6 @@ class Spree::UserSessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     router_name = Devise.mappings[scope].router_name
     context = router_name ? send(router_name) : self
-    context.respond_to?(:login_path) ? context.login_path : spree.root_path
+    context.respond_to?(:login_path) ? context.login_path(locale_param) : spree.root_path
   end
 end
