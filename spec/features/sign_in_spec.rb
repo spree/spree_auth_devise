@@ -74,7 +74,7 @@ RSpec.feature 'Sign In', type: :feature do
 
       expect(page).not_to have_text Spree.t(:login).upcase
       expect(page).to have_text Spree.t(:logout).upcase
-      expect(current_url).to match(/\/account\?locale\=fr$/)
+      expect(current_url).to match(/\/fr\/account/)
     end
   end
 end

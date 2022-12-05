@@ -9,6 +9,19 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       expect(response).to redirect_to spree.account_path
     end
 
+    context "with non default locale" do
+      before do
+        Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
+      end
+
+      after { I18n.locale = :en }
+
+      it 'redirects to account_path with locale' do
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}
+        expect(response).to redirect_to spree.account_path(locale: 'fr')
+      end
+    end
+
     context 'with a guest token present' do
       before do
         if Spree.version.to_f > 3.6
@@ -63,6 +76,8 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
       allow(Devise::Mapping).to receive(:find_scope!).and_return(:spree_user)
     end
+
+    after { I18n.locale = :en }
 
     it 'redirect to sign in after timeout' do
       expect(controller.send(:after_inactive_sign_up_path_for, :user)).to eq(spree.login_path)
