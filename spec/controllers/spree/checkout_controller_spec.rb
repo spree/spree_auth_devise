@@ -93,7 +93,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
           expect(response).to redirect_to spree.order_path(order)
         end
 
-        context 'and not deafult locale' do
+        context 'non default locale' do
           it 'redirects to the tokenized order view with a non default locale' do
             if Spree.version.to_f > 3.6
               request.cookie_jar.signed[:token] = 'ABC'
