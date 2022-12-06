@@ -83,7 +83,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       expect(controller.send(:after_inactive_sign_up_path_for, :user)).to eq(spree.login_path)
     end
 
-    context "with locale chagned to fr" do
+    context "with locale changed to fr" do
       before do
         allow(controller).to receive(:locale_param).and_return('fr')
       end
