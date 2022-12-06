@@ -200,4 +200,22 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
       end
     end
   end
+
+  context "#destroy" do
+    before do
+      Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
+    end
+
+    it "redirects to login page after signing out with default locale" do
+      post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+      delete :destroy
+      expect(response).to redirect_to(spree.login_path)
+    end
+
+    it "persists fr locale when redirecting to login page after signing out" do
+      post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: 'fr' }
+      delete :destroy, params: { locale: 'fr' }
+      expect(response).to redirect_to spree.login_path(locale: 'fr')
+    end
+end
 end

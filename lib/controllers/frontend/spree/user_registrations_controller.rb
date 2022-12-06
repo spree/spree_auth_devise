@@ -94,7 +94,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     scope = Devise::Mapping.find_scope!(resource)
     router_name = Devise.mappings[scope].router_name
     context = router_name ? send(router_name) : self
-    context.respond_to?(:login_path) ? context.login_path : "/login"
+    context.respond_to?(:login_path) ? context.login_path(locale_param) : spree.root_path
   end
 
   private
