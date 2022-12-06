@@ -11,7 +11,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
 
     context "with non default locale" do
       before do
-        Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
+        Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       end
 
       after { I18n.locale = :en }
@@ -79,7 +79,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
 
     after { I18n.locale = :en }
 
-    it 'redirect to sign in after timeout' do
+    it 'redirects to sign in after timeout' do
       expect(controller.send(:after_inactive_sign_up_path_for, :user)).to eq(spree.login_path)
     end
 

@@ -18,13 +18,11 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     expect(current_path).to eq '/account'
   end
 
-  context 'localized' do
+  context 'with non default locale' do
     before do
-      if Spree.version.to_f >= 4.2
-        add_french_locales
-        Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
-        I18n.locale = :fr
-      end
+      add_french_locales
+      Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
+      I18n.locale = :fr
     end
 
     after { I18n.locale = :en }

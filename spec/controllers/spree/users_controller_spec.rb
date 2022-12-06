@@ -5,7 +5,7 @@ RSpec.describe Spree::UsersController, type: :controller do
 
   before do 
     allow(controller).to receive(:spree_current_user) { user }
-    Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
+    Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
   end
 
   context '#load_object' do
@@ -15,7 +15,7 @@ RSpec.describe Spree::UsersController, type: :controller do
       expect(response).to redirect_to spree.login_path
     end
 
-    context "and locale is not default" do
+    context "non default locale" do
       it 'redirects to signup path with non default locale if user is not found' do
         allow(controller).to receive(:spree_current_user) { nil }
         put :update, params: { user: { email: 'foobar@example.com' }, locale: 'fr' }
@@ -39,10 +39,14 @@ RSpec.describe Spree::UsersController, type: :controller do
         expect(response).to redirect_to spree.account_path
       end
 
-      context 'and locale is not default' do
+      context 'non default locale' do
+        before { put :update, params: { user: { email: 'mynew@email-address.com' }, locale: 'fr' } }
+
         it 'performs update' do
-          put :update, params: { user: { email: 'mynew@email-address.com' }, locale: 'fr' }
           expect(assigns[:user].email).to eq 'mynew@email-address.com'
+        end
+
+        it 'persists locale when redirecting to account' do
           expect(response).to redirect_to spree.account_path(locale: 'fr')
         end
       end
