@@ -69,7 +69,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
     end
   end
   
-  context '#timeout' do
+  context 'when user session times out' do
     let(:user) { build_stubbed(:user) }
 
     before do 
