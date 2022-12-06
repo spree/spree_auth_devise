@@ -206,7 +206,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
     end
 
-    it "redirects to login page after signing out with deafult locale" do
+    it "redirects to login page after signing out with default locale" do
       post :create, params: { spree_user: { email: user.email, password: 'secret' }}
       get :destroy
       expect(response).to redirect_to(spree.login_path)
