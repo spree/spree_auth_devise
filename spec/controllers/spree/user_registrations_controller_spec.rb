@@ -73,7 +73,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
     let(:user) { build_stubbed(:user) }
 
     before do 
-      Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
+      Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       allow(Devise::Mapping).to receive(:find_scope!).and_return(:spree_user)
     end
 
