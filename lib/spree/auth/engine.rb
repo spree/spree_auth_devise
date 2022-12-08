@@ -14,7 +14,7 @@ module Spree
       end
 
       initializer "spree_auth_devise.set_user_class", after: :load_config_initializers do
-        ActiveSupport::Reloader.to_prepare do
+        Rails.application.config.after_initialize do
           Spree.user_class = 'Spree::User' if Spree.user_class.blank? || Spree.user_class.to_s == 'Spree::LegacyUser'
         end
       end
