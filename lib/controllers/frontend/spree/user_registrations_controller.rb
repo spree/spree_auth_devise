@@ -30,6 +30,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   # POST /resource/sign_up
   def create
     @user = build_resource(spree_user_params)
+    @user.saved_locale = current_locale
     resource.skip_confirmation_notification! if Spree::Auth::Config[:confirmable]
     resource_saved = resource.save
     yield resource if block_given?
