@@ -1,3 +1,5 @@
+require 'pry'
+
 class Spree::UserRegistrationsController < Devise::RegistrationsController
   helper 'spree/base'
 
@@ -30,7 +32,6 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   # POST /resource/sign_up
   def create
     @user = build_resource(spree_user_params)
-    @user.selected_locale = current_locale
     resource.skip_confirmation_notification! if Spree::Auth::Config[:confirmable]
     resource_saved = resource.save
     yield resource if block_given?
@@ -105,7 +106,9 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   end
 
   def spree_user_params
-    params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+    user_params = params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+    user_params[:selected_locale] = current_locale
+    user_params
   end
 
   def after_sign_in_redirect(resource_or_scope)
