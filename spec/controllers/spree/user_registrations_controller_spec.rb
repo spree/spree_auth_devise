@@ -9,7 +9,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       expect(response).to redirect_to spree.account_path
     end
 
-    context "with non default locale" do
+    context 'with non default locale' do
       before do
         Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       end
@@ -19,6 +19,12 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       it 'redirects to account_path with locale' do
         post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}
         expect(response).to redirect_to spree.account_path(locale: 'fr')
+      end
+
+      it 'saves locale in user' do
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}
+        user = Spree.user_class.find_by_email('foobar@example.com')
+        expect(user.selected_locale).to eq('fr')
       end
     end
 
@@ -68,11 +74,11 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       end
     end
   end
-  
+
   context 'when user session times out' do
     let(:user) { build_stubbed(:user) }
 
-    before do 
+    before do
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       allow(Devise::Mapping).to receive(:find_scope!).and_return(:spree_user)
     end
@@ -83,7 +89,7 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       expect(controller.send(:after_inactive_sign_up_path_for, :user)).to eq(spree.login_path)
     end
 
-    context "with locale changed to fr" do
+    context 'with locale changed to fr' do
       before do
         allow(controller).to receive(:locale_param).and_return('fr')
       end
