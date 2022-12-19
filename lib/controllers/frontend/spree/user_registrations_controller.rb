@@ -1,5 +1,3 @@
-require 'pry'
-
 class Spree::UserRegistrationsController < Devise::RegistrationsController
   helper 'spree/base'
 
