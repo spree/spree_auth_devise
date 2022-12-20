@@ -48,8 +48,8 @@ module Spree
         ApplicationController.send :include, Spree::AuthenticationHelpers
       end
 
-      def self.api_available?
-        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
+      def self.checkout_available?
+        @@checkout_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Checkout::Engine')
       end
 
       def self.backend_available?
