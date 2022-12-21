@@ -33,22 +33,33 @@ RSpec.describe Spree::UsersController, type: :controller do
 
   context '#update' do
     context 'when updating own account' do
-      it 'performs update' do
-        put :update, params: { user: { email: 'mynew@email-address.com' } }
-        expect(assigns[:user].email).to eq 'mynew@email-address.com'
-        expect(response).to redirect_to spree.account_path
+      context 'deafult locale' do
+        before { put :update, params: { user: { email: 'mynew@email-address.com' } } }
+
+        it 'performs update of email' do
+          expect(assigns[:user].email).to eq 'mynew@email-address.com'
+        end
+
+        it 'redirects to correct path' do
+          expect(response).to redirect_to spree.account_path
+        end
       end
 
       context 'non default locale' do
         before { put :update, params: { user: { email: 'mynew@email-address.com' }, locale: 'fr' } }
 
-        it 'performs update' do
+        it 'performs update of email' do
           expect(assigns[:user].email).to eq 'mynew@email-address.com'
         end
 
         it 'persists locale when redirecting to account' do
           expect(response).to redirect_to spree.account_path(locale: 'fr')
         end
+      end
+
+      it 'performs update of selected_locale' do
+        put :update, params: { user: { selected_locale: 'pl' } }
+        expect(assigns[:user].selected_locale).to eq 'pl'
       end
     end
 
