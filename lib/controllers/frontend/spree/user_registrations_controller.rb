@@ -104,7 +104,9 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
   end
 
   def spree_user_params
-    params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+    user_params = params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
+    user_params[:selected_locale] = current_locale
+    user_params
   end
 
   def after_sign_in_redirect(resource_or_scope)
