@@ -30,6 +30,11 @@ module Spree
         Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
+        if Spree::Auth::Engine.checkout_available?
+          Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/checkout/*/*/*/*_decorator*.rb")) do |c|
+            Rails.configuration.cache_classes ? require(c) : load(c)
+          end
+        end
         if Spree::Auth::Engine.backend_available?
           Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/backend/*/*/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
