@@ -9,14 +9,14 @@ RSpec.describe Spree::CheckoutController, type: :controller do
     Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
   end
 
+  after { I18n.locale = :en }
+
   context '#edit' do
     context 'when registration step enabled' do
       before do
         allow(controller).to receive(:check_authorization)
         Spree::Auth::Config.set(registration_step: true)
       end
-
-      after { I18n.locale = :en }
 
       context 'when authenticated as registered user' do
         before { allow(controller).to receive(:spree_current_user) { user } }
@@ -76,8 +76,6 @@ RSpec.describe Spree::CheckoutController, type: :controller do
         allow(order).to receive(:payment_required?) { false }
       end
 
-      after { I18n.locale = :en }
-
       context 'with a token' do
         before do
           if Spree.version.to_f > 3.6
@@ -118,8 +116,6 @@ RSpec.describe Spree::CheckoutController, type: :controller do
           end
         end
 
-        after { I18n.locale = :en }
-
         it 'redirects to the standard order view' do
           post :update, params: { state: 'confirm' }
           expect(response).to redirect_to spree.order_path(order)
@@ -155,8 +151,6 @@ RSpec.describe Spree::CheckoutController, type: :controller do
 
   context '#update_registration' do
     let(:user) { build(:user) }
-
-    after { I18n.locale = :en }
 
     it 'does not check registration' do
       controller.stub :check_authorization

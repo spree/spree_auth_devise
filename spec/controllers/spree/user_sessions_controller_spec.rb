@@ -3,6 +3,8 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
   before { @request.env['devise.mapping'] = Devise.mappings[:spree_user] }
 
+  after { I18n.locale = :en }
+
   context "#create" do
     context "using correct login information" do
       if Gem.loaded_specs['spree_core'].version >= Gem::Version.create('3.7.0')
@@ -163,8 +165,6 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
             Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
           end
 
-          after { I18n.locale = :en }
-
           it 'redirects to localized account path after signing in' do
             skip if Spree.version.to_f < 4.2
             post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: 'fr' }
@@ -207,8 +207,6 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
     before do
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
     end
-
-    after { I18n.locale = :en }
 
     it "redirects to login page after signing out with default locale" do
       post :create, params: { spree_user: { email: user.email, password: 'secret' } }

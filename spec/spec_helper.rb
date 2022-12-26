@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
 
@@ -6,7 +8,7 @@ require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'spree_dev_tools/rspec/spec_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
+# in spec/support/ and its sub-directories.
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].sort.each { |f| require f }
 
 require 'spree/testing_support/locale_helpers' if Spree.version.to_f >= 4.2
