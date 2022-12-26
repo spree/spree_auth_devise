@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     RSpec.describe OrdersController, type: :controller do
