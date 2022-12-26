@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.feature 'Admin - Sign Out', type: :feature, js: false do
+RSpec.feature 'Admin - Sign Out', type: :feature, js: true do
   let(:user) { create(:user, email: 'email@person.com') }
 
   before do
@@ -14,7 +14,7 @@ RSpec.feature 'Admin - Sign Out', type: :feature, js: false do
     click_button Spree.t(:login)
   end
 
-  xdescribe 'allows a signed in user to logout' do
+  describe 'allows a signed in user to logout' do
     it 'shows the login page' do
       log_out
 
