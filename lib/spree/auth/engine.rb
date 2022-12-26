@@ -60,10 +60,6 @@ module Spree
         @@frontend_available ||= Gem::Specification.find_all_by_name('spree_frontend').any?
       end
 
-      def self.api_available?
-        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
-      end
-
       def self.emails_available?
         @@emails_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Emails::Engine')
       end
