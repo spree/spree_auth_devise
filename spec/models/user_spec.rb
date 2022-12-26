@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Spree::User, type: :model do
   before(:all) { Spree::Role.create name: 'admin' }
   let!(:store) { create(:store) }
