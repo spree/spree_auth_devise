@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.feature 'Reset Password', type: :feature do
   background do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
