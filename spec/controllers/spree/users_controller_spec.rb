@@ -8,6 +8,8 @@ RSpec.describe Spree::UsersController, type: :controller do
     Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
   end
 
+  after { I18n.locale = :en}
+
   context '#load_object' do
     it 'redirects to signup path if user is not found' do
       allow(controller).to receive(:spree_current_user) { nil }

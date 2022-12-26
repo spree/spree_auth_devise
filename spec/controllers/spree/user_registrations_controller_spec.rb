@@ -4,6 +4,8 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
   context '#create' do
     before { allow(controller).to receive(:after_sign_up_path_for).and_return(spree.account_path) }
 
+    after { I18n.locale = :en }
+
     it 'redirects to account_path' do
       post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
       expect(response).to redirect_to spree.account_path
@@ -13,8 +15,6 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       before do
         Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       end
-
-      after { I18n.locale = :en }
 
       it 'redirects to account_path with locale' do
         post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}

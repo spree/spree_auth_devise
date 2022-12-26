@@ -149,7 +149,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           order.reload
           expect(order.user_id).to eq user.id
           expect(order.created_by_id).to eq user.id
-        end 
+        end
       end
 
       context "and html format is used" do
@@ -162,6 +162,8 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           before do
             Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
           end
+
+          after { I18n.locale = :en}
 
           it 'redirects to localized account path after signing in' do
             skip if Spree.version.to_f < 4.2
@@ -206,6 +208,8 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
     end
 
+    after { I18n.locale = :en}
+
     it "redirects to login page after signing out with default locale" do
       post :create, params: { spree_user: { email: user.email, password: 'secret' }}
       delete :destroy
@@ -217,5 +221,5 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
       delete :destroy, params: { locale: 'fr' }
       expect(response).to redirect_to spree.login_path(locale: 'fr')
     end
-end
+  end
 end

@@ -76,6 +76,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
         allow(order).to receive(:payment_required?) { false }
       end
 
+      after { I18n.locale = :en }
+
       context 'with a token' do
         before do
           if Spree.version.to_f > 3.6
@@ -84,8 +86,6 @@ RSpec.describe Spree::CheckoutController, type: :controller do
             allow(order).to receive(:guest_token) { 'ABC' }
           end
         end
-
-        after { I18n.locale = :en }
 
         it 'redirects to the tokenized order view' do
           if Spree.version.to_f > 3.6
