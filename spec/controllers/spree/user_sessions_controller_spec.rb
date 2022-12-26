@@ -72,7 +72,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
             order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
           end
-          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+          post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
           order.reload
           expect(order.user_id).to eq user.id
@@ -85,7 +85,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
             order = create(:order, guest_token: 'ABC', user_id: nil, created_by_id: nil)
           end
-          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+          post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
           order.reload
           expect(order.user_id).to eq user.id
@@ -111,22 +111,22 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
         it 'does not assign orders with an existing user' do
           if Spree.version.to_f > 3.6
-              order = create(:order, token: 'ABC', user_id: 200)
+            order = create(:order, token: 'ABC', user_id: 200)
           else
-              order = create(:order, guest_token: 'ABC', user_id: 200)
+            order = create(:order, guest_token: 'ABC', user_id: 200)
           end
-          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+          post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
           expect(order.reload.user_id).to eq 200
         end
 
         it 'does not assign orders with a different token' do
           if Spree.version.to_f > 3.6
-              order = create(:order, token: 'DEF', user_id: nil, created_by_id: nil)
+            order = create(:order, token: 'DEF', user_id: nil, created_by_id: nil)
           else
-              order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
+            order = create(:order, guest_token: 'DEF', user_id: nil, created_by_id: nil)
           end
-          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+          post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
           expect(order.reload.user_id).to be_nil
         end
@@ -144,7 +144,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
           else
             order = create(:order, email: user.email, guest_token: 'ABC', user_id: nil, created_by_id: nil)
           end
-          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+          post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
           order.reload
           expect(order.user_id).to eq user.id
@@ -154,7 +154,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
       context "and html format is used" do
         it "redirects to account path after signing in" do
-          post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+          post :create, params: { spree_user: { email: user.email, password: 'secret' } }
           expect(response).to redirect_to spree.account_path
         end
 
@@ -163,7 +163,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
             Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
           end
 
-          after { I18n.locale = :en}
+          after { I18n.locale = :en }
 
           it 'redirects to localized account path after signing in' do
             skip if Spree.version.to_f < 4.2
@@ -187,7 +187,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
     context "using incorrect login information" do
       context "and html format is used" do
         it "renders new template again with errors" do
-          post :create, params: { spree_user: { email: user.email, password: 'wrong' }}
+          post :create, params: { spree_user: { email: user.email, password: 'wrong' } }
           expect(response).to render_template('new')
           expect(flash[:error]).to eq I18n.t(:'devise.failure.invalid')
         end
@@ -208,10 +208,10 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
     end
 
-    after { I18n.locale = :en}
+    after { I18n.locale = :en }
 
     it "redirects to login page after signing out with default locale" do
-      post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+      post :create, params: { spree_user: { email: user.email, password: 'secret' } }
       delete :destroy
       expect(response).to redirect_to(spree.login_path)
     end
