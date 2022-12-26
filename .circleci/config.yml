@@ -51,7 +51,7 @@ run_tests: &run_tests
     - store_test_results:
         path: ~/rspec
     - store_artifacts:
-        path: tmp/capybara
+        path: /tmp/test-artifacts
 
 run_tests_3_0: &run_tests_3_0
   <<: *defaults_3_0
@@ -86,7 +86,7 @@ run_tests_3_0: &run_tests_3_0
     - store_test_results:
         path: ~/rspec
     - store_artifacts:
-        path: tmp/capybara
+        path: /tmp/test-artifacts
 
 jobs:
   bundle:
