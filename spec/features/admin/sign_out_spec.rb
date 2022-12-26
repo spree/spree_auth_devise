@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.feature 'Admin - Sign Out', type: :feature, js: true do
-  let(:current_store) { create(:store) }
+  let(:current_store) { create(:store, default: true) }
   let(:user) { create(:user, email: 'email@person.com') }
 
   before do
