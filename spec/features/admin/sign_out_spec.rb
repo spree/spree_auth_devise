@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.feature 'Admin - Sign Out', type: :feature, js: true do
+  let(:current_store) { create(:store) }
   let(:user) { create(:user, email: 'email@person.com') }
 
   before do
-    let(:current_store) { create(:store) }
     I18n.locale = :en
 
     visit spree.admin_login_path(locale: 'en')
