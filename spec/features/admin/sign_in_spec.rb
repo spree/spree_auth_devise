@@ -30,7 +30,7 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     scenario 'lets a user sign in successfully', js: true do
       log_in(email: @user.email, password: 'secret', locale: 'fr')
       show_user_menu
-  
+
       expect(page).not_to have_text login_button.upcase
       expect(page).to have_text logout_button.upcase
       expect(current_path).to eq '/fr/account'

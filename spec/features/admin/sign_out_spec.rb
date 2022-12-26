@@ -7,8 +7,8 @@ RSpec.feature 'Admin - Sign Out', type: :feature, js: true do
     I18n.locale = :en
     visit spree.admin_login_path
 
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: 'secret'
+    fill_in Spree.t(:email), with: user.email
+    fill_in Spree.t(:password), with: 'secret'
 
     # Regression test for #1257
     check 'Remember me'
