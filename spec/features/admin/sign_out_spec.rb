@@ -7,7 +7,7 @@ RSpec.feature 'Admin - Sign Out', type: :feature, js: true do
   before do
     I18n.locale = :en
 
-    visit spree.admin_login_path(locale: 'en')
+    visit spree.admin_login_path(locale: :en)
 
     fill_in id: 'spree_user_email', with: user.email
     fill_in Spree.t(:password), with: 'secret'
@@ -21,7 +21,7 @@ RSpec.feature 'Admin - Sign Out', type: :feature, js: true do
     it 'shows the login page' do
       log_out
 
-      visit spree.admin_login_path(locale: 'en')
+      visit spree.admin_login_path(locale: :en)
 
       expect(page).to have_button Spree.t(:login)
       expect(page).not_to have_text Spree.t(:logout)

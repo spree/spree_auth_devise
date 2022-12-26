@@ -21,19 +21,23 @@ RSpec.feature 'Admin - Sign In', type: :feature do
   context 'with non default locale' do
     before do
       add_french_locales
+
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       I18n.locale = :fr
     end
 
     after { I18n.locale = :en }
 
-    scenario 'lets a user sign in successfully', js: true do
-      log_in(email: @user.email, password: 'secret', locale: 'fr')
-      show_user_menu
+    describe 'admin login in french', js: true do
+      it 'lets a user sign in successfully' do
+        log_in(email: @user.email, password: 'secret', locale: 'fr')
 
-      expect(page).not_to have_text login_button.upcase
-      expect(page).to have_text logout_button.upcase
-      expect(current_path).to eq '/fr/account'
+        show_user_menu
+
+        expect(page).not_to have_text login_button.upcase
+        expect(page).to have_text logout_button.upcase
+        expect(current_path).to eq '/fr/account'
+      end
     end
   end
 
