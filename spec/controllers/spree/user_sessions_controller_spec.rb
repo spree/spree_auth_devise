@@ -14,7 +14,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
           it 'assigns orders with the correct token and no user present' do
             order = create(:order, email: user.email, token: 'ABC', user_id: nil, created_by_id: nil)
-            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+            post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
             order.reload
             expect(order.user_id).to eq user.id
@@ -23,7 +23,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
           it 'assigns orders with the correct token and no user or email present' do
             order = create(:order, token: 'ABC', user_id: nil, created_by_id: nil)
-            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+            post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
             order.reload
             expect(order.user_id).to eq user.id
@@ -34,7 +34,7 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
             order = create(:order, email: user.email, token: 'ABC',
                            user_id: nil, created_by_id: nil,
                            completed_at: 1.minute.ago)
-            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+            post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
             order.reload
             expect(order.user_id).to be_nil
@@ -43,14 +43,14 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
           it 'does not assign orders with an existing user' do
             order = create(:order, token: 'ABC', user_id: 200)
-            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+            post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
             expect(order.reload.user_id).to eq 200
           end
 
           it 'does not assign orders with a different token' do
             order = create(:order, token: 'DEF', user_id: nil, created_by_id: nil)
-            post :create, params: { spree_user: { email: user.email, password: 'secret' }}
+            post :create, params: { spree_user: { email: user.email, password: 'secret' } }
 
             expect(order.reload.user_id).to be_nil
           end
