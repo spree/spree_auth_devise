@@ -20,7 +20,7 @@ RSpec.feature 'Admin - Sign Out', type: :feature, js: true do
     it 'shows the login page' do
       log_out
 
-      visit spree.admin_login_path
+      visit spree.admin_login_path(locale: 'en')
 
       expect(page).to have_button Spree.t(:login)
       expect(page).not_to have_text Spree.t(:logout)
