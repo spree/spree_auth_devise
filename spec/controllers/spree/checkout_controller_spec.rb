@@ -16,6 +16,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
         Spree::Auth::Config.set(registration_step: true)
       end
 
+      after { I18n.locale = :en }
+
       context 'when authenticated as registered user' do
         before { allow(controller).to receive(:spree_current_user) { user } }
 
@@ -83,6 +85,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
           end
         end
 
+        after { I18n.locale = :en }
+
         it 'redirects to the tokenized order view' do
           if Spree.version.to_f > 3.6
             request.cookie_jar.signed[:token] = 'ABC'
@@ -113,6 +117,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
             allow(order).to receive(:guest_token) { nil }
           end
         end
+
+        after { I18n.locale = :en }
 
         it 'redirects to the standard order view' do
           post :update, params: { state: 'confirm' }
@@ -149,6 +155,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
 
   context '#update_registration' do
     let(:user) { build(:user) }
+
+    after { I18n.locale = :en }
 
     it 'does not check registration' do
       controller.stub :check_authorization
