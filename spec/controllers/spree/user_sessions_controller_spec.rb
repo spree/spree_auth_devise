@@ -167,8 +167,8 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
 
           it 'redirects to localized account path after signing in' do
             skip if Spree.version.to_f < 4.2
-            post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: 'fr' }
-            expect(response).to redirect_to spree.account_path(locale: 'fr')
+            post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: :fr }
+            expect(response).to redirect_to spree.account_path(locale: :fr)
           end
         end
       end
@@ -215,9 +215,9 @@ RSpec.describe Spree::UserSessionsController, type: :controller do
     end
 
     it "persists fr locale when redirecting to login page after signing out" do
-      post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: 'fr' }
-      delete :destroy, params: { locale: 'fr' }
-      expect(response).to redirect_to spree.login_path(locale: 'fr')
+      post :create, params: { spree_user: { email: user.email, password: 'secret' }, locale: :fr }
+      delete :destroy, params: { locale: :fr }
+      expect(response).to redirect_to spree.login_path(locale: :fr)
     end
   end
 end

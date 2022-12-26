@@ -17,12 +17,12 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       end
 
       it 'redirects to account_path with locale' do
-        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}
-        expect(response).to redirect_to spree.account_path(locale: 'fr')
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: :fr}
+        expect(response).to redirect_to spree.account_path(locale: :fr)
       end
 
       it 'saves locale in user' do
-        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: :fr}
         user = Spree.user_class.find_by_email('foobar@example.com')
         expect(user.selected_locale).to eq('fr')
       end

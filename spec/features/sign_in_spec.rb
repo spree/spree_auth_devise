@@ -18,7 +18,7 @@ RSpec.feature 'Sign In', type: :feature do
     expect(current_path).to eq '/account'
   end
 
-  scenario 'show validation erros' do
+  scenario 'show validation errors' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong_password'
     click_button login_button
@@ -56,7 +56,7 @@ RSpec.feature 'Sign In', type: :feature do
     expect(current_path).to eq '/account'
   end
 
-  context 'localized' do
+  context 'localized', js: true do
     before do
       if Spree.version.to_f >= 4.2
         add_french_locales
@@ -67,9 +67,9 @@ RSpec.feature 'Sign In', type: :feature do
 
     after { I18n.locale = :en }
 
-    scenario 'let a user sign in successfully', js: true do
+    it 'let a user sign in successfully' do
       skip if Spree.version.to_f < 4.2
-      log_in(email: @user.email, password: @user.password, locale: 'fr')
+      log_in(email: @user.email, password: @user.password, locale: :fr)
       show_user_menu
 
       expect(page).not_to have_text Spree.t(:login).upcase

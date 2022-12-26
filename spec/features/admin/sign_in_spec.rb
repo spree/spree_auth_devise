@@ -30,7 +30,7 @@ RSpec.feature 'Admin - Sign In', type: :feature do
 
     describe 'admin login in french', js: true do
       it 'lets a user sign in successfully' do
-        log_in(email: @user.email, password: 'secret', locale: 'fr')
+        log_in(email: @user.email, password: 'secret', locale: :fr)
 
         show_user_menu
 
