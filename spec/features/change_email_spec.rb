@@ -10,15 +10,13 @@ RSpec.feature 'Change email', type: :feature do
     visit spree.edit_account_path
   end
 
-  describe 'work with correct password', js: true do
-    it 'Updates account' do
-      fill_in 'user_email', with: 'tests@example.com'
-      fill_in 'user_password', with: 'password'
-      fill_in 'user_password_confirmation', with: 'password'
-      click_button 'Update'
+  it 'work with correct password', js: true do
+    fill_in 'user_email', with: 'tests@example.com'
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
+    click_button 'Update'
 
-      expect(page).to have_text 'Account updated'
-      expect(page).to have_text 'tests@example.com'
-    end
+    expect(page).to have_text 'Account updated'
+    expect(page).to have_text 'tests@example.com'
   end
 end
