@@ -1,6 +1,6 @@
 RSpec.feature 'Sign Up', type: :feature do
   context 'with valid data' do
-    scenario 'create a new user' do
+    it 'create a new user' do
       visit spree.signup_path
 
       fill_in 'Email', with: 'email@person.com'
@@ -15,7 +15,7 @@ RSpec.feature 'Sign Up', type: :feature do
   end
 
   context 'with invalid data' do
-    scenario 'does not create a new user' do
+    it 'does not create a new user' do
       visit spree.signup_path
 
       fill_in 'Email', with: 'email@person.com'

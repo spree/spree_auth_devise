@@ -9,7 +9,7 @@ RSpec.feature 'Confirmation', type: :feature, confirmable: true do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
   end
 
-  scenario 'create a new user' do
+  it 'create a new user' do
     visit spree.signup_path
 
     fill_in 'Email', with: 'email@person.com'

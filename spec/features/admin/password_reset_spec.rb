@@ -3,7 +3,7 @@ RSpec.feature 'Admin - Reset Password', type: :feature do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
   end
 
-  scenario 'allows a user to supply an email for the password reset' do
+  it 'allows a user to supply an email for the password reset' do
     user = create(:user, email: 'foobar@example.com', password: 'secret', password_confirmation: 'secret')
     visit spree.admin_login_path
     click_link 'Forgot password?'
@@ -12,7 +12,7 @@ RSpec.feature 'Admin - Reset Password', type: :feature do
     expect(page).to have_text 'You will receive an email with instructions'
   end
 
-  scenario 'shows errors if no email is supplied' do
+  it 'shows errors if no email is supplied' do
     visit spree.admin_login_path
     click_link 'Forgot password?'
     click_button 'Reset my password'

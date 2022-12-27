@@ -4,12 +4,12 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     visit spree.admin_login_path
   end
 
-  scenario 'asks user to sign in' do
+  it 'asks user to sign in' do
     visit spree.admin_path
     expect(page).not_to have_text 'Authorization Failure'
   end
 
-  scenario 'lets a user sign in successfully', js: true do
+  it 'lets a user sign in successfully', js: true do
     log_in(email: @user.email, password: 'secret')
     show_user_menu
 
@@ -41,7 +41,7 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     end
   end
 
-  scenario 'shows validation errors' do
+  it 'shows validation errors' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong_password'
     click_button 'Login'
@@ -50,7 +50,7 @@ RSpec.feature 'Admin - Sign In', type: :feature do
     expect(page).to have_button 'Login'
   end
 
-  scenario 'allows a user to access a restricted page after logging in' do
+  it 'allows a user to access a restricted page after logging in' do
     user = create(:admin_user, email: 'admin@person.com')
     visit spree.admin_path
 

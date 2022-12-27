@@ -1,11 +1,11 @@
 RSpec.feature 'Orders', :js, type: :feature do
-  scenario 'allow a user to view their cart at any time' do
+  it 'allow a user to view their cart at any time' do
     visit spree.cart_path
     expect(page).to have_text 'Your cart is empty'
   end
 
   # regression test for spree/spree#1687
-  scenario 'merge incomplete orders from different sessions' do
+  it 'merge incomplete orders from different sessions' do
     ror_mug = create(:product, name: 'RoR Mug')
     ror_shirt = create(:product, name: 'RoR Shirt')
 

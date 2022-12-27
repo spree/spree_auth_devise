@@ -10,7 +10,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     log_in(email: user.email, password: user.password)
   end
 
-  scenario 'allow a signed in user to logout' do
+  it 'allow a signed in user to logout' do
     log_out_via_frontend_user_menu
 
     visit spree.root_path

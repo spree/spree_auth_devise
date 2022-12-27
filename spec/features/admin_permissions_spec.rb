@@ -11,18 +11,18 @@ RSpec.feature 'Admin Permissions', type: :feature do
     end
 
     context 'admin is restricted from accessing orders' do
-      scenario 'can not list orders' do
+      it 'can not list orders' do
         visit spree.admin_orders_path
         expect(page).to have_text 'Authorization Failure'
       end
 
-      scenario 'can not edit orders' do
+      it 'can not edit orders' do
         create(:order, number: 'R123')
         visit spree.edit_admin_order_path('R123')
         expect(page).to have_text 'Authorization Failure'
       end
 
-      scenario 'can not new orders' do
+      it 'can not new orders' do
         visit spree.new_admin_order_path
         expect(page).to have_text 'Authorization Failure'
       end
@@ -31,12 +31,12 @@ RSpec.feature 'Admin Permissions', type: :feature do
     context "admin is restricted from accessing an order's customer details" do
       given(:order) { create(:order_with_totals) }
 
-      scenario 'can not list customer details for an order' do
+      it 'can not list customer details for an order' do
         visit spree.admin_order_customer_path(order)
         expect(page).to have_text 'Authorization Failure'
       end
 
-      scenario "can not edit an order's customer details" do
+      it "can not edit an order's customer details" do
         visit spree.edit_admin_order_customer_path(order)
         expect(page).to have_text 'Authorization Failure'
       end

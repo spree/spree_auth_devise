@@ -29,7 +29,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       allow_any_instance_of(Spree::Order).to receive(:payment_required?).and_return(false)
     end
 
-    scenario 'allow a visitor to checkout as guest, without registration' do
+    it 'allow a visitor to checkout as guest, without registration' do
       Spree::Auth::Config.set(registration_step: true)
       add_to_cart(mug)
       click_link 'checkout'
@@ -49,7 +49,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       expect(page).to have_text 'Order placed successfully'
     end
 
-    scenario 'associate an uncompleted guest order with user after logging in' do
+    it 'associate an uncompleted guest order with user after logging in' do
       add_to_cart(mug)
 
       visit spree.login_path
@@ -73,7 +73,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
     end
 
     # Regression test for #890
-    xscenario 'associate an incomplete guest order with user after successful password reset' do
+    xit 'associate an incomplete guest order with user after successful password reset' do
       add_to_cart(mug)
 
       visit spree.login_path
@@ -106,7 +106,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       ActiveJob::Base.queue_adapter = :test
     end
 
-    scenario 'allow a user to register during checkout' do
+    it 'allow a user to register during checkout' do
       add_to_cart(mug)
       click_link 'checkout'
 
