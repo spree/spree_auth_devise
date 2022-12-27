@@ -29,7 +29,7 @@ RSpec.feature 'Admin Permissions', type: :feature do
     end
 
     context "admin is restricted from accessing an order's customer details" do
-      given(:order) { create(:order_with_totals) }
+      let(:order) { create(:order_with_totals) }
 
       it 'can not list customer details for an order' do
         visit spree.admin_order_customer_path(order)

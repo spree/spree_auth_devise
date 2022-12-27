@@ -1,17 +1,17 @@
 RSpec.feature 'Checkout', :js, type: :feature do
-  given!(:country) { create(:country, name: 'United States', states_required: true) }
-  given!(:state)   { create(:state, name: 'Maryland', country: country) }
-  given!(:shipping_method) do
+  let!(:country) { create(:country, name: 'United States', states_required: true) }
+  let!(:state)   { create(:state, name: 'Maryland', country: country) }
+  let!(:shipping_method) do
     shipping_method = create(:shipping_method)
     calculator = Spree::Calculator::Shipping::PerItem.create!(calculable: shipping_method, preferred_amount: 10)
     shipping_method.calculator = calculator
     shipping_method.tap(&:save)
   end
 
-  given!(:user) { create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password') }
-  given!(:zone)    { create(:zone) }
-  given!(:address) { create(:address, state: state, country: country) }
-  given!(:mug) { create(:product, name: 'RoR Mug') }
+  let!(:user) { create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password') }
+  let!(:zone)    { create(:zone) }
+  let!(:address) { create(:address, state: state, country: country) }
+  let!(:mug) { create(:product, name: 'RoR Mug') }
 
   before do
     mug.master.stock_items.first.update_column(:count_on_hand, 1)
