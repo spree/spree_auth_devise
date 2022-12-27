@@ -11,7 +11,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
   end
 
   scenario 'allow a signed in user to logout' do
-    log_out
+    log_out_via_frontend_user_menu
 
     visit spree.root_path
     show_user_menu
@@ -28,7 +28,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     it 'clears token cookies' do
       add_to_cart(mug)
 
-      log_out
+      log_out_via_frontend_user_menu
 
       find('#link-to-cart').click
       expect(page).to have_text Spree.t(:your_cart_is_empty)

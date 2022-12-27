@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module TestingSupport
     module AuthHelpers
@@ -22,7 +24,7 @@ module Spree
         expect(page).to have_content Spree.t(:logged_in_successfully)
       end
 
-      def log_out
+      def log_out_via_frontend_user_menu
         show_user_menu
         click_link logout_button
 
