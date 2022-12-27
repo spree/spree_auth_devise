@@ -1,5 +1,5 @@
 RSpec.feature 'Admin orders', type: :feature do
-  background do
+  before do
     user = create(:admin_user)
     log_in email: user.email, password: user.password
   end

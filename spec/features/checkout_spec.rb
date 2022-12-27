@@ -13,7 +13,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
   given!(:address) { create(:address, state: state, country: country) }
   given!(:mug) { create(:product, name: 'RoR Mug') }
 
-  background do
+  before do
     mug.master.stock_items.first.update_column(:count_on_hand, 1)
 
     # Bypass gateway error on checkout | ..or stub a gateway
@@ -23,7 +23,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
   end
 
   context 'without payment being required' do
-    background do
+    before do
       # So that we don't have to setup payment methods just for the sake of it
       allow_any_instance_of(Spree::Order).to receive(:has_available_payment).and_return(true)
       allow_any_instance_of(Spree::Order).to receive(:payment_required?).and_return(false)

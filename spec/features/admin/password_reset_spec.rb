@@ -1,5 +1,5 @@
 RSpec.feature 'Admin - Reset Password', type: :feature do
-  background do
+  before do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
   end
 

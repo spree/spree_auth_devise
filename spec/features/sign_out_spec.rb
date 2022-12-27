@@ -6,7 +6,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
            password_confirmation: 'secret')
   end
 
-  background do
+  before do
     log_in(email: user.email, password: user.password)
   end
 
