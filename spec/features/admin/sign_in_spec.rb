@@ -1,21 +1,22 @@
 RSpec.feature 'Admin - Sign In', type: :feature do
-  before do
-    @user = create(:user, email: 'email@person.com')
-    visit spree.admin_login_path
-  end
+  let(:user) { create(:admin_user) }
 
-  it 'asks user to sign in' do
-    visit spree.admin_path
-    expect(page).not_to have_text 'Authorization Failure'
-  end
+  context 'when a user visits the admin_path' do
+    describe 'when the user is not signed in' do
+      it 'asks the user to sign in' do
+        visit spree.admin_path
 
-  it 'lets a user sign in successfully', js: true do
-    log_in(email: @user.email, password: 'secret')
-    show_user_menu
+        expect(page).not_to have_text 'Authorization Failure'
+      end
+    end
 
-    expect(page).not_to have_text login_button.upcase
-    expect(page).to have_text logout_button.upcase
-    expect(current_path).to eq '/account'
+    describe 'when the user is signed in' do
+      it 'lets a user sign in successfully and access the admin UI' do
+        admin_login(email: user.email, password: 'secret')
+
+        assert_admin_login_success
+      end
+    end
   end
 
   context 'with non default locale' do
@@ -28,45 +29,25 @@ RSpec.feature 'Admin - Sign In', type: :feature do
 
     after { I18n.locale = :en }
 
-    describe 'admin login in french', js: true do
+    describe 'admin login in french' do
       it 'lets a user sign in successfully' do
-        log_in(email: @user.email, password: 'secret', locale: :fr)
+        admin_login(email: user.email, password: 'secret', locale: :fr)
 
-        show_user_menu
-
-        expect(page).not_to have_text login_button.upcase
-        expect(page).to have_text logout_button.upcase
-        expect(current_path).to eq '/fr/account'
+        assert_admin_login_success(:fr)
       end
     end
   end
 
   it 'shows validation errors' do
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: 'wrong_password'
-    click_button 'Login'
+    admin_login(email: user.email, password: 'wrong_password')
 
     expect(page).to have_text 'Invalid email or password'
     expect(page).to have_button 'Login'
   end
 
   it 'allows a user to access a restricted page after logging in' do
-    user = create(:admin_user, email: 'admin@person.com')
-    visit spree.admin_path
+    admin_login(email: user.email, password: 'secret')
 
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: 'secret'
-    click_button login_button
-
-    if Spree.version.to_f > 4.1
-      within '.navbar .dropdown-menu-right' do
-        expect(page).to have_text 'admin@person.com'
-      end
-    else
-      within '.user-menu' do
-        expect(page).to have_text 'admin@person.com'
-      end
-    end
-    expect(current_path).to match('/admin')
+    assert_admin_login_success
   end
 end

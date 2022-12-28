@@ -14,7 +14,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     log_out_via_frontend_user_menu
 
     visit spree.root_path
-    show_user_menu
+    show_frontend_user_menu
 
     expect(page).to have_link login_button.upcase
     expect(page).not_to have_link logout_button.upcase

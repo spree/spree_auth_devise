@@ -4,15 +4,7 @@ RSpec.feature 'Admin - Sign Out', type: :feature, js: false do
   let(:user) { create(:admin_user, email: 'email@person.com') }
 
   before do
-    visit spree.admin_path
-
-    fill_in id: 'spree_user_email', with: user.email
-    fill_in Spree.t(:password), with: 'secret'
-
-    # Regression test for #1257
-    check 'Remember me'
-
-    click_button Spree.t(:login)
+    admin_login(email: user.email, password: 'secret')
   end
 
   it 'allows a signed in user to logout' do

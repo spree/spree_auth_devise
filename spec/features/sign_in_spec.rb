@@ -11,7 +11,7 @@ RSpec.feature 'Sign In', type: :feature do
 
   it 'let a user sign in successfully', js: true do
     log_in(email: @user.email, password: @user.password)
-    show_user_menu
+    show_frontend_user_menu
 
     expect(page).not_to have_text login_button.upcase
     expect(page).to have_text logout_button.upcase
@@ -70,7 +70,7 @@ RSpec.feature 'Sign In', type: :feature do
     it 'let a user sign in successfully' do
       skip if Spree.version.to_f < 4.2
       log_in(email: @user.email, password: @user.password, locale: :fr)
-      show_user_menu
+      show_frontend_user_menu
 
       expect(page).not_to have_text Spree.t(:login).upcase
       expect(page).to have_text Spree.t(:logout).upcase
