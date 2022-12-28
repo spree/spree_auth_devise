@@ -49,7 +49,7 @@ module Spree
       end
 
       def show_frontend_user_menu
-        find("button[aria-label='#{Spree.t('nav_bar.show_frontend_user_menu')}']").click
+        find("button[aria-label='#{Spree.t('nav_bar.show_user_menu')}']").click
       end
 
       def show_user_account
