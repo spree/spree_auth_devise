@@ -1,6 +1,5 @@
 require 'devise'
 require 'devise-encryptable'
-require 'pry'
 
 require_relative 'configuration'
 
