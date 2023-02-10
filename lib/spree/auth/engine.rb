@@ -1,11 +1,14 @@
 require 'devise'
 require 'devise-encryptable'
+require 'pry'
 
 require_relative 'configuration'
 
 module Spree
   module Auth
     class Engine < Rails::Engine
+      include Spree::Core::ControllerHelpers::GemChecking
+
       isolate_namespace Spree
       engine_name 'spree_auth'
 
@@ -30,42 +33,22 @@ module Spree
         Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
-        if Spree::Auth::Engine.backend_available?
+        if backend_available?
           Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/backend/*/*/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
         end
-        if Spree::Auth::Engine.frontend_available?
+        if frontend_available?
           Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/frontend/**/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
         end
-        if Spree::Auth::Engine.api_available?
+        if api_available?
           Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/api/**/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
         end
         ApplicationController.send :include, Spree::AuthenticationHelpers
-      end
-
-      def self.api_available?
-        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
-      end
-
-      def self.backend_available?
-        @@backend_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Backend::Engine')
-      end
-
-      def self.frontend_available?
-        @@frontend_available ||= Gem::Specification.find_all_by_name('spree_frontend').any?
-      end
-
-      def self.api_available?
-        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
-      end
-
-      def self.emails_available?
-        @@emails_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Emails::Engine')
       end
 
       if backend_available?
