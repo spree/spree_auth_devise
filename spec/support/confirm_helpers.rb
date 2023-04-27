@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.configure do |config|
   config.around do |example|
     if example.metadata.key?(:confirmable)
@@ -19,7 +21,7 @@ RSpec.configure do |config|
       Spree::Auth::Config[:confirmable] = example.metadata[:confirmable]
 
       Spree.send(:remove_const, :User)
-      load File.expand_path('../../../app/models/spree/user.rb', __FILE__)
+      load File.expand_path('../../app/models/spree/user.rb', __dir__)
     end
   end
 end

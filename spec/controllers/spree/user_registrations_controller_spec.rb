@@ -1,6 +1,8 @@
 RSpec.describe Spree::UserRegistrationsController, type: :controller do
   before { @request.env['devise.mapping'] = Devise.mappings[:spree_user] }
 
+  after { I18n.locale = :en }
+
   context '#create' do
     before { allow(controller).to receive(:after_sign_up_path_for).and_return(spree.account_path) }
 
@@ -14,15 +16,13 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
         Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       end
 
-      after { I18n.locale = :en }
-
       it 'redirects to account_path with locale' do
-        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}
-        expect(response).to redirect_to spree.account_path(locale: 'fr')
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: :fr}
+        expect(response).to redirect_to spree.account_path(locale: :fr)
       end
 
       it 'saves locale in user' do
-        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: 'fr'}
+        post :create, params: { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' }, locale: :fr}
         user = Spree.user_class.find_by_email('foobar@example.com')
         expect(user.selected_locale).to eq('fr')
       end
@@ -82,8 +82,6 @@ RSpec.describe Spree::UserRegistrationsController, type: :controller do
       Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr')
       allow(Devise::Mapping).to receive(:find_scope!).and_return(:spree_user)
     end
-
-    after { I18n.locale = :en }
 
     it 'redirects to sign in after timeout' do
       expect(controller.send(:after_inactive_sign_up_path_for, :user)).to eq(spree.login_path)

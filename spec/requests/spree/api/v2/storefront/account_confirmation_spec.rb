@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Storefront API v2 Account Confirmation spec', type: :request do
   describe 'account_confirmations#show' do
-
     before do
       Spree::User.stub(:confirm_by_token, confirmation_token: confirmation_token).and_return user
       get "/api/v2/storefront/account_confirmations/#{confirmation_token}"

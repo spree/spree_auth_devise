@@ -4,7 +4,7 @@ RSpec.feature 'Accounts', type: :feature do
       allow_bypass_sign_in
     end
 
-    scenario 'can edit an admin user' do
+    it 'can edit an admin user' do
       user = create(:admin_user, email: 'admin@person.com', password: 'password', password_confirmation: 'password')
       visit spree.login_path
 
@@ -16,7 +16,7 @@ RSpec.feature 'Accounts', type: :feature do
       expect(page).to have_text 'admin@person.com'
     end
 
-    scenario 'can edit a new user' do
+    it 'can edit a new user' do
       visit spree.signup_path
 
       fill_in 'Email', with: 'email@person.com'
@@ -38,7 +38,7 @@ RSpec.feature 'Accounts', type: :feature do
       expect(page).to have_text 'Account updated'
     end
 
-    scenario 'can edit an existing user account' do
+    it 'can edit an existing user account' do
       user = create(:user, email: 'email@person.com', password: 'secret', password_confirmation: 'secret')
       visit spree.login_path
 

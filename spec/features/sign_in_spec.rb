@@ -1,24 +1,24 @@
 RSpec.feature 'Sign In', type: :feature do
-  background do
+  before do
     @user = create(:user, email: 'email@person.com', password: 'secret', password_confirmation: 'secret')
     visit spree.login_path
   end
 
-  scenario 'ask user to sign in' do
+  it 'ask user to sign in' do
     visit spree.admin_path
     expect(page).not_to have_text 'Authorization Failure'
   end
 
-  scenario 'let a user sign in successfully', js: true do
+  it 'let a user sign in successfully', js: true do
     log_in(email: @user.email, password: @user.password)
-    show_user_menu
+    show_frontend_user_menu
 
     expect(page).not_to have_text login_button.upcase
     expect(page).to have_text logout_button.upcase
     expect(current_path).to eq '/account'
   end
 
-  scenario 'show validation erros' do
+  it 'show validation errors' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong_password'
     click_button login_button
@@ -27,7 +27,7 @@ RSpec.feature 'Sign In', type: :feature do
     expect(page).to have_text 'Log in'
   end
 
-  scenario 'allow a user to access a restricted page after logging in' do
+  it 'allow a user to access a restricted page after logging in' do
     user = create(:admin_user, email: 'admin@person.com', password: 'password', password_confirmation: 'password')
     visit spree.admin_path
 
@@ -56,7 +56,7 @@ RSpec.feature 'Sign In', type: :feature do
     expect(current_path).to eq '/account'
   end
 
-  context 'localized' do
+  context 'localized', js: true do
     before do
       if Spree.version.to_f >= 4.2
         add_french_locales
@@ -67,10 +67,10 @@ RSpec.feature 'Sign In', type: :feature do
 
     after { I18n.locale = :en }
 
-    scenario 'let a user sign in successfully', js: true do
+    it 'let a user sign in successfully' do
       skip if Spree.version.to_f < 4.2
-      log_in(email: @user.email, password: @user.password, locale: 'fr')
-      show_user_menu
+      log_in(email: @user.email, password: @user.password, locale: :fr)
+      show_frontend_user_menu
 
       expect(page).not_to have_text Spree.t(:login).upcase
       expect(page).to have_text Spree.t(:logout).upcase

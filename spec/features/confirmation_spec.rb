@@ -5,11 +5,11 @@ RSpec.feature 'Confirmation', type: :feature, confirmable: true do
     expect(Spree::UserMailer).to receive(:confirmation_instructions).with(anything, anything, { current_store_id: Spree::Store.default.id }).and_return(double(deliver: true))
   end
 
-  background do
+  before do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
   end
 
-  scenario 'create a new user' do
+  it 'create a new user' do
     visit spree.signup_path
 
     fill_in 'Email', with: 'email@person.com'

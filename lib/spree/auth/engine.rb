@@ -31,7 +31,7 @@ module Spree
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
         if Spree::Auth::Engine.backend_available?
-          Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/backend/*/*/*_decorator*.rb")) do |c|
+          Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/backend/**/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
         end
@@ -58,10 +58,6 @@ module Spree
 
       def self.frontend_available?
         @@frontend_available ||= Gem::Specification.find_all_by_name('spree_frontend').any?
-      end
-
-      def self.api_available?
-        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
       end
 
       def self.emails_available?

@@ -1,19 +1,19 @@
 RSpec.feature 'Checkout', :js, type: :feature do
-  given!(:country) { create(:country, name: 'United States', states_required: true) }
-  given!(:state)   { create(:state, name: 'Maryland', country: country) }
-  given!(:shipping_method) do
+  let!(:country) { create(:country, name: 'United States', states_required: true) }
+  let!(:state)   { create(:state, name: 'Maryland', country: country) }
+  let!(:shipping_method) do
     shipping_method = create(:shipping_method)
     calculator = Spree::Calculator::Shipping::PerItem.create!(calculable: shipping_method, preferred_amount: 10)
     shipping_method.calculator = calculator
     shipping_method.tap(&:save)
   end
 
-  given!(:user) { create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password') }
-  given!(:zone)    { create(:zone) }
-  given!(:address) { create(:address, state: state, country: country) }
-  given!(:mug) { create(:product, name: 'RoR Mug') }
+  let!(:user) { create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password') }
+  let!(:zone)    { create(:zone) }
+  let!(:address) { create(:address, state: state, country: country) }
+  let!(:mug) { create(:product, name: 'RoR Mug') }
 
-  background do
+  before do
     mug.master.stock_items.first.update_column(:count_on_hand, 1)
 
     # Bypass gateway error on checkout | ..or stub a gateway
@@ -23,13 +23,13 @@ RSpec.feature 'Checkout', :js, type: :feature do
   end
 
   context 'without payment being required' do
-    background do
+    before do
       # So that we don't have to setup payment methods just for the sake of it
       allow_any_instance_of(Spree::Order).to receive(:has_available_payment).and_return(true)
       allow_any_instance_of(Spree::Order).to receive(:payment_required?).and_return(false)
     end
 
-    scenario 'allow a visitor to checkout as guest, without registration' do
+    it 'allow a visitor to checkout as guest, without registration' do
       Spree::Auth::Config.set(registration_step: true)
       add_to_cart(mug)
       click_link 'checkout'
@@ -49,7 +49,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       expect(page).to have_text 'Order placed successfully'
     end
 
-    scenario 'associate an uncompleted guest order with user after logging in' do
+    it 'associate an uncompleted guest order with user after logging in' do
       add_to_cart(mug)
 
       visit spree.login_path
@@ -73,7 +73,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
     end
 
     # Regression test for #890
-    xscenario 'associate an incomplete guest order with user after successful password reset' do
+    xit 'associate an incomplete guest order with user after successful password reset' do
       add_to_cart(mug)
 
       visit spree.login_path
@@ -106,7 +106,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
       ActiveJob::Base.queue_adapter = :test
     end
 
-    scenario 'allow a user to register during checkout' do
+    it 'allow a user to register during checkout' do
       add_to_cart(mug)
       click_link 'checkout'
 

@@ -1,20 +1,20 @@
 RSpec.feature 'Sign Out', type: :feature, js: true do
-  given!(:user) do
+  let!(:user) do
     create(:user,
-          email: 'email@person.com',
-          password: 'secret',
-          password_confirmation: 'secret')
+           email: 'email@person.com',
+           password: 'secret',
+           password_confirmation: 'secret')
   end
 
-  background do
+  before do
     log_in(email: user.email, password: user.password)
   end
 
-  scenario 'allow a signed in user to logout' do
-    log_out
+  it 'allow a signed in user to logout' do
+    log_out_via_frontend_user_menu
 
     visit spree.root_path
-    show_user_menu
+    show_frontend_user_menu
 
     expect(page).to have_link login_button.upcase
     expect(page).not_to have_link logout_button.upcase
@@ -28,7 +28,7 @@ RSpec.feature 'Sign Out', type: :feature, js: true do
     it 'clears token cookies' do
       add_to_cart(mug)
 
-      log_out
+      log_out_via_frontend_user_menu
 
       find('#link-to-cart').click
       expect(page).to have_text Spree.t(:your_cart_is_empty)

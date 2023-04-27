@@ -9,6 +9,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
     Spree::Store.default.update(default_locale: 'en', supported_locales: 'en,fr') if Spree.version.to_f >= 4.2
   end
 
+  after { I18n.locale = :en }
+
   context '#edit' do
     context 'when registration step enabled' do
       before do
@@ -33,8 +35,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
 
         context 'non default locale' do
           it 'redirects to registration step with non default locale' do
-            get :edit, params: { state: 'address', locale: 'fr' }
-            expect(response).to redirect_to spree.checkout_registration_path(locale: 'fr')
+            get :edit, params: { state: 'address', locale: :fr }
+            expect(response).to redirect_to spree.checkout_registration_path(locale: :fr)
           end
         end
       end
@@ -97,8 +99,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
           it 'redirects to the tokenized order view with a non default locale' do
             # spree version higher than 3.6 required for test to work correctly
             request.cookie_jar.signed[:token] = 'ABC'
-            post :update, params: { state: 'confirm', locale: 'fr' }
-            expect(response).to redirect_to spree.order_path(order, locale: 'fr')
+            post :update, params: { state: 'confirm', locale: :fr }
+            expect(response).to redirect_to spree.order_path(order, locale: :fr)
           end
         end
       end
@@ -121,8 +123,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
 
         context 'non default locale' do
           it 'redirects to the standard order view with a non default locale' do
-            post :update, params: { state: 'confirm', locale: 'fr' }
-            expect(response).to redirect_to spree.order_path(order, locale: 'fr')
+            post :update, params: { state: 'confirm', locale: :fr }
+            expect(response).to redirect_to spree.order_path(order, locale: :fr)
           end
         end
       end
@@ -174,8 +176,8 @@ RSpec.describe Spree::CheckoutController, type: :controller do
     context 'non default locale' do
       it 'redirects to the checkout_path after saving with non default locale' do
         allow(controller).to receive(:check_authorization)
-        put :update_registration, params: { order: { email: 'jobs@spreecommerce.com' }, locale: 'fr' }
-        expect(response).to redirect_to spree.checkout_state_path(:address, locale: 'fr')
+        put :update_registration, params: { order: { email: 'jobs@spreecommerce.com' }, locale: :fr }
+        expect(response).to redirect_to spree.checkout_state_path(:address, locale: :fr)
       end
     end
 

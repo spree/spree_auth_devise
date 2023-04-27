@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Spree::Order, type: :model do
   let(:order) { described_class.new }
 

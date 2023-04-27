@@ -1,5 +1,6 @@
-# encoding: UTF-8
-lib = File.expand_path('../lib/', __FILE__)
+# frozen_string_literal: true
+
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
 require 'spree/auth/version'
@@ -19,10 +20,10 @@ Gem::Specification.new do |s|
   s.license     = 'BSD-3-Clause'
 
   s.metadata = {
-    "bug_tracker_uri"   => "https://github.com/spree/spree_auth_devise/issues",
-    "changelog_uri"     => "https://github.com/spree/spree_auth_devise/releases/tag/v#{s.version}",
-    "documentation_uri" => "https://guides.spreecommerce.org/",
-    "source_code_uri"   => "https://github.com/spree/spree_auth_devise/tree/v#{s.version}",
+    'bug_tracker_uri' => 'https://github.com/spree/spree_auth_devise/issues',
+    'changelog_uri' => "https://github.com/spree/spree_auth_devise/releases/tag/v#{s.version}",
+    'documentation_uri' => 'https://guides.spreecommerce.org/',
+    'source_code_uri' => "https://github.com/spree/spree_auth_devise/tree/v#{s.version}"
   }
 
   s.files        = `git ls-files`.split("\n")
