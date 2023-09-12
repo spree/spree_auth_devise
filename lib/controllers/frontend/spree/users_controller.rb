@@ -23,7 +23,7 @@ class Spree::UsersController < Spree::StoreController
 
       redirect_back_or_default(root_url)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -41,7 +41,7 @@ class Spree::UsersController < Spree::StoreController
       end
       redirect_to spree.account_path, notice: Spree.t(:account_updated)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
