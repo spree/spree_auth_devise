@@ -1,6 +1,6 @@
 module Spree
   module Auth
-    VERSION = '4.5.0'.freeze
+    VERSION = '4.6.0'.freeze
 
     def gem_version
       Gem::Version.new(VERSION)
