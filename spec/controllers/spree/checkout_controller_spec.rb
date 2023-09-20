@@ -13,7 +13,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
     context 'when registration step enabled' do
       before do
         allow(controller).to receive(:check_authorization)
-        Spree::Auth::Config.set(registration_step: true)
+        Spree::Auth::Config.set(:registration_step, true)
       end
 
       context 'when authenticated as registered user' do
@@ -42,7 +42,7 @@ RSpec.describe Spree::CheckoutController, type: :controller do
 
     context 'when registration step disabled' do
       before do
-        Spree::Auth::Config.set(registration_step: false)
+        Spree::Auth::Config.set(:registration_step, false)
         allow(controller).to receive(:check_authorization)
       end
 

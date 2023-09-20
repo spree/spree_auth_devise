@@ -1,6 +1,6 @@
 module ConfigurationHelpers
   def allow_bypass_sign_in
-    Spree::Auth::Config.set(signout_after_password_change: false)
+    Spree::Auth::Config.set(:signout_after_password_change, false)
   end
 end
 
