@@ -1,12 +1,14 @@
 RSpec.configure do |config|
   config.around do |example|
     if example.metadata.key?(:confirmable)
+      old_setting = Spree::Auth::Config.confirmable
       old_user = Spree::User
 
       begin
         example.run
       ensure
         Spree.const_set('User', old_user)
+        Spree::Auth::Config.confirmable = old_setting
       end
     else
       example.run
@@ -16,7 +18,7 @@ RSpec.configure do |config|
   config.before do |example|
     if example.metadata.key?(:confirmable)
       Rails.cache.clear
-      Spree::Auth::Config[:confirmable] = example.metadata[:confirmable]
+      Spree::Auth::Config.confirmable = example.metadata[:confirmable]
 
       Spree.send(:remove_const, :User)
       load File.expand_path('../../../app/models/spree/user.rb', __FILE__)

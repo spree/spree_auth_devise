@@ -30,7 +30,7 @@ RSpec.feature 'Checkout', :js, type: :feature do
     end
 
     scenario 'allow a visitor to checkout as guest, without registration' do
-      Spree::Auth::Config.set(registration_step: true)
+      Spree::Auth::Config.set(:registration_step, true)
       add_to_cart(mug)
       click_link 'checkout'
 
