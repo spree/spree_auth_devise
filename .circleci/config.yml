@@ -9,8 +9,7 @@ defaults: &defaults
     BUNDLE_PATH: ~/spree/vendor/bundle
   working_directory: ~/spree
   docker:
-    - image: &ruby_image circleci/ruby:3.0-node-browsers
-    - image: &redis_image circleci/redis:6.2-alpine
+    - image: &ruby_image cimg/ruby:3.3.0-browsers
 
 run_tests: &run_tests
   <<: *defaults
@@ -18,8 +17,8 @@ run_tests: &run_tests
     - checkout
     - restore_cache:
         keys:
-          - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
-          - spree-auth-devise-bundle-v9-ruby-3-0
+          - spree-auth-devise-bundle-v10-ruby-3-3-{{ .Branch }}
+          - spree-auth-devise-bundle-v10-ruby-3-3
     - run:
         name: Add keyserver
         command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B
@@ -57,8 +56,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
-            - spree-auth-devise-bundle-v9-ruby-3-0
+            - spree-auth-devise-bundle-v10-ruby-3-3-{{ .Branch }}
+            - spree-auth-devise-bundle-v10-ruby-3-3
       - run:
           name: Add keyserver
           command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B
@@ -75,7 +74,7 @@ jobs:
       - save_cache:
           paths:
             - vendor/bundle
-          key: spree-auth-devise-bundle-v9-ruby-3-0-{{ checksum "Gemfile.lock" }}
+          key: spree-auth-devise-bundle-v10-ruby-3-3-{{ checksum "Gemfile.lock" }}
 
   tests_postgres: &tests_postgres
     <<: *run_tests
@@ -86,8 +85,7 @@ jobs:
       DB_USERNAME: postgres
     docker:
       - image: *ruby_image
-      - image: *redis_image
-      - image: &postgres_image circleci/postgres:12-alpine
+      - image: &postgres_image cimg/postgres:16.2
         environment:
           POSTGRES_USER: postgres
 
@@ -102,8 +100,7 @@ jobs:
       COVERAGE_DIR: /tmp/workspace/simplecov
     docker:
       - image: *ruby_image
-      - image: *redis_image
-      - image: &mysql_image circleci/mysql:8-ram
+      - image: &mysql_image cimg/mysql:8.0
 
 workflows:
   version: 2
