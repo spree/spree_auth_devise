@@ -9,7 +9,7 @@ defaults: &defaults
     BUNDLE_PATH: ~/spree/vendor/bundle
   working_directory: ~/spree
   docker:
-    - image: &ruby_image circleci/ruby:3.0-node-browsers
+    - image: &ruby_image cimg/ruby:3.3.0-browsers
 
 run_tests: &run_tests
   <<: *defaults
