@@ -111,7 +111,7 @@ RSpec.describe Spree::User, type: :model do
         user = Spree.user_class.new
         user.email = FFaker::Internet.email
         user.password = user.password_confirmation = 'pass1234'
-        user.save
+        user.save!
 
         expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
           user, anything, { current_store_id: default_store.id }).and_return(double(deliver: true)
@@ -126,7 +126,7 @@ RSpec.describe Spree::User, type: :model do
         user = Spree.user_class.new
         user.email = FFaker::Internet.email
         user.password = user.password_confirmation = 'pass1234'
-        user.save
+        user.save!
 
         expect(Spree::UserMailer).to receive(:confirmation_instructions).with(
           user, anything, { current_store_id: store.id }).and_return(double(deliver: true)
