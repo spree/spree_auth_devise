@@ -17,8 +17,8 @@ run_tests: &run_tests
     - checkout
     - restore_cache:
         keys:
-          - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
-          - spree-auth-devise-bundle-v9-ruby-3-0
+          - spree-auth-devise-bundle-v10-ruby-3-3-{{ .Branch }}
+          - spree-auth-devise-bundle-v10-ruby-3-3
     - run:
         name: Add keyserver
         command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B
@@ -56,8 +56,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - spree-auth-devise-bundle-v9-ruby-3-0-{{ .Branch }}
-            - spree-auth-devise-bundle-v9-ruby-3-0
+            - spree-auth-devise-bundle-v10-ruby-3-3-{{ .Branch }}
+            - spree-auth-devise-bundle-v10-ruby-3-3
       - run:
           name: Add keyserver
           command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B
@@ -74,7 +74,7 @@ jobs:
       - save_cache:
           paths:
             - vendor/bundle
-          key: spree-auth-devise-bundle-v9-ruby-3-0-{{ checksum "Gemfile.lock" }}
+          key: spree-auth-devise-bundle-v10-ruby-3-3-{{ checksum "Gemfile.lock" }}
 
   tests_postgres: &tests_postgres
     <<: *run_tests
