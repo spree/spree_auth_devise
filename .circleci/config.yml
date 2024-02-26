@@ -100,7 +100,7 @@ jobs:
       COVERAGE_DIR: /tmp/workspace/simplecov
     docker:
       - image: *ruby_image
-      - image: &mysql_image circleci/mysql:8-ram
+      - image: &mysql_image cimg/mysql:8.0
 
 workflows:
   version: 2
