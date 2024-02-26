@@ -10,7 +10,6 @@ defaults: &defaults
   working_directory: ~/spree
   docker:
     - image: &ruby_image circleci/ruby:3.0-node-browsers
-    - image: &redis_image circleci/redis:6.2-alpine
 
 run_tests: &run_tests
   <<: *defaults
@@ -86,8 +85,7 @@ jobs:
       DB_USERNAME: postgres
     docker:
       - image: *ruby_image
-      - image: *redis_image
-      - image: &postgres_image circleci/postgres:12-alpine
+      - image: &postgres_image cimg/postgres:16.2
         environment:
           POSTGRES_USER: postgres
 
@@ -102,7 +100,6 @@ jobs:
       COVERAGE_DIR: /tmp/workspace/simplecov
     docker:
       - image: *ruby_image
-      - image: *redis_image
       - image: &mysql_image circleci/mysql:8-ram
 
 workflows:
