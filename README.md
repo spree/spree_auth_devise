@@ -1,4 +1,4 @@
-# Spree Auth (Devise)
+# Spree Auth Devise
 
 [![CircleCI](https://circleci.com/gh/spree/spree_auth_devise/tree/main.svg?style=svg)](https://circleci.com/gh/spree/spree_auth_devise/tree/main)
 
@@ -6,9 +6,9 @@ Provides authentication services for [Spree](https://spreecommerce.org), using t
 
 ## Developed by
 
-[![Vendo](https://assets-global.website-files.com/6230c485f2c32ea1b0daa438/623372f40a8c54ca9aea34e8_vendo%202.svg)](https://getvendo.com?utm_source=spree_auth_github)
+<a href="https://getvendo.com?utm_source=spree_auth_github"><img src="https://cdn.getvendo.com/assets/vendo-logo-4bda02af8c99bc2ecc5a400120f0ebe4eafcd385e02e25f198a8c355ab75d1ff.png" height=50 alt="Vendo - Start your own multi-brand marketplace" /></a>
 
-> All-in-one platform for all your Marketplace and B2B eCommerce needs. [Start your 30-day free trial](https://e98esoirr8c.typeform.com/contactvendo?typeform-source=spree_auth_github)
+<a href="http://sparksolutions.co?utm_source=github"><img src="https://sparksolutions.co/wp-content/themes/sparksolutions/images/logo.svg" height=50 alt="Spark Solutions - Ruby on Rails and Spree Commerce developers"></a>
 
 ## Installation
 
@@ -135,3 +135,23 @@ You need to do a quick one-time creation of a test application and then you can 
 Then run the rspec tests.
 
     bundle exec rspec
+
+
+## License
+
+Spree Starter (formerly Spark Starter Kit) is copyright © 2015-2021
+[Spark Solutions Sp. z o.o.][spark]. It is free software,
+and may be redistributed under the terms specified in the
+[LICENSE](LICENSE.md) file.
+
+## About Spark Solutions
+
+[![Spark Solutions](http://sparksolutions.co/wp-content/uploads/2015/01/logo-ss-tr-221x100.png)][spark]
+
+Spree Auth Devise is maintained and funded by [Spark Solutions Sp. z o.o.](http://sparksolutions.co?utm_source=github)
+The names and logos are trademarks of Spark Solutions Sp. z o.o.
+
+We are passionate about open source software.
+We are [available for hire][spark].
+
+[spark]:http://sparksolutions.co?utm_source=github
