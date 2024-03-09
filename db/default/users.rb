@@ -71,7 +71,7 @@ end
 
 if Spree::User.admin.empty?
   create_admin_user
-else
+elsif !ENV['AUTO_ACCEPT']
   puts 'Admin user has already been previously created.'
   if agree('Would you like to create a new admin user? (yes/no)')
     create_admin_user
