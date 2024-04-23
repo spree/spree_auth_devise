@@ -1,6 +1,5 @@
 class Spree::UsersController < Spree::StoreController
   before_action :set_current_order, except: :show
-  prepend_before_action :authorize_actions, only: :new
 
   include Spree::Core::ControllerHelpers
 
