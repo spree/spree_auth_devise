@@ -6,10 +6,14 @@ gem 'spree_backend', github: 'spree/spree_backend', branch: 'main'
 gem 'spree_emails', github: 'spree/spree', branch: 'main'
 gem 'spree_frontend', github: 'spree/spree_legacy_frontend', branch: 'main'
 
-if ENV['DB'] == 'mysql'
-  gem 'mysql2'
-else
-  gem 'pg'
+platforms :ruby do
+  if ENV['DB'] == 'mysql'
+    gem 'mysql2'
+  elsif ENV['DB'] == 'postgres'
+    gem 'pg'
+  else
+    gem 'sqlite3', '~> 1.4'
+  end
 end
 
 gem 'pry'
