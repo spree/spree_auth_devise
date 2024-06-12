@@ -8,7 +8,7 @@
           <div data-hook="login_extras"></div>
         </div>
 
-        <% if Spree::Auth::Config[:registrable] %>
+        <% if Spree::Auth::Config[:registerable] %>
           <div class="col-lg-11 mx-auto" data-hook="registration">
             <%= render partial: 'spree/shared/registration', locals: { registration_button: 'registration-button' } %>
           </div>
