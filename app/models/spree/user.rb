@@ -7,8 +7,11 @@ module Spree
       include Metadata
     end
 
-    devise :database_authenticatable, :registerable, :recoverable,
-           :rememberable, :trackable, :encryptable, encryptor: 'authlogic_sha512'
+    devise :rememberable, :trackable, :encryptable, encryptor: 'authlogic_sha512'
+
+    devise :database_authenticatable if Spree::Auth::Config[:database_authenticatable]
+    devise :recoverable if Spree::Auth::Config[:recoverable]
+    devise :registerable if Spree::Auth::Config[:registerable]
     devise :confirmable if Spree::Auth::Config[:confirmable]
     devise :validatable if Spree::Auth::Config[:validatable]
 
