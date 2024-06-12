@@ -106,6 +106,8 @@ RSpec.describe Spree::User, type: :model do
   describe "#send_confirmation_instructions", retry: 2 do
     let(:default_store) { Spree::Store.default }
 
+    before { Rails.application.reload_routes! }
+
     context "when current store not exists" do
       it 'takes default store and sends confirmation instruction', confirmable: true do
         user = Spree.user_class.new
