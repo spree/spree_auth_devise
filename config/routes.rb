@@ -46,12 +46,13 @@ Spree::Core::Engine.add_routes do
     if Spree.respond_to?(:admin_path) && Spree::Core::Engine.backend_available?
       namespace :admin, path: Spree.admin_path do
         devise_for :spree_user,
-                  class_name: Spree.user_class.to_s,
+                  class_name: Spree.admin_user_class.to_s,
                   controllers: { sessions: 'spree/admin/user_sessions',
-                                    passwords: 'spree/admin/user_passwords' },
+                                   passwords: 'spree/admin/user_passwords' },
                   skip: [:unlocks, :omniauth_callbacks, :registrations],
                   path_names: { sign_out: 'logout' },
                   path_prefix: :user
+
         devise_scope :spree_user do
           get '/authorization_failure', to: 'user_sessions#authorization_failure', as: :unauthorized
           get '/login' => 'user_sessions#new', :as => :login
