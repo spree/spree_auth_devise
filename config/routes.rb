@@ -38,9 +38,19 @@ Spree::Core::Engine.add_routes do
 
     if Spree::Core::Engine.frontend_available?
       resources :users, only: [:edit, :update]
-      get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration
-      put '/checkout/registration' => 'checkout#update_registration', :as => :update_checkout_registration
       resource :account, controller: 'users'
+
+      unless Spree::Auth::Engine.checkout_available?
+        get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration
+        put '/checkout/registration' => 'checkout#update_registration', :as => :update_checkout_registration
+      end
+    end
+
+    if Spree::Auth::Engine.checkout_available?
+      namespace :checkout do
+        get :registration, to: 'orders#registration', as: :registration
+        put :registration, to: 'orders#update_registration', as: :update_registration
+      end
     end
 
     if Spree.respond_to?(:admin_path) && Spree::Core::Engine.backend_available?
