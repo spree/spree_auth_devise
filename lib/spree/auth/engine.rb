@@ -13,10 +13,6 @@ module Spree
         Spree::Auth::Config = Spree::Auth::Configuration.new
       end
 
-      initializer "spree_auth_devise.set_user_class", after: :load_config_initializers do
-        Spree.user_class = 'Spree::User'
-      end
-
       initializer "spree_auth_devise.check_secret_token" do
         if Spree::Auth.default_secret_key == Devise.secret_key
           puts "[WARNING] You are not setting Devise.secret_key within your application!"
