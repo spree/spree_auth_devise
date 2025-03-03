@@ -1,14 +1,12 @@
+# ⚠️ Warning - maintenance mode
+
+This gem is only usable for Spree below version 5.0 (eg, Spree 4.x). For Spree 5 you do not need this gem.
+
 # Spree Auth Devise
 
 [![CircleCI](https://circleci.com/gh/spree/spree_auth_devise/tree/main.svg?style=svg)](https://circleci.com/gh/spree/spree_auth_devise/tree/main)
 
 Provides authentication services for [Spree](https://spreecommerce.org), using the [Devise](https://github.com/plataformatec/devise) gem.
-
-## Developed by
-
-<a href="https://getvendo.com?utm_source=spree_auth_github"><img src="https://cdn.getvendo.com/assets/vendo-logo-4bda02af8c99bc2ecc5a400120f0ebe4eafcd385e02e25f198a8c355ab75d1ff.png" height=50 alt="Vendo - Start your own multi-brand marketplace" /></a>
-
-<a href="http://sparksolutions.co?utm_source=github"><img src="https://sparksolutions.co/wp-content/themes/sparksolutions/images/logo.svg" height=50 alt="Spark Solutions - Ruby on Rails and Spree Commerce developers"></a>
 
 ## Installation
 
