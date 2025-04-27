@@ -30,6 +30,11 @@ module Spree
         Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
+        if Spree::Auth::Engine.checkout_available?
+          Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/checkout/**/*_decorator*.rb")) do |c|
+            Rails.configuration.cache_classes ? require(c) : load(c)
+          end
+        end
         if Spree::Auth::Engine.backend_available?
           Dir.glob(File.join(File.dirname(__FILE__), "../../controllers/backend/*/*/*_decorator*.rb")) do |c|
             Rails.configuration.cache_classes ? require(c) : load(c)
@@ -45,11 +50,12 @@ module Spree
             Rails.configuration.cache_classes ? require(c) : load(c)
           end
         end
+
         ApplicationController.send :include, Spree::AuthenticationHelpers
       end
 
-      def self.api_available?
-        @@api_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Api::Engine')
+      def self.checkout_available?
+        @@checkout_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Checkout::Engine')
       end
 
       def self.backend_available?
@@ -66,6 +72,11 @@ module Spree
 
       def self.emails_available?
         @@emails_available ||= ::Rails::Engine.subclasses.map(&:instance).map{ |e| e.class.to_s }.include?('Spree::Emails::Engine')
+      end
+
+      if checkout_available?
+        paths["app/controllers"] << "lib/controllers/checkout"
+        paths["app/views"] << "lib/views/checkout"
       end
 
       if backend_available?
