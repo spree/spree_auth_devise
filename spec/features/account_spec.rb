@@ -2,6 +2,7 @@ RSpec.feature 'Accounts', type: :feature do
   describe 'editing', js: true do
     before do
       allow_bypass_sign_in
+      I18n.locale = 'en'
     end
 
     scenario 'can edit an admin user' do
@@ -34,6 +35,7 @@ RSpec.feature 'Accounts', type: :feature do
       fill_in 'Password Confirmation', with: 'foobar'
       click_button 'Update'
 
+      show_user_account
       expect(page).to have_text 'email@person.com'
       expect(page).to have_text 'Account updated'
     end
@@ -55,6 +57,7 @@ RSpec.feature 'Accounts', type: :feature do
       fill_in 'Password Confirmation', with: 'foobar'
       click_button 'Update'
 
+      show_user_account
       expect(page).to have_text 'email@person.com'
       expect(page).to have_text 'Account updated'
     end
